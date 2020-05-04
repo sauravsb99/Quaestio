@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "355612203491",
+    "firebase_url": "https://quaestio-bfc06.firebaseio.com",
+    "project_id": "quaestio-bfc06",
+    "storage_bucket": "quaestio-bfc06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355612203491:android:15fb26bf3ad009f35ba8d6",
+        "android_client_info": {
+          "package_name": "com.quaestio.queastio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355612203491-0tpkpo9npa6dl5nl4gseq7kmtk7dk5mc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ6c363dBpeWTHos6OoINvvo_f4nVdbN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355612203491-0tpkpo9npa6dl5nl4gseq7kmtk7dk5mc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
