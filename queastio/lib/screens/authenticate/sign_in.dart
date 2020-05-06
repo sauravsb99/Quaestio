@@ -1,6 +1,5 @@
 import 'package:queastio/services/auth.dart';
 import 'package:flutter/material.dart';
-
 class SignIn extends StatefulWidget {
 
   final Function toggleView;
@@ -25,7 +24,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign In '),
+        title: Text('Sign In'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),

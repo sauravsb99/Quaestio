@@ -1,6 +1,5 @@
 import 'package:queastio/services/auth.dart';
 import 'package:flutter/material.dart';
-
 class Register extends StatefulWidget {
 
   final Function toggleView;
@@ -27,7 +26,7 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign up to Brew Crew'),
+        title: Text('Register'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
