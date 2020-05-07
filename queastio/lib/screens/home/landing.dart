@@ -13,6 +13,7 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Topic>>.value(
+      initialData: List(),
       value: DatabaseService().topics,
       child: Column(
         children: <Widget>[
