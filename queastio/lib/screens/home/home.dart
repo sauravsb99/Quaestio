@@ -1,28 +1,33 @@
 import 'package:queastio/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:queastio/screens/home/landing.dart';
-
+import 'package:queastio/screens/home/drawer.dart';
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
+    // Navigator.pop(context);
     return Container(
       child: Scaffold(
         backgroundColor: Colors.brown[50],
+        drawer: Drawer(
+          child: MyDrawer(),
+        ),
         appBar: AppBar(
           title: Text('Quaestia'),
           backgroundColor: Colors.brown[400],
+          
           elevation: 0.0,
-          actions: <Widget>[
-            FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('logout'),
-              onPressed: () async {
-                await _auth.signOut();
-              },
-            ),
-          ],
+          // actions: <Widget>[
+          //   FlatButton.icon(
+          //     icon: Icon(Icons.person),
+          //     label: Text('logout'),
+          //     onPressed: () async {
+          //       await _auth.signOut();
+          //     },
+          //   ),
+          // ],
         ),
         body: Landing(),
       ),
