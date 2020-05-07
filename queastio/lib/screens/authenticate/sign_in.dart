@@ -1,5 +1,8 @@
 import 'package:queastio/services/auth.dart';
+import 'package:queastio/shared/constants.dart';
+import 'package:queastio/shared/loading.dart';
 import 'package:flutter/material.dart';
+
 class SignIn extends StatefulWidget {
 
   final Function toggleView;
@@ -14,59 +17,20 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
+  bool loading = false;
 
   // text field state
   String email = '';
   String password = '';
 
   @override
-
   Widget build(BuildContext context) {
-
-    final emailField = TextField(
-      obscureText: false,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(11.0))),
-    );
-
-    final passwordField = TextField(
-      obscureText: true,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Password",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(11.0))),
-    ); //password
-
-    final loginButton = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
-        child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () async{
-          dynamic result = await _auth.signInAnon();
-          if(result == null){
-            print('Eroor signing in');
-          }else{
-            print('Welcome ');
-            print(result.uid);
-          }
-         },
-          child: Text("Login",textAlign: TextAlign.center,style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold))
-        )
-    );
-
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign in to Brew Crew'),
+        title: Text('Sign In'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
@@ -75,7 +39,6 @@ class _SignInState extends State<SignIn> {
           ),
         ],
       ),
-
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
@@ -84,6 +47,7 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -92,6 +56,7 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               TextFormField(
                 obscureText: true,
+                decoration: textInputDecoration.copyWith(hintText: 'password'),
                 validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
                   setState(() => password = val);
@@ -106,9 +71,11 @@ class _SignInState extends State<SignIn> {
                 ),
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
+                    setState(() => loading = true);
                     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                     if(result == null) {
                       setState(() {
+                        loading = false;
                         error = 'Could not sign in with those credentials';
                       });
                     }
@@ -123,10 +90,7 @@ class _SignInState extends State<SignIn> {
             ],
           ),
         ),
-
       ),
     );
   }
-
-//  loginButton({Text child, Future<Null> Function() onPressed}) {}
 }
