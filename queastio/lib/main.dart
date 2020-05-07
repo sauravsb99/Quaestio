@@ -3,6 +3,7 @@ import 'package:queastio/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/auth.dart';
 import 'models/user.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -17,4 +18,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
