@@ -17,61 +17,71 @@ class _MyDrawerState extends State<MyDrawer> {
       child: ListView(
 
         children:<Widget>[
+          FlatButton(
+            color: Colors.black54,
 
-          Container(
-            color: Colors.white,
-            child: Padding(padding: const EdgeInsets.all(13.0),
-
-              child:Material(
-                color: Colors.deepOrangeAccent,
-                elevation: 15.0,
-                borderRadius: BorderRadius.circular(15.0),
-                borderOnForeground: true,
-
-                child: FlatButton(
-                  onPressed: (){},
-
-
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-//                          padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width/4,8,8,8),
-                        child: Container(
-
-                          child: Text("Profile",textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 22.0,color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
+            onPressed: (){},
+            child:DrawerHeader(
+//            decoration: BoxDecoration(color: Colors.blue,
+//            ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar (
+                    radius:35.0,
+                    backgroundColor: Colors.grey[800],
+                    backgroundImage: NetworkImage("https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"),
                   ),
-                ),
+
+                  SizedBox(width: MediaQuery.of(context).size.width*0.15,),
+                  Text("Name",textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17.0,color: Colors.white),
+                  ),
+                ],
               ),
-            ),
-          ),
+//                 child: Padding(padding: const EdgeInsets.fromLTRB(13.0,13.0,13.0,0),
+//                    child:Material(
+//                      ation: 15.0,
+//                      borderRadius: BorderRadius.circular(15.0),
+//                      borderOnForeground: true,
+//
+//
+//
+//
+//          ),
+//    ),
+
+              ),
+    ),
+
+
+
+
+//                ),
+//              ),
+//          ),
 
           Wrap(
             alignment: WrapAlignment.center,
             children: <Widget>[
               Padding(
 //padding: EdgeInsetsGeometry(WrapAlignment.center),
-                padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,50,MediaQuery.of(context).size.width*0.05,8),
+                padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,30,MediaQuery.of(context).size.width*0.05,10),
 //
                 child: Material(
                   elevation: 15.0,
                   borderRadius: BorderRadius.circular(15.0),
                   borderOnForeground: true,
                   child: FlatButton(
+                    color: Colors.grey,
                     onPressed: (){},
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.7,
-                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
                         child:Center(
                           child: Text('About Us', style: TextStyle(
@@ -84,8 +94,8 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
 
                     shape: RoundedRectangleBorder(side: BorderSide(
-                      color: Colors.deepOrangeAccent,
-                      width: 5,
+                      color: Colors.black,
+                      width: 3,
                       style: BorderStyle.solid,
                     ), borderRadius: BorderRadius.circular(11)),
                   ),
@@ -99,19 +109,20 @@ class _MyDrawerState extends State<MyDrawer> {
             children: <Widget>[
               Padding(
 //padding: EdgeInsetsGeometry(WrapAlignment.center),
-                padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,50,MediaQuery.of(context).size.width*0.05,8),
+                padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,10,MediaQuery.of(context).size.width*0.05,10),
 //
                 child: Material(
                   elevation: 15.0,
                   borderRadius: BorderRadius.circular(15.0),
                   borderOnForeground: true,
                   child: FlatButton(
+                    color: Colors.grey,
                     onPressed: (){},
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.7,
-                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
                         child:Center(
                           child: Text('Contact Us', style: TextStyle(
@@ -124,8 +135,8 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
 
                     shape: RoundedRectangleBorder(side: BorderSide(
-                      color: Colors.deepOrangeAccent,
-                      width: 5,
+                      color: Colors.black,
+                      width: 3,
                       style: BorderStyle.solid,
                     ), borderRadius: BorderRadius.circular(11)),
                   ),
@@ -134,16 +145,84 @@ class _MyDrawerState extends State<MyDrawer> {
             ],
           ),
 
+          Wrap(
+            alignment: WrapAlignment.center,
+            children: <Widget>[
+              Padding(
+//padding: EdgeInsetsGeometry(WrapAlignment.center),
+                padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,10,MediaQuery.of(context).size.width*0.05,10),
+//
+                child: Material(
+                  elevation: 15.0,
+                  borderRadius: BorderRadius.circular(15.0),
+                  borderOnForeground: true,
+                  child: FlatButton(
+                    color: Colors.grey,
+                    onPressed: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+
+                        width: MediaQuery.of(context).size.width*0.7,
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+//                          color: Colors.blueGrey,
+                        child:Center(
+                          child: Text('FAQ', style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.black,
+                          ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    shape: RoundedRectangleBorder(side: BorderSide(
+                      color: Colors.black,
+                      width: 3,
+                      style: BorderStyle.solid,
+                    ), borderRadius: BorderRadius.circular(11),
+
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+
+          Container(
+
+            // This align moves the children to the bottom
+              child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  // This container holds all the children that will be aligned
+                  // on the bottom and should not scroll with the above ListView
+                  child: Container(
+                      child: Column(
+//                        children: <Widget>[
+//                          Divider(),
+//                          ListTile(
+//                              leading: Icon(Icons.settings),
+//                              title: Text('Settings')),
+//                          ListTile(
+//                              leading: Icon(Icons.help),
+//                              title: Text('Help and Feedback'))
+//                        ],
+                      )
+                  )
+              )
+          ),
+
 
                 Wrap(
                   alignment: WrapAlignment.center,
                   children: <Widget>[
                     Padding(
                       //padding: EdgeInsetsGeometry(WrapAlignment.center),
-                      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,50,MediaQuery.of(context).size.width*0.05,8),
+                      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,MediaQuery.of(context).size.height*0.30,MediaQuery.of(context).size.width*0.05,0),
                       //
                       child: Material(
-                        elevation: 15.0,
+                        elevation: 0.0,
                         borderRadius: BorderRadius.circular(15.0),
                         borderOnForeground: true,
                         child: FlatButton(
@@ -155,7 +234,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
                               width: MediaQuery.of(context).size.width*0.7,
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
                               child:Center(
                                 child: Text('Logout', style: TextStyle(
@@ -168,7 +247,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           ),
 
                           shape: RoundedRectangleBorder(side: BorderSide(
-                            color: Colors.deepOrangeAccent,
+                            color: Colors.grey,
                             width: 5,
                             style: BorderStyle.solid,
                           ), borderRadius: BorderRadius.circular(11)),
@@ -181,28 +260,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
 
 //              TEST
-//                Container(
-//
-//                  // This align moves the children to the bottom
-//                    child: Align(
-//                        alignment: FractionalOffset.bottomCenter,
-//                        // This container holds all the children that will be aligned
-//                        // on the bottom and should not scroll with the above ListView
-//                        child: Container(
-//                            child: Column(
-//                              children: <Widget>[
-//                                Divider(),
-//                                ListTile(
-//                                    leading: Icon(Icons.settings),
-//                                    title: Text('Settings')),
-//                                ListTile(
-//                                    leading: Icon(Icons.help),
-//                                    title: Text('Help and Feedback'))
-//                              ],
-//                            )
-//                        )
-//                    )
-//                ),
+
 
 
 
