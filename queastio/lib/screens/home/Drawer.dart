@@ -1,3 +1,5 @@
+
+import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:queastio/services/auth.dart';

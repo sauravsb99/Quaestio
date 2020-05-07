@@ -8,9 +8,7 @@ class DatabaseService {
   List<Topic> _topicListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Topic(
-          name: doc.data['name'] ?? '', 
-          image: doc.data['image'] ?? ''
-          );
+          name: doc.data['name'] ?? '', image: doc.data['image'] ?? '');
     }).toList();
   }
 
