@@ -18,7 +18,7 @@ class _TopicListState extends State<TopicList> {
     // });
 
     return ListView.builder(
-      itemCount:topics.length,
+      itemCount: topics.length,
       itemBuilder: (context, index) {
         return TopicTile(topic: topics[index]);
       },
