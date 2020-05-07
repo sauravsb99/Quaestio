@@ -71,17 +71,13 @@ class _SignInState extends State<SignIn> {
 
     return Scaffold(
       backgroundColor: Colors.brown[100],
+      drawer: null,
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign in to Brew Crew'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Register'),
-            onPressed: () => widget.toggleView(),
-          ),
-        ],
+        title: Text('Sign in'),
+//        actions: <Widget>[
+//        ],
       ),
 
       body: Container(
@@ -90,6 +86,11 @@ class _SignInState extends State<SignIn> {
           key: _formKey,
           child: Column(
             children: <Widget>[
+              FlatButton.icon(
+                icon: Icon(Icons.person),
+                label: Text('Register'),
+                onPressed: () => widget.toggleView(),
+              ),
               SizedBox(height: 20.0),
               emailField,
               SizedBox(height: 20.0),
