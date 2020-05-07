@@ -1,6 +1,6 @@
 import 'package:queastio/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'landing.dart';
+import 'package:queastio/screens/home/landing.dart';
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
