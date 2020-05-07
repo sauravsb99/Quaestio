@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:queastio/screens/home/Drawer.dart';
 
+import 'landing.dart';
+
 class Home extends StatelessWidget {
 
 
@@ -26,6 +28,7 @@ class Home extends StatelessWidget {
 //            ),
 //          ],
         ),
+        body: Landing(),
       ),
       );
   }
