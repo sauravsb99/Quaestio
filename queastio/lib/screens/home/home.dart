@@ -1,8 +1,8 @@
 import 'package:queastio/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'landing.dart';
 
 class Home extends StatelessWidget {
-
   final AuthService _auth = AuthService();
 
   @override
@@ -24,6 +24,7 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
+        body: Landing(),
       ),
     );
   }
