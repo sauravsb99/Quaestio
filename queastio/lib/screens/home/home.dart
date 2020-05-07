@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:queastio/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:queastio/widgets/Drawer.dart';
+import 'package:queastio/screens/home/Drawer.dart';
 
 class Home extends StatelessWidget {
 
