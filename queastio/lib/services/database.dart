@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:queastio/models/topic.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:queastio/models/user.dart';
 
 class DatabaseService {
   final CollectionReference topicCollection =
