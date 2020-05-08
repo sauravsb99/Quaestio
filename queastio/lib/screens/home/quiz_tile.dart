@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:queastio/models/topic.dart';
+import 'package:queastio/models/quiz.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class TopicTile extends StatelessWidget {
-  final Topic topic;
+class QuizTile extends StatelessWidget {
+  final Quiz quiz;
 
-  TopicTile({this.topic});
+  QuizTile({this.quiz});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,8 @@ class TopicTile extends StatelessWidget {
       splashColor: Colors.indigo[100],
       splashFactory: InkSplash.splashFactory,
       onTap: () {
-        print(topic.name);
-        Navigator.pushNamed(context, '/quizzes', arguments: topic.name);
+        print(quiz.questions);
+        // Navigator.pushNamed(context, '/quizzes', arguments: quiz.qName);
       },
       child: Card(
           child: Padding(
@@ -22,20 +22,13 @@ class TopicTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            CircleAvatar(
-              minRadius: 10.0,
-              maxRadius: 40.0,
-              child: CachedNetworkImage(
-                placeholder: (context, url) => CircularProgressIndicator(),
-                imageUrl: topic.image,
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: Text(
-                topic.name,
+                quiz.qName,
                 style: TextStyle(
                   fontSize: 20.0,
+                  color: Colors.black,
                 ),
               ),
             ),
