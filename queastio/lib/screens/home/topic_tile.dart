@@ -17,12 +17,14 @@ class TopicTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           CircleAvatar(
-            minRadius: 10.0,
-            maxRadius: 40.0,
-            child: CachedNetworkImage(
-                              placeholder: (context, url) => CircularProgressIndicator(),
-                              imageUrl: topic.image,
-                            ),
+            radius: 30,
+            backgroundImage: NetworkImage(topic.image),
+            // minRadius: 10.0,
+            // maxRadius: 40.0,
+            // child: CachedNetworkImage(
+            //                   placeholder: (context, url) => CircularProgressIndicator(),
+            //                   imageUrl: topic.image,
+            //                 ),
           ),
           Padding(
             padding: const EdgeInsets.all(25.0),

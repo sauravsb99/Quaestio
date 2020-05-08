@@ -1,7 +1,10 @@
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/services/auth.dart';
+import 'package:provider/provider.dart';
+import 'package:queastio/services/database.dart';
 class MyDrawer extends StatefulWidget {
   @override
   _MyDrawerState createState() => _MyDrawerState();
@@ -12,8 +15,13 @@ class _MyDrawerState extends State<MyDrawer> {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    
-    return Container(
+    User user = Provider.of<User>(context);
+    return StreamBuilder<UserData>(
+      stream: DatabaseService(uid: user.uid).userData,
+      builder: (context, snapshot) {
+        if(snapshot.hasData){
+          UserData userData = snapshot.data;
+      return Container(
       color: Colors.black26,
       child: ListView(
 
@@ -37,7 +45,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
 
                   SizedBox(width: MediaQuery.of(context).size.width*0.15,),
-                  Text("Name",textAlign: TextAlign.center,
+                  Text(userData.name,textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 17.0,color: Colors.white),
                   ),
                 ],
@@ -229,7 +237,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         child: FlatButton(
                           onPressed: () async {
                             await _auth.signOut();
-
+                            Navigator.pop(context);
                             },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -270,5 +278,11 @@ class _MyDrawerState extends State<MyDrawer> {
         ],
       ),
     );
+        }
+  else {
+          return Home();
+        }
+      });
+        
   }
 }
