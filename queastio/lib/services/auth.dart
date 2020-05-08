@@ -4,8 +4,16 @@ import 'package:queastio/models/user.dart';
 class AuthService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  AuthService();
+  Future<User> getUser() async{
+    var firebaseuser = await _auth.currentUser();
+    User(firebaseuser.uid ,firebaseuser.email);
+    firebaseuser.uid;
+    firebaseuser.email;
+  }
+
   User _userFromFirebaseUser(FirebaseUser user){
-    return user != null ? User(uid: user.uid): null;
+    return user != null ? User(user.uid,user.email): null;
   }
    Stream<User> get user {
     return _auth.onAuthStateChanged
