@@ -27,11 +27,13 @@ dependencies:
   cloud_firestore: ^0.13.5
   provider: ^4.0.5+1
   flutter_spinkit: "^4.1.2"
-
+  firebase_storage:
+  image_picker:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  firebase_storage:
+
+
 
 
 # For information on the generic Dart part of this file, see the

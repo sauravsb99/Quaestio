@@ -1,10 +1,13 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/services/auth.dart';
 
 class MyDrawer extends StatefulWidget {
+
   @override
   _MyDrawerState createState() => _MyDrawerState();
 }
@@ -22,7 +25,12 @@ class _MyDrawerState extends State<MyDrawer> {
           FlatButton(
             color: Colors.black54,
 
-            onPressed: (){},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()));
+
+            },
             child:DrawerHeader(
 //            decoration: BoxDecoration(color: Colors.blue,
 //            ),
@@ -37,10 +45,24 @@ class _MyDrawerState extends State<MyDrawer> {
                     backgroundImage: NetworkImage("https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"),
                   ),
 
-                  SizedBox(width: MediaQuery.of(context).size.width*0.15,),
-                  Text("Name",textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 17.0,color: Colors.white),
-                  ),
+                  SizedBox(width: MediaQuery.of(context).size.width*0.05,),
+              FutureBuilder<FirebaseUser>(
+                future: FirebaseAuth.instance.currentUser(),
+                builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return new Text(snapshot.data.email.toUpperCase(),textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17.0,color: Colors.white),);
+                  }
+                  else {
+                    return new Text('Loading...',textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17.0,color: Colors.white),);
+                  }
+                },
+              ),
+
+//                  Text("Name",textAlign: TextAlign.center,
+//                    style: TextStyle(fontSize: 17.0,color: Colors.white),
+//                  ),
                 ],
               ),
 //                 child: Padding(padding: const EdgeInsets.fromLTRB(13.0,13.0,13.0,0),
