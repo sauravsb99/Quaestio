@@ -1,13 +1,12 @@
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path/path.dart';
-import 'package:queastio/screens/home/home.dart';
+import 'package:queastio/services/auth.dart';
+import 'package:queastio/models/user.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -16,16 +15,19 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   File _image;
+  User currentUser;
+
 
   @override
 
   Widget build(BuildContext context) {
 
 
+
     Future getImage(bool isCamera) async{
       var image;
       if(isCamera) {
-
+        image = await ImagePicker.pickImage(source: ImageSource.camera);
       }
       else {
         image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -39,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 
     Future uploadPic(BuildContext context) async{
-      String fileName=basename(_image.path);
+      String fileName=basename("$currentUser.uid");
       StorageReference firebaseStorageRef=FirebaseStorage.instance.ref().child(fileName);
       StorageUploadTask uploadTask=firebaseStorageRef.putFile(_image);
       StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
@@ -149,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(8.0,8.0,15.0,8.0),
-                              child: Text("hi",
+                              child: Text("${currentUser?.email??"hi"}" ,
                                   style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold)
                               ),
                             ),
