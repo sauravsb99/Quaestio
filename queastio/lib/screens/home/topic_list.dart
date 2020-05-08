@@ -23,6 +23,5 @@ class _TopicListState extends State<TopicList> {
         return TopicTile(topic: topics[index]);
       },
     );
-  
   }
 }
