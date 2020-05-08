@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:queastio/models/user.dart';
+import 'database.dart';
+import 'dart:math';
 
 class AuthService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -40,6 +42,8 @@ class AuthService{
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      var rng = new Random();
+      await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}');
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
