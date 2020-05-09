@@ -73,7 +73,11 @@ class QuizTile extends StatelessWidget {
                       RaisedButton(
                         padding: EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 5.0),
-                        onPressed: () {},
+                        onPressed: () {
+                          print('Red');
+                          Navigator.pushNamed(context, '/quiz',
+                              arguments: quiz.questions);
+                        },
                         child: Text(
                           'Start Quiz',
                           style: TextStyle(
