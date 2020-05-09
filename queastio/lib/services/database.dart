@@ -46,9 +46,14 @@ class DatabaseService {
     }).toList();
   }
 
-  Stream<UserData> get userData {
+Stream<UserData> get userData  {
+try{
     return userCollection.document(uid).snapshots().map(_userDataFromSnapshot);
+  }on Exception {
+
+  return null;
   }
+}
 
   Stream<List<Topic>> get topics {
     return topicCollection.snapshots().map(_topicListFromSnapshot);

@@ -25,20 +25,54 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+
+    final emailField = TextFormField(
+      validator: (val) => val.isEmpty ? 'Enter an email' : null,
+      onChanged: (val) {
+        setState(() => email = val);
+      },
+      obscureText: false,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Email",
+          border:
+          OutlineInputBorder(borderRadius: BorderRadius.circular(11.0))),
+    );
+
+    final passwordField =  TextFormField(
+      obscureText: true,
+      validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+      onChanged: (val) {
+        setState(() => password = val);
+      },
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Password",
+          border:
+          OutlineInputBorder(borderRadius: BorderRadius.circular(11.0))),
+    ); //password
+
+    final loginButton = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Color(0xff01A0C7),
+        child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+            child:Text("Sign in"),
+            onPressed: () async {
+              if(_formKey.currentState.validate()){
+                dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                if(result == null) {
+                  setState(() {
+                    error = 'Could not sign in with those credentials';
+                  });
+                }
+              }
+            }
+        )
+    );
+
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
-      appBar: AppBar(
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        title: Text('Sign In'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Register'),
-            onPressed: () => widget.toggleView(),
-          ),
-        ],
-      ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
@@ -46,6 +80,11 @@ class _SignInState extends State<SignIn> {
           child: Column(
             children: <Widget>[
               SizedBox(height: 20.0),
+              emailField,
+              SizedBox(height: 20.0),
+              passwordField,
+              SizedBox(height: 20.0),
+              loginButton,
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
