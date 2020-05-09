@@ -14,7 +14,6 @@ class AuthService{
       //.map((FirebaseUser user) => _userFromFirebaseUser(user));
       .map(_userFromFirebaseUser);
   }
-
   Future signInAnon() async{
     try{
 
@@ -27,7 +26,6 @@ class AuthService{
       return null;
     }
   }
-
 
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
@@ -61,16 +59,5 @@ class AuthService{
       return null;
     }
   }
-
-//  Future updateWithPassword(String email, String password) async {
-//    try {
-//      AuthResult result = await _auth.updateWithPassword(uid: uid, password: password);
-//      FirebaseUser user = result.user;
-//      return user;
-//    } catch (error) {
-//      print(error.toString());
-//      return null;
-//    }
-//  }
 
 }
