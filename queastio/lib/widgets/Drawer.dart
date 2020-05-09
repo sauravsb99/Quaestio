@@ -177,37 +177,6 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ],
                 ),
-
-
-
-//              TEST
-//                Container(
-//
-//                  // This align moves the children to the bottom
-//                    child: Align(
-//                        alignment: FractionalOffset.bottomCenter,
-//                        // This container holds all the children that will be aligned
-//                        // on the bottom and should not scroll with the above ListView
-//                        child: Container(
-//                            child: Column(
-//                              children: <Widget>[
-//                                Divider(),
-//                                ListTile(
-//                                    leading: Icon(Icons.settings),
-//                                    title: Text('Settings')),
-//                                ListTile(
-//                                    leading: Icon(Icons.help),
-//                                    title: Text('Help and Feedback'))
-//                              ],
-//                            )
-//                        )
-//                    )
-//                ),
-
-
-
-
-
         ],
       ),
     );

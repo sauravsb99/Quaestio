@@ -1,25 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:queastio/models/user.dart';
+import 'database.dart';
+import 'dart:math';
 
 class AuthService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  AuthService();
-  Future<User> getUser() async{
-    var firebaseuser = await _auth.currentUser();
-    User(firebaseuser.uid ,firebaseuser.email);
-    firebaseuser.uid;
-    firebaseuser.email;
-  }
-
   User _userFromFirebaseUser(FirebaseUser user){
-    return user != null ? User(user.uid,user.email): null;
+    return user != null ? User(uid: user.uid): null;
   }
    Stream<User> get user {
     return _auth.onAuthStateChanged
       //.map((FirebaseUser user) => _userFromFirebaseUser(user));
       .map(_userFromFirebaseUser);
   }
+
   Future signInAnon() async{
     try{
 
@@ -32,6 +27,7 @@ class AuthService{
       return null;
     }
   }
+
 
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
@@ -48,6 +44,8 @@ class AuthService{
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      var rng = new Random();
+      await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}');
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
@@ -63,5 +61,16 @@ class AuthService{
       return null;
     }
   }
+
+//  Future updateWithPassword(String email, String password) async {
+//    try {
+//      AuthResult result = await _auth.updateWithPassword(uid: uid, password: password);
+//      FirebaseUser user = result.user;
+//      return user;
+//    } catch (error) {
+//      print(error.toString());
+//      return null;
+//    }
+//  }
 
 }
