@@ -71,7 +71,7 @@ class _UserputState extends State<Userput> {
 
           UserData userData = snapshot.data;
 
-
+          // print(userData.image);
 
           DatabaseService data=DatabaseService();
 //          String password = '';
@@ -121,7 +121,7 @@ class _UserputState extends State<Userput> {
                                 backgroundColor: Colors.black26,
                                 child: ClipOval(
                                   child: SizedBox(width: 140.0, height: 140.0,
-                                    child: _image==null?Image.network(user.uid):Image.file(_image,fit: BoxFit.fill,),
+                                    child: _image==null?Image.network(userData.image):Image.file(_image,fit: BoxFit.fill,),
                                     //                          child:(_image)
 //                                    child: url!=null?Image.network(url):Image.network(user.uid),
                                   ),
@@ -158,57 +158,57 @@ class _UserputState extends State<Userput> {
                           key: _formKey,
                           child:Column(
                             children: <Widget>[
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  SizedBox(
-                                    width: 10,
-                                  ),
+                            // Row(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: <Widget>[
+                            //       SizedBox(
+                            //         width: 10,
+                            //       ),
 
-                                  Text(
-                                    "UID",
-                                    style: TextStyle(
-                                        fontSize: 17
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Container(
-                                    //                         : CrossAxisAlignment.center,
-                                    color: Colors.white,
-                                    child: SizedBox(width: (MediaQuery.of(context).size.width - 75) * 0.7,
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(8.0, 8.0, 15.0, 8.0),
-                                          child: TextFormField(
-                                            initialValue:userData.uid,
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold
-                                            ),
-                                            validator: (val) => val.isEmpty ? 'Enter an email' : null,
-                                            onChanged: (val) {
-                                              String uid;
-                                              setState(() => uid = val);
-                                            },
+                            //       Text(
+                            //         "UID",
+                            //         style: TextStyle(
+                            //             fontSize: 17
+                            //         ),
+                            //       ),
+                            //       SizedBox(
+                            //         width: 15,
+                            //       ),
+                            //       Container(
+                            //         //                         : CrossAxisAlignment.center,
+                            //         color: Colors.white,
+                            //         child: SizedBox(width: (MediaQuery.of(context).size.width - 75) * 0.7,
+                            //           child: Align(
+                            //             alignment: Alignment.centerRight,
+                            //             child: Padding(
+                            //               padding: const EdgeInsets.fromLTRB(8.0, 8.0, 15.0, 8.0),
+                            //               child: TextFormField(
+                            //                 initialValue:userData.uid,
+                            //                 style: TextStyle(
+                            //                     fontSize: 18,
+                            //                     fontWeight: FontWeight.bold
+                            //                 ),
+                            //                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                            //                 onChanged: (val) {
+                            //                   String uid;
+                            //                   setState(() => uid = val);
+                            //                 },
 
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      icon: Icon(
-                                          Icons.edit
-                                      ),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      }
-                                  ),
-                                ],
-                              ),
+                            //                   ),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       IconButton(
+                            //           icon: Icon(
+                            //               Icons.edit
+                            //           ),
+                            //           onPressed: () {
+                            //             Navigator.pop(context);
+                            //           }
+                            //       ),
+                            //     ],
+                            //   ),
 
                             SizedBox(
                               height: 10,
@@ -265,42 +265,42 @@ class _UserputState extends State<Userput> {
                                 ],
                               ),
                             SizedBox(height: 10,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
+                          //   Row(
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: <Widget>[
+                          //       SizedBox(
+                          //         width: 10,
+                          //       ),
 
-                                Text("E-mail", style: TextStyle(fontSize: 17),),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                              Container(
-                                //                         : CrossAxisAlignment.center,
-                                color: Colors.blue,
-                                child: SizedBox(
-                                  width: (MediaQuery.of(context).size.width-75)*0.7,
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(8.0,8.0,15.0,8.0),
-                                      child: Text(userData.email==null?"email not available":userData.email,
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold
-                                          )
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.lock),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
+                          //       Text("E-mail", style: TextStyle(fontSize: 17),),
+                          //       SizedBox(
+                          //         width: 15,
+                          //       ),
+                          //     Container(
+                          //       //                         : CrossAxisAlignment.center,
+                          //       color: Colors.blue,
+                          //       child: SizedBox(
+                          //         width: (MediaQuery.of(context).size.width-75)*0.7,
+                          //         child: Align(
+                          //           alignment: Alignment.centerRight,
+                          //           child: Padding(
+                          //             padding: const EdgeInsets.fromLTRB(8.0,8.0,15.0,8.0),
+                          //             child: Text(userData.email==null?"email not available":userData.email,
+                          //                 style: TextStyle(
+                          //                     fontSize: 18,
+                          //                     fontWeight: FontWeight.bold
+                          //                 )
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     IconButton(
+                          //       icon: Icon(Icons.lock),
+                          //       onPressed: () {},
+                          //     ),
+                          //   ],
+                          // ),
                             SizedBox(
                               height: 60,
                             ),
@@ -311,7 +311,7 @@ class _UserputState extends State<Userput> {
                               RaisedButton(
                                 onPressed: () async {
                                   final ref = FirebaseStorage.instance.ref().child(user.uid);
-                                  var url = await ref.getDownloadURL();
+                                  String url = await ref.getDownloadURL();
                                   print(url);
                                 },
                                 splashColor: Colors.white,
@@ -331,7 +331,13 @@ class _UserputState extends State<Userput> {
                                 onPressed: () async {
                                 if (_formKey.currentState.validate()) {
                                   print(name);
-                                await data.updateUserData(name);
+                                  String i = url;
+                                  if(name ==null)
+                                    name = userData.name;
+                                  if(i==null)
+                                  i=userData.image;
+                                    // i="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
+                                await DatabaseService(uid: user.uid).updateUserData(name,i);
                                 setState((){
                                 Scaffold.of(context).showSnackBar(SnackBar(content: Text("url")));
                                 });

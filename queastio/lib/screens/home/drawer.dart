@@ -47,7 +47,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           CircleAvatar (
                             radius:35.0,
                             backgroundColor: Colors.grey[800],
-                            backgroundImage: NetworkImage("https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"),
+                            backgroundImage: NetworkImage(userData.image),
                           ),
 
                           SizedBox(width: MediaQuery.of(context).size.width*0.05,),

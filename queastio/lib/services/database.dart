@@ -15,10 +15,11 @@ class DatabaseService {
   final CollectionReference quizCollection =
       Firestore.instance.collection('quizzes');
 
-  Future<void> updateUserData(String name) async {
+  Future<void> updateUserData(String name,String image) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
+      'image': image,
     });
   }
 
@@ -26,6 +27,7 @@ class DatabaseService {
     return UserData(
       uid: uid,
       name: snapshot.data['name'],
+      image: snapshot.data['image'],
     );
   }
 
