@@ -12,15 +12,17 @@ class _TopicListState extends State<TopicList> {
   @override
   Widget build(BuildContext context) {
     final topics = Provider.of<List<Topic>>(context);
-    topics.forEach((topic) {
-      print(topic.name);
-      print(topic.image);
-    });
+    // topics.forEach((topic) {
+    //   print(topic.name);
+    //   print(topic.image);
+    // });
+
     return ListView.builder(
       itemCount: topics.length,
       itemBuilder: (context, index) {
         return TopicTile(topic: topics[index]);
       },
     );
+
   }
 }
