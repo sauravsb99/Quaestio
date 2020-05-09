@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -9,7 +11,7 @@ import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/services/database.dart';
 
 class Userput extends StatefulWidget {
-  DatabaseService data;
+//  DatabaseService data;
   final UserData user;
   Userput({this.user});
   @override
@@ -17,8 +19,7 @@ class Userput extends StatefulWidget {
 }
 
 class _UserputState extends State<Userput> {
-
-  DatabaseService data;
+//  FirebaseAuth _auth=FirebaseAuth.instance;
   final UserData user;
   final _formKey = GlobalKey<FormState>();
 
@@ -72,6 +73,7 @@ class _UserputState extends State<Userput> {
 
 
 
+          DatabaseService data=DatabaseService();
 //          String password = '';
 //          String email = '';
 //          url=Loadpic(user.uid).toString();
@@ -119,7 +121,7 @@ class _UserputState extends State<Userput> {
                                 backgroundColor: Colors.black26,
                                 child: ClipOval(
                                   child: SizedBox(width: 140.0, height: 140.0,
-                                    child: Image.network(user.uid),
+                                    child: _image==null?Image.network(user.uid):Image.file(_image,fit: BoxFit.fill,),
                                     //                          child:(_image)
 //                                    child: url!=null?Image.network(url):Image.network(user.uid),
                                   ),
@@ -329,13 +331,18 @@ class _UserputState extends State<Userput> {
                                 onPressed: () async {
                                 if (_formKey.currentState.validate()) {
                                   print(name);
-                                await data.updateUserData(name); //, newpassword
+                                await data.updateUserData(name);
+                                setState((){
+                                Scaffold.of(context).showSnackBar(SnackBar(content: Text("url")));
+                                });
+//                                .whenComplete(print("hi")); //, newpassword
 //                                if (result == null) {
 //                                setState(() {
 //                                print('Could not sign in with those credentials');
 //                                });
 //                                }
                                 }
+                                if(_image!=null){
                                     String fileName=basename(userData.uid);
                                     StorageReference firebaseStorageRef=FirebaseStorage.instance.ref().child(fileName);
                                     StorageUploadTask uploadTask=firebaseStorageRef.putFile(_image);
@@ -346,6 +353,8 @@ class _UserputState extends State<Userput> {
                                       print("Data Updated");
                                       Scaffold.of(context).showSnackBar(SnackBar(content: Text(url)));
                                     });
+                                     }
+
 
     //                          };
                                 },

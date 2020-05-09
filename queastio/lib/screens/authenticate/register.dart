@@ -31,11 +31,6 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
         title: Text('Register'),
-//        leading: IconButton(
-//          icon:Icon(Icons.menu),
-//          color: Colors.white, onPressed: (){},
-//),
-//        actions:
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),

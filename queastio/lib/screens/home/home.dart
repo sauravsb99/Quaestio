@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
       value: DatabaseService().topics,
       child: Container(
         child: Scaffold(
-          backgroundColor: Colors.brown[50],
+          backgroundColor: Colors.black,
           drawer: Drawer(
             child: MyDrawer(),
           ),
@@ -29,6 +29,6 @@ class Home extends StatelessWidget {
           body: TopicList(),
         ),
       ),
-      );
+    );
   }
 }
