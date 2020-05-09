@@ -13,6 +13,27 @@ class _QuestionCardState extends State<QuestionCard> {
   bool _isPrevButtonDisabled;
   bool _isNextButtonDisabled;
 
+  Future<void> _showMyDialog(int score, int total) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+              'You have scored ' + score.toString() + '/' + total.toString()),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Take Another Test'),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/');
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void initState() {
     index = 0;
     _isPrevButtonDisabled = true;
@@ -141,6 +162,7 @@ class _QuestionCardState extends State<QuestionCard> {
                               answers: answers, selected: selectedOptions);
                           int score = instance.getScore();
                           print('Score:' + score.toString());
+                          _showMyDialog(score, answers.length);
                         },
                   child: Text('Submit Test'),
                   color: Colors.green,
