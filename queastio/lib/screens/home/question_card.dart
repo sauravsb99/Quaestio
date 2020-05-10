@@ -1,7 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:queastio/services/auth.dart';
+import 'package:queastio/services/database.dart';
 import 'package:queastio/services/scoring.dart';
+import 'package:queastio/models/user.dart';
 
 class QuestionCard extends StatefulWidget {
   @override
@@ -12,23 +14,50 @@ class _QuestionCardState extends State<QuestionCard> {
   int index = 0;
   bool _isPrevButtonDisabled;
   bool _isNextButtonDisabled;
+  final AuthService _auth = AuthService();
 
   Future<void> _showMyDialog(int score, int total) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-              'You have scored ' + score.toString() + '/' + total.toString()),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Take Another Test'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/');
-              },
-            ),
-          ],
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: Column(children: <Widget>[
+              Text(
+                'You have scored',
+              ),
+              SizedBox(height: 20.0),
+              Text(
+                score.toString(),
+                style: TextStyle(
+                  fontSize: 50.0,
+                ),
+              ),
+              Divider(
+                thickness: 5.0,
+                indent: 75.0,
+                endIndent: 75.0,
+                color: Colors.indigo[900],
+              ),
+              Text(
+                total.toString(),
+                style: TextStyle(
+                  fontSize: 50.0,
+                ),
+              )
+            ]),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.home),
+                color: Colors.indigo,
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/');
+                },
+              ),
+            ],
+          ),
         );
       },
     );
@@ -46,6 +75,7 @@ class _QuestionCardState extends State<QuestionCard> {
     final dynamic args = ModalRoute.of(context).settings.arguments;
     final List questions = args['questions'];
     final List answers = args['answers'];
+    final String qid = args['qid'];
     Map question = Map.from(questions[index]);
     selectedOptions =
         selectedOptions == null ? new List(questions.length) : selectedOptions;
@@ -88,7 +118,7 @@ class _QuestionCardState extends State<QuestionCard> {
               title: Text(question['options'][0]),
               value: question['options'][0],
               groupValue: selectedOptions[index],
-              activeColor: Colors.green,
+              activeColor: Colors.indigo,
               onChanged: (value) {
                 setState(() {
                   selectedOptions[index] = value;
@@ -100,7 +130,7 @@ class _QuestionCardState extends State<QuestionCard> {
               title: Text(question['options'][1]),
               value: question['options'][1],
               groupValue: selectedOptions[index],
-              activeColor: Colors.green,
+              activeColor: Colors.indigo,
               onChanged: (value) {
                 setState(() {
                   selectedOptions[index] = value;
@@ -112,7 +142,7 @@ class _QuestionCardState extends State<QuestionCard> {
               title: Text(question['options'][2]),
               value: question['options'][2],
               groupValue: selectedOptions[index],
-              activeColor: Colors.green,
+              activeColor: Colors.indigo,
               onChanged: (value) {
                 setState(() {
                   selectedOptions[index] = value;
@@ -124,7 +154,7 @@ class _QuestionCardState extends State<QuestionCard> {
               title: Text(question['options'][3]),
               value: question['options'][3],
               groupValue: selectedOptions[index],
-              activeColor: Colors.green,
+              activeColor: Colors.indigo,
               onChanged: (value) {
                 setState(() {
                   selectedOptions[index] = value;
@@ -137,7 +167,7 @@ class _QuestionCardState extends State<QuestionCard> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 IconButton(
-                  color: Colors.green,
+                  color: Colors.indigo,
                   disabledColor: Colors.white,
                   icon: Icon(
                     Icons.arrow_left,
@@ -157,18 +187,21 @@ class _QuestionCardState extends State<QuestionCard> {
                   textColor: Colors.white,
                   onPressed: selectedOptions == null
                       ? null
-                      : () {
+                      : () async {
                           Scoring instance = Scoring(
                               answers: answers, selected: selectedOptions);
                           int score = instance.getScore();
                           print('Score:' + score.toString());
+                          User user = Provider.of<User>(context, listen: false);
+                          await DatabaseService(uid: user.uid)
+                              .insertScore(qid, score, answers.length);
                           _showMyDialog(score, answers.length);
                         },
                   child: Text('Submit Test'),
-                  color: Colors.green,
+                  color: Colors.indigo,
                 ),
                 IconButton(
-                  color: Colors.green,
+                  color: Colors.indigo,
                   disabledColor: Colors.white,
                   icon: Icon(
                     Icons.arrow_right,

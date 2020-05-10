@@ -18,15 +18,15 @@ class QuizTile extends StatelessWidget {
           builder: (context) {
             return Container(
               padding: EdgeInsets.all(15.0),
+              color: Colors.indigo[900],
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Divider(height: 20.0),
                   Text(
                     quiz.qName.toUpperCase(),
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0,
                       letterSpacing: 2.0,
@@ -43,6 +43,7 @@ class QuizTile extends StatelessWidget {
                     'lorem idasfs sdsad fwr dfs asda wewe fdgv sdas dg asd dsvfds sfedet gddhrd sdfdsgs',
                     style: TextStyle(
                       fontSize: 20.0,
+                      color: Colors.white,
                     ),
                     textAlign: TextAlign.justify,
                   ),
@@ -51,6 +52,7 @@ class QuizTile extends StatelessWidget {
                     'No of questions: 10',
                     style: TextStyle(
                       fontSize: 20.0,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(height: 50.0),
@@ -79,7 +81,8 @@ class QuizTile extends StatelessWidget {
                           print(answers);
                           Navigator.pushNamed(context, '/quiz', arguments: {
                             'questions': quiz.questions,
-                            'answers': answers
+                            'answers': answers,
+                            'qid': quiz.qId
                           });
                         },
                         child: Text(
@@ -89,7 +92,7 @@ class QuizTile extends StatelessWidget {
                             color: Colors.grey[50],
                           ),
                         ),
-                        color: Colors.limeAccent[700],
+                        color: Colors.indigoAccent[700],
                       ),
                     ],
                   )
@@ -107,24 +110,25 @@ class QuizTile extends StatelessWidget {
         _showQuizDetails();
       },
       child: Card(
+          color: Colors.black26,
           child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: Text(
-                quiz.qName.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Text(
+                    quiz.qName.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      )),
+          )),
     );
   }
 }

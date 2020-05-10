@@ -18,13 +18,22 @@ class _QuizListState extends State<QuizList> {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
           return Scaffold(
-            appBar: AppBar(),
-            body: ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                return QuizTile(quiz: data[index]);
-              },
+            backgroundColor: Colors.indigo[900],
+            appBar: AppBar(
+              backgroundColor: Colors.indigo[900],
             ),
+            body: data.length == 0
+                ? Center(
+                    child: Text(
+                    'No tests here yet.Check back later.',
+                    style: TextStyle(color: Colors.white),
+                  ))
+                : ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return QuizTile(quiz: data[index]);
+                    },
+                  ),
           );
         }
         return Text('Boring');
