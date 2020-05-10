@@ -2,7 +2,6 @@ import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:queastio/screens/home/home.dart';
-import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/database.dart';
@@ -25,6 +24,7 @@ class _MyDrawerState extends State<MyDrawer> {
             return Container(
               color: Colors.black26,
               child: ListView(
+<<<<<<< HEAD
                 children: <Widget>[
                   InkWell(
                     splashColor: Colors.indigo[100],
@@ -33,24 +33,37 @@ class _MyDrawerState extends State<MyDrawer> {
                       print(userData.name);
                       Navigator.pushNamed(
                         context, '/profile',
+=======
+
+                children:<Widget>[
+
+              InkWell(
+                // child:Image.network(userData.image),
+              splashColor: Colors.indigo[100],
+                splashFactory: InkSplash.splashFactory,
+                onTap: () {
+                  print(userData.name);
+                  Navigator.pushNamed(context, '/profile',
+>>>>>>> 2db7d17a7255a938d23d8c6f2a9a942eab850ac2
 //                      arguments: userData.name
                       );
                     },
                     child: DrawerHeader(
                       child: Row(
+                        
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.05,
-                          ),
-                          Text(
-                            userData.name,
-                            textAlign: TextAlign.center,
-                            style:
-                                TextStyle(fontSize: 17.0, color: Colors.white),
-                          ),
+                        children: <Widget>[CircleAvatar(
+                          radius: MediaQuery.of(context).size.width*0.10,
+                          backgroundImage: NetworkImage(userData.image),
+                        ),
+                          SizedBox(width: MediaQuery.of(context).size.width*0.05,),
+                            Expanded(
+                            child:Text(userData.name,textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 28.0,color: Colors.white),
+                          ),),
+
                         ],
                       ),
                     ),
