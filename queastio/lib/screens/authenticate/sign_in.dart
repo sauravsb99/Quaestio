@@ -138,9 +138,11 @@ class _SignInState extends State<SignIn> {
                             child:Text("Sign in",style: TextStyle( color: Colors.white),),
                             onPressed: () async {
                               if(_formKey.currentState.validate()){
+                                setState(() => loading = true);
                                 dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                                 if(result == null) {
                                   setState(() {
+                                    loading = false;
                                     error = 'Could not sign in with those credentials';
                                   });
                                 }
