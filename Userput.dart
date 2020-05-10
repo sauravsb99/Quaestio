@@ -71,7 +71,7 @@ class _UserputState extends State<Userput> {
 
           UserData userData = snapshot.data;
 
-          // print(userData.image);
+
 
           DatabaseService data=DatabaseService();
 //          String password = '';
@@ -121,7 +121,7 @@ class _UserputState extends State<Userput> {
                                 backgroundColor: Colors.black26,
                                 child: ClipOval(
                                   child: SizedBox(width: 140.0, height: 140.0,
-                                    child: _image==null?Image.network(userData.image):Image.file(_image,fit: BoxFit.fill,),
+                                    child: _image==null?((userData.image==null)?(Image.network("https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg")):(Image.network(userData.image))):Image.file(_image,fit: BoxFit.fill,),
                                     //                          child:(_image)
 //                                    child: url!=null?Image.network(url):Image.network(user.uid),
                                   ),
@@ -158,57 +158,57 @@ class _UserputState extends State<Userput> {
                           key: _formKey,
                           child:Column(
                             children: <Widget>[
-                            // Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: <Widget>[
-                            //       SizedBox(
-                            //         width: 10,
-                            //       ),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: 10,
+                                  ),
 
-                            //       Text(
-                            //         "UID",
-                            //         style: TextStyle(
-                            //             fontSize: 17
-                            //         ),
-                            //       ),
-                            //       SizedBox(
-                            //         width: 15,
-                            //       ),
-                            //       Container(
-                            //         //                         : CrossAxisAlignment.center,
-                            //         color: Colors.white,
-                            //         child: SizedBox(width: (MediaQuery.of(context).size.width - 75) * 0.7,
-                            //           child: Align(
-                            //             alignment: Alignment.centerRight,
-                            //             child: Padding(
-                            //               padding: const EdgeInsets.fromLTRB(8.0, 8.0, 15.0, 8.0),
-                            //               child: TextFormField(
-                            //                 initialValue:userData.uid,
-                            //                 style: TextStyle(
-                            //                     fontSize: 18,
-                            //                     fontWeight: FontWeight.bold
-                            //                 ),
-                            //                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
-                            //                 onChanged: (val) {
-                            //                   String uid;
-                            //                   setState(() => uid = val);
-                            //                 },
+                                  Text(
+                                    "UID",
+                                    style: TextStyle(
+                                        fontSize: 17
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Container(
+                                    //                         : CrossAxisAlignment.center,
+                                    color: Colors.white,
+                                    child: SizedBox(width: (MediaQuery.of(context).size.width - 75) * 0.7,
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(8.0, 8.0, 15.0, 8.0),
+                                          child: TextFormField(
+                                            initialValue:userData.uid,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                            validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                                            onChanged: (val) {
+                                              String uid;
+                                              setState(() => uid = val);
+                                            },
 
-                            //                   ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       IconButton(
-                            //           icon: Icon(
-                            //               Icons.edit
-                            //           ),
-                            //           onPressed: () {
-                            //             Navigator.pop(context);
-                            //           }
-                            //       ),
-                            //     ],
-                            //   ),
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                      icon: Icon(
+                                          Icons.edit
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      }
+                                  ),
+                                ],
+                              ),
 
                             SizedBox(
                               height: 10,
@@ -265,42 +265,42 @@ class _UserputState extends State<Userput> {
                                 ],
                               ),
                             SizedBox(height: 10,),
-                          //   Row(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: <Widget>[
-                          //       SizedBox(
-                          //         width: 10,
-                          //       ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 10,
+                                ),
 
-                          //       Text("E-mail", style: TextStyle(fontSize: 17),),
-                          //       SizedBox(
-                          //         width: 15,
-                          //       ),
-                          //     Container(
-                          //       //                         : CrossAxisAlignment.center,
-                          //       color: Colors.blue,
-                          //       child: SizedBox(
-                          //         width: (MediaQuery.of(context).size.width-75)*0.7,
-                          //         child: Align(
-                          //           alignment: Alignment.centerRight,
-                          //           child: Padding(
-                          //             padding: const EdgeInsets.fromLTRB(8.0,8.0,15.0,8.0),
-                          //             child: Text(userData.email==null?"email not available":userData.email,
-                          //                 style: TextStyle(
-                          //                     fontSize: 18,
-                          //                     fontWeight: FontWeight.bold
-                          //                 )
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     IconButton(
-                          //       icon: Icon(Icons.lock),
-                          //       onPressed: () {},
-                          //     ),
-                          //   ],
-                          // ),
+                                Text("E-mail", style: TextStyle(fontSize: 17),),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                              Container(
+                                //                         : CrossAxisAlignment.center,
+                                color: Colors.blue,
+                                child: SizedBox(
+                                  width: (MediaQuery.of(context).size.width-75)*0.7,
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(8.0,8.0,15.0,8.0),
+                                      child: Text(userData.uid==null?"email not available":userData.uid,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold
+                                          )
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.lock),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
                             SizedBox(
                               height: 60,
                             ),
@@ -311,7 +311,7 @@ class _UserputState extends State<Userput> {
                               RaisedButton(
                                 onPressed: () async {
                                   final ref = FirebaseStorage.instance.ref().child(user.uid);
-                                  String url = await ref.getDownloadURL();
+                                  var url = await ref.getDownloadURL();
                                   print(url);
                                 },
                                 splashColor: Colors.white,
@@ -329,37 +329,27 @@ class _UserputState extends State<Userput> {
                               ),
                               RaisedButton(
                                 onPressed: () async {
-                                if (_formKey.currentState.validate()) {
-                                  print(name);
-                                  String i = url;
-                                  if(name ==null)
-                                    name = userData.name;
-                                  if(i==null)
-                                  i=userData.image;
-                                    // i="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
-                                await DatabaseService(uid: user.uid).updateUserData(name,i);
-                                setState((){
-                                Scaffold.of(context).showSnackBar(SnackBar(content: Text("url")));
-                                });
-//                                .whenComplete(print("hi")); //, newpassword
-//                                if (result == null) {
-//                                setState(() {
-//                                print('Could not sign in with those credentials');
-//                                });
-//                                }
-                                }
-                                if(_image!=null){
+
+                                  if(_image!=null){
                                     String fileName=basename(userData.uid);
                                     StorageReference firebaseStorageRef=FirebaseStorage.instance.ref().child(fileName);
                                     StorageUploadTask uploadTask=firebaseStorageRef.putFile(_image);
                                     StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
                                     var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
-                                     url = dowurl.toString();
-                                     setState(() {
+                                    url = dowurl.toString();
+                                    setState(() {
                                       print("Data Updated");
-                                      Scaffold.of(context).showSnackBar(SnackBar(content: Text(url)));
+                                      Scaffold.of(context).showSnackBar(SnackBar(content: Text("${url}")));
                                     });
-                                     }
+                                  }
+                                if (_formKey.currentState.validate()) {
+                                  print(name);
+                                await data.updateUserData(name,url);
+                                setState((){
+                                Scaffold.of(context).showSnackBar(SnackBar(content: Text("url")));
+                                });
+                                }
+
 
 
     //                          };
@@ -384,8 +374,9 @@ class _UserputState extends State<Userput> {
                       ),
                     ),
               ],
-            ),
-              );
+//            ),
+              ),
+          );
             }
         else {
           return Home();

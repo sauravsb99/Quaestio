@@ -6,11 +6,13 @@ class QuizTile extends StatelessWidget {
   final Quiz quiz;
 
   QuizTile({this.quiz});
-
   @override
   Widget build(BuildContext context) {
     void _showQuizDetails() {
-      print('dsfsdf');
+      List<String> answers = quiz.questions.map((q) {
+        return q['answer'].toString();
+      }).toList();
+      print(answers);
       showModalBottomSheet(
           context: context,
           builder: (context) {
@@ -74,9 +76,11 @@ class QuizTile extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 5.0),
                         onPressed: () {
-                          print('Red');
-                          Navigator.pushNamed(context, '/quiz',
-                              arguments: quiz.questions);
+                          print(answers);
+                          Navigator.pushNamed(context, '/quiz', arguments: {
+                            'questions': quiz.questions,
+                            'answers': answers
+                          });
                         },
                         child: Text(
                           'Start Quiz',
