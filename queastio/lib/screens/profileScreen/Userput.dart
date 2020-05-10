@@ -19,20 +19,10 @@ class Userput extends StatefulWidget {
 }
 
 class _UserputState extends State<Userput> {
-//  FirebaseAuth _auth=FirebaseAuth.instance;
   final UserData user;
   final _formKey = GlobalKey<FormState>();
 
   _UserputState ( {this.user} );
-
-//  String get name => _formKey.currentState.name;
-//  // ignore: non_constant_identifier_names
-//  Future Loadpic(uid) async {
-//    final ref = FirebaseStorage.instance.ref().child(uid);
-//    var url = await ref.getDownloadURL();
-//// no need of the file extension, the name will do fine.
-//    return url;
-//  }
 
   Future getImage (bool isCamera) async {
     var image;
@@ -58,35 +48,18 @@ class _UserputState extends State<Userput> {
   File _image;
   String url;
   @override
-  Widget build (
-      BuildContext context
-      ) {
-    User user = Provider.of<User>(
-        context
-    );
+  Widget build (BuildContext context) {
+    User user = Provider.of<User>(context);
     return StreamBuilder<UserData>(
       stream: DatabaseService(uid: user.uid).userData,
       builder: ( context, snapshot ) {
         if ( snapshot.hasData ) {
 
           UserData userData = snapshot.data;
-
-          // print(userData.image);
-
           DatabaseService data=DatabaseService();
-//          String password = '';
-//          String email = '';
-//          url=Loadpic(user.uid).toString();
 
           return Scaffold(
-            //      appBar: AppBar(
-            //        leading:
-            //        title: Text('Profile'),
-            //      ),
-            body:
-  //      Builder(
-  //        builder: (context) =>
-            Wrap(
+            body: Wrap(
 
               children: <Widget>[
                 Container(
@@ -122,8 +95,6 @@ class _UserputState extends State<Userput> {
                                 child: ClipOval(
                                   child: SizedBox(width: 140.0, height: 140.0,
                                     child: _image==null?Image.network(userData.image):Image.file(_image,fit: BoxFit.fill,),
-                                    //                          child:(_image)
-//                                    child: url!=null?Image.network(url):Image.network(user.uid),
                                   ),
                                 ),
                               ),
@@ -158,58 +129,6 @@ class _UserputState extends State<Userput> {
                           key: _formKey,
                           child:Column(
                             children: <Widget>[
-                            // Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: <Widget>[
-                            //       SizedBox(
-                            //         width: 10,
-                            //       ),
-
-                            //       Text(
-                            //         "UID",
-                            //         style: TextStyle(
-                            //             fontSize: 17
-                            //         ),
-                            //       ),
-                            //       SizedBox(
-                            //         width: 15,
-                            //       ),
-                            //       Container(
-                            //         //                         : CrossAxisAlignment.center,
-                            //         color: Colors.white,
-                            //         child: SizedBox(width: (MediaQuery.of(context).size.width - 75) * 0.7,
-                            //           child: Align(
-                            //             alignment: Alignment.centerRight,
-                            //             child: Padding(
-                            //               padding: const EdgeInsets.fromLTRB(8.0, 8.0, 15.0, 8.0),
-                            //               child: TextFormField(
-                            //                 initialValue:userData.uid,
-                            //                 style: TextStyle(
-                            //                     fontSize: 18,
-                            //                     fontWeight: FontWeight.bold
-                            //                 ),
-                            //                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
-                            //                 onChanged: (val) {
-                            //                   String uid;
-                            //                   setState(() => uid = val);
-                            //                 },
-
-                            //                   ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       IconButton(
-                            //           icon: Icon(
-                            //               Icons.edit
-                            //           ),
-                            //           onPressed: () {
-                            //             Navigator.pop(context);
-                            //           }
-                            //       ),
-                            //     ],
-                            //   ),
-
                             SizedBox(
                               height: 10,
                             ),
@@ -254,53 +173,12 @@ class _UserputState extends State<Userput> {
                                       ),
                                     ),
                                   ),
-                                  IconButton(
-                                      icon: Icon(
+                                  Icon(
                                           Icons.edit
                                       ),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      }
-                                  ),
                                 ],
                               ),
                             SizedBox(height: 10,),
-                          //   Row(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: <Widget>[
-                          //       SizedBox(
-                          //         width: 10,
-                          //       ),
-
-                          //       Text("E-mail", style: TextStyle(fontSize: 17),),
-                          //       SizedBox(
-                          //         width: 15,
-                          //       ),
-                          //     Container(
-                          //       //                         : CrossAxisAlignment.center,
-                          //       color: Colors.blue,
-                          //       child: SizedBox(
-                          //         width: (MediaQuery.of(context).size.width-75)*0.7,
-                          //         child: Align(
-                          //           alignment: Alignment.centerRight,
-                          //           child: Padding(
-                          //             padding: const EdgeInsets.fromLTRB(8.0,8.0,15.0,8.0),
-                          //             child: Text(userData.email==null?"email not available":userData.email,
-                          //                 style: TextStyle(
-                          //                     fontSize: 18,
-                          //                     fontWeight: FontWeight.bold
-                          //                 )
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     IconButton(
-                          //       icon: Icon(Icons.lock),
-                          //       onPressed: () {},
-                          //     ),
-                          //   ],
-                          // ),
                             SizedBox(
                               height: 60,
                             ),
@@ -329,6 +207,22 @@ class _UserputState extends State<Userput> {
                               ),
                               RaisedButton(
                                 onPressed: () async {
+                                  String err= "Photo Updated";
+                                  if(_image!=null){
+                                    String fileName=basename(userData.uid);
+                                    StorageReference firebaseStorageRef=FirebaseStorage.instance.ref().child(fileName);
+                                    StorageUploadTask uploadTask=firebaseStorageRef.putFile(_image);
+                                    StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
+                                    var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
+                                    if(await uploadTask.isCanceled){
+                                      err="Error";
+                                    };
+                                    url = dowurl.toString();
+                                    setState(() {
+                                      print("Data Updated");
+                                      Scaffold.of(context).showSnackBar(SnackBar(content: Text(err)));
+                                    });
+                                  }
                                 if (_formKey.currentState.validate()) {
                                   print(name);
                                   String i = url;
@@ -339,27 +233,10 @@ class _UserputState extends State<Userput> {
                                     // i="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
                                 await DatabaseService(uid: user.uid).updateUserData(name,i);
                                 setState((){
-                                Scaffold.of(context).showSnackBar(SnackBar(content: Text("url")));
+                                Scaffold.of(context).showSnackBar(SnackBar(content: Text("Name Updated")));
                                 });
-//                                .whenComplete(print("hi")); //, newpassword
-//                                if (result == null) {
-//                                setState(() {
-//                                print('Could not sign in with those credentials');
-//                                });
-//                                }
                                 }
-                                if(_image!=null){
-                                    String fileName=basename(userData.uid);
-                                    StorageReference firebaseStorageRef=FirebaseStorage.instance.ref().child(fileName);
-                                    StorageUploadTask uploadTask=firebaseStorageRef.putFile(_image);
-                                    StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
-                                    var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
-                                     url = dowurl.toString();
-                                     setState(() {
-                                      print("Data Updated");
-                                      Scaffold.of(context).showSnackBar(SnackBar(content: Text(url)));
-                                    });
-                                     }
+
 
 
     //                          };
