@@ -27,62 +27,47 @@ class _MyDrawerState extends State<MyDrawer> {
               child: ListView(
 
                 children:<Widget>[
-                  FlatButton(
-                    color: Colors.black54,
-
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfileScreen()));
-
-                    },
-                    child:DrawerHeader(
-//            decoration: BoxDecoration(color: Colors.blue,
-//            ),
+              InkWell(
+              splashColor: Colors.indigo[100],
+                splashFactory: InkSplash.splashFactory,
+                onTap: () {
+                  print(userData.name);
+                  Navigator.pushNamed(context, '/profile', arguments: userData.name);
+                },
+                child:DrawerHeader(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          CircleAvatar (
-                            radius:35.0,
-                            backgroundColor: Colors.grey[800],
-                            backgroundImage: NetworkImage("https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"),
-                          ),
-
-                          SizedBox(width: MediaQuery.of(context).size.width*0.05,),
-                          Text(userData.name,textAlign: TextAlign.center,
+//                          CircleAvatar (
+//                            radius:35.0,
+//                            backgroundColor: Colors.grey[800],
+//                            backgroundImage: userData.image==null?NetworkImage("https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"):NetworkImage(userData.image),),
+                            SizedBox(width: MediaQuery.of(context).size.width*0.05,),
+                            Text(userData.name,textAlign: TextAlign.center,
+//=======
+//                          CircleAvatar (
+//                            radius:35.0,
+//                            backgroundColor: Colors.grey[800],
+//                            backgroundImage: NetworkImage(userData.image),
+//                          ),
+//
+//                          SizedBox(width: MediaQuery.of(context).size.width*0.05,),
+//                          Text(userData.name,textAlign: TextAlign.center,
+//>>>>>>> 61c9d171b3ca8300c0b01336e26c804036a235de
                             style: TextStyle(fontSize: 17.0,color: Colors.white),
                           ),
+
                         ],
                       ),
-//                 child: Padding(padding: const EdgeInsets.fromLTRB(13.0,13.0,13.0,0),
-//                    child:Material(
-//                      ation: 15.0,
-//                      borderRadius: BorderRadius.circular(15.0),
-//                      borderOnForeground: true,
-//
-//
-//
-//
-//          ),
-//    ),
-
                     ),
                   ),
-
-
-
-
-//                ),
-//              ),
-//          ),
 
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
                       Padding(
-//padding: EdgeInsetsGeometry(WrapAlignment.center),
                         padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,30,MediaQuery.of(context).size.width*0.05,10),
 //
                         child: Material(

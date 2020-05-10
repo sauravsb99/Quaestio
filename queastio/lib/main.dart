@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/screens/home/question_card.dart';
+import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/auth.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/quizzes': (context) => QuizList(),
           '/quiz': (context) => QuestionCard(),
+          '/profile':(context)=>ProfileScreen(),
         },
       ),
     );
