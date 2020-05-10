@@ -18,119 +18,108 @@ class QuizTile extends StatelessWidget {
           builder: (context) {
             return Wrap(
               children: <Widget>[
-                SizedBox(height: 100,),
+                SizedBox(
+                  height: 100,
+                ),
                 Container(
-                    padding: EdgeInsets.fromLTRB(15.0,0,15,0),
-                    color: Colors.white70,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: 50,),
-                        Text(
-                          quiz.qName.toUpperCase(),
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                            letterSpacing: 2.0,
-                            wordSpacing: 5.0,
-                          ),
-                        ),
-<<<<<<< HEAD
+                  padding: EdgeInsets.fromLTRB(15.0, 0, 15, 0),
+                  color: Colors.white70,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 50,
                       ),
-                      RaisedButton(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 5.0),
-                        onPressed: () {
-                          print(answers);
-                          Navigator.pushNamed(context, '/quiz', arguments: {
-                            'questions': quiz.questions,
-                            'answers': answers,
-                            'qname': quiz.qName
-                          });
-                        },
+                      Text(
+                        quiz.qName.toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.0,
+                          letterSpacing: 2.0,
+                          wordSpacing: 5.0,
+                        ),
+                      ),
+                      Divider(
+                        height: 30.0,
+                        thickness: 5.0,
+                        color: Colors.black54,
+                        indent: 0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Start Quiz',
-=======
-                        Divider(
-                          height: 30.0,
-                          thickness: 5.0,
-                          color: Colors.black54,
-                          indent: 0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'lorem idasfs sdsad fwr dfs asda wewe fdgv sdas dg asd dsvfds sfedet gddhrd sdfdsgs',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black87,
-                            ),
-                            textAlign: TextAlign.justify,
-                          ),
-                        ),
-                        SizedBox(height: 20.0),
-                        Text(
-                          'No of questions:10',
->>>>>>> 2db7d17a7255a938d23d8c6f2a9a942eab850ac2
+                          'lorem idasfs sdsad fwr dfs asda wewe fdgv sdas dg asd dsvfds sfedet gddhrd sdfdsgs',
                           style: TextStyle(
-                            fontSize: 17.0,
+                            fontSize: 20.0,
                             color: Colors.black87,
                           ),
+                          textAlign: TextAlign.justify,
                         ),
-                        SizedBox(height: 45.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(2.0),
-                              decoration: BoxDecoration(
-                                color: Colors.indigo,
-                                shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Text(
-                                'Topic',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  color: Colors.white,
-                                ),
+                      ),
+                      SizedBox(height: 20.0),
+                      Text(
+                        'No of questions:10',
+                        style: TextStyle(
+                          fontSize: 17.0,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      SizedBox(height: 45.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              color: Colors.indigo,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Text(
+                              'Topic',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.white,
                               ),
                             ),
-                            MaterialButton(
+                          ),
+                          MaterialButton(
 //                          child: ClipRRect(
 //                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
 
-                              child: RaisedButton(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10.0, horizontal: 5.0),
-                                onPressed: () {
-                                  print(answers);
-                                  Navigator.pushNamed(context, '/quiz', arguments: {
-                                    'questions': quiz.questions,
-                                    'answers': answers,
-                                    'qid': quiz.qId
-                                  });
-                                },
-                                child: Text(
-                                  'Start Quiz',
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.grey[50],
-                                  ),
+                            child: RaisedButton(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 5.0),
+                              onPressed: () {
+                                print(answers);
+                                Navigator.pushNamed(context, '/quiz',
+                                    arguments: {
+                                      'questions': quiz.questions,
+                                      'answers': answers,
+                                      'qid': quiz.qId
+                                    });
+                              },
+                              child: Text(
+                                'Start Quiz',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.grey[50],
                                 ),
-                                color: Colors.black87,
                               ),
-                              onPressed: (){},
+                              color: Colors.black87,
                             ),
+                            onPressed: () {},
+                          ),
 //                        ),
-                          ],
-                        ),
-                        SizedBox(height: 50,)
-                      ],
-                    ),
-
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      )
+                    ],
+                  ),
                 ),
               ],
             );
