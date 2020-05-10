@@ -14,12 +14,23 @@ class DatabaseService {
 
   final CollectionReference quizCollection =
       Firestore.instance.collection('quizzes');
+  final CollectionReference scoreCollection =
+      Firestore.instance.collection('scores');
 
-  Future<void> updateUserData(String name,String image) async {
+  Future<void> updateUserData(String name, String image) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
       'image': image,
+    });
+  }
+
+  Future<void> insertScore(String qid, int score, int total) async {
+    return await scoreCollection.document().setData({
+      'uid': uid,
+      'quiz': qid,
+      'score': score,
+      'total': total,
     });
   }
 
@@ -41,6 +52,7 @@ class DatabaseService {
   List<Quiz> _quizListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Quiz(
+        qId: doc.documentID,
         qName: doc.data['name'] ?? '',
         qTopic: doc.data['qTopic'] ?? '',
         questions: List.from(doc.data['questions']) ?? List(),
@@ -48,14 +60,16 @@ class DatabaseService {
     }).toList();
   }
 
-Stream<UserData> get userData  {
-try{
-    return userCollection.document(uid).snapshots().map(_userDataFromSnapshot);
-  }on Exception {
-
-  return null;
+  Stream<UserData> get userData {
+    try {
+      return userCollection
+          .document(uid)
+          .snapshots()
+          .map(_userDataFromSnapshot);
+    } on Exception {
+      return null;
+    }
   }
-}
 
   Stream<List<Topic>> get topics {
     return topicCollection.snapshots().map(_topicListFromSnapshot);
