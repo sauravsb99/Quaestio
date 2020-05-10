@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:queastio/models/score.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/models/quiz.dart';
@@ -25,10 +26,10 @@ class DatabaseService {
     });
   }
 
-  Future<void> insertScore(String qid, int score, int total) async {
+  Future<void> insertScore(String qname, int score, int total) async {
     return await scoreCollection.document().setData({
       'uid': uid,
-      'quiz': qid,
+      'quiz': qname,
       'score': score,
       'total': total,
     });
@@ -60,6 +61,17 @@ class DatabaseService {
     }).toList();
   }
 
+  List<Score> _scoreListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Score(
+        uid: doc.data['uid'] ?? '',
+        quiz: doc.data['quiz'] ?? '',
+        score: doc.data['score'] ?? 0,
+        total: doc.data['total'] ?? 0,
+      );
+    }).toList();
+  }
+
   Stream<UserData> get userData {
     try {
       return userCollection
@@ -80,5 +92,12 @@ class DatabaseService {
         .where('qTopic', isEqualTo: topic)
         .snapshots()
         .map(_quizListFromSnapshot);
+  }
+
+  Stream<List<Score>> getScores() {
+    return scoreCollection
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map(_scoreListFromSnapshot);
   }
 }

@@ -75,7 +75,7 @@ class _QuestionCardState extends State<QuestionCard> {
     final dynamic args = ModalRoute.of(context).settings.arguments;
     final List questions = args['questions'];
     final List answers = args['answers'];
-    final String qid = args['qid'];
+    final String qname = args['qname'];
     Map question = Map.from(questions[index]);
     selectedOptions =
         selectedOptions == null ? new List(questions.length) : selectedOptions;
@@ -194,7 +194,7 @@ class _QuestionCardState extends State<QuestionCard> {
                           print('Score:' + score.toString());
                           User user = Provider.of<User>(context, listen: false);
                           await DatabaseService(uid: user.uid)
-                              .insertScore(qid, score, answers.length);
+                              .insertScore(qname, score, answers.length);
                           _showMyDialog(score, answers.length);
                         },
                   child: Text('Submit Test'),
