@@ -26,10 +26,7 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.black26,
               child: ListView(
 
-                children:<Widget>[CircleAvatar(
-                  radius: 20.0,
-                  backgroundImage: NetworkImage(userData.image),
-                ),
+                children:<Widget>[
 
               InkWell(
                 // child:Image.network(userData.image),
@@ -47,12 +44,15 @@ class _MyDrawerState extends State<MyDrawer> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
+                        children: <Widget>[CircleAvatar(
+                          radius: MediaQuery.of(context).size.width*0.10,
+                          backgroundImage: NetworkImage(userData.image),
+                        ),
                           SizedBox(width: MediaQuery.of(context).size.width*0.05,),
-                            Text(userData.name,textAlign: TextAlign.center,
-
-                            style: TextStyle(fontSize: 30.0,color: Colors.white),
-                          ),
+                            Expanded(
+                            child:Text(userData.name,textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 28.0,color: Colors.white),
+                          ),),
 
                         ],
                       ),
