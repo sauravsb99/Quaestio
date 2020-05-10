@@ -56,7 +56,6 @@ class _UserputState extends State<Userput> {
         if ( snapshot.hasData ) {
 
           UserData userData = snapshot.data;
-          DatabaseService data=DatabaseService();
 
           return Scaffold(
             body: Wrap(
@@ -214,9 +213,9 @@ class _UserputState extends State<Userput> {
                                     StorageUploadTask uploadTask=firebaseStorageRef.putFile(_image);
                                     StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
                                     var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
-                                    if(await uploadTask.isCanceled){
-                                      err="Error";
-                                    };
+                                    if(uploadTask.isCanceled) {
+                                      err = "Error";
+                                    }
                                     url = dowurl.toString();
                                     setState(() {
                                       print("Data Updated");
