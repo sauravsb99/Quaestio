@@ -19,12 +19,14 @@ class _QuizListState extends State<QuizList> {
           List<Quiz> data = snapshot.data;
           return Scaffold(
             appBar: AppBar(),
-            body: ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                return QuizTile(quiz: data[index]);
-              },
-            ),
+            body: data.length == 0
+                ? Center(child: Text('No tests here yet.Check back later.'))
+                : ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return QuizTile(quiz: data[index]);
+                    },
+                  ),
           );
         }
         return Text('Boring');
