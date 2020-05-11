@@ -195,8 +195,9 @@ class _QuestionCardState extends State<QuestionCard> {
                           int score = instance.getScore();
                           print('Score:' + score.toString());
                           User user = Provider.of<User>(context, listen: false);
+                          DateTime time = DateTime.now();
                           await DatabaseService(uid: user.uid)
-                              .insertScore(qname, score, answers.length);
+                              .insertScore(qname, score, answers.length, time);
                           _showMyDialog(score, answers.length);
                         },
                   child: Text('Submit Test'),

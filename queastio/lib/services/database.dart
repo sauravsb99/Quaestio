@@ -26,12 +26,14 @@ class DatabaseService {
     });
   }
 
-  Future<void> insertScore(String qname, int score, int total) async {
+  Future<void> insertScore(
+      String qname, int score, int total, DateTime time) async {
     return await scoreCollection.document().setData({
       'uid': uid,
       'quiz': qname,
       'score': score,
       'total': total,
+      'time': time
     });
   }
 
