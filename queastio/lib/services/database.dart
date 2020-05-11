@@ -74,6 +74,7 @@ class DatabaseService {
         quiz: doc.data['quiz'] ?? '',
         score: doc.data['score'] ?? 0,
         total: doc.data['total'] ?? 0,
+        time: doc.data['time'] ?? '',
       );
     }).toList();
   }
