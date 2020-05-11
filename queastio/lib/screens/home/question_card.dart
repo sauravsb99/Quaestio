@@ -78,6 +78,7 @@ class _QuestionCardState extends State<QuestionCard> {
     final List questions = quiz['questions'];
     final List answers = quiz['answers'];
     final String qname = quiz['qname'];
+    final String qTopic = quiz['qTopic'];
     Map question = Map.from(questions[index]);
     selectedOptions =
         selectedOptions == null ? new List(questions.length) : selectedOptions;
@@ -196,8 +197,8 @@ class _QuestionCardState extends State<QuestionCard> {
                           print('Score:' + score.toString());
                           User user = Provider.of<User>(context, listen: false);
                           DateTime time = DateTime.now();
-                          await DatabaseService(uid: user.uid)
-                              .insertScore(qname, score, answers.length, time);
+                          await DatabaseService(uid: user.uid).insertScore(
+                              qname, qTopic, score, answers.length, time);
                           _showMyDialog(score, answers.length);
                         },
                   child: Text('Submit Test'),
