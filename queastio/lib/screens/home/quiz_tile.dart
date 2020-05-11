@@ -18,15 +18,19 @@ class QuizTile extends StatelessWidget {
           builder: (context) {
             return Wrap(
               children: <Widget>[
-                SizedBox(height: 100,),
+                SizedBox(
+                  height: 100,
+                ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(15.0,0,15,0),
+                  padding: EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                   color: Colors.white70,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: 50,),
+                      SizedBox(
+                        height: 50,
+                      ),
                       Text(
                         quiz.qName.toUpperCase(),
                         style: TextStyle(
@@ -90,11 +94,12 @@ class QuizTile extends StatelessWidget {
                                   vertical: 10.0, horizontal: 5.0),
                               onPressed: () {
                                 print(answers);
-                                Navigator.pushNamed(context, '/quiz', arguments: {
-                                  'questions': quiz.questions,
-                                  'answers': answers,
-                                  'qid': quiz.qId
-                                });
+                                Navigator.pushNamed(context, '/quiz',
+                                    arguments: {
+                                      'questions': quiz.questions,
+                                      'answers': answers,
+                                      'qid': quiz.qId
+                                    });
                               },
                               child: Text(
                                 'Start Quiz',
@@ -105,15 +110,16 @@ class QuizTile extends StatelessWidget {
                               ),
                               color: Colors.black87,
                             ),
-                            onPressed: (){},
+                            onPressed: () {},
                           ),
 //                        ),
                         ],
                       ),
-                      SizedBox(height: 50,)
+                      SizedBox(
+                        height: 50,
+                      )
                     ],
                   ),
-
                 ),
               ],
             );
@@ -133,8 +139,7 @@ class QuizTile extends StatelessWidget {
             color: Colors.black87,
             child: Padding(
               padding: const EdgeInsets.all(18.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+              child: Wrap(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(25.0),
