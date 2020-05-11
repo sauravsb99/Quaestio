@@ -98,7 +98,8 @@ class QuizTile extends StatelessWidget {
                                     arguments: {
                                       'questions': quiz.questions,
                                       'answers': answers,
-                                      'qid': quiz.qId
+                                      'qname': quiz.qName,
+                                      'qTopic': quiz.qTopic
                                     });
                               },
                               child: Text(
