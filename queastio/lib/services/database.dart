@@ -30,10 +30,11 @@ class DatabaseService {
     });
   }
 
-  Future<void> insertScore(
-      String qname, String qTopic, int score, int total, DateTime time) async {
+  Future<void> insertScore(String uname, String qname, String qTopic, int score,
+      int total, DateTime time) async {
     return await scoreCollection.document().setData({
       'uid': uid,
+      'uname': uname,
       'quiz': qname,
       'qTopic': qTopic,
       'score': score,
@@ -72,6 +73,8 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return Score(
         uid: doc.data['uid'] ?? '',
+        uname: doc.data['uname'] ?? '',
+        qTopic: doc.data['qTopic'] ?? '',
         quiz: doc.data['quiz'] ?? '',
         score: doc.data['score'] ?? 0,
         total: doc.data['total'] ?? 0,
