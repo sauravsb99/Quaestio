@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/models/quiz.dart';
+import 'package:queastio/shared/loading.dart';
 import 'quiz_tile.dart';
 import 'package:queastio/services/database.dart';
 
 class QuizList extends StatefulWidget {
+  final String topic;
+  QuizList({this.topic});
   @override
-  _QuizListState createState() => _QuizListState();
+  _QuizListState createState() => _QuizListState(topic: topic);
 }
 
 class _QuizListState extends State<QuizList> {
+  final String topic;
+  _QuizListState({this.topic});
   @override
   Widget build(BuildContext context) {
-    final String topic = ModalRoute.of(context).settings.arguments;
     return StreamBuilder<List<Quiz>>(
       stream: DatabaseService().getQuizzes(topic),
       builder: (context, snapshot) {
@@ -24,23 +28,23 @@ class _QuizListState extends State<QuizList> {
             ),
             body: data.length == 0
                 ? Center(
-                      child: Text(
+                    child: Text(
                       'No tests here yet.Check back later.',
                       style: TextStyle(color: Colors.white),
                     ),
-            )
+                  )
                 : Container(
-              color: Colors.indigo,
-                  child: ListView.builder(
+                    color: Colors.indigo,
+                    child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         return QuizTile(quiz: data[index]);
                       },
                     ),
-                ),
+                  ),
           );
         }
-        return Text('Boring');
+        return Loading();
       },
     );
   }

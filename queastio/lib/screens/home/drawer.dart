@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,13 +5,14 @@ import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/database.dart';
+import 'package:queastio/shared/constants.dart';
+
 class MyDrawer extends StatefulWidget {
   @override
   _MyDrawerState createState() => _MyDrawerState();
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -20,37 +20,30 @@ class _MyDrawerState extends State<MyDrawer> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          if(snapshot.hasData){
+          if (snapshot.hasData) {
             UserData userData = snapshot.data;
             return Container(
               color: Colors.black26,
               child: ListView(
-
-                children:<Widget>[
-
-              InkWell(
-                // child:Image.network(userData.image),
-              splashColor: Colors.indigo[100],
-                splashFactory: InkSplash.splashFactory,
-                onTap: () {
-                  print(userData.name);
-                  Navigator.pushNamed(context, '/profile',
+                children: <Widget>[
+                  InkWell(
+                    // child:Image.network(userData.image),
+                    splashColor: Colors.indigo[100],
+                    splashFactory: InkSplash.splashFactory,
+                    onTap: () {
+                      print(userData.name);
+                      Navigator.pushNamed(context, ProfileRoute
 //                      arguments: userData.name
-                  );
-                },
-                child:DrawerHeader(
+                          );
+                    },
+                    child: DrawerHeader(
                       child: Row(
-                        
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[CircleAvatar(
                           radius: MediaQuery.of(context).size.width*0.10,
-                          child: Image.network(
-//                              placeholder: (context, url) => CircularProgressIndicator(),
-//                              imageUrl:
-                              userData.image
-                          ),
+                          backgroundImage: NetworkImage(userData.image),
                         ),
                           SizedBox(width: MediaQuery.of(context).size.width*0.05,),
                             Expanded(
@@ -62,12 +55,63 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ),
                   ),
-
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,30,MediaQuery.of(context).size.width*0.05,10),
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.05,
+                            30,
+                            MediaQuery.of(context).size.width * 0.05,
+                            10),
+//
+                        child: Material(
+                          elevation: 15.0,
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderOnForeground: true,
+                          child: FlatButton(
+                            color: Colors.grey,
+                            onPressed: () {
+                              Navigator.pushNamed(context, PrevScoresRoute);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+//                          color: Colors.blueGrey,
+                                child: Center(
+                                  child: Text(
+                                    'Previous Scores',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
+                                  width: 3,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(11)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.05,
+                            30,
+                            MediaQuery.of(context).size.width * 0.05,
+                            10),
 //
                         child: Material(
                           elevation: 15.0,
@@ -168,8 +212,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-
-                                width: MediaQuery.of(context).size.width*0.7,
+                                width: MediaQuery.of(context).size.width * 0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
                                 child:Center(
@@ -194,7 +237,6 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ],
                   ),
-
 
                   Container(
 
@@ -265,11 +307,9 @@ class _MyDrawerState extends State<MyDrawer> {
                 ],
               ),
             );
-          }
-          else {
+          } else {
             return Home();
           }
         });
-
   }
 }
