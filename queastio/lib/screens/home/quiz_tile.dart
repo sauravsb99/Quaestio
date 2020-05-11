@@ -115,8 +115,7 @@ class QuizTile extends StatelessWidget {
           color: Colors.black26,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Wrap(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(25.0),
