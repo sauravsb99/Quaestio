@@ -60,7 +60,7 @@ class QuizTile extends StatelessWidget {
                       ),
                       SizedBox(height: 20.0),
                       Text(
-                        'No of questions:10',
+                        'No of questions: ' + answers.length.toString(),
                         style: TextStyle(
                           fontSize: 17.0,
                           color: Colors.black87,
