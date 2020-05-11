@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -45,7 +46,11 @@ class _MyDrawerState extends State<MyDrawer> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[CircleAvatar(
                           radius: MediaQuery.of(context).size.width*0.10,
-                          backgroundImage: NetworkImage(userData.image),
+                          child: Image.network(
+//                              placeholder: (context, url) => CircularProgressIndicator(),
+//                              imageUrl:
+                              userData.image
+                          ),
                         ),
                           SizedBox(width: MediaQuery.of(context).size.width*0.05,),
                             Expanded(
@@ -152,7 +157,14 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pop(context);
+//                              Navigator.pop(context);
+                            Navigator.pushNamed(context, '/faq',
+
+//                      arguments: userData.name
+                            );
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -250,16 +262,6 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ],
                   ),
-
-
-
-//              TEST
-
-
-
-
-
-
                 ],
               ),
             );

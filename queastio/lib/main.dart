@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queastio/screens/FAQ/faqhome.dart';
 import 'package:queastio/screens/home/question_card.dart';
 import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/screens/wrapper.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
           '/quizzes': (context) => QuizList(),
           '/quiz': (context) => QuestionCard(),
           '/profile':(context)=>ProfileScreen(),
+          '/faq':(context)=>FaqHome(),
         },
       ),
     );
