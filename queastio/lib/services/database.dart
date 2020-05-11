@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:queastio/models/faq.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/models/quiz.dart';
@@ -16,6 +17,9 @@ class DatabaseService {
       Firestore.instance.collection('quizzes');
   final CollectionReference scoreCollection =
       Firestore.instance.collection('scores');
+
+  final CollectionReference faqCollection =
+  Firestore.instance.collection('faq');
 
   Future<void> updateUserData(String name, String image) async {
     return await userCollection.document(uid).setData({
@@ -71,8 +75,22 @@ class DatabaseService {
     }
   }
 
+  List<Faq> _faqListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Faq(
+          faqQid: doc.data['qid'] ?? '',
+          faqQuestion: doc.data['question'] ?? '',
+          faqAnswer: doc.data['answer']?? '');
+    }).toList();
+  }
+
+
   Stream<List<Topic>> get topics {
     return topicCollection.snapshots().map(_topicListFromSnapshot);
+  }
+
+  Stream<List<Faq>> get faqs {
+    return faqCollection.snapshots().map(_faqListFromSnapshot);
   }
 
   Stream<List<Quiz>> getQuizzes(String topic) {
