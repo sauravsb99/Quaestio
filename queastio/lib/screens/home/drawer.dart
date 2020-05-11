@@ -176,7 +176,6 @@ class _MyDrawerState extends State<MyDrawer> {
                                 ),
                               ),
                             ),
-
                             shape: RoundedRectangleBorder(side: BorderSide(
                               color: Colors.black,
                               width: 3,
@@ -187,7 +186,6 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ],
                   ),
-
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
@@ -203,18 +201,13 @@ class _MyDrawerState extends State<MyDrawer> {
                             color: Colors.grey,
                             onPressed: (){
                               Navigator.pop(context);
-//                              Navigator.pop(context);
-                            Navigator.pushNamed(context, '/faq',
-
-//                      arguments: userData.name
-                            );
+                            Navigator.pushNamed(context, FaQRoute);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-//                          color: Colors.blueGrey,
                                 child:Center(
                                   child: Text('FAQ', style: TextStyle(
                                     fontSize: 22,
@@ -230,19 +223,16 @@ class _MyDrawerState extends State<MyDrawer> {
                               width: 3,
                               style: BorderStyle.solid,
                             ), borderRadius: BorderRadius.circular(11),
-
                             ),
                           ),
                         ),
                       ),
                     ],
                   ),
-
                   Container(
-
-                    // This align moves the children to the bottom
-                      child: Align(
-                          alignment: FractionalOffset.bottomCenter,
+                      child: Container(
+//                          alignment: FractionalOffset.bottomCenter,
+                          padding: EdgeInsets.fromLTRB(0, 0,0,5),
                           // This container holds all the children that will be aligned
                           // on the bottom and should not scroll with the above ListView
                           child: Container(
@@ -260,15 +250,11 @@ class _MyDrawerState extends State<MyDrawer> {
                           )
                       )
                   ),
-
-
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
                       Padding(
-                        //padding: EdgeInsetsGeometry(WrapAlignment.center),
-                        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,MediaQuery.of(context).size.height*0.30,MediaQuery.of(context).size.width*0.05,0),
-                        //
+                        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,MediaQuery.of(context).size.height*0.20,MediaQuery.of(context).size.width*0.05,0),
                         child: Material(
                           elevation: 0.0,
                           borderRadius: BorderRadius.circular(15.0),
@@ -283,7 +269,6 @@ class _MyDrawerState extends State<MyDrawer> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width*0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-//                          color: Colors.blueGrey,
                                 child:Center(
                                   child: Text('Logout', style: TextStyle(
                                     fontSize: 22,

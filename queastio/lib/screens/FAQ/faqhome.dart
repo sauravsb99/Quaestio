@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/models/faq.dart';
 import 'package:queastio/screens/FAQ/faq_list.dart';
-import 'package:queastio/screens/home/drawer.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:queastio/services/database.dart';
 import 'package:provider/provider.dart';
@@ -16,11 +15,14 @@ class FaqHome extends StatelessWidget {
       value: DatabaseService().faqs,
       child: Container(
         child: Scaffold(
-          backgroundColor: Colors.black26,
+          backgroundColor: Colors.grey,
 
 //          drawer: MyDrawer(),
 
-          body: FaqList(),
+          body: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: FaqList(),
+          ),
         ),
       ),
     );
