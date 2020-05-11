@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:queastio/services/auth.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/services/scoring.dart';
 import 'package:queastio/models/user.dart';
+import 'package:queastio/shared/constants.dart';
 
 class QuestionCard extends StatefulWidget {
+  final Map quiz;
+  QuestionCard({this.quiz});
   @override
-  _QuestionCardState createState() => _QuestionCardState();
+  _QuestionCardState createState() => _QuestionCardState(quiz: quiz);
 }
 
 class _QuestionCardState extends State<QuestionCard> {
+  final Map quiz;
+  _QuestionCardState({this.quiz});
   int index = 0;
   bool _isPrevButtonDisabled;
   bool _isNextButtonDisabled;
-  final AuthService _auth = AuthService();
 
   Future<void> _showMyDialog(int score, int total) async {
     return showDialog<void>(
@@ -53,7 +56,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 icon: Icon(Icons.home),
                 color: Colors.indigo,
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/');
+                  Navigator.pushReplacementNamed(context, HomeViewRoute);
                 },
               ),
             ],
@@ -72,10 +75,9 @@ class _QuestionCardState extends State<QuestionCard> {
   List<String> selectedOptions;
   @override
   Widget build(BuildContext context) {
-    final dynamic args = ModalRoute.of(context).settings.arguments;
-    final List questions = args['questions'];
-    final List answers = args['answers'];
-    final String qname = args['qname'];
+    final List questions = quiz['questions'];
+    final List answers = quiz['answers'];
+    final String qname = quiz['qname'];
     Map question = Map.from(questions[index]);
     selectedOptions =
         selectedOptions == null ? new List(questions.length) : selectedOptions;

@@ -5,6 +5,7 @@ import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/database.dart';
+import 'package:queastio/shared/constants.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -31,10 +32,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     splashFactory: InkSplash.splashFactory,
                     onTap: () {
                       print(userData.name);
-                      Navigator.pushNamed(
-                        context, '/profile',
+                      Navigator.pushNamed(context, ProfileRoute
 //                      arguments: userData.name
-                      );
+                          );
                     },
                     child: DrawerHeader(
                       child: Row(
@@ -78,7 +78,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           child: FlatButton(
                             color: Colors.grey,
                             onPressed: () {
-                              Navigator.pushNamed(context, '/prevscores');
+                              Navigator.pushNamed(context, PrevScoresRoute);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

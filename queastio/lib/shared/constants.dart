@@ -11,3 +11,9 @@ const textInputDecoration = InputDecoration(
     borderSide: BorderSide(color: Colors.pink, width: 2.0),
   ),
 );
+
+const String HomeViewRoute = '/';
+const String QuizListRoute = '/quizzes';
+const String QuestionRoute = '/quiz';
+const String PrevScoresRoute = '/prevscores';
+const String ProfileRoute = '/profile';
