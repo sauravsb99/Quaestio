@@ -5,14 +5,17 @@ import 'quiz_tile.dart';
 import 'package:queastio/services/database.dart';
 
 class QuizList extends StatefulWidget {
+  final String topic;
+  QuizList({this.topic});
   @override
-  _QuizListState createState() => _QuizListState();
+  _QuizListState createState() => _QuizListState(topic: topic);
 }
 
 class _QuizListState extends State<QuizList> {
+  final String topic;
+  _QuizListState({this.topic});
   @override
   Widget build(BuildContext context) {
-    final String topic = ModalRoute.of(context).settings.arguments;
     return StreamBuilder<List<Quiz>>(
       stream: DatabaseService().getQuizzes(topic),
       builder: (context, snapshot) {
