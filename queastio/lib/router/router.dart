@@ -1,5 +1,8 @@
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:queastio/screens/FAQ/faqhome.dart';
+import 'package:queastio/screens/admin/add_quiz.dart';
 import 'package:queastio/screens/home/previous_scores.dart';
 import 'package:queastio/screens/home/question_card.dart';
 import 'package:queastio/screens/home/quiz_list.dart';
@@ -24,6 +27,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case FaQRoute:
       return MaterialPageRoute(builder: (context) => FaqHome());
+    case AddQuizRoute:
+      return MaterialPageRoute(builder: (context) => AddQuiz());
   }
 }
 

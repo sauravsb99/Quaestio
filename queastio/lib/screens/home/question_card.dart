@@ -78,6 +78,7 @@ class _QuestionCardState extends State<QuestionCard> {
     final List questions = quiz['questions'];
     final List answers = quiz['answers'];
     final String qname = quiz['qname'];
+    // print(qname);
     Map question = Map.from(questions[index]);
     selectedOptions =
         selectedOptions == null ? new List(questions.length) : selectedOptions;
