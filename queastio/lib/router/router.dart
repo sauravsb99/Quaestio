@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queastio/screens/FAQ/faqhome.dart';
 import 'package:queastio/screens/home/previous_scores.dart';
 import 'package:queastio/screens/home/question_card.dart';
 import 'package:queastio/screens/home/quiz_list.dart';
@@ -6,6 +7,7 @@ import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/screens/wrapper.dart';
 import 'package:queastio/shared/constants.dart';
 
+// ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case HomeViewRoute:
@@ -20,5 +22,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => PreviousScores());
     case ProfileRoute:
       return MaterialPageRoute(builder: (context) => ProfileScreen());
+    case FaQRoute:
+      return MaterialPageRoute(builder: (context) => FaqHome());
   }
 }
+
+

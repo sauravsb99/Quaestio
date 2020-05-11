@@ -137,18 +137,9 @@ class _UserputState extends State<Userput> {
                                   SizedBox(
                                     width: 10,
                                   ),
-
-                                  Text(
-                                    "Name",
-                                    style: TextStyle(
-                                        fontSize: 17
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
+                                  Text("Name",style: TextStyle(fontSize: 17)),
+                                  SizedBox(width: 15),
                                   Container(
-                                    //                         : CrossAxisAlignment.center,
                                     color: Colors.white,
                                     child: SizedBox(width: (MediaQuery.of(context).size.width - 75) * 0.7,
                                       child: Align(
@@ -163,18 +154,14 @@ class _UserputState extends State<Userput> {
                                             ),
                                             validator: (val) => val.isEmpty ? 'Enter name' : null,
                                             onChanged: (val) {
-
                                               setState(() => name = val);
                                             },
-
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Icon(
-                                          Icons.edit
-                                      ),
+                                  Icon(Icons.edit),
                                 ],
                               ),
                             SizedBox(height: 10,),
@@ -229,16 +216,11 @@ class _UserputState extends State<Userput> {
                                     name = userData.name;
                                   if(i==null)
                                   i=userData.image;
-                                    // i="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
-                                await DatabaseService(uid: user.uid).updateUserData(name,i);
+                                  await DatabaseService(uid: user.uid).updateUserData(name,i);
                                 setState((){
                                 Scaffold.of(context).showSnackBar(SnackBar(content: Text("Name Updated")));
                                 });
                                 }
-
-
-
-    //                          };
                                 },
                                 splashColor: Colors.white,
                                 textColor: Colors.white,
