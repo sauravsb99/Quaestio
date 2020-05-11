@@ -93,7 +93,7 @@ class QuizTile extends StatelessWidget {
                                 Navigator.pushNamed(context, '/quiz', arguments: {
                                   'questions': quiz.questions,
                                   'answers': answers,
-                                  'qid': quiz.qId
+                                  'qname': quiz.qName,
                                 });
                               },
                               child: Text(
