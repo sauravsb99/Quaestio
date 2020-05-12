@@ -20,7 +20,7 @@ class DatabaseService {
       Firestore.instance.collection('scores');
 
   final CollectionReference faqCollection =
-  Firestore.instance.collection('faq');
+      Firestore.instance.collection('faq');
 
   Future<void> updateUserData(String name, String image) async {
     return await userCollection.document(uid).setData({
@@ -31,10 +31,11 @@ class DatabaseService {
   }
 
   Future<void> insertScore(
-      String qname, int score, int total, DateTime time) async {
+      String qname, String qTopic, int score, int total, DateTime time) async {
     return await scoreCollection.document().setData({
       'uid': uid,
       'quiz': qname,
+      'qTopic': qTopic,
       'score': score,
       'total': total,
       'time': time
@@ -94,10 +95,9 @@ class DatabaseService {
       return Faq(
           faqQid: doc.data['qid'] ?? '',
           faqQuestion: doc.data['question'] ?? '',
-          faqAnswer: doc.data['answer']?? '');
+          faqAnswer: doc.data['answer'] ?? '');
     }).toList();
   }
-
 
   Stream<List<Topic>> get topics {
     return topicCollection.snapshots().map(_topicListFromSnapshot);
