@@ -1,14 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:queastio/models/quiz.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:queastio/models/user.dart';
+import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
 
 class QuizTile extends StatelessWidget {
   final Quiz quiz;
 
   QuizTile({this.quiz});
+
   @override
   Widget build(BuildContext context) {
+    Future<void> _showNoScoreDialog(List<String> answers) async {
+      return showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Text(
+                        'You have already attempted this test once. You will not be scored for any attempts that follow.')
+                  ],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('Continue'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, QuestionRoute, arguments: {
+                        'questions': quiz.questions,
+                        'answers': answers,
+                        'qname': quiz.qName,
+                        'qTopic': quiz.qTopic,
+                        'firstTime': false
+                      });
+                    },
+                  ),
+                ]);
+          });
+    }
+
     void _showQuizDetails() {
       List<String> answers = quiz.questions.map((q) {
         return q['answer'].toString();
@@ -17,6 +56,7 @@ class QuizTile extends StatelessWidget {
       showModalBottomSheet(
           context: context,
           builder: (context) {
+            User user = Provider.of<User>(context, listen: false);
             return Wrap(
               children: <Widget>[
                 SizedBox(
@@ -95,13 +135,22 @@ class QuizTile extends StatelessWidget {
                                   vertical: 10.0, horizontal: 5.0),
                               onPressed: () {
                                 print(answers);
-                                Navigator.pushNamed(context, QuestionRoute,
-                                    arguments: {
-                                      'questions': quiz.questions,
-                                      'answers': answers,
-                                      'qname': quiz.qName,
-                                      'qTopic': quiz.qTopic
-                                    });
+                                DatabaseService(uid: user.uid)
+                                    .testAlreadyTaken(quiz.qName)
+                                    .then((value) {
+                                  if (value.documents.isEmpty) {
+                                    Navigator.pushNamed(context, QuestionRoute,
+                                        arguments: {
+                                          'questions': quiz.questions,
+                                          'answers': answers,
+                                          'qname': quiz.qName,
+                                          'qTopic': quiz.qTopic,
+                                          'firstTime': true
+                                        });
+                                  } else {
+                                    _showNoScoreDialog(answers);
+                                  }
+                                });
                               },
                               child: Text(
                                 'Start Quiz',
@@ -112,7 +161,7 @@ class QuizTile extends StatelessWidget {
                               ),
                               color: Colors.black87,
                             ),
-                            onPressed: (){},
+                            onPressed: () {},
                           ),
                           MaterialButton(
 //                          child: ClipRRect(
@@ -145,7 +194,6 @@ class QuizTile extends StatelessWidget {
                       )
                     ],
                   ),
-
                 ),
               ],
             );
