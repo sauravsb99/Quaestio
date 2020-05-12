@@ -61,7 +61,7 @@ class QuizTile extends StatelessWidget {
                       ),
                       SizedBox(height: 20.0),
                       Text(
-                        'No of questions: ' + answers.length.toString(),
+                        'No of questions:10',
                         style: TextStyle(
                           fontSize: 17.0,
                           color: Colors.black87,
@@ -112,7 +112,7 @@ class QuizTile extends StatelessWidget {
                               ),
                               color: Colors.black87,
                             ),
-                            onPressed: () {},
+                            onPressed: (){},
                           ),
                           MaterialButton(
 //                          child: ClipRRect(
@@ -145,6 +145,7 @@ class QuizTile extends StatelessWidget {
                       )
                     ],
                   ),
+
                 ),
               ],
             );
