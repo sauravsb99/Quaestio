@@ -133,6 +133,13 @@ class DatabaseService {
         .snapshots()
         .map(_scoreListFromSnapshot);
   }
+
+  Future<QuerySnapshot> testAlreadyTaken(String qname) async {
+    return scoreCollection
+        .where('uid', isEqualTo: uid)
+        .where('quiz', isEqualTo: qname)
+        .getDocuments();
+  }
 //  Stream<List<Score>> getScoresbyTopic() {
 //    return scoreCollection
 //        .where(('uid', isEqualTo: uid)).where(('quiz', isEqualTo: quiz)).orderBy('time', descending: true)

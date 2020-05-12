@@ -204,10 +204,17 @@ class _QuestionCardState extends State<QuestionCard> {
                                       selected: selectedOptions);
                                   int score = instance.getScore();
                                   print('Score:' + score.toString());
-                                  DateTime time = DateTime.now();
-                                  await DatabaseService(uid: user.uid)
-                                      .insertScore(userData.name, qname, qTopic,
-                                          score, answers.length, time);
+                                  if (quiz['firstTime']) {
+                                    DateTime time = DateTime.now();
+                                    await DatabaseService(uid: user.uid)
+                                        .insertScore(
+                                            userData.name,
+                                            qname,
+                                            qTopic,
+                                            score,
+                                            answers.length,
+                                            time);
+                                  }
                                   _showMyDialog(score, answers.length);
                                 },
                           child: Text('Submit Test'),
