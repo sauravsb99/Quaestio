@@ -78,6 +78,7 @@ class DatabaseService {
         quiz: doc.data['quiz'] ?? '',
         score: doc.data['score'] ?? 0,
         total: doc.data['total'] ?? 0,
+        time: doc.data['time'] ?? '',
       );
     }).toList();
   }
@@ -120,6 +121,7 @@ class DatabaseService {
   Stream<List<Score>> getScores() {
     return scoreCollection
         .where('uid', isEqualTo: uid)
+        .orderBy('time', descending: true)
         .snapshots()
         .map(_scoreListFromSnapshot);
   }
@@ -131,4 +133,10 @@ class DatabaseService {
         .snapshots()
         .map(_scoreListFromSnapshot);
   }
+//  Stream<List<Score>> getScoresbyTopic() {
+//    return scoreCollection
+//        .where(('uid', isEqualTo: uid)).where(('quiz', isEqualTo: quiz)).orderBy('time', descending: true)
+//        .snapshots()
+//        .map(_scoreListFromSnapshot);
+//  }
 }
