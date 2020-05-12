@@ -123,4 +123,12 @@ class DatabaseService {
         .snapshots()
         .map(_scoreListFromSnapshot);
   }
+
+  Stream<List<Score>> getQuizScores(String qname) {
+    return scoreCollection
+        .where('quiz', isEqualTo: qname)
+        .orderBy('score', descending: true)
+        .snapshots()
+        .map(_scoreListFromSnapshot);
+  }
 }

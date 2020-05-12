@@ -18,4 +18,4 @@ const String QuestionRoute = '/quiz';
 const String PrevScoresRoute = '/prevscores';
 const String ProfileRoute = '/profile';
 const String FaQRoute = '/faq';
-
+const String LeaderRoute = '/leader';
