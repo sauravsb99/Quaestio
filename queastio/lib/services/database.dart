@@ -117,8 +117,15 @@ class DatabaseService {
 
   Stream<List<Score>> getScores() {
     return scoreCollection
-        .where('uid', isEqualTo: uid)
+        .where('uid', isEqualTo: uid).orderBy('time', descending: true)
         .snapshots()
         .map(_scoreListFromSnapshot);
   }
+
+//  Stream<List<Score>> getScoresbyTopic() {
+//    return scoreCollection
+//        .where(('uid', isEqualTo: uid)).where(('quiz', isEqualTo: quiz)).orderBy('time', descending: true)
+//        .snapshots()
+//        .map(_scoreListFromSnapshot);
+//  }
 }

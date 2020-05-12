@@ -1,3 +1,4 @@
+// ignore: implementation_imports
 import 'package:cloud_firestore_platform_interface/src/timestamp.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -19,52 +20,30 @@ class _PreviousScoresState extends State<PreviousScores> {
 
 
   List<charts.Series<Score, DateTime>> _seriesLineData;
-  List<Score> mydata;
+//  List<Score> mydata;
 
-  _generateData (
-      mydata
-      ){
+  _generateData (data){
     _seriesLineData = List<charts.Series<Score, DateTime>>(
     );
 
     User user;
     _seriesLineData.add(
         charts.Series(
-          domainFn: ( Score score, _ )=> gettime(score.time),
+          domainFn: ( Score data, _ )=> data.time.toDate(),
 //                                        user.timestamp.seconds,
 
-          measureFn: (
-              Score score, _
-              )=>
-          (
-              score.score
-          ) / score.total * 100,
-//          colorFn: (
-//              Score score, _
-//              )=>
-//              getcolor(
-//                  score.qTopic
-//              ),
+          measureFn: (Score data, _)=>(data.score) / data.total * 100,
+          colorFn: (Score data, _ )=> getcolor(data.quiz),
 //        colorFn:
 //        id:
-          data: mydata,
+          data: data,
 
-          labelAccessorFn: (
-              Score row, _
-              )=> "${row.qTopic}",
+          labelAccessorFn: (Score row, _)=> "${row.time}",
           id: "Growth Chart",
+//          fillPatternFn:
         )
     );
   }
-
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(title: Text('Tasks')),
-//      body: _buildBody(context),
-//    );
-//  }
-
   @override
   Widget build (
       BuildContext context
@@ -83,7 +62,7 @@ class _PreviousScoresState extends State<PreviousScores> {
             ){
           if ( snapshot.hasData ) {
             List<Score> data = snapshot.data;
-            List<Score> score = snapshot.data;
+//            List<Score> score = snapshot.data;
 //      var i=0;
 //      for(i=0; i<=score.length;i++){
 //      _generateData(score[i]);}
@@ -95,17 +74,17 @@ class _PreviousScoresState extends State<PreviousScores> {
             );
 //              List.generate(score, index){
             _generateData(
-                score
+                data
             );
 ////            }
             return Scaffold(
-              backgroundColor: Colors.indigo,
-              appBar: AppBar(
-                title: Text(
-                    'My Scores'
-                ),
-                backgroundColor: Colors.black,
-              ),
+//              backgroundColor: Colors.indigo,
+//              appBar: AppBar(
+//                title: Text(
+//                    'My Scores'
+//                ),
+//                backgroundColor: Colors.black,
+//              ),
               body: data.length == 0
                   ? Center(
                   child: Text(
@@ -120,9 +99,8 @@ class _PreviousScoresState extends State<PreviousScores> {
                   length: 2,
                   child: Scaffold(
                     appBar: AppBar(
-                      backgroundColor: Color(
-                          0xff1976d2
-                      ),
+                      title: Text("My Scores"),
+                      backgroundColor: Colors.indigoAccent,
                       bottom: TabBar(
                         indicatorColor: Color(
                             0xff9962D0
@@ -243,7 +221,7 @@ class _PreviousScoresState extends State<PreviousScores> {
                               child: Column(
                                 children: <Widget>[
                                   Text(
-                                    'Score for the first 5 years',
+                                    'Your Past Performance',
                                     style: TextStyle(
                                         fontSize: 24.0,
                                         fontWeight: FontWeight.bold
@@ -271,31 +249,6 @@ class _PreviousScoresState extends State<PreviousScores> {
                                           ),
                                         ]
                                     ),
-//                                  )
-
-
-
-//                                    charts.LineChart(
-//                                        _seriesLineData,
-//                                        defaultRenderer: new charts
-//                                            .LineRendererConfig(
-//                                            includeArea: true, stacked: true
-//                                        ),
-//                                        animate: true,
-//                                        animationDuration: Duration(
-//                                            seconds: 5
-//                                        ),
-//                                        behaviors: [
-//                                          new charts.ChartTitle(
-//                                              'Score',
-//                                              behaviorPosition: charts
-//                                                  .BehaviorPosition.start,
-//                                              titleOutsideJustification: charts
-//                                                  .OutsideJustification
-//                                                  .middleDrawArea
-//                                          ),
-//                                        ]
-//                                    ),
                                   ),
                                 ],
                               ),
@@ -313,16 +266,15 @@ class _PreviousScoresState extends State<PreviousScores> {
     );
   }
 
-//  getcolor (qTopic){
-//    switch (qTopic) {
-//      case 'Aptitude':return charts.Color().rgbaHexString.'96566';
-//        break;
-//      default:return charts.Color().rgbaHexString;
-//        break;
-//    }
-//  }
-
-  gettime(Timestamp time) {
-    return time.toDate() ;
+  getcolor (quiz){
+    switch (quiz) {
+      case 'quiz1':return charts.Color.fromHex(code: '#438786');
+        break;
+      case 'Permutation and Combination I': return charts.Color.fromHex(code: '#000000');
+        break;
+      default: return charts.Color.fromHex(code: '0xff1976d2');
+        break;
+    }
   }
+
 }
