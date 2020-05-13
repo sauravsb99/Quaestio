@@ -1,12 +1,9 @@
-// ignore: implementation_imports
-import 'package:cloud_firestore_platform_interface/src/timestamp.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:queastio/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/models/score.dart';
-import 'package:date_format/date_format.dart';
 
 class PreviousScores extends StatefulWidget {
   final Widget child;
@@ -26,7 +23,7 @@ class _PreviousScoresState extends State<PreviousScores> {
     _seriesLineData = List<charts.Series<Score, DateTime>>(
     );
 
-    User user;
+//    User user;
     _seriesLineData.add(
         charts.Series(
           domainFn: ( Score data, _ )=> data.time.toDate(),

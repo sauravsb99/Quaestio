@@ -22,11 +22,30 @@ class DatabaseService {
   final CollectionReference faqCollection =
       Firestore.instance.collection('faq');
 
-  Future<void> updateUserData(String name, String image) async {
+  Future<void> updateUserData(String name, String image, String role) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
       'image': image,
+      'role': role,
+    });
+  }
+
+  Future<void> updateUserDataByAdmin(String name, String image, String role) async {
+      await userCollection.document(uid).setData({
+      'uid': uid,
+      'name': name,
+      'image': image,
+      'role':'admin',
+    });
+      return('True');
+  }
+
+  Future<void> updateQuiz(String name,String qTopic, List<Map> questions) async{
+    return await quizCollection.document().setData({
+      'name': name,
+      'qTopic': qTopic,
+      'questions': questions,
     });
   }
 
@@ -43,11 +62,14 @@ class DatabaseService {
     });
   }
 
+
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
       name: snapshot.data['name'],
       image: snapshot.data['image'],
+      role: snapshot.data['role'],
+
     );
   }
 

@@ -11,7 +11,8 @@ class UserData {
   final String uid;
   final String name;
   final String image;
+  final String role;
 
-  UserData({ this.uid,this.name,this.image});
+  UserData({ this.uid,this.name,this.image,this.role});
 
 }
