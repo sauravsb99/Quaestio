@@ -5,6 +5,7 @@ import 'package:queastio/services/scoring.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
+import 'package:quiver/async.dart';
 
 class QuestionCard extends StatefulWidget {
   final Map quiz;
@@ -19,6 +20,48 @@ class _QuestionCardState extends State<QuestionCard> {
   int index = 0;
   bool _isPrevButtonDisabled;
   bool _isNextButtonDisabled;
+  Duration d;
+  String time = '';
+  User user;
+  UserData userData;
+
+  _convertToTwoDigit(int n) {
+    if (n < 10) return '0' + n.toString();
+    return n.toString();
+  }
+
+  Future<void> calcScore() async {
+    Scoring instance =
+        Scoring(answers: quiz['answers'], selected: selectedOptions);
+    int score = instance.getScore();
+    print('Score:' + score.toString());
+    if (quiz['firstTime']) {
+      DateTime time = DateTime.now();
+      await DatabaseService(uid: user.uid).insertScore(userData.name,
+          quiz['qname'], quiz['qTopic'], score, quiz['answers'].length, time);
+    }
+    _showMyDialog(score, quiz['answers'].length);
+  }
+
+  void startTimer() {
+    CountdownTimer c = CountdownTimer(
+      Duration(minutes: quiz['time']),
+      Duration(seconds: 1),
+    );
+    var sub = c.listen(null);
+    sub.onData((duration) {
+      setState(() {
+        d = d - Duration(seconds: 1);
+        time = _convertToTwoDigit(d.inMinutes.remainder(60)) +
+            ':' +
+            _convertToTwoDigit(d.inSeconds.remainder(60));
+      });
+    });
+    sub.onDone(() {
+      calcScore();
+      sub.cancel();
+    });
+  }
 
   Future<void> _showMyDialog(int score, int total) async {
     return showDialog<void>(
@@ -71,16 +114,16 @@ class _QuestionCardState extends State<QuestionCard> {
     index = 0;
     _isPrevButtonDisabled = true;
     _isNextButtonDisabled = false;
+    d = new Duration(minutes: quiz['time']);
+    startTimer();
   }
 
   List<String> selectedOptions;
   @override
   Widget build(BuildContext context) {
     final List questions = quiz['questions'];
-    final List answers = quiz['answers'];
-    final String qname = quiz['qname'];
-    final String qTopic = quiz['qTopic'];
     Map question = Map.from(questions[index]);
+
     selectedOptions =
         selectedOptions == null ? new List(questions.length) : selectedOptions;
     setState(() {
@@ -89,13 +132,13 @@ class _QuestionCardState extends State<QuestionCard> {
     setState(() {
       _isNextButtonDisabled = index == questions.length - 1;
     });
-    User user = Provider.of<User>(context, listen: false);
+    user = Provider.of<User>(context, listen: false);
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            UserData userData = snapshot.data;
+            userData = snapshot.data;
             return Material(
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -103,6 +146,19 @@ class _QuestionCardState extends State<QuestionCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text('Time Left: ' + time),
+                        FlatButton(
+                          padding: EdgeInsets.all(8.0),
+                          textColor: Colors.white,
+                          onPressed: selectedOptions == null ? null : calcScore,
+                          child: Text('Submit Test'),
+                          color: Colors.indigo,
+                        ),
+                      ],
+                    ),
                     question['qType'] == 'Text'
                         ? Text(
                             (index + 1).toString() + '. ' + question['qText'],
@@ -193,33 +249,6 @@ class _QuestionCardState extends State<QuestionCard> {
                                   });
                                 },
                         ),
-                        FlatButton(
-                          padding: EdgeInsets.all(8.0),
-                          textColor: Colors.white,
-                          onPressed: selectedOptions == null
-                              ? null
-                              : () async {
-                                  Scoring instance = Scoring(
-                                      answers: answers,
-                                      selected: selectedOptions);
-                                  int score = instance.getScore();
-                                  print('Score:' + score.toString());
-                                  if (quiz['firstTime']) {
-                                    DateTime time = DateTime.now();
-                                    await DatabaseService(uid: user.uid)
-                                        .insertScore(
-                                            userData.name,
-                                            qname,
-                                            qTopic,
-                                            score,
-                                            answers.length,
-                                            time);
-                                  }
-                                  _showMyDialog(score, answers.length);
-                                },
-                          child: Text('Submit Test'),
-                          color: Colors.indigo,
-                        ),
                         IconButton(
                           color: Colors.indigo,
                           disabledColor: Colors.white,
@@ -237,7 +266,7 @@ class _QuestionCardState extends State<QuestionCard> {
                                 },
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
