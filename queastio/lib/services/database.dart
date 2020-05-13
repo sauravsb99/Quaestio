@@ -41,6 +41,14 @@ class DatabaseService {
       return('True');
   }
 
+  Future<void> updateQuiz(String name,String qTopic, List<Map> questions) async{
+    return await quizCollection.document().setData({
+      'name': name,
+      'qTopic': qTopic,
+      'questions': questions,
+    });
+  }
+
   Future<void> insertScore(String uname, String qname, String qTopic, int score,
       int total, DateTime time) async {
     return await scoreCollection.document().setData({
@@ -53,6 +61,7 @@ class DatabaseService {
       'time': time
     });
   }
+
 
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
@@ -133,11 +142,26 @@ class DatabaseService {
 
   Stream<List<Score>> getScores() {
     return scoreCollection
-        .where('uid', isEqualTo: uid).orderBy('time', descending: true)
+        .where('uid', isEqualTo: uid)
+        .orderBy('time', descending: true)
         .snapshots()
         .map(_scoreListFromSnapshot);
   }
 
+  Stream<List<Score>> getQuizScores(String qname) {
+    return scoreCollection
+        .where('quiz', isEqualTo: qname)
+        .orderBy('score', descending: true)
+        .snapshots()
+        .map(_scoreListFromSnapshot);
+  }
+
+  Future<QuerySnapshot> testAlreadyTaken(String qname) async {
+    return scoreCollection
+        .where('uid', isEqualTo: uid)
+        .where('quiz', isEqualTo: qname)
+        .getDocuments();
+  }
 //  Stream<List<Score>> getScoresbyTopic() {
 //    return scoreCollection
 //        .where(('uid', isEqualTo: uid)).where(('quiz', isEqualTo: quiz)).orderBy('time', descending: true)
