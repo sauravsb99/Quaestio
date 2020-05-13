@@ -43,12 +43,25 @@ class AuthService{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       var rng = new Random();
-      await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}','https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg');
+      await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}','https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg','user');
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
       return null;
     } 
+  }
+
+  Future registeradminWithEmailAndPassword(String email, String password) async {
+    try {
+      var result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      var user = result.user;
+      var rng = new Random();
+      await DatabaseService(uid: user.uid).updateUserDataByAdmin('Admin${rng.nextInt(100000)}','https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg','admin');
+      return ('True');
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
   }
 
   Future signOut() async {
