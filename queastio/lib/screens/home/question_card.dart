@@ -45,7 +45,7 @@ class _QuestionCardState extends State<QuestionCard> {
 
   void startTimer() {
     CountdownTimer c = CountdownTimer(
-      Duration(minutes: quiz['time']),
+      Duration(minutes: quiz['duration']),
       Duration(seconds: 1),
     );
     var sub = c.listen(null);
@@ -114,7 +114,7 @@ class _QuestionCardState extends State<QuestionCard> {
     index = 0;
     _isPrevButtonDisabled = true;
     _isNextButtonDisabled = false;
-    d = new Duration(minutes: quiz['time']);
+    d = new Duration(minutes: quiz['duration']);
     startTimer();
   }
 
@@ -134,146 +134,155 @@ class _QuestionCardState extends State<QuestionCard> {
     });
     user = Provider.of<User>(context, listen: false);
 
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            userData = snapshot.data;
-            return Material(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text('Time Left: ' + time),
-                        FlatButton(
-                          padding: EdgeInsets.all(8.0),
-                          textColor: Colors.white,
-                          onPressed: selectedOptions == null ? null : calcScore,
-                          child: Text('Submit Test'),
-                          color: Colors.indigo,
-                        ),
-                      ],
-                    ),
-                    question['qType'] == 'Text'
-                        ? Text(
-                            (index + 1).toString() + '. ' + question['qText'],
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                          )
-                        : Wrap(
-                            children: <Widget>[
-                              Text(
-                                (index + 1).toString() + '. ',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: StreamBuilder<UserData>(
+          stream: DatabaseService(uid: user.uid).userData,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              userData = snapshot.data;
+              return Material(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                              padding: EdgeInsets.all(8.0),
+                              color: Colors.indigo,
+                              child: Text(
+                                'Time Left: ' + time,
+                                style: buttonText,
+                              )),
+                          FlatButton(
+                            padding: EdgeInsets.all(8.0),
+                            onPressed:
+                                selectedOptions == null ? null : calcScore,
+                            child: Text('Submit Test', style: buttonText),
+                            color: Colors.indigo,
+                          ),
+                        ],
+                      ),
+                      question['qType'] == 'Text'
+                          ? Text(
+                              (index + 1).toString() + '. ' + question['qText'],
+                              style: TextStyle(
+                                fontSize: 18.0,
                               ),
-                              Image.network(question['qImage']),
-                            ],
+                            )
+                          : Wrap(
+                              children: <Widget>[
+                                Text(
+                                  (index + 1).toString() + '. ',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                                Image.network(question['qImage']),
+                              ],
+                            ),
+                      Divider(
+                        height: 30.0,
+                        color: Colors.grey,
+                      ),
+                      RadioListTile<String>(
+                        title: Text(question['options'][0]),
+                        value: question['options'][0],
+                        groupValue: selectedOptions[index],
+                        activeColor: Colors.indigo,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOptions[index] = value;
+                            print(selectedOptions[index]);
+                          });
+                        },
+                      ),
+                      RadioListTile<String>(
+                        title: Text(question['options'][1]),
+                        value: question['options'][1],
+                        groupValue: selectedOptions[index],
+                        activeColor: Colors.indigo,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOptions[index] = value;
+                            print(selectedOptions[index]);
+                          });
+                        },
+                      ),
+                      RadioListTile<String>(
+                        title: Text(question['options'][2]),
+                        value: question['options'][2],
+                        groupValue: selectedOptions[index],
+                        activeColor: Colors.indigo,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOptions[index] = value;
+                            print(selectedOptions[index]);
+                          });
+                        },
+                      ),
+                      RadioListTile<String>(
+                        title: Text(question['options'][3]),
+                        value: question['options'][3],
+                        groupValue: selectedOptions[index],
+                        activeColor: Colors.indigo,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOptions[index] = value;
+                            print(selectedOptions[index]);
+                          });
+                        },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          IconButton(
+                            color: Colors.indigo,
+                            disabledColor: Colors.white,
+                            icon: Icon(
+                              Icons.arrow_left,
+                              size: 50.0,
+                            ),
+                            onPressed: _isPrevButtonDisabled
+                                ? null
+                                : () {
+                                    setState(() {
+                                      index -= 1;
+                                      print(index);
+                                    });
+                                  },
                           ),
-                    Divider(
-                      height: 30.0,
-                      color: Colors.grey,
-                    ),
-                    RadioListTile<String>(
-                      title: Text(question['options'][0].toString()),
-                      value: question['options'][0].toString(),
-                      groupValue: selectedOptions[index],
-                      activeColor: Colors.indigo,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedOptions[index] = value;
-                          print(selectedOptions[index]);
-                        });
-                      },
-                    ),
-                    RadioListTile<String>(
-                      title: Text(question['options'][1].toString()),
-                      value: question['options'][1].toString(),
-                      groupValue: selectedOptions[index].toString(),
-                      activeColor: Colors.indigo,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedOptions[index] = value;
-                          print(selectedOptions[index]);
-                        });
-                      },
-                    ),
-                    RadioListTile<String>(
-                      title: Text(question['options'][2].toString()),
-                      value: question['options'][2].toString(),
-                      groupValue: selectedOptions[index],
-                      activeColor: Colors.indigo,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedOptions[index] = value;
-                          print(selectedOptions[index]);
-                        });
-                      },
-                    ),
-                    RadioListTile<String>(
-                      title: Text(question['options'][3].toString()),
-                      value: question['options'][3].toString(),
-                      groupValue: selectedOptions[index],
-                      activeColor: Colors.indigo,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedOptions[index] = value;
-                          print(selectedOptions[index]);
-                        });
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        IconButton(
-                          color: Colors.indigo,
-                          disabledColor: Colors.white,
-                          icon: Icon(
-                            Icons.arrow_left,
-                            size: 50.0,
+                          IconButton(
+                            color: Colors.indigo,
+                            disabledColor: Colors.white,
+                            icon: Icon(
+                              Icons.arrow_right,
+                              size: 50.0,
+                            ),
+                            onPressed: _isNextButtonDisabled
+                                ? null
+                                : () {
+                                    setState(() {
+                                      index += 1;
+                                      print(index);
+                                    });
+                                  },
                           ),
-                          onPressed: _isPrevButtonDisabled
-                              ? null
-                              : () {
-                                  setState(() {
-                                    index -= 1;
-                                    print(index);
-                                  });
-                                },
-                        ),
-                        IconButton(
-                          color: Colors.indigo,
-                          disabledColor: Colors.white,
-                          icon: Icon(
-                            Icons.arrow_right,
-                            size: 50.0,
-                          ),
-                          onPressed: _isNextButtonDisabled
-                              ? null
-                              : () {
-                                  setState(() {
-                                    index += 1;
-                                    print(index);
-                                  });
-                                },
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          } else {
-            return Loading();
-          }
-        });
+              );
+            } else {
+              return Loading();
+            }
+          }),
+    );
   }
 }

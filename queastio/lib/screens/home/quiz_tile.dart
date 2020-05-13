@@ -41,7 +41,7 @@ class QuizTile extends StatelessWidget {
                         'qname': quiz.qName,
                         'qTopic': quiz.qTopic,
                         'firstTime': false,
-                        'time': 10
+                        'duration': quiz.duration
                       });
                     },
                   ),
@@ -73,15 +73,34 @@ class QuizTile extends StatelessWidget {
                       SizedBox(
                         height: 50,
                       ),
-                      Text(
-                        quiz.qName.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24.0,
-                          letterSpacing: 2.0,
-                          wordSpacing: 5.0,
-                        ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            quiz.qName.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24.0,
+                              letterSpacing: 2.0,
+                              wordSpacing: 5.0,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              color: Colors.indigo,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Text(
+                              quiz.qTopic,
+                              style: TextStyle(
+                                fontSize: 10.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Divider(
                         height: 30.0,
@@ -102,7 +121,7 @@ class QuizTile extends StatelessWidget {
                       ),
                       SizedBox(height: 20.0),
                       Text(
-                        'No of questions:10',
+                        'No of questions: ' + quiz.qCount.toString(),
                         style: TextStyle(
                           fontSize: 17.0,
                           color: Colors.black87,
@@ -112,20 +131,25 @@ class QuizTile extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(2.0),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            child: Text(
-                              'Topic',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                color: Colors.white,
+                          MaterialButton(
+//                          child: ClipRRect(
+//                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
+
+                            child: RaisedButton(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 5.0),
+                              onPressed: () {
+                                print(answers);
+                                Navigator.pushNamed(context, LeaderRoute,
+                                    arguments: quiz.qName);
+                              },
+                              child: Text(
+                                'Leaderboard',
+                                style: buttonText,
                               ),
+                              color: Colors.black87,
                             ),
+                            onPressed: () {},
                           ),
                           MaterialButton(
 //                          child: ClipRRect(
@@ -156,38 +180,13 @@ class QuizTile extends StatelessWidget {
                               },
                               child: Text(
                                 'Start Quiz',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.grey[50],
-                                ),
+                                style: buttonText,
                               ),
                               color: Colors.black87,
                             ),
                             onPressed: () {},
                           ),
-                          MaterialButton(
-//                          child: ClipRRect(
-//                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
 
-                            child: RaisedButton(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 5.0),
-                              onPressed: () {
-                                print(answers);
-                                Navigator.pushNamed(context, LeaderRoute,
-                                    arguments: quiz.qName);
-                              },
-                              child: Text(
-                                'Leader',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.grey[50],
-                                ),
-                              ),
-                              color: Colors.black87,
-                            ),
-                            onPressed: () {},
-                          ),
 //                        ),
                         ],
                       ),

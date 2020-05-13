@@ -31,17 +31,19 @@ class DatabaseService {
     });
   }
 
-  Future<void> updateUserDataByAdmin(String name, String image, String role) async {
-      await userCollection.document(uid).setData({
+  Future<void> updateUserDataByAdmin(
+      String name, String image, String role) async {
+    await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
       'image': image,
-      'role':'admin',
+      'role': 'admin',
     });
-      return('True');
+    return ('True');
   }
 
-  Future<void> updateQuiz(String name,String qTopic, List<Map> questions) async{
+  Future<void> updateQuiz(
+      String name, String qTopic, List<Map> questions) async {
     return await quizCollection.document().setData({
       'name': name,
       'qTopic': qTopic,
@@ -62,14 +64,12 @@ class DatabaseService {
     });
   }
 
-
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
       name: snapshot.data['name'],
       image: snapshot.data['image'],
       role: snapshot.data['role'],
-
     );
   }
 
@@ -87,6 +87,9 @@ class DatabaseService {
         qName: doc.data['name'] ?? '',
         qTopic: doc.data['qTopic'] ?? '',
         questions: List.from(doc.data['questions']) ?? List(),
+        qDesc: doc.data['qDesc'] ?? 'A Simple Quiz',
+        duration: doc.data['duration'] ?? 10,
+        qCount: doc.data['qCount'] ?? 0,
       );
     }).toList();
   }
