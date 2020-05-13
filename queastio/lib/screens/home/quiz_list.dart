@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/models/quiz.dart';
-import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
-import 'quiz_tile.dart';
+import 'package:queastio/screens/home/quiz_tile.dart';
 import 'package:queastio/services/database.dart';
 
 class QuizList extends StatefulWidget {
@@ -27,12 +26,6 @@ class _QuizListState extends State<QuizList> {
             backgroundColor: Colors.indigo,
             appBar: AppBar(
               backgroundColor: Colors.indigo,
-            ),
-            floatingActionButton: FloatingActionButton(onPressed: (){
-              print("kali thudangatte");
-              Navigator.pushNamed(context, AddQuizRoute);
-            },
-            child: Icon(Icons.plus_one),
             ),
             body: data.length == 0
                 ? Center(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/screens/FAQ/faqhome.dart';
+import 'package:queastio/screens/admin/Quiz_listAdmin.dart';
 import 'package:queastio/screens/admin/add_quiz.dart';
 import 'package:queastio/screens/home/leader_board.dart';
 import 'package:queastio/screens/home/previous_scores.dart';
@@ -28,6 +29,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FaqHome());
     case NewAdminHomeRoute:
       return MaterialPageRoute(builder: (context) => NewAdminHome());
+    case QuizListAdminRoute:
+      return MaterialPageRoute(
+          builder: (context) => QuizListAdmin(topic: settings.arguments));
     case AddQuizRoute:
       return MaterialPageRoute(builder: (context) => AddQuiz());
     case LeaderRoute:

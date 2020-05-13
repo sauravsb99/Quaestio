@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/shared/constants.dart';
 
-class TopicTile extends StatelessWidget {
+class TopicTileAdmin extends StatelessWidget {
   final Topic topic;
 
-  TopicTile({this.topic});
+  TopicTileAdmin({this.topic});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -13,7 +13,7 @@ class TopicTile extends StatelessWidget {
       splashFactory: InkSplash.splashFactory,
       onTap: () {
         print("hi");
-        Navigator.pushNamed(context, QuizListRoute, arguments: topic.name);
+        Navigator.pushNamed(context, QuizListAdminRoute, arguments: topic.name);
       },
       child: Material(
 //          color: Colors.indigo,

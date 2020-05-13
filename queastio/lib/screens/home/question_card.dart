@@ -126,8 +126,8 @@ class _QuestionCardState extends State<QuestionCard> {
                       color: Colors.grey,
                     ),
                     RadioListTile<String>(
-                      title: Text(question['options'][0]),
-                      value: question['options'][0],
+                      title: Text(question['options'][0].toString()),
+                      value: question['options'][0].toString(),
                       groupValue: selectedOptions[index],
                       activeColor: Colors.indigo,
                       onChanged: (value) {
@@ -138,8 +138,20 @@ class _QuestionCardState extends State<QuestionCard> {
                       },
                     ),
                     RadioListTile<String>(
-                      title: Text(question['options'][1]),
-                      value: question['options'][1],
+                      title: Text(question['options'][1].toString()),
+                      value: question['options'][1].toString(),
+                      groupValue: selectedOptions[index].toString(),
+                      activeColor: Colors.indigo,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedOptions[index] = value;
+                          print(selectedOptions[index]);
+                        });
+                      },
+                    ),
+                    RadioListTile<String>(
+                      title: Text(question['options'][2].toString()),
+                      value: question['options'][2].toString(),
                       groupValue: selectedOptions[index],
                       activeColor: Colors.indigo,
                       onChanged: (value) {
@@ -150,20 +162,8 @@ class _QuestionCardState extends State<QuestionCard> {
                       },
                     ),
                     RadioListTile<String>(
-                      title: Text(question['options'][2]),
-                      value: question['options'][2],
-                      groupValue: selectedOptions[index],
-                      activeColor: Colors.indigo,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedOptions[index] = value;
-                          print(selectedOptions[index]);
-                        });
-                      },
-                    ),
-                    RadioListTile<String>(
-                      title: Text(question['options'][3]),
-                      value: question['options'][3],
+                      title: Text(question['options'][3].toString()),
+                      value: question['options'][3].toString(),
                       groupValue: selectedOptions[index],
                       activeColor: Colors.indigo,
                       onChanged: (value) {
