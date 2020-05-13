@@ -40,7 +40,8 @@ class QuizTile extends StatelessWidget {
                         'answers': answers,
                         'qname': quiz.qName,
                         'qTopic': quiz.qTopic,
-                        'firstTime': false
+                        'firstTime': false,
+                        'time': 10
                       });
                     },
                   ),
@@ -145,7 +146,8 @@ class QuizTile extends StatelessWidget {
                                           'answers': answers,
                                           'qname': quiz.qName,
                                           'qTopic': quiz.qTopic,
-                                          'firstTime': true
+                                          'firstTime': true,
+                                          'time': 10
                                         });
                                   } else {
                                     _showNoScoreDialog(answers);
