@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/models/quiz.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:queastio/shared/constants.dart';
 
 class QuizTile extends StatelessWidget {
   final Quiz quiz;
@@ -60,7 +61,7 @@ class QuizTile extends StatelessWidget {
                       ),
                       SizedBox(height: 20.0),
                       Text(
-                        'No of questions: ' + answers.length.toString(),
+                        'No of questions:10',
                         style: TextStyle(
                           fontSize: 17.0,
                           color: Colors.black87,
@@ -94,7 +95,7 @@ class QuizTile extends StatelessWidget {
                                   vertical: 10.0, horizontal: 5.0),
                               onPressed: () {
                                 print(answers);
-                                Navigator.pushNamed(context, '/quiz',
+                                Navigator.pushNamed(context, QuestionRoute,
                                     arguments: {
                                       'questions': quiz.questions,
                                       'answers': answers,
@@ -104,6 +105,29 @@ class QuizTile extends StatelessWidget {
                               },
                               child: Text(
                                 'Start Quiz',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.grey[50],
+                                ),
+                              ),
+                              color: Colors.black87,
+                            ),
+                            onPressed: (){},
+                          ),
+                          MaterialButton(
+//                          child: ClipRRect(
+//                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
+
+                            child: RaisedButton(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 5.0),
+                              onPressed: () {
+                                print(answers);
+                                Navigator.pushNamed(context, LeaderRoute,
+                                    arguments: quiz.qName);
+                              },
+                              child: Text(
+                                'Leader',
                                 style: TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.grey[50],
@@ -121,6 +145,7 @@ class QuizTile extends StatelessWidget {
                       )
                     ],
                   ),
+
                 ),
               ],
             );

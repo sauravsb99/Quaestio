@@ -32,7 +32,8 @@ dependencies:
   image_picker: ^0.6.6+1
   csv: ^4.0.3
   file_picker: ^1.9.0+1
-
+  charts_flutter: ^0.6.0
+  date_format:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -30,10 +30,19 @@ class DatabaseService {
     });
   }
 
-  Future<void> insertScore(
-      String qname, String qTopic, int score, int total, DateTime time) async {
+  Future<void> updateQuiz(Quizadd quizadd) async{
+    return await quizCollection.document().setData({
+      'name': quizadd.name,
+      'qTopic': quizadd.qTopic,
+      'questions': quizadd.questions,
+    });
+  }
+
+  Future<void> insertScore(String uname, String qname, String qTopic, int score,
+      int total, DateTime time) async {
     return await scoreCollection.document().setData({
       'uid': uid,
+      'uname': uname,
       'quiz': qname,
       'qTopic': qTopic,
       'score': score,
@@ -42,6 +51,7 @@ class DatabaseService {
     });
   }
 
+  
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
@@ -72,9 +82,12 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return Score(
         uid: doc.data['uid'] ?? '',
+        uname: doc.data['uname'] ?? '',
+        qTopic: doc.data['qTopic'] ?? '',
         quiz: doc.data['quiz'] ?? '',
         score: doc.data['score'] ?? 0,
         total: doc.data['total'] ?? 0,
+        time: doc.data['time'] ?? '',
       );
     }).toList();
   }
@@ -117,7 +130,22 @@ class DatabaseService {
   Stream<List<Score>> getScores() {
     return scoreCollection
         .where('uid', isEqualTo: uid)
+        .orderBy('time', descending: true)
         .snapshots()
         .map(_scoreListFromSnapshot);
   }
+
+  Stream<List<Score>> getQuizScores(String qname) {
+    return scoreCollection
+        .where('quiz', isEqualTo: qname)
+        .orderBy('score', descending: true)
+        .snapshots()
+        .map(_scoreListFromSnapshot);
+  }
+//  Stream<List<Score>> getScoresbyTopic() {
+//    return scoreCollection
+//        .where(('uid', isEqualTo: uid)).where(('quiz', isEqualTo: quiz)).orderBy('time', descending: true)
+//        .snapshots()
+//        .map(_scoreListFromSnapshot);
+//  }
 }
