@@ -12,6 +12,11 @@ const textInputDecoration = InputDecoration(
   ),
 );
 
+const buttonText = TextStyle(
+  fontSize: 20.0,
+  fontWeight: FontWeight.w200,
+  color: Color(0xFFFAFAFA),
+);
 const String HomeViewRoute = '/';
 const String QuizListRoute = '/quizzes';
 const String QuestionRoute = '/quiz';
