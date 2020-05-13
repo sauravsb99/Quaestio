@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'dart:io';
+import 'dart:collection';
+import 'package:queastio/models/quiz.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'dart:convert' show utf8;
@@ -20,6 +22,7 @@ class AddQuiz extends StatefulWidget {
 }
 
 class _AddQuizState extends State<AddQuiz> {
+  
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String _fileName;
   String _path;
@@ -66,20 +69,58 @@ class _AddQuizState extends State<AddQuiz> {
           : _paths != null ? _paths.keys.toString() : '...';
     });
   }
+  Quizadd quiz;
   List<List<dynamic>> data = [];
   loadCsv(String path) async{
     print("kerii keriii");
     final x = new File(path).openRead();
      data = await x.transform(utf8.decoder).transform(new CsvToListConverter()).toList();
     //  var jSondata = json.decode(x.toString());
+    
+    List l;
+    dynamic cnt=0;
+    String name;
+    String qTopic;
+    Map m;
+    HashMap map1 = new HashMap<int, String>();
+    // m["0"] = "506";
+    map1[1] = 'A';
+    l.add(map1);
+    print(l);
      for(dynamic u in data){
        if(u[0]=="quiz")
-        print(u);
+        {
+          
+            name = u[0];
+            qTopic = u[1];
+          
+        }
+
+      else{
+          // Map<String,String> ma;
+          // dynamic c = u[0];
+          // ma.addEntries(u[0]);
+          // ma["0"]=u[0];
+          // ma.putIfAbsent("0", () => "506");
+          // String opt = "options";
+          // ma.update(cnt, opt);
+          // ma.update(opt, u[1]);
+          // ma.update(opt, u[2]);
+          // ma.update(opt, u[3]);
+          // ma.update(opt, u[4]);
+          // ma.update(cnt, u[5]);
+          // ma.update(cnt, u[6]);
+          // ma.update(cnt, u[7]);
+          // l.add(ma);
+          // cnt++;
+      }
        
      }
     // print(data);
+    // print(l);
   }
 
+  
   @override
   
   Widget build(BuildContext context) {
