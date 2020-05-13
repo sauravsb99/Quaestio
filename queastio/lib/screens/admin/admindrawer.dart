@@ -1,18 +1,18 @@
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:queastio/screens/home/home.dart';
+import 'package:queastio/screens/admin/adminhome.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
 
-class MyDrawer extends StatefulWidget {
+class AdminDrawer extends StatefulWidget {
   @override
-  _MyDrawerState createState() => _MyDrawerState();
+  _AdminDrawerState createState() => _AdminDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _AdminDrawerState extends State<AdminDrawer> {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,10 @@ class _MyDrawerState extends State<MyDrawer> {
                     splashFactory: InkSplash.splashFactory,
                     onTap: () {
                       print(userData.name);
+//                      print(userData.role);
+                      print(userData.name);
                       Navigator.pushNamed(context, ProfileRoute
-//                      arguments: userData.name
-                          );
+                      );
                     },
                     child: DrawerHeader(
                       child: Row(
@@ -46,10 +47,10 @@ class _MyDrawerState extends State<MyDrawer> {
                           backgroundImage: NetworkImage(userData.image),
                         ),
                           SizedBox(width: MediaQuery.of(context).size.width*0.05,),
-                            Expanded(
+                          Expanded(
                             child:Text(userData.name,textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 28.0,color: Colors.white),
-                          ),),
+                              style: TextStyle(fontSize: 28.0,color: Colors.white),
+                            ),),
 
                         ],
                       ),
@@ -127,7 +128,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
                                 child:Center(
-                                  child: Text(userData.role, style: TextStyle(
+                                  child: Text('About Us', style: TextStyle(
                                     fontSize: 22,
                                     color: Colors.black,
                                   ),
@@ -160,7 +161,9 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pushNamed(context, NewAdminHomeRoute);
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -168,7 +171,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
                                 child:Center(
-                                  child: Text('Contact Us', style: TextStyle(
+                                  child: Text('+', style: TextStyle(
                                     fontSize: 22,
                                     color: Colors.black,
                                   ),
@@ -201,7 +204,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             color: Colors.grey,
                             onPressed: (){
                               Navigator.pop(context);
-                            Navigator.pushNamed(context, FaQRoute);
+                              Navigator.pushNamed(context, FaQRoute);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -293,7 +296,7 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             );
           } else {
-            return Home();
+            return AdminHome();
           }
         });
   }

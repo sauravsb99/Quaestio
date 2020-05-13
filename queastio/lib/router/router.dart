@@ -6,7 +6,7 @@ import 'package:queastio/screens/home/quiz_list.dart';
 import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/screens/wrapper.dart';
 import 'package:queastio/shared/constants.dart';
-
+import 'package:queastio/screens/newadmin/New_adminHome.dart';
 // ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -24,6 +24,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case FaQRoute:
       return MaterialPageRoute(builder: (context) => FaqHome());
+    case NewAdminHomeRoute:
+      return MaterialPageRoute(builder: (context) => NewAdminHome());
   }
 }
 

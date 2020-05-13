@@ -216,7 +216,7 @@ class _UserputState extends State<Userput> {
                                     name = userData.name;
                                   if(i==null)
                                   i=userData.image;
-                                  await DatabaseService(uid: user.uid).updateUserData(name,i);
+                                  await DatabaseService(uid: user.uid).updateUserData(name,i,userData.role);
                                 setState((){
                                 Scaffold.of(context).showSnackBar(SnackBar(content: Text("Name Updated")));
                                 });
