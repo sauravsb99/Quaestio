@@ -16,6 +16,7 @@ import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/services/database.dart';
 import 'dart:math';
 import 'package:file_picker/file_picker.dart';
+import 'package:queastio/shared/constants.dart';
 class AddQuiz extends StatefulWidget {
   @override
   _AddQuizState createState() => _AddQuizState();
@@ -69,7 +70,7 @@ class _AddQuizState extends State<AddQuiz> {
           : _paths != null ? _paths.keys.toString() : '...';
     });
   }
-  Quizadd quiz;
+  // Quizadd quiz;
   List<List<dynamic>> data = [];
   loadCsv(String path) async{
     print("kerii keriii");
@@ -77,47 +78,53 @@ class _AddQuizState extends State<AddQuiz> {
      data = await x.transform(utf8.decoder).transform(new CsvToListConverter()).toList();
     //  var jSondata = json.decode(x.toString());
     
-    List l;
-    dynamic cnt=0;
+    // List l;
     String name;
     String qTopic;
-    Map m;
-    HashMap map1 = new HashMap<int, String>();
-    // m["0"] = "506";
-    map1[1] = 'A';
-    l.add(map1);
-    print(l);
+    // Map m;
+    var orderLines = <Map>[]; 
+    var map ={};
+    // map['answer'] = "506";
+    print(orderLines);
+    // int count =0;
      for(dynamic u in data){
        if(u[0]=="quiz")
         {
-          
-            name = u[0];
-            qTopic = u[1];
-          
+            // var map={};
+            name = u[1];
+            qTopic = u[2];
+          //   map['name'] = name;
+          // map['qTopic'] = qTopic;
+            // orderLines.add(map);
         }
 
       else{
           // Map<String,String> ma;
-          // dynamic c = u[0];
-          // ma.addEntries(u[0]);
-          // ma["0"]=u[0];
-          // ma.putIfAbsent("0", () => "506");
-          // String opt = "options";
-          // ma.update(cnt, opt);
-          // ma.update(opt, u[1]);
-          // ma.update(opt, u[2]);
-          // ma.update(opt, u[3]);
-          // ma.update(opt, u[4]);
-          // ma.update(cnt, u[5]);
-          // ma.update(cnt, u[6]);
-          // ma.update(cnt, u[7]);
-          // l.add(ma);
-          // cnt++;
+
+          var map={};
+          List la=[];
+          la.add(u[1]);
+          la.add(u[2]);
+          la.add(u[3]);
+          la.add(u[4]);
+          print(la);
+          
+          map['answer']=u[0];
+          map['options']=la;
+          // map['options']=u[2];
+          // map['options']=u[3];
+          // map['options']=u[4];
+          map['qText']=u[5];
+          map['qType']=u[6];
+          map['qno'] = u[7];
+          orderLines.add(map);
       }
        
      }
+     await DatabaseService().updateQuiz(name,qTopic,orderLines);
     // print(data);
-    // print(l);
+    // print(orderLines);
+    
   }
 
   
@@ -199,9 +206,11 @@ class _AddQuizState extends State<AddQuiz> {
                                     onTap: () async{
                                       await loadCsv(path);
                                       // print(data);
-
-                                    
-
+                                //       setState((){
+                                // Scaffold.of(context).showSnackBar(SnackBar(content: Text("Quiz Updated")));
+                                // });
+                                    // Navigator.pushNamed(context, HomeViewRoute);
+                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text("Quiz Updated")));
                                     },
                                   );
                                 },

@@ -30,11 +30,11 @@ class DatabaseService {
     });
   }
 
-  Future<void> updateQuiz(Quizadd quizadd) async{
+  Future<void> updateQuiz(String name,String qTopic, List<Map> questions) async{
     return await quizCollection.document().setData({
-      'name': quizadd.name,
-      'qTopic': quizadd.qTopic,
-      'questions': quizadd.questions,
+      'name': name,
+      'qTopic': qTopic,
+      'questions': questions,
     });
   }
 
