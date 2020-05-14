@@ -24,7 +24,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => QuestionCard(quiz: settings.arguments));
     case PrevScoresRoute:
-      return MaterialPageRoute(builder: (context) => PreviousScores());
+      return MaterialPageRoute(
+          builder: (context) => PreviousScores(uid: settings.arguments));
     case ProfileRoute:
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case FaQRoute:

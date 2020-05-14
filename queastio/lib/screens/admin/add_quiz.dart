@@ -17,13 +17,13 @@ import 'package:queastio/services/database.dart';
 import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:queastio/shared/constants.dart';
+
 class AddQuiz extends StatefulWidget {
   @override
   _AddQuizState createState() => _AddQuizState();
 }
 
 class _AddQuizState extends State<AddQuiz> {
-  
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String _fileName;
   String _path;
@@ -70,66 +70,70 @@ class _AddQuizState extends State<AddQuiz> {
           : _paths != null ? _paths.keys.toString() : '...';
     });
   }
+
   // Quizadd quiz;
   List<List<dynamic>> data = [];
-  loadCsv(String path) async{
+  loadCsv(String path) async {
     print("kerii keriii");
     final x = new File(path).openRead();
-     data = await x.transform(utf8.decoder).transform(new CsvToListConverter()).toList();
+    data = await x
+        .transform(utf8.decoder)
+        .transform(new CsvToListConverter())
+        .toList();
     //  var jSondata = json.decode(x.toString());
-    
+
     // List l;
     String name;
     String qTopic;
+    String qDesc;
+    int qCount;
+    int duration;
     // Map m;
-    var orderLines = <Map>[]; 
-    var map ={};
+    var orderLines = <Map>[];
+    var map = {};
     // map['answer'] = "506";
     print(orderLines);
     // int count =0;
-     for(dynamic u in data){
-       if(u[0]=="quiz")
-        {
-            // var map={};
-            name = u[1];
-            qTopic = u[2];
-          //   map['name'] = name;
-          // map['qTopic'] = qTopic;
-            // orderLines.add(map);
-        }
+    for (dynamic u in data) {
+      if (u[0] == "quiz") {
+        // var map={};
+        name = u[1];
+        qTopic = u[2];
+        qDesc = u[3];
+        qCount = u[4];
+        duration = u[5];
+        //   map['name'] = name;
+        // map['qTopic'] = qTopic;
+        // orderLines.add(map);
+      } else {
+        // Map<String,String> ma;
 
-      else{
-          // Map<String,String> ma;
+        var map = {};
+        List la = [];
+        la.add(u[1].toString());
+        la.add(u[2].toString());
+        la.add(u[3].toString());
+        la.add(u[4].toString());
+        print(la);
 
-          var map={};
-          List la=[];
-          la.add(u[1]);
-          la.add(u[2]);
-          la.add(u[3]);
-          la.add(u[4]);
-          print(la);
-          
-          map['answer']=u[0];
-          map['options']=la;
-          // map['options']=u[2];
-          // map['options']=u[3];
-          // map['options']=u[4];
-          map['qText']=u[5];
-          map['qType']=u[6];
-          map['qno'] = u[7];
-          orderLines.add(map);
+        map['answer'] = u[0].toString();
+        map['options'] = la;
+        // map['options']=u[2];
+        // map['options']=u[3];
+        // map['options']=u[4];
+        map['qText'] = u[5];
+        map['qType'] = u[6];
+        map['qno'] = u[7];
+        orderLines.add(map);
       }
-       
-     }
-     await DatabaseService().updateQuiz(name,qTopic,orderLines);
+    }
+    await DatabaseService()
+        .updateQuiz(name, qTopic, qDesc, qCount, duration, orderLines);
     // print(data);
     // print(orderLines);
-    
   }
 
-  
   @override
-  
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new Scaffold(
@@ -147,9 +151,7 @@ class _AddQuizState extends State<AddQuiz> {
               children: <Widget>[
                 new Padding(
                   padding: const EdgeInsets.only(top: 20.0),
-                  
                 ),
-                
                 new ConstrainedBox(
                   constraints: BoxConstraints.tightFor(width: 200.0),
                   child: new SwitchListTile.adaptive(
@@ -168,7 +170,6 @@ class _AddQuizState extends State<AddQuiz> {
                         onPressed: () => _openFileExplorer(),
                         child: new Text("Upload The File/Files"),
                       ),
-                      
                     ],
                   ),
                 ),
@@ -196,21 +197,22 @@ class _AddQuizState extends State<AddQuiz> {
                                   final path = isMultiPath
                                       ? _paths.values.toList()[index].toString()
                                       : _path;
-                                  
+
                                   return new ListTile(
-                                    
                                     title: new Text(
                                       name,
                                     ),
                                     subtitle: new Text(path),
-                                    onTap: () async{
+                                    onTap: () async {
                                       await loadCsv(path);
                                       // print(data);
-                                //       setState((){
-                                // Scaffold.of(context).showSnackBar(SnackBar(content: Text("Quiz Updated")));
-                                // });
-                                    // Navigator.pushNamed(context, HomeViewRoute);
-                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text("Quiz Updated")));
+                                      //       setState((){
+                                      // Scaffold.of(context).showSnackBar(SnackBar(content: Text("Quiz Updated")));
+                                      // });
+                                      // Navigator.pushNamed(context, HomeViewRoute);
+                                      Scaffold.of(context).showSnackBar(
+                                          SnackBar(
+                                              content: Text("Quiz Updated")));
                                     },
                                   );
                                 },
@@ -229,4 +231,3 @@ class _AddQuizState extends State<AddQuiz> {
     );
   }
 }
-
