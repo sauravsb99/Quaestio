@@ -269,7 +269,7 @@ class _PreviousScoresState extends State<PreviousScores> {
         break;
       case 'Permutation and Combination I': return charts.Color.fromHex(code: '#000000');
         break;
-      default: return charts.Color.fromHex(code: '0xff1976d2');
+      default: return charts.Color.fromHex(code: '#2976d2');
         break;
     }
   }
