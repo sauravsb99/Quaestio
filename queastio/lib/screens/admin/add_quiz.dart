@@ -110,13 +110,13 @@ class _AddQuizState extends State<AddQuiz> {
 
         var map = {};
         List la = [];
-        la.add(u[1]);
-        la.add(u[2]);
-        la.add(u[3]);
-        la.add(u[4]);
+        la.add(u[1].toString());
+        la.add(u[2].toString());
+        la.add(u[3].toString());
+        la.add(u[4].toString());
         print(la);
 
-        map['answer'] = u[0];
+        map['answer'] = u[0].toString();
         map['options'] = la;
         // map['options']=u[2];
         // map['options']=u[3];

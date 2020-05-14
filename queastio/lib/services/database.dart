@@ -115,8 +115,8 @@ class DatabaseService {
         uname: doc.data['uname'] ?? '',
         qTopic: doc.data['qTopic'] ?? '',
         quiz: doc.data['quiz'] ?? '',
-        score: doc.data['score'] ?? 0,
-        total: doc.data['total'] ?? 0,
+        score: doc.data['score'] ?? '',
+        total: doc.data['total'] ?? '',
         time: doc.data['time'] ?? '',
       );
     }).toList();
