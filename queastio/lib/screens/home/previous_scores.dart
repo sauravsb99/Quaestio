@@ -26,7 +26,7 @@ class _PreviousScoresState extends State<PreviousScores> {
 //                                        user.timestamp.seconds,
 
       measureFn: (Score data, _) => (data.score) / data.total * 100,
-      colorFn: (Score data, _) => getcolor(data.quiz),
+      colorFn: (Score data, _) => getcolor(data.qTopic),
 //        colorFn:
 //        id:
       data: data,
@@ -41,7 +41,6 @@ class _PreviousScoresState extends State<PreviousScores> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<Score>>(
         stream: DatabaseService(uid: uid).getScores(),
-        // ignore: missing_return
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Score> data = snapshot.data;
@@ -65,13 +64,8 @@ class _PreviousScoresState extends State<PreviousScores> {
 //                ),
 //                backgroundColor: Colors.black,
 //              ),
-              body: data.length == 0
-                  ? Center(
-                      child: Text(
-                      'You have not attempted any tests yet',
-                      style: TextStyle(color: Colors.white),
-                    ))
-                  : MaterialApp(
+              body:
+                   MaterialApp(
                       home: DefaultTabController(
                         length: 2,
                         child: Scaffold(
@@ -201,16 +195,44 @@ class _PreviousScoresState extends State<PreviousScores> {
                     ),
             );
           }
-        });
+          return Scaffold(
+              backgroundColor: Colors.indigo,
+              appBar: AppBar(
+                title: Text(
+                    'My Scores'
+                ),
+                backgroundColor: Colors.black,
+              ),
+              body: Center(
+                child: Text(
+                  'You have not attempted any tests yet',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ));
+        }
+
+        );
   }
 
-  getcolor(quiz) {
-    switch (quiz) {
-      case 'quiz1':
+  getcolor(qTopic) {
+    switch (qTopic) {
+      case 'Aptitude':
         return charts.Color.fromHex(code: '#438786');
         break;
-      case 'Permutation and Combination I':
-        return charts.Color.fromHex(code: '#000000');
+      case 'Maths':
+        return charts.Color.fromHex(code: '#532234');
+        break;
+      case 'Biology':
+        return charts.Color.fromHex(code: '#937219');
+        break;
+      case 'Computer':
+        return charts.Color.fromHex(code: '#374182');
+        break;
+      case 'Physics':
+        return charts.Color.fromHex(code: '#437264');
+        break;
+      case 'Chemistry':
+        return charts.Color.fromHex(code: '#725373');
         break;
       default:
         return charts.Color.fromHex(code: '#261262');
