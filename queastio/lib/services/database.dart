@@ -73,6 +73,17 @@ class DatabaseService {
     );
   }
 
+  List<UserData> _userDataListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return UserData(
+        uid: doc['uid'],
+        name: doc['name'],
+        image: doc['image'],
+        role: doc['role'],
+      );
+    }).toList();
+  }
+
   List<Topic> _topicListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Topic(
@@ -114,6 +125,17 @@ class DatabaseService {
           .document(uid)
           .snapshots()
           .map(_userDataFromSnapshot);
+    } on Exception {
+      return null;
+    }
+  }
+
+  Stream<List<UserData>> get allUsers {
+    try {
+      return userCollection
+          .where('role', isEqualTo: 'user')
+          .snapshots()
+          .map(_userDataListFromSnapshot);
     } on Exception {
       return null;
     }
