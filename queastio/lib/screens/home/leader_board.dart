@@ -23,19 +23,26 @@ class _LeaderBoardState extends State<LeaderBoard> {
             List<Score> scores = snapshot.data;
             return Scaffold(
               appBar: AppBar(title: Text('LeaderBoard')),
-              body: ListView.builder(
-                  itemCount: scores.length,
-                  itemBuilder: (context, index) {
-                    double perc =
-                        (scores[index].score / scores[index].total) * 100;
-                    return LeaderTile(
-                        uid: scores[index].uid,
-                        score: perc.toString(),
-                        index: (index + 1).toString());
-                  }),
+              body: scores.length == 0
+                  ? Center(child: Text('The quiz hasn\'t been attempted yet'))
+                  : ListView.builder(
+                      itemCount: scores.length,
+                      itemBuilder: (context, index) {
+                        double perc =
+                            (scores[index].score / scores[index].total) * 100;
+                        return LeaderTile(
+                            uid: scores[index].uid,
+                            score: perc.toString(),
+                            index: (index + 1).toString());
+                      }),
             );
           } else {
-            return Loading();
+            return Scaffold(
+              appBar: AppBar(title: Text('LeaderBoard')),
+              body: Center(
+                child: Text('The quiz hasn\'t been attempted yet'),
+              ),
+            );
           }
         });
   }

@@ -24,13 +24,15 @@ class _QuestionCardState extends State<QuestionCard> {
   String time = '';
   User user;
   UserData userData;
-
+  CountdownTimer c;
+  var sub;
   _convertToTwoDigit(int n) {
     if (n < 10) return '0' + n.toString();
     return n.toString();
   }
 
   Future<void> calcScore() async {
+    sub.cancel();
     Scoring instance =
         Scoring(answers: quiz['answers'], selected: selectedOptions);
     int score = instance.getScore();
@@ -44,11 +46,11 @@ class _QuestionCardState extends State<QuestionCard> {
   }
 
   void startTimer() {
-    CountdownTimer c = CountdownTimer(
+    c = CountdownTimer(
       Duration(minutes: quiz['duration']),
       Duration(seconds: 1),
     );
-    var sub = c.listen(null);
+    sub = c.listen(null);
     sub.onData((duration) {
       setState(() {
         d = d - Duration(seconds: 1);
@@ -59,7 +61,6 @@ class _QuestionCardState extends State<QuestionCard> {
     });
     sub.onDone(() {
       calcScore();
-      sub.cancel();
     });
   }
 

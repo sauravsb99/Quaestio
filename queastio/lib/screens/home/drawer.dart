@@ -78,7 +78,8 @@ class _MyDrawerState extends State<MyDrawer> {
                           child: FlatButton(
                             color: Colors.grey,
                             onPressed: () {
-                              Navigator.pushNamed(context, PrevScoresRoute);
+                              Navigator.pushNamed(context, PrevScoresRoute,
+                                  arguments: user.uid);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

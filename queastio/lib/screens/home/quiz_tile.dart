@@ -74,32 +74,47 @@ class QuizTile extends StatelessWidget {
                         height: 50,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            quiz.qName.toUpperCase(),
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24.0,
-                              letterSpacing: 2.0,
-                              wordSpacing: 5.0,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(2.0),
-                            decoration: BoxDecoration(
-                              color: Colors.indigo,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            child: Text(
-                              quiz.qTopic,
-                              style: TextStyle(
-                                fontSize: 10.0,
-                                color: Colors.white,
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                quiz.qName.toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24.0,
+                                  letterSpacing: 2.0,
+                                  wordSpacing: 5.0,
+                                ),
                               ),
-                            ),
+                              Container(
+                                padding: EdgeInsets.all(2.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.indigo,
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Text(
+                                  quiz.qTopic,
+                                  style: TextStyle(
+                                    fontSize: 10.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
+                          Tooltip(
+                            message:
+                                'Note: This is a time bound test. Your answers will be submitted automatically when the time runs out',
+                            padding: EdgeInsets.all(15.0),
+                            preferBelow: false,
+                            child: Icon(
+                              (Icons.help),
+                              color: Colors.grey,
+                            ),
+                          )
                         ],
                       ),
                       Divider(
@@ -111,7 +126,7 @@ class QuizTile extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'lorem idasfs sdsad fwr dfs asda wewe fdgv sdas dg asd dsvfds sfedet gddhrd sdfdsgs',
+                          quiz.qDesc,
                           style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.black87,
@@ -120,13 +135,36 @@ class QuizTile extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20.0),
-                      Text(
-                        'No of questions: ' + quiz.qCount.toString(),
-                        style: TextStyle(
-                          fontSize: 17.0,
-                          color: Colors.black87,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'No of questions: ' + quiz.qCount.toString(),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.black87,
+                          ),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Duration: ' + quiz.duration.toString() + ' minutes',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Text(
+                      //     'Note: This is a time bound test. Your answers will be submitted automatically when the time runs out',
+                      //     style: TextStyle(
+                      //       fontSize: 18.0,
+                      //       color: Colors.black87,
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(height: 45.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,7 +209,7 @@ class QuizTile extends StatelessWidget {
                                           'qname': quiz.qName,
                                           'qTopic': quiz.qTopic,
                                           'firstTime': true,
-                                          'time': 10
+                                          'duration': quiz.duration
                                         });
                                   } else {
                                     _showNoScoreDialog(answers);
