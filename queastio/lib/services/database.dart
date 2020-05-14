@@ -42,11 +42,14 @@ class DatabaseService {
     return ('True');
   }
 
-  Future<void> updateQuiz(
-      String name, String qTopic, List<Map> questions) async {
+  Future<void> updateQuiz(String name, String qTopic, String qDesc, int qCount,
+      int duration, List<Map> questions) async {
     return await quizCollection.document().setData({
       'name': name,
       'qTopic': qTopic,
+      'qDesc': qDesc,
+      'qCount': qCount,
+      'duration': duration,
       'questions': questions,
     });
   }
