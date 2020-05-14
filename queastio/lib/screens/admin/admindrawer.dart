@@ -1,18 +1,18 @@
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:queastio/screens/home/home.dart';
+import 'package:queastio/screens/admin/adminhome.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
 
-class MyDrawer extends StatefulWidget {
+class AdminDrawer extends StatefulWidget {
   @override
-  _MyDrawerState createState() => _MyDrawerState();
+  _AdminDrawerState createState() => _AdminDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _AdminDrawerState extends State<AdminDrawer> {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     splashFactory: InkSplash.splashFactory,
                     onTap: () {
                       print(userData.name);
-                      Navigator.pushNamed(context, ProfileRoute
-//                      arguments: userData.name
-                          );
+//                      print(userData.role);
+                      print(userData.name);
+                      Navigator.pushNamed(context, ProfileRoute);
                     },
                     child: DrawerHeader(
                       child: Row(
@@ -78,7 +78,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           child: FlatButton(
                             color: Colors.grey,
                             onPressed: () {
-                              Navigator.pushNamed(context, PrevScoresRoute);
+                              Navigator.pushNamed(context, UserListRoute);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -88,7 +88,7 @@ class _MyDrawerState extends State<MyDrawer> {
 //                          color: Colors.blueGrey,
                                 child: Center(
                                   child: Text(
-                                    'Previous Scores',
+                                    'Users',
                                     style: TextStyle(
                                       fontSize: 22,
                                       color: Colors.black,
@@ -134,7 +134,7 @@ class _MyDrawerState extends State<MyDrawer> {
 //                          color: Colors.blueGrey,
                                 child: Center(
                                   child: Text(
-                                    userData.role,
+                                    'About Us',
                                     style: TextStyle(
                                       fontSize: 22,
                                       color: Colors.black,
@@ -172,7 +172,9 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, NewAdminHomeRoute);
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -181,7 +183,7 @@ class _MyDrawerState extends State<MyDrawer> {
 //                          color: Colors.blueGrey,
                                 child: Center(
                                   child: Text(
-                                    'Contact Us',
+                                    '+',
                                     style: TextStyle(
                                       fontSize: 22,
                                       color: Colors.black,
@@ -320,7 +322,7 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             );
           } else {
-            return Home();
+            return AdminHome();
           }
         });
   }

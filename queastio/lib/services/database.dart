@@ -22,18 +22,34 @@ class DatabaseService {
   final CollectionReference faqCollection =
       Firestore.instance.collection('faq');
 
-  Future<void> updateUserData(String name, String image) async {
+  Future<void> updateUserData(String name, String image, String role) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
       'image': image,
+      'role': role,
     });
   }
 
-  Future<void> updateQuiz(String name,String qTopic, List<Map> questions) async{
+  Future<void> updateUserDataByAdmin(
+      String name, String image, String role) async {
+    await userCollection.document(uid).setData({
+      'uid': uid,
+      'name': name,
+      'image': image,
+      'role': 'admin',
+    });
+    return ('True');
+  }
+
+  Future<void> updateQuiz(String name, String qTopic, String qDesc, int qCount,
+      int duration, List<Map> questions) async {
     return await quizCollection.document().setData({
       'name': name,
       'qTopic': qTopic,
+      'qDesc': qDesc,
+      'qCount': qCount,
+      'duration': duration,
       'questions': questions,
     });
   }
@@ -51,13 +67,24 @@ class DatabaseService {
     });
   }
 
-  
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
       name: snapshot.data['name'],
       image: snapshot.data['image'],
+      role: snapshot.data['role'],
     );
+  }
+
+  List<UserData> _userDataListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return UserData(
+        uid: doc['uid'],
+        name: doc['name'],
+        image: doc['image'],
+        role: doc['role'],
+      );
+    }).toList();
   }
 
   List<Topic> _topicListFromSnapshot(QuerySnapshot snapshot) {
@@ -74,6 +101,9 @@ class DatabaseService {
         qName: doc.data['name'] ?? '',
         qTopic: doc.data['qTopic'] ?? '',
         questions: List.from(doc.data['questions']) ?? List(),
+        qDesc: doc.data['qDesc'] ?? 'A Simple Quiz',
+        duration: doc.data['duration'] ?? 10,
+        qCount: doc.data['qCount'] ?? 0,
       );
     }).toList();
   }
@@ -98,6 +128,17 @@ class DatabaseService {
           .document(uid)
           .snapshots()
           .map(_userDataFromSnapshot);
+    } on Exception {
+      return null;
+    }
+  }
+
+  Stream<List<UserData>> get allUsers {
+    try {
+      return userCollection
+          .where('role', isEqualTo: 'user')
+          .snapshots()
+          .map(_userDataListFromSnapshot);
     } on Exception {
       return null;
     }
