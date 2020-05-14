@@ -8,5 +8,12 @@ class Score {
   final int score;
   final int total;
   final Timestamp time;
-  Score({this.quiz, this.qTopic, this.uid, this.uname,this.score, this.total,this.time});
+  Score(
+      {this.quiz,
+      this.qTopic,
+      this.uid,
+      this.uname,
+      this.score,
+      this.total,
+      this.time});
 }

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/quiz.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
 
-class QuizTile extends StatelessWidget {
+class QuizTileAdmin extends StatelessWidget {
   final Quiz quiz;
 
-  QuizTile({this.quiz});
+  QuizTileAdmin({this.quiz});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +39,7 @@ class QuizTile extends StatelessWidget {
                         'answers': answers,
                         'qname': quiz.qName,
                         'qTopic': quiz.qTopic,
-                        'firstTime': false,
-                        'duration': quiz.duration
+                        'firstTime': false
                       });
                     },
                   ),
