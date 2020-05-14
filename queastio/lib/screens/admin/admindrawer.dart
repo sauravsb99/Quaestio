@@ -34,24 +34,29 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       print(userData.name);
 //                      print(userData.role);
                       print(userData.name);
-                      Navigator.pushNamed(context, ProfileRoute
-                      );
+                      Navigator.pushNamed(context, ProfileRoute);
                     },
                     child: DrawerHeader(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[CircleAvatar(
-                          radius: MediaQuery.of(context).size.width*0.10,
-                          backgroundImage: NetworkImage(userData.image),
-                        ),
-                          SizedBox(width: MediaQuery.of(context).size.width*0.05,),
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: MediaQuery.of(context).size.width * 0.10,
+                            backgroundImage: NetworkImage(userData.image),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
                           Expanded(
-                            child:Text(userData.name,textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 28.0,color: Colors.white),
-                            ),),
-
+                            child: Text(
+                              userData.name,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 28.0, color: Colors.white),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -73,7 +78,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                           child: FlatButton(
                             color: Colors.grey,
                             onPressed: () {
-                              Navigator.pushNamed(context, PrevScoresRoute);
+                              Navigator.pushNamed(context, UserListRoute);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -83,7 +88,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
 //                          color: Colors.blueGrey,
                                 child: Center(
                                   child: Text(
-                                    'Previous Scores',
+                                    'Users',
                                     style: TextStyle(
                                       fontSize: 22,
                                       color: Colors.black,
@@ -120,40 +125,46 @@ class _AdminDrawerState extends State<AdminDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: (){},
+                            onPressed: () {},
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-                                width: MediaQuery.of(context).size.width*0.7,
+                                width: MediaQuery.of(context).size.width * 0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
-                                child:Center(
-                                  child: Text('About Us', style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.black,
-                                  ),
+                                child: Center(
+                                  child: Text(
+                                    'About Us',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-
-                            shape: RoundedRectangleBorder(side: BorderSide(
-                              color: Colors.black,
-                              width: 3,
-                              style: BorderStyle.solid,
-                            ), borderRadius: BorderRadius.circular(11)),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
+                                  width: 3,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(11)),
                           ),
                         ),
                       ),
                     ],
                   ),
-
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
                       Padding(
 //padding: EdgeInsetsGeometry(WrapAlignment.center),
-                        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,10,MediaQuery.of(context).size.width*0.05,10),
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.05,
+                            10,
+                            MediaQuery.of(context).size.width * 0.05,
+                            10),
 //
                         child: Material(
                           elevation: 15.0,
@@ -161,29 +172,33 @@ class _AdminDrawerState extends State<AdminDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: (){
+                            onPressed: () {
                               Navigator.pushNamed(context, NewAdminHomeRoute);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-                                width: MediaQuery.of(context).size.width*0.7,
+                                width: MediaQuery.of(context).size.width * 0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
 //                          color: Colors.blueGrey,
-                                child:Center(
-                                  child: Text('+', style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.black,
-                                  ),
+                                child: Center(
+                                  child: Text(
+                                    '+',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(side: BorderSide(
-                              color: Colors.black,
-                              width: 3,
-                              style: BorderStyle.solid,
-                            ), borderRadius: BorderRadius.circular(11)),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
+                                  width: 3,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(11)),
                           ),
                         ),
                       ),
@@ -194,7 +209,11 @@ class _AdminDrawerState extends State<AdminDrawer> {
                     children: <Widget>[
                       Padding(
 //padding: EdgeInsetsGeometry(WrapAlignment.center),
-                        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,10,MediaQuery.of(context).size.width*0.05,10),
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.05,
+                            10,
+                            MediaQuery.of(context).size.width * 0.05,
+                            10),
 //
                         child: Material(
                           elevation: 15.0,
@@ -202,7 +221,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: (){
+                            onPressed: () {
                               Navigator.pop(context);
                               Navigator.pushNamed(context, FaQRoute);
                             },
@@ -211,21 +230,24 @@ class _AdminDrawerState extends State<AdminDrawer> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                child:Center(
-                                  child: Text('FAQ', style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.black,
-                                  ),
+                                child: Center(
+                                  child: Text(
+                                    'FAQ',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-
-                            shape: RoundedRectangleBorder(side: BorderSide(
-                              color: Colors.black,
-                              width: 3,
-                              style: BorderStyle.solid,
-                            ), borderRadius: BorderRadius.circular(11),
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Colors.black,
+                                width: 3,
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(11),
                             ),
                           ),
                         ),
@@ -235,7 +257,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                   Container(
                       child: Container(
 //                          alignment: FractionalOffset.bottomCenter,
-                          padding: EdgeInsets.fromLTRB(0, 0,0,5),
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                           // This container holds all the children that will be aligned
                           // on the bottom and should not scroll with the above ListView
                           child: Container(
@@ -249,15 +271,16 @@ class _AdminDrawerState extends State<AdminDrawer> {
 //                              leading: Icon(Icons.help),
 //                              title: Text('Help and Feedback'))
 //                        ],
-                              )
-                          )
-                      )
-                  ),
+                                  )))),
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.05,MediaQuery.of(context).size.height*0.20,MediaQuery.of(context).size.width*0.05,0),
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.05,
+                            MediaQuery.of(context).size.height * 0.05,
+                            MediaQuery.of(context).size.width * 0.05,
+                            0),
                         child: Material(
                           elevation: 0.0,
                           borderRadius: BorderRadius.circular(15.0),
@@ -270,23 +293,26 @@ class _AdminDrawerState extends State<AdminDrawer> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-                                width: MediaQuery.of(context).size.width*0.7,
+                                width: MediaQuery.of(context).size.width * 0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                child:Center(
-                                  child: Text('Logout', style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.black,
-                                  ),
+                                child: Center(
+                                  child: Text(
+                                    'Logout',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-
-                            shape: RoundedRectangleBorder(side: BorderSide(
-                              color: Colors.grey,
-                              width: 5,
-                              style: BorderStyle.solid,
-                            ), borderRadius: BorderRadius.circular(11)),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.grey,
+                                  width: 5,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(11)),
                           ),
                         ),
                       ),
