@@ -149,24 +149,27 @@ class _QuestionCardState extends State<QuestionCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
+                      Flexible(
+                        flex: 1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                                padding: EdgeInsets.all(8.0),
+                                color: Colors.indigo,
+                                child: Text(
+                                  'Time Left: ' + time,
+                                  style: buttonText,
+                                )),
+                            FlatButton(
                               padding: EdgeInsets.all(8.0),
+                              onPressed:
+                                  selectedOptions == null ? null : calcScore,
+                              child: Text('Submit Test', style: buttonText),
                               color: Colors.indigo,
-                              child: Text(
-                                'Time Left: ' + time,
-                                style: buttonText,
-                              )),
-                          FlatButton(
-                            padding: EdgeInsets.all(8.0),
-                            onPressed:
-                                selectedOptions == null ? null : calcScore,
-                            child: Text('Submit Test', style: buttonText),
-                            color: Colors.indigo,
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                       question['qType'] == 'Text'
                           ? Text(
@@ -190,53 +193,23 @@ class _QuestionCardState extends State<QuestionCard> {
                         height: 30.0,
                         color: Colors.grey,
                       ),
-                      RadioListTile<String>(
-                        title: Text(question['options'][0]),
-                        value: question['options'][0],
-                        groupValue: selectedOptions[index],
-                        activeColor: Colors.indigo,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedOptions[index] = value;
-                            print(selectedOptions[index]);
-                          });
-                        },
-                      ),
-                      RadioListTile<String>(
-                        title: Text(question['options'][1]),
-                        value: question['options'][1],
-                        groupValue: selectedOptions[index],
-                        activeColor: Colors.indigo,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedOptions[index] = value;
-                            print(selectedOptions[index]);
-                          });
-                        },
-                      ),
-                      RadioListTile<String>(
-                        title: Text(question['options'][2]),
-                        value: question['options'][2],
-                        groupValue: selectedOptions[index],
-                        activeColor: Colors.indigo,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedOptions[index] = value;
-                            print(selectedOptions[index]);
-                          });
-                        },
-                      ),
-                      RadioListTile<String>(
-                        title: Text(question['options'][3]),
-                        value: question['options'][3],
-                        groupValue: selectedOptions[index],
-                        activeColor: Colors.indigo,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedOptions[index] = value;
-                            print(selectedOptions[index]);
-                          });
-                        },
+                      Flexible(
+                        child: ListView.builder(
+                            itemCount: question['options'].length,
+                            itemBuilder: (context, ind) {
+                              return RadioListTile<String>(
+                                title: Text(question['options'][ind]),
+                                value: question['options'][ind],
+                                groupValue: selectedOptions[index],
+                                activeColor: Colors.indigo,
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedOptions[index] = value;
+                                    print(selectedOptions[index]);
+                                  });
+                                },
+                              );
+                            }),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
