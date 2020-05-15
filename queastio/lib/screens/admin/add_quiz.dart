@@ -104,26 +104,22 @@ class _AddQuizState extends State<AddQuiz> {
 
         var map = {};
         List la = [];
-        la.add(u[1].toString());
-        la.add(u[2].toString());
-        la.add(u[3].toString());
-        la.add(u[4].toString());
-        print(la);
-
-        map['answer'] = u[0].toString();
+        map['qno'] = u[0];
+        map['qType'] = u[1];
+        map['qText'] = u[2];
+        map['answer'] = u[3].toString();
+        int i = 4;
+        while (i < u.length && u[i].toString() != '') {
+          la.add(u[i].toString());
+          i++;
+        }
         map['options'] = la;
-        // map['options']=u[2];
-        // map['options']=u[3];
-        // map['options']=u[4];
-        map['qText'] = u[5];
-        map['qType'] = u[6];
-        map['qno'] = u[7];
         orderLines.add(map);
       }
     }
 
-    await DatabaseService()
-        .updateQuiz(user.uid,name, qTopic, qDesc, qCount, duration, orderLines);
+    await DatabaseService(uid: user.uid)
+        .updateQuiz(name, qTopic, qDesc, qCount, duration, orderLines);
     // print(data);
     // print(orderLines);
   }

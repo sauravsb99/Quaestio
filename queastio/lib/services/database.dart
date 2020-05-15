@@ -43,10 +43,10 @@ class DatabaseService {
     return ('True');
   }
 
-  Future<void> updateQuiz(String uid,String name, String qTopic, String qDesc, int qCount,
+  Future<void> updateQuiz(String name, String qTopic, String qDesc, int qCount,
       int duration, List<Map> questions) async {
     return await quizCollection.document().setData({
-      'uid':uid,
+      'uid': uid,
       'name': name,
       'qTopic': qTopic,
       'qDesc': qDesc,

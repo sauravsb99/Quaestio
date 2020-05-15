@@ -39,7 +39,8 @@ class QuizTileAdmin extends StatelessWidget {
                         'answers': answers,
                         'qname': quiz.qName,
                         'qTopic': quiz.qTopic,
-                        'firstTime': false
+                        'firstTime': false,
+                        'duration': quiz.duration,
                       });
                     },
                   ),
