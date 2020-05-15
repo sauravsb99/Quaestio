@@ -3,6 +3,7 @@ import 'package:queastio/screens/FAQ/faqhome.dart';
 import 'package:queastio/screens/admin/Quiz_listAdmin.dart';
 import 'package:queastio/screens/admin/add_quiz.dart';
 import 'package:queastio/screens/admin/user_listAdmin.dart';
+import 'package:queastio/screens/home/answersheet.dart';
 import 'package:queastio/screens/home/leader_board.dart';
 import 'package:queastio/screens/home/previous_scores.dart';
 import 'package:queastio/screens/home/question_card.dart';
@@ -42,5 +43,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LeaderRoute:
       return MaterialPageRoute(
           builder: (context) => LeaderBoard(qname: settings.arguments));
+    case AnswerSheetRoute:
+      dynamic data = settings.arguments;
+      return MaterialPageRoute(
+          builder: (context) => AnswerSheet(
+                answers: data['answers'],
+                questions: data['questions'],
+              ));
   }
 }
