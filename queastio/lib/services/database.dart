@@ -4,6 +4,7 @@ import 'package:queastio/models/score.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/models/quiz.dart';
+import 'dart:developer' as developer;
 
 class DatabaseService {
   final String uid;
@@ -54,6 +55,27 @@ class DatabaseService {
     });
   }
 
+  Future<void> deleteQuiz(String qid) async {
+    print('ok');
+    quizCollection.document(qid).delete();
+  }
+
+//  Stream<List<Quiz>>
+  String selectedQuiz(String name, String topic) {
+//    var a=quizCollection.where('name',isEqualTo: name).where('qTopic',isEqualTo: topic);
+    var a = quizCollection.document().documentID;
+    print(a);
+    return a;
+//        .where('name',isEqualTo: name).where('qTopic',isEqualTo: topic);
+  }
+
+  Stream<List<Quiz>> getQuizzesadmin(String name) {
+    return quizCollection
+        .where('name', isEqualTo: name)
+        .snapshots()
+        .map(_quizListFromSnapshot);
+  }
+
   Future<void> insertScore(String uname, String qname, String qTopic, int score,
       int total, DateTime time) async {
     return await scoreCollection.document().setData({
@@ -95,7 +117,9 @@ class DatabaseService {
   }
 
   List<Quiz> _quizListFromSnapshot(QuerySnapshot snapshot) {
+    developer.log('Hi');
     return snapshot.documents.map((doc) {
+      developer.log(doc.documentID);
       return Quiz(
         qId: doc.documentID,
         qName: doc.data['name'] ?? '',
@@ -190,6 +214,15 @@ class DatabaseService {
         .where('quiz', isEqualTo: qname)
         .getDocuments();
   }
+
+//  void deletequiz(BuildContext context, String name) async {
+//    await notesReference.child(note.id).remove().then((_) {
+//      setState(() {
+//        items.removeAt(position);
+//      });
+//    });
+//  }
+
 //  Stream<List<Score>> getScoresbyTopic() {
 //    return scoreCollection
 //        .where(('uid', isEqualTo: uid)).where(('quiz', isEqualTo: quiz)).orderBy('time', descending: true)
@@ -197,3 +230,15 @@ class DatabaseService {
 //        .map(_scoreListFromSnapshot);
 //  }
 }
+
+//bool deletequiz(String name) {
+//  try {
+//    data.quizCollection
+//        .document()
+//        .delete();
+//    return true;
+//  } catch (e) {
+//    print(e.toString());
+//    return false;
+//  }
+//}

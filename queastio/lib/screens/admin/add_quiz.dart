@@ -1,22 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'dart:io';
-import 'dart:collection';
-import 'package:queastio/models/quiz.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'dart:convert' show utf8;
-import 'package:path/path.dart';
-import 'package:provider/provider.dart';
-import 'package:queastio/models/user.dart';
-import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/services/database.dart';
-import 'dart:math';
 import 'package:file_picker/file_picker.dart';
-import 'package:queastio/shared/constants.dart';
 
 class AddQuiz extends StatefulWidget {
   @override
