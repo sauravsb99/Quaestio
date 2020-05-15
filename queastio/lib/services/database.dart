@@ -43,9 +43,10 @@ class DatabaseService {
     return ('True');
   }
 
-  Future<void> updateQuiz(String name, String qTopic, String qDesc, int qCount,
+  Future<void> updateQuiz(String uid,String name, String qTopic, String qDesc, int qCount,
       int duration, List<Map> questions) async {
     return await quizCollection.document().setData({
+      'uid':uid,
       'name': name,
       'qTopic': qTopic,
       'qDesc': qDesc,
@@ -69,9 +70,9 @@ class DatabaseService {
 //        .where('name',isEqualTo: name).where('qTopic',isEqualTo: topic);
   }
 
-  Stream<List<Quiz>> getQuizzesadmin(String name) {
+  Stream<List<Quiz>> getQuizzesadmin(String uid) {
     return quizCollection
-        .where('name', isEqualTo: name)
+        .where('uid', isEqualTo: uid)
         .snapshots()
         .map(_quizListFromSnapshot);
   }

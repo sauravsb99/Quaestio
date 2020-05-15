@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:queastio/models/quiz.dart';
+import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/admin/myquizzes_tile.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:queastio/services/database.dart';
@@ -14,9 +16,11 @@ class MyQuizListAdmin extends StatefulWidget {
 class _MyQuizListAdminState extends State<MyQuizListAdmin> {
   _MyQuizListAdminState();
   @override
+
   Widget build(BuildContext context) {
+    User user= Provider.of<User>(context, listen: false);
     return StreamBuilder<List<Quiz>>(
-      stream: DatabaseService().getQuizzesadmin('P&C1'),
+      stream: DatabaseService().getQuizzesadmin(user.uid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
