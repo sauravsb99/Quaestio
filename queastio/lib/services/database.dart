@@ -4,6 +4,7 @@ import 'package:queastio/models/score.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/models/quiz.dart';
+import 'dart:developer' as developer;
 
 class DatabaseService {
   final String uid;
@@ -54,21 +55,21 @@ class DatabaseService {
     });
   }
 
-  Future<void> deleteQuiz(String name, String qTopic) async {
+  Future<void> deleteQuiz(String qid) async {
     print('ok');
-    quizCollection.document(selectedQuiz(name, qTopic)).delete();
+    quizCollection.document(qid).delete();
   }
 
 //  Stream<List<Quiz>>
-  String selectedQuiz(String name, String topic){
+  String selectedQuiz(String name, String topic) {
 //    var a=quizCollection.where('name',isEqualTo: name).where('qTopic',isEqualTo: topic);
-    var a =quizCollection.document().documentID;
+    var a = quizCollection.document().documentID;
     print(a);
     return a;
 //        .where('name',isEqualTo: name).where('qTopic',isEqualTo: topic);
-
   }
-  Stream<List<Quiz>>  getQuizzesadmin(String name) {
+
+  Stream<List<Quiz>> getQuizzesadmin(String name) {
     return quizCollection
         .where('name', isEqualTo: name)
         .snapshots()
@@ -116,7 +117,9 @@ class DatabaseService {
   }
 
   List<Quiz> _quizListFromSnapshot(QuerySnapshot snapshot) {
+    developer.log('Hi');
     return snapshot.documents.map((doc) {
+      developer.log(doc.documentID);
       return Quiz(
         qId: doc.documentID,
         qName: doc.data['name'] ?? '',
@@ -189,7 +192,6 @@ class DatabaseService {
         .map(_quizListFromSnapshot);
   }
 
-
   Stream<List<Score>> getScores() {
     return scoreCollection
         .where('uid', isEqualTo: uid)
@@ -213,8 +215,6 @@ class DatabaseService {
         .getDocuments();
   }
 
-
-
 //  void deletequiz(BuildContext context, String name) async {
 //    await notesReference.child(note.id).remove().then((_) {
 //      setState(() {
@@ -230,7 +230,6 @@ class DatabaseService {
 //        .map(_scoreListFromSnapshot);
 //  }
 }
-
 
 //bool deletequiz(String name) {
 //  try {

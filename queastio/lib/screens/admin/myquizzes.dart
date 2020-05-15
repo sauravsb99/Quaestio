@@ -3,6 +3,7 @@ import 'package:queastio/models/quiz.dart';
 import 'package:queastio/screens/admin/myquizzes_tile.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:queastio/services/database.dart';
+import 'dart:developer' as developer;
 
 class MyQuizListAdmin extends StatefulWidget {
   MyQuizListAdmin();
@@ -20,35 +21,27 @@ class _MyQuizListAdminState extends State<MyQuizListAdmin> {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
           return Scaffold(
-
             backgroundColor: Colors.indigo,
             appBar: AppBar(
               backgroundColor: Colors.indigo,
               title: Text('MyQuizzes'),
             ),
-
             body: data.length == 0
                 ? Center(
-              child: Text(
-                'No tests here yet.Check back later.',
-                style: TextStyle(color: Colors.white),
-              ),
-            )
-                :Container(
-
-              color: Colors.indigo,
-              child: ListView.builder(
-
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  return MyQuizTileAdmin(quiz: data[index]);
-                },
-              ),
-
-            ),
-
-
-
+                    child: Text(
+                      'No tests here yet.Check back later.',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                : Container(
+                    color: Colors.indigo,
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return MyQuizTileAdmin(quiz: data[index]);
+                      },
+                    ),
+                  ),
           );
         }
         return Loading();
