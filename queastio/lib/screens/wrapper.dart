@@ -32,12 +32,11 @@ class Wrapper extends StatelessWidget {
               }
             }
             else {
-              return AdminHome(
+              return Authenticate(
               );
             }
           }
     );
-      return Authenticate();
   }
 //    );
 }

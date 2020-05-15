@@ -26,7 +26,7 @@ const String FaQRoute = '/faq';
 const String NewAdminHomeRoute = '/newadmin';
 
 const String QuizListAdminRoute = '/quizzesadmin';
-
+const String MyQuizzesRoute = '/myquizzes';
 const String AddQuizRoute = '/addquiz';
 const String UserListRoute = '/userlist';
 const String LeaderRoute = '/leader';
