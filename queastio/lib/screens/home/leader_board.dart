@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:queastio/models/score.dart';
 import 'package:queastio/screens/home/leader_tile.dart';
 import 'package:queastio/services/database.dart';
-import 'package:queastio/shared/loading.dart';
 
 class LeaderBoard extends StatefulWidget {
   final String qname;

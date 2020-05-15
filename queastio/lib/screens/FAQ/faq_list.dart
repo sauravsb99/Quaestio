@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/faq.dart';
 import 'package:queastio/screens/FAQ/faq_tile.dart';
-import 'package:queastio/services/database.dart';
 
 class FaqList extends StatefulWidget {
   @override
