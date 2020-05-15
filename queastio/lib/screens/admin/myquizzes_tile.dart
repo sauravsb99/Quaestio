@@ -9,7 +9,7 @@ class MyQuizTileAdmin extends StatelessWidget {
   final Quiz quiz;
   MyQuizTileAdmin({this.quiz});
 
-  DatabaseService data= new DatabaseService();
+  DatabaseService data = new DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class MyQuizTileAdmin extends StatelessWidget {
                           ),
                           Tooltip(
                             message:
-                            'Note: This is a time bound test. Your answers will be submitted automatically when the time runs out',
+                                'Note: This is a time bound test. Your answers will be submitted automatically when the time runs out',
                             padding: EdgeInsets.all(15.0),
                             preferBelow: false,
                             child: Icon(
@@ -233,14 +233,12 @@ class MyQuizTileAdmin extends StatelessWidget {
                     ],
                   ),
                 ),
-
               ],
             );
-          }
-          );
+          });
     }
-    return  Padding(
 
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         splashColor: Colors.white70,
@@ -252,7 +250,6 @@ class MyQuizTileAdmin extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Expanded(
-
               child: Card(
                   color: Colors.black87,
                   child: Padding(
@@ -274,22 +271,22 @@ class MyQuizTileAdmin extends StatelessWidget {
                   )),
             ),
             FlatButton(
-              child: Icon( Icons.delete, color: Colors.white,),
-              onPressed: (){
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
+              onPressed: () {
                 User user = Provider.of<User>(context, listen: false);
-                DatabaseService(uid: user.uid)
-                    .deleteQuiz(quiz.qName,quiz.qTopic);
+                DatabaseService(uid: user.uid).deleteQuiz(quiz.qId);
 //                if(b){
 //                  print(b);
 //                }
-              print(user.uid);
+                print(user.uid);
               },
             ),
           ],
         ),
       ),
     );
-
   }
-
 }
