@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:queastio/screens/home/answersheet.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/services/scoring.dart';
 import 'package:queastio/models/user.dart';
@@ -78,31 +79,35 @@ class _QuestionCardState extends State<QuestionCard> {
               ),
               SizedBox(height: 20.0),
               Text(
-                score.toString(),
+                (100 * (score / total)).toInt().toString() + '%',
                 style: TextStyle(
                   fontSize: 50.0,
                 ),
               ),
-              Divider(
-                thickness: 5.0,
-                indent: 75.0,
-                endIndent: 75.0,
-                color: Colors.indigo[900],
-              ),
-              Text(
-                total.toString(),
-                style: TextStyle(
-                  fontSize: 50.0,
-                ),
-              )
             ]),
             actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.home),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AnswerSheetRoute, arguments: {
+                    'answers': quiz['answers'],
+                    'questions': quiz['questions']
+                  });
+                },
                 color: Colors.indigo,
+                child: Text(
+                  'Answers',
+                  style: buttonText,
+                ),
+              ),
+              RaisedButton(
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, HomeViewRoute);
                 },
+                color: Colors.indigo,
+                child: Text(
+                  'Home',
+                  style: buttonText,
+                ),
               ),
             ],
           ),
