@@ -12,6 +12,7 @@ import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/screens/wrapper.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/screens/newadmin/New_adminHome.dart';
+import 'package:queastio/screens/admin/myquizzes.dart';
 
 // ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -36,6 +37,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case QuizListAdminRoute:
       return MaterialPageRoute(
           builder: (context) => QuizListAdmin(topic: settings.arguments));
+    case MyQuizzesRoute:
+      return MaterialPageRoute(
+          builder: (context) => MyQuizListAdmin());
     case AddQuizRoute:
       return MaterialPageRoute(builder: (context) => AddQuiz());
     case UserListRoute:
