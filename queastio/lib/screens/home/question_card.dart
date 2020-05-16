@@ -90,7 +90,8 @@ class _QuestionCardState extends State<QuestionCard> {
                 onPressed: () {
                   Navigator.pushNamed(context, AnswerSheetRoute, arguments: {
                     'answers': quiz['answers'],
-                    'questions': quiz['questions']
+                    'questions': quiz['questions'],
+                    'selected': selectedOptions
                   });
                 },
                 color: Colors.indigo,
