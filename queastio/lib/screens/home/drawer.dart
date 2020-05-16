@@ -277,7 +277,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             MediaQuery.of(context).size.width * 0.05,
-                            MediaQuery.of(context).size.height * 0.05,
+                            MediaQuery.of(context).size.height * 0.20,
                             MediaQuery.of(context).size.width * 0.05,
                             0),
                         child: Material(
@@ -290,7 +290,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               Navigator.pop(context);
                             },
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),

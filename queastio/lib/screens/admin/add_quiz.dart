@@ -1,22 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'dart:io';
-import 'dart:collection';
-import 'package:queastio/models/quiz.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'dart:convert' show utf8;
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/user.dart';
-import 'package:queastio/screens/home/home.dart';
+import 'dart:convert' show utf8;
 import 'package:queastio/services/database.dart';
-import 'dart:math';
 import 'package:file_picker/file_picker.dart';
-import 'package:queastio/shared/constants.dart';
+import 'package:provider/provider.dart';
 
 class AddQuiz extends StatefulWidget {
   @override
@@ -83,6 +76,7 @@ class _AddQuizState extends State<AddQuiz> {
     //  var jSondata = json.decode(x.toString());
 
     // List l;
+    User user = Provider.of<User>(context, listen: false);
     String name;
     String qTopic;
     String qDesc;
@@ -110,24 +104,21 @@ class _AddQuizState extends State<AddQuiz> {
 
         var map = {};
         List la = [];
-        la.add(u[1].toString());
-        la.add(u[2].toString());
-        la.add(u[3].toString());
-        la.add(u[4].toString());
-        print(la);
-
-        map['answer'] = u[0].toString();
+        map['qno'] = u[0];
+        map['qType'] = u[1];
+        map['qText'] = u[2];
+        map['answer'] = u[3].toString();
+        int i = 4;
+        while (i < u.length && u[i].toString() != '') {
+          la.add(u[i].toString());
+          i++;
+        }
         map['options'] = la;
-        // map['options']=u[2];
-        // map['options']=u[3];
-        // map['options']=u[4];
-        map['qText'] = u[5];
-        map['qType'] = u[6];
-        map['qno'] = u[7];
         orderLines.add(map);
       }
     }
-    await DatabaseService()
+
+    await DatabaseService(uid: user.uid)
         .updateQuiz(name, qTopic, qDesc, qCount, duration, orderLines);
     // print(data);
     // print(orderLines);

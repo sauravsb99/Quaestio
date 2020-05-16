@@ -54,7 +54,7 @@ class AuthService{
       var rng = new Random();
       await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}','https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg','user');
       
-      await user.sendEmailVerification();
+      // await user.sendEmailVerification();
         return _userFromFirebaseUser(user);
       // }
       
