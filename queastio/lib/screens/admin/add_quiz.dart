@@ -106,7 +106,7 @@ class _AddQuizState extends State<AddQuiz> {
         List la = [];
         map['qno'] = u[0];
         map['qType'] = u[1];
-        map['qText'] = u[2];
+        u[1] == 'Text' ? map['qText'] = u[2] : map['qImage'] = u[2];
         map['answer'] = u[3].toString();
         int i = 4;
         while (i < u.length && u[i].toString() != '') {
