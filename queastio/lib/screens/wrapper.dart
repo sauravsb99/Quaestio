@@ -27,25 +27,24 @@ class Wrapper extends StatelessWidget {
                 );
               }
               else {
-                print("ingatt nokkedo");
-                // if(userData.)
-                if(user.isactivated == false)
-                  return Waiting();
-                else{
+                // print("ingatt nokkedo");
+                // // if(userData.)
+                // if(user.isactivated == false)
+                //   return Waiting();
+                // else{
                   return Home(
 
                 );
-                }
+                // }
                 
               }
             }
             else {
-              return AdminHome(
+              return Authenticate(
               );
             }
           }
     );
-      // return Authenticate();
   }
 //    );
 }

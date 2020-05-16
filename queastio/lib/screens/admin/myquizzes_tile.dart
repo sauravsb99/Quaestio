@@ -5,10 +5,11 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
 
-class QuizTileAdmin extends StatelessWidget {
+class MyQuizTileAdmin extends StatelessWidget {
   final Quiz quiz;
+  MyQuizTileAdmin({this.quiz});
 
-  QuizTileAdmin({this.quiz});
+  DatabaseService data = new DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,7 @@ class QuizTileAdmin extends StatelessWidget {
                         'answers': answers,
                         'qname': quiz.qName,
                         'qTopic': quiz.qTopic,
-                        'firstTime': false,
-                        'duration': quiz.duration,
+                        'firstTime': false
                       });
                     },
                   ),
@@ -247,25 +247,45 @@ class QuizTileAdmin extends StatelessWidget {
           print(quiz.questions);
           _showQuizDetails();
         },
-        child: Card(
-            color: Colors.black87,
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Wrap(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Text(
-                      quiz.qName.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                      ),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Card(
+                  color: Colors.black87,
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Wrap(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(25.0),
+                          child: Text(
+                            quiz.qName.toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  )),
+            ),
+            FlatButton(
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
               ),
-            )),
+              onPressed: () {
+                User user = Provider.of<User>(context, listen: false);
+                DatabaseService(uid: user.uid).deleteQuiz(quiz.qId);
+//                if(b){
+//                  print(b);
+//                }
+                print(user.uid);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
