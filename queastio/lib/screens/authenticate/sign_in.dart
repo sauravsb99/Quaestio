@@ -140,6 +140,7 @@ class _SignInState extends State<SignIn> {
                               if(_formKey.currentState.validate()){
                                 setState(() => loading = true);
                                 dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                                
                                 if(result == null) {
                                   setState(() {
                                     loading = false;
@@ -147,6 +148,16 @@ class _SignInState extends State<SignIn> {
                                   });
                                 }
                               }
+                            }
+                        ),
+                        SizedBox(height: 40.0),
+                        RaisedButton(
+                            color: Colors.pink[400],
+                            child:Text("Reset Password",style: TextStyle( color: Colors.white),),
+                            onPressed: () async {
+                                _auth.sendPasswordReset(email);
+                                print("sending mail");
+                              
                             }
                         ),
                         SizedBox(height: 12.0),

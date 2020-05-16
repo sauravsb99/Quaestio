@@ -24,9 +24,9 @@ const String PrevScoresRoute = '/prevscores';
 const String ProfileRoute = '/profile';
 const String FaQRoute = '/faq';
 const String NewAdminHomeRoute = '/newadmin';
-
+const String Signin = '/signin';
 const String QuizListAdminRoute = '/quizzesadmin';
-
+const String HomeRoute = '/home';
 const String AddQuizRoute = '/addquiz';
 const String UserListRoute = '/userlist';
 const String LeaderRoute = '/leader';
