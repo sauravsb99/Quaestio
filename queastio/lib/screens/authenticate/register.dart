@@ -1,6 +1,8 @@
 import 'dart:ui';
-
+import 'package:queastio/router/router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:queastio/screens/authenticate/sign_in.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
@@ -21,7 +23,7 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
-
+  // firebaseAuth = FirebaseAuth.getInstance();
   // text field state
   String email = '';
   String password = '';
@@ -134,12 +136,22 @@ class _RegisterState extends State<Register> {
                           if(_formKey.currentState.validate()){
                             setState(() => loading = true);
                             dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                            // dynamic user = result.user;
+                            // user.send
                             if(result == null) {
                               setState(() {
                                 loading = false;
                                 error = 'Please supply a valid email';
                               });
                             }
+                            // else{
+                            //     // widget.toggleView();
+                            //     return SignIn();
+                            // }
+                            Navigator.pushNamed(context, Signin);
+                            // if(user.isEmailVerified){
+                            // }
+                            // FirebaseUser user = _auth.user;
                           }
                         }
                       ),
