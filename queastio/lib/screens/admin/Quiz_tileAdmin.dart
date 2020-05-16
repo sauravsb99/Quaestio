@@ -12,42 +12,6 @@ class QuizTileAdmin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _showNoScoreDialog(List<String> answers) async {
-      return showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return AlertDialog(
-                title: Column(
-                  children: <Widget>[
-                    Text(
-                        'You have already attempted this test once. You will not be scored for any attempts that follow.')
-                  ],
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Cancel'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text('Continue'),
-                    onPressed: () {
-                      Navigator.pushNamed(context, QuestionRoute, arguments: {
-                        'questions': quiz.questions,
-                        'answers': answers,
-                        'qname': quiz.qName,
-                        'qTopic': quiz.qTopic,
-                        'firstTime': false,
-                        'duration': quiz.duration,
-                      });
-                    },
-                  ),
-                ]);
-          });
-    }
-
     void _showQuizDetails() {
       List<String> answers = quiz.questions.map((q) {
         return q['answer'].toString();
@@ -200,19 +164,15 @@ class QuizTileAdmin extends StatelessWidget {
                                 DatabaseService(uid: user.uid)
                                     .testAlreadyTaken(quiz.qName)
                                     .then((value) {
-                                  if (value.documents.isEmpty) {
-                                    Navigator.pushNamed(context, QuestionRoute,
-                                        arguments: {
-                                          'questions': quiz.questions,
-                                          'answers': answers,
-                                          'qname': quiz.qName,
-                                          'qTopic': quiz.qTopic,
-                                          'firstTime': true,
-                                          'duration': quiz.duration
-                                        });
-                                  } else {
-                                    _showNoScoreDialog(answers);
-                                  }
+                                  Navigator.pushNamed(context, QuestionRoute,
+                                      arguments: {
+                                        'questions': quiz.questions,
+                                        'answers': answers,
+                                        'qname': quiz.qName,
+                                        'qTopic': quiz.qTopic,
+                                        'firstTime': true,
+                                        'duration': quiz.duration
+                                      });
                                 });
                               },
                               child: Text(
