@@ -1,5 +1,8 @@
+// import 'dart:js';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:queastio/models/user.dart';
+import 'package:queastio/shared/constants.dart';
 import 'database.dart';
 import 'dart:math';
 
@@ -32,6 +35,7 @@ class AuthService{
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       return user;
+      
     } catch (error) {
       print(error.toString());
       return null;
@@ -40,16 +44,28 @@ class AuthService{
 
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
+      
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+
+      
+
       var rng = new Random();
       await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}','https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg','user');
-      return _userFromFirebaseUser(user);
+      
+      // await user.sendEmailVerification();
+        return _userFromFirebaseUser(user);
+      // }
+      
     } catch (error) {
       print(error.toString());
       return null;
     } 
   }
+
+  // Future verifiedaayo() async {
+
+  // }
 
   Future registeradminWithEmailAndPassword(String email, String password) async {
     try {
@@ -62,6 +78,10 @@ class AuthService{
       print(error.toString());
       return null;
     }
+  }
+
+  Future sendPasswordReset(String email) async{
+    return _auth.sendPasswordResetEmail(email: email);
   }
 
   Future signOut() async {
