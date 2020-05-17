@@ -201,6 +201,20 @@ class DatabaseService {
         .map(_scoreListFromSnapshot);
   }
 
+  Stream<List<Score>> getTopicScores(String topic){
+    if(topic=='All' || topic=='null') {
+      return getScores();
+    }
+    else {
+      return scoreCollection
+          .where('uid', isEqualTo: uid)
+          .where('qTopic', isEqualTo: topic)
+          .orderBy('time', descending: true)
+          .snapshots()
+          .map(_scoreListFromSnapshot);
+    }
+  }
+
   Stream<List<Score>> getQuizScores(String qname) {
     return scoreCollection
         .where('quiz', isEqualTo: qname)
