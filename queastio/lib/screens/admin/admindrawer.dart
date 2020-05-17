@@ -115,7 +115,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             MediaQuery.of(context).size.width * 0.05,
-                            30,
+                            10,
                             MediaQuery.of(context).size.width * 0.05,
                             10),
 //
@@ -125,9 +125,12 @@ class _AdminDrawerState extends State<AdminDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: () {Navigator.pushNamed(context, MyQuizzesRoute,arguments: {
-                              'topic': 'Aptitude',
-                            });},
+                            onPressed: () {
+                              Navigator.pushNamed(context, MyQuizzesRoute,
+                                  arguments: {
+                                    'topic': 'Aptitude',
+                                  });
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -280,7 +283,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             MediaQuery.of(context).size.width * 0.05,
-                            MediaQuery.of(context).size.height * 0.20,
+                            MediaQuery.of(context).size.height * 0.10,
                             MediaQuery.of(context).size.width * 0.05,
                             0),
                         child: Material(

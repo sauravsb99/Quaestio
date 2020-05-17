@@ -86,7 +86,7 @@ class _QuestionCardState extends State<QuestionCard> {
               ),
             ]),
             actions: <Widget>[
-              RaisedButton(
+              FlatButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AnswerSheetRoute, arguments: {
                     'answers': quiz['answers'],
@@ -94,20 +94,19 @@ class _QuestionCardState extends State<QuestionCard> {
                     'selected': selectedOptions
                   });
                 },
-                color: Colors.indigo,
+                textColor: Colors.indigo,
                 child: Text(
                   'Answers',
-                  style: buttonText,
                 ),
               ),
-              RaisedButton(
+              FlatButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, HomeViewRoute);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, HomeViewRoute, (route) => false);
                 },
-                color: Colors.indigo,
+                textColor: Colors.indigo,
                 child: Text(
                   'Home',
-                  style: buttonText,
                 ),
               ),
             ],

@@ -44,8 +44,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         children: <Widget>[
                           CircleAvatar(
                             radius: MediaQuery.of(context).size.width * 0.10,
-                            backgroundImage: 
-                            NetworkImage(userData.image),
+                            backgroundImage: NetworkImage(userData.image),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
@@ -61,6 +60,11 @@ class _MyDrawerState extends State<MyDrawer> {
                         ],
                       ),
                     ),
+                  ),
+                  Divider(
+                    indent: 20.0,
+                    endIndent: 20.0,
+                    color: Colors.grey,
                   ),
                   Wrap(
                     alignment: WrapAlignment.center,
@@ -117,7 +121,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             MediaQuery.of(context).size.width * 0.05,
-                            30,
+                            10,
                             MediaQuery.of(context).size.width * 0.05,
                             10),
 //
@@ -278,7 +282,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             MediaQuery.of(context).size.width * 0.05,
-                            MediaQuery.of(context).size.height * 0.20,
+                            MediaQuery.of(context).size.height * 0.10,
                             MediaQuery.of(context).size.width * 0.05,
                             0),
                         child: Material(

@@ -27,12 +27,14 @@ class QuizTile extends StatelessWidget {
                 ),
                 actions: <Widget>[
                   FlatButton(
+                    textColor: Colors.indigo,
                     child: Text('Cancel'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   FlatButton(
+                    textColor: Colors.indigo,
                     child: Text('Continue'),
                     onPressed: () {
                       Navigator.pushNamed(context, QuestionRoute, arguments: {
@@ -239,6 +241,7 @@ class QuizTile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24.0,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                         letterSpacing: 2.0,
                       ),
                       textAlign: TextAlign.center,
