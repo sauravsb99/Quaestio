@@ -16,7 +16,7 @@ class PreviousScores extends StatefulWidget {
 class _PreviousScoresState extends State<PreviousScores> {
   List<charts.Series<Score, DateTime>> _seriesLineData;
   final String uid;
-  String topic;
+  String topic = 'All';
   _PreviousScoresState({this.uid, this.topic});
 //  List<Score> mydata;
 
@@ -196,40 +196,115 @@ class _PreviousScoresState extends State<PreviousScores> {
 //                                                );
 //                                              }),
 //                                        ),
-                                  Row(children: <Widget>[
-                                    Radio(
-                                        value: 'All',
-                                        groupValue: topic,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            topic = value;
-                                          });
-                                        }),
-                                    Radio(
-                                        value: 'Maths',
-                                        groupValue: topic,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            topic = value;
-                                          });
-                                        }),
-                                    Radio(
-                                        value: 'Aptitude',
-                                        groupValue: topic,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            topic = value;
-                                          });
-                                        }),
-                                    Radio(
-                                        value: 'Chemistry',
-                                        groupValue: topic,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            topic = value;
-                                          });
-                                        }),
-                                  ]),
+                                  Wrap(
+                                      alignment: WrapAlignment.spaceBetween,
+                                      spacing: 20.0,
+                                      children: <Widget>[
+                                        Column(
+                                          children: <Widget>[
+                                            Text('All'),
+                                            Radio(
+                                                value: 'All',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text('Maths'),
+                                            Radio(
+                                                value: 'Maths',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text('Aptitude'),
+                                            Radio(
+                                                value: 'Aptitude',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text('Chemistry'),
+                                            Radio(
+                                                value: 'Chemistry',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text('Computer'),
+                                            Radio(
+                                                value: 'Computer',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text('Physics'),
+                                            Radio(
+                                                value: 'Physics',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text('English'),
+                                            Radio(
+                                                value: 'English',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text('Biology'),
+                                            Radio(
+                                                value: 'Biology',
+                                                groupValue: topic,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    topic = value;
+                                                  });
+                                                }),
+                                          ],
+                                        ),
+                                      ]),
                                   StreamBuilder<List<Score>>(
                                       stream: DatabaseService(uid: uid)
                                           .getTopicScores(topic),
@@ -256,7 +331,7 @@ class _PreviousScoresState extends State<PreviousScores> {
                                                   new charts.ChartTitle('Score',
                                                       behaviorPosition: charts
                                                           .BehaviorPosition
-                                                          .inside,
+                                                          .start,
                                                       titleOutsideJustification:
                                                           charts
                                                               .OutsideJustification
