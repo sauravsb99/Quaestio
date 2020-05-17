@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/authenticate/authenticate.dart';
-import 'package:queastio/screens/authenticate/waiting.dart';
 import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/screens/admin/adminhome.dart';
 import 'package:queastio/services/database.dart';
@@ -27,16 +26,9 @@ class Wrapper extends StatelessWidget {
                 );
               }
               else {
-                // print("ingatt nokkedo");
-                // // if(userData.)
-                // if(user.isactivated == false)
-                //   return Waiting();
-                // else{
                   return Home(
 
                 );
-                // }
-                
               }
             }
             else {

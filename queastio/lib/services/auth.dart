@@ -2,7 +2,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:queastio/models/user.dart';
-import 'package:queastio/screens/authenticate/waiting.dart';
 import 'package:queastio/shared/constants.dart';
 import 'database.dart';
 import 'dart:math';
