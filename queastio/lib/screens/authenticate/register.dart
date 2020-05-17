@@ -42,19 +42,19 @@ class _RegisterState extends State<Register> {
                   child: Text(
                     'Signup',
                     style:
-                        TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 78.0, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(260.0, 125.0, 0.0, 0.0),
-                  child: Text(
-                    '.',
-                    style: TextStyle(
-                        fontSize: 80.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green),
-                  ),
-                )
+                // Container(
+                //   padding: EdgeInsets.fromLTRB(260.0, 125.0, 0.0, 0.0),
+                //   child: Text(
+                //     '.',
+                //     style: TextStyle(
+                //         fontSize: 80.0,
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.green),
+                //   ),
+                // )
               ],
             ),
           ),
@@ -138,6 +138,28 @@ class _RegisterState extends State<Register> {
                           }
                         }
                       ),
+                      SizedBox(height: 25.0),
+                      Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Already A Member ?',
+                  style: TextStyle(fontFamily: 'Montserrat'),
+                ),
+                SizedBox(width: 15.0),
+                InkWell(
+                  onTap: ()=> widget.toggleView() ,
+                  child: Text(
+                    'SignIn',
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline),
+                  ),
+                )
+              ],
+            ),
                       SizedBox(height: 12.0),
                       Text(
                         error,

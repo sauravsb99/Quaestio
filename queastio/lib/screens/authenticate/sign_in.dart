@@ -37,24 +37,24 @@ class _SignInState extends State<SignIn> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                    child: Text('Hello',
+                    child: Text('Welcome',
                         style: TextStyle(
-                            fontSize: 80.0, fontWeight: FontWeight.bold)),
+                            fontSize: 78.0, fontWeight: FontWeight.bold)),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
-                    child: Text('There',
+                    child: Text('Back',
                         style: TextStyle(
-                            fontSize: 80.0, fontWeight: FontWeight.bold)),
+                            fontSize: 78.0, fontWeight: FontWeight.bold)),
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(220.0, 175.0, 0.0, 0.0),
-                    child: Text('.',
-                        style: TextStyle(
-                            fontSize: 80.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green)),
-                  )
+                  // Container(
+                  //   padding: EdgeInsets.fromLTRB(220.0, 175.0, 0.0, 0.0),
+                  //   child: Text('.',
+                  //       style: TextStyle(
+                  //           fontSize: 80.0,
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Colors.indigo)),
+                  // )
                 ],
               ),
             ),
