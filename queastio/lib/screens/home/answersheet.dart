@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class AnswerSheet extends StatelessWidget {
   final List questions;
   final List answers;
-  AnswerSheet({this.questions, this.answers});
+  final List selected;
+  AnswerSheet({this.questions, this.answers, this.selected});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +53,22 @@ class AnswerSheet extends StatelessWidget {
                               title: Text(questions[index]['options'][ind]),
                               groupValue: answers[index],
                               value: questions[index]['options'][ind],
-                              activeColor: Colors.indigo,
+                              activeColor: Colors.green,
                             );
                           }),
+                    ),
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: <Widget>[
+                        Text('Your Answer: ' +
+                            (selected[index] != null ? selected[index] : '')),
+                        answers[index] == selected[index]
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.green,
+                              )
+                            : Icon(Icons.close, color: Colors.red)
+                      ],
                     ),
                     Divider(),
                   ],
