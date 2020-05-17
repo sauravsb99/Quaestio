@@ -1,6 +1,8 @@
 import 'dart:ui';
-
+import 'package:queastio/router/router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:queastio/screens/authenticate/sign_in.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
@@ -21,7 +23,7 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
-
+  // firebaseAuth = FirebaseAuth.getInstance();
   // text field state
   String email = '';
   String password = '';
@@ -29,64 +31,31 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.indigo,
-      appBar: AppBar(
-        backgroundColor: Colors.indigo,
-        elevation: 0.0,
-        title: Text('Register'),
-      ),
-      body: Wrap(
-        children: <Widget>[
+        resizeToAvoidBottomPadding: false,
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+            Widget>[
           Container(
-            child: Padding(
-
-              padding: EdgeInsets.fromLTRB(30,MediaQuery.of(context).size.height*0.2,30,0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child:SizedBox(width: 20,
-//                      child:Text('hiyo',textScaleFactor: 5,style: TextStyle(fontFamily: 'Jost') ,textAlign: TextAlign.left,),
-                    ),
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                  child: Text(
+                    'Signup',
+                    style:
+                        TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
                   ),
-                  Material(
-                    color: Colors.indigo,
-                    child: Align(
-
-                    alignment: Alignment.bottomRight,
-                    //<Widget>[
-                      child: Material(
-                        color: Colors.indigo,
-                        child:FlatButton.icon(color: Colors.black,
-                          icon: Icon(Icons.person,color: Colors.white,),
-                          label: Text('Register',style: TextStyle( color: Colors.white),),
-                          onPressed: () {},
-                        ),
-
-                      ),
-        ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(260.0, 125.0, 0.0, 0.0),
+                  child: Text(
+                    '.',
+                    style: TextStyle(
+                        fontSize: 80.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
                   ),
-                  SizedBox(width: 5,),
-                  Material(
-//                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft:Radius.circular(10.0))),
-                    color: Colors.indigo,
-                    child: Align(
-
-                      alignment: Alignment.bottomRight,
-                      //<Widget>[
-                      child: Material(
-                        color: Colors.indigo,
-                        child:FlatButton.icon(color: Colors.black26,
-                          icon: Icon(Icons.person,color: Colors.white,),
-                          label: Text('Sign In',style: TextStyle( color: Colors.white),),
-                          onPressed: () => widget.toggleView(),
-                        ),
-
-                      ),
-                    ),
-
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
           Align(
@@ -102,13 +71,22 @@ class _RegisterState extends State<Register> {
                 child: Form(
                 key: _formKey,
                 child: Container(
-                  color: Colors.black,
-                  padding: EdgeInsets.fromLTRB(38,28,38,8),
+                  // color: Colors.black,
+                   padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: 20.0),
                       TextFormField(
-                        decoration: textInputDecoration.copyWith(hintText: 'email'),
+                        decoration: InputDecoration(
+                        labelText: 'EMAIL',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        // hintText: 'EMAIL',
+                        // hintStyle: ,
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green))),
                         validator: (val) => val.isEmpty ? 'Enter an email' : null,
                         onChanged: (val) {
                           setState(() => email = val);
@@ -116,7 +94,14 @@ class _RegisterState extends State<Register> {
                       ),
                       SizedBox(height: 20.0),
                       TextFormField(
-                        decoration: textInputDecoration.copyWith(hintText: 'password'),
+                        decoration: InputDecoration(
+                        labelText: 'PASSWORD ',
+                        labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green))),
                         obscureText: true,
                         validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                         onChanged: (val) {
@@ -125,21 +110,31 @@ class _RegisterState extends State<Register> {
                       ),
                       SizedBox(height: 40.0),
                       RaisedButton(
-                        color: Colors.pink[400],
+                        color: Colors.green,
                         child: Text(
                           'Register',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
                         ),
                         onPressed: () async {
                           if(_formKey.currentState.validate()){
                             setState(() => loading = true);
                             dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                            // dynamic user = result.user;
+                            // user.send
                             if(result == null) {
                               setState(() {
                                 loading = false;
                                 error = 'Please supply a valid email';
                               });
                             }
+                            // else{
+                            //     // widget.toggleView();
+                            //     return SignIn();
+                            // }
+                            // if(user.isEmailVerified){
+                            // }
+                            // FirebaseUser user = _auth.user;
                           }
                         }
                       ),

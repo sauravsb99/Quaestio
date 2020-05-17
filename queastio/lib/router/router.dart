@@ -3,6 +3,8 @@ import 'package:queastio/screens/FAQ/faqhome.dart';
 import 'package:queastio/screens/admin/Quiz_listAdmin.dart';
 import 'package:queastio/screens/admin/add_quiz.dart';
 import 'package:queastio/screens/admin/user_listAdmin.dart';
+import 'package:queastio/screens/authenticate/sign_in.dart';
+import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/screens/home/answersheet.dart';
 import 'package:queastio/screens/home/leader_board.dart';
 import 'package:queastio/screens/home/previous_scores.dart';
@@ -28,6 +30,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case PrevScoresRoute:
       return MaterialPageRoute(
           builder: (context) => PreviousScores(uid: settings.arguments));
+    case HomeRoute:
+      return MaterialPageRoute(builder: (context) => Home());
     case ProfileRoute:
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case FaQRoute:
@@ -43,6 +47,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AddQuiz());
     case UserListRoute:
       return MaterialPageRoute(builder: (context) => UserList());
+    case Signin:
+    return MaterialPageRoute(builder: (context)=> SignIn());
     case LeaderRoute:
       return MaterialPageRoute(
           builder: (context) => LeaderBoard(qname: settings.arguments));
