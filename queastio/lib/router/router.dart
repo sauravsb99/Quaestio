@@ -42,8 +42,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => QuizListAdmin(topic: settings.arguments));
     case MyQuizzesRoute:
-      return MaterialPageRoute(
-          builder: (context) => MyQuizListAdmin());
+      return MaterialPageRoute(builder: (context) => MyQuizListAdmin());
     case AddQuizRoute:
       return MaterialPageRoute(builder: (context) => AddQuiz());
     case UserListRoute:
@@ -59,6 +58,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (context) => AnswerSheet(
                 answers: data['answers'],
                 questions: data['questions'],
+                selected: data['selected'],
               ));
   }
 }

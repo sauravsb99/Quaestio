@@ -38,7 +38,7 @@ class _QuestionCardState extends State<QuestionCard> {
         Scoring(answers: quiz['answers'], selected: selectedOptions);
     int score = instance.getScore();
     print('Score:' + score.toString());
-    if (quiz['firstTime']) {
+    if (userData.role == "user" && quiz['firstTime']) {
       DateTime time = DateTime.now();
       await DatabaseService(uid: user.uid).insertScore(userData.name,
           quiz['qname'], quiz['qTopic'], score, quiz['answers'].length, time);
@@ -90,7 +90,8 @@ class _QuestionCardState extends State<QuestionCard> {
                 onPressed: () {
                   Navigator.pushNamed(context, AnswerSheetRoute, arguments: {
                     'answers': quiz['answers'],
-                    'questions': quiz['questions']
+                    'questions': quiz['questions'],
+                    'selected': selectedOptions
                   });
                 },
                 color: Colors.indigo,
