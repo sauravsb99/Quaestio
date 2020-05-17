@@ -76,7 +76,7 @@ class _UserputState extends State<Userput> {
                                         0.20),
                                 child: CircleAvatar(
                                   radius: 80,
-                                  backgroundColor: Colors.black26,
+                                  backgroundColor: Colors.black,
                                   child: ClipOval(
                                     child: SizedBox(
                                       width: 140.0,
