@@ -23,12 +23,12 @@ class _MyDrawerState extends State<MyDrawer> {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
             return Container(
-              color: Colors.black26,
+              color: Colors.black87,
               child: ListView(
                 children: <Widget>[
                   InkWell(
                     // child:Image.network(userData.image),
-                    splashColor: Colors.indigo[100],
+                    splashColor: Colors.white,
                     splashFactory: InkSplash.splashFactory,
                     onTap: () {
                       print(userData.name);
@@ -44,7 +44,8 @@ class _MyDrawerState extends State<MyDrawer> {
                         children: <Widget>[
                           CircleAvatar(
                             radius: MediaQuery.of(context).size.width * 0.10,
-                            backgroundImage: NetworkImage(userData.image),
+                            backgroundImage: 
+                            NetworkImage(userData.image),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
