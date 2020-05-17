@@ -23,39 +23,39 @@ class _QuizListAdminState extends State<QuizListAdmin> {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
           return Scaffold(
-
             backgroundColor: Colors.indigo,
             appBar: AppBar(
               backgroundColor: Colors.indigo,
+              title: Text(
+                topic,
+                style: TextStyle(
+                  letterSpacing: 2.0,
+                ),
+              ),
             ),
-            floatingActionButton: FloatingActionButton(onPressed: (){
-              print("kali thudangatte");
-              Navigator.pushNamed(context, AddQuizRoute);
-            },
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                print("kali thudangatte");
+                Navigator.pushNamed(context, AddQuizRoute);
+              },
               child: Icon(Icons.plus_one),
             ),
             body: data.length == 0
                 ? Center(
-              child: Text(
-                'No tests here yet.Check back later.',
-                style: TextStyle(color: Colors.white),
-              ),
-            )
-                :Container(
-
-              color: Colors.indigo,
-              child: ListView.builder(
-
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  return QuizTileAdmin(quiz: data[index]);
-                },
-              ),
-
-            ),
-
-
-
+                    child: Text(
+                      'No tests here yet.Check back later.',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                : Container(
+                    color: Colors.indigo,
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return QuizTileAdmin(quiz: data[index]);
+                      },
+                    ),
+                  ),
           );
         }
         return Loading();

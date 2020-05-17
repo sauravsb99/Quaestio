@@ -16,7 +16,7 @@ class PreviousScores extends StatefulWidget {
 class _PreviousScoresState extends State<PreviousScores> {
   List<charts.Series<Score, DateTime>> _seriesLineData;
   final String uid;
-  String topic = 'All';
+  String topic;
   _PreviousScoresState({this.uid, this.topic});
 //  List<Score> mydata;
 
@@ -59,6 +59,7 @@ class _PreviousScoresState extends State<PreviousScores> {
             _seriesLineData = List<charts.Series<Score, DateTime>>();
 //              List.generate(score, index){
 ////            }
+            topic = topic == null ? 'All' : topic;
             return Scaffold(
 //              backgroundColor: Colors.indigo,
 //              appBar: AppBar(

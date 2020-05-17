@@ -22,10 +22,15 @@ class _QuizListState extends State<QuizList> {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
           return Scaffold(
-            
             backgroundColor: Colors.indigo,
             appBar: AppBar(
               backgroundColor: Colors.indigo,
+              title: Text(
+                topic,
+                style: TextStyle(
+                  letterSpacing: 2.0,
+                ),
+              ),
             ),
             body: data.length == 0
                 ? Center(
@@ -34,21 +39,15 @@ class _QuizListState extends State<QuizList> {
                       style: TextStyle(color: Colors.white),
                     ),
                   )
-                :Container(
-                  
+                : Container(
                     color: Colors.indigo,
                     child: ListView.builder(
-                      
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         return QuizTile(quiz: data[index]);
                       },
                     ),
-                    
                   ),
-                
-                 
-              
           );
         }
         return Loading();
