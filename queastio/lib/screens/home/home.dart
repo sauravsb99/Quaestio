@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/screens/home/drawer.dart';
+import 'package:queastio/screens/home/landing.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:queastio/services/database.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class Home extends StatelessWidget {
       value: DatabaseService().topics,
       child: Container(
         child: Scaffold(
-          backgroundColor: Colors.black26,
+          backgroundColor: Colors.indigo,
           drawer: Drawer(
             child: MyDrawer(),
           ),
@@ -26,7 +27,7 @@ class Home extends StatelessWidget {
             backgroundColor: Colors.black45,
             elevation: 0.0,
           ),
-          body: TopicList(),
+          body: Landing(),
         ),
       ),
     );
