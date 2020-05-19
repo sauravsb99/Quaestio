@@ -113,7 +113,10 @@ class DatabaseService {
   List<Topic> _topicListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Topic(
-          name: doc.data['name'] ?? '', image: doc.data['image'] ?? '');
+        name: doc.data['name'] ?? '',
+        image: doc.data['image'] ?? '',
+        category: doc.data['category'] ?? '',
+      );
     }).toList();
   }
 
@@ -201,11 +204,10 @@ class DatabaseService {
         .map(_scoreListFromSnapshot);
   }
 
-  Stream<List<Score>> getTopicScores(String topic){
-    if(topic=='All' || topic=='null') {
+  Stream<List<Score>> getTopicScores(String topic) {
+    if (topic == 'All' || topic == 'null') {
       return getScores();
-    }
-    else {
+    } else {
       return scoreCollection
           .where('uid', isEqualTo: uid)
           .where('qTopic', isEqualTo: topic)
