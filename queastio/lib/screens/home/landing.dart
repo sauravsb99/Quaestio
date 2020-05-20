@@ -22,9 +22,9 @@ class _LandingState extends State<Landing> {
     heights = [0, 0];
     heights2 = [
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
-          0.3,
+          0.4,
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
-          0.3,
+          0.4,
     ];
   }
 
@@ -45,10 +45,10 @@ class _LandingState extends State<Landing> {
                 heights[1] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
-                    0.3;
+                    0.4;
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
-                    0.3;
+                    0.4;
                 clickedCard = null;
               } else {
                 heights[1] = 0;
@@ -67,39 +67,45 @@ class _LandingState extends State<Landing> {
           child: AnimatedContainer(
             duration: Duration(milliseconds: 250),
             height: heights2[0],
-            child: Card(
-              child: Stack(
-                children: <Widget>[
-                  // Positioned.fill(
-                  //   child: Image.asset(
-                  //     'assets/domain.jpg',
-                  //     fit: BoxFit.fill,
-                  //   ),
-                  // ),
-                  Container(
-                    decoration: BoxDecoration(
-//                        borderRadius: BorderRadius.circular(10.0),
-                        color: Color(0xff1b1b1b),
-                        image: new DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          alignment: FractionalOffset.topCenter,
-                          image:  CachedNetworkImageProvider("https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",),
-    )
-    ),
-
-
-                  child: Center(
-                      child: Text(
-                    'Domain Specifics',
-                    style: TextStyle(
-                      fontSize: 26.0,
-                      color: Colors.white,
-                      letterSpacing: 3.0,
-                      fontWeight: FontWeight.bold,
+            child:Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                  child: Stack(
+                      children: <Widget>[
+                      // Positioned.fill(
+                      //   child: Image.asset(
+                      //     'assets/aptitude.jpg',
+                      //     fit: BoxFit.fill,
+                      //   ),
+                      // ),
+                      Container(
+                      padding: EdgeInsets.all(18),
+          //                 color: Colors.white,
+                      decoration: BoxDecoration(
+          //                     borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.black87,
+                          image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            alignment: FractionalOffset.topCenter,
+                            image:  CachedNetworkImageProvider("https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",),
+                          )
+                      ),
                     ),
-                      )           )),
-                ],
-              ),
+                    Center(
+                        child: Text(
+                          'Domain Specific',
+                          style: TextStyle(
+                            fontSize: 26.0,
+                            color: Colors.white,
+                            letterSpacing: 3.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+          //                    ],
+          //                  ),
+              ],
+          ),
+          ),
             ),
           ),
         ),
@@ -141,14 +147,15 @@ class _LandingState extends State<Landing> {
                 heights[1] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
-                    0.3;
+                    0.4;
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
-                    0.3;
+                    0.4;
                 clickedCard = null;
               } else {
-                heights[1] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
+                heights[1] = (MediaQuery.of(context).size.height
+                              - AppBar().preferredSize.height-50
+                             ) *
                     0.7;
                 heights[0] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
@@ -164,40 +171,44 @@ class _LandingState extends State<Landing> {
           child: AnimatedContainer(
             duration: Duration(milliseconds: 250),
             height: heights2[1],
-            child: Card(
-              child: Stack(
-                children: <Widget>[
-                  // Positioned.fill(
-                  //   child: Image.asset(
-                  //     'assets/aptitude.jpg',
-                  //     fit: BoxFit.fill,
-                  //   ),
-                  // ),
-               Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Stack(
+                  children: <Widget>[
+                    // Positioned.fill(
+                    //   child: Image.asset(
+                    //     'assets/aptitude.jpg',
+                    //     fit: BoxFit.fill,
+                    //   ),
+                    // ),
+                 Container(
+                   padding: EdgeInsets.all(18),
 //                 color: Colors.white,
-                 decoration: BoxDecoration(
+                   decoration: BoxDecoration(
 //                     borderRadius: BorderRadius.circular(20.0),
-                     color: Color(0xffa9b6b8),
-                     image: DecorationImage(
-                       fit: BoxFit.fitWidth,
-                       alignment: FractionalOffset.topCenter,
-                       image:  CachedNetworkImageProvider("https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",),
-                     )
+                       color: Colors.black87,
+                       image: DecorationImage(
+                         fit: BoxFit.fitWidth,
+                         alignment: FractionalOffset.topCenter,
+                         image:  CachedNetworkImageProvider("https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",),
+                       )
+                   ),
                  ),
-               ),
-                  Center(
-                          child: Text(
-                        'General Aptitude',
-                        style: TextStyle(
-                          fontSize: 26.0,
-                          color: Colors.white,
-                          letterSpacing: 3.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
+                    Center(
+                            child: Text(
+                          'General Aptitude',
+                          style: TextStyle(
+                            fontSize: 26.0,
+                            color: Colors.white,
+                            letterSpacing: 3.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
 //                    ],
 //                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -206,7 +217,7 @@ class _LandingState extends State<Landing> {
           duration: Duration(milliseconds: 250),
           height: heights[1],
           padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
-          color: Color(0xffa9b6b8),
+          color: Color(0xff1b1b1b),
           child: ListView.builder(
               itemCount: aTopic.length,
               itemBuilder: (context, index) {
@@ -229,12 +240,16 @@ class _LandingState extends State<Landing> {
                       height: (MediaQuery.of(context).size.height -
                               AppBar().preferredSize.height) *
                           0.0001,
-                      color: Color(0xfffaece6),
+//                      color: Color(0xfffaece6),
                     ),
                   ],
                 );
               }),
-        )
+        ),
+//            SizedBox(
+//              height: MediaQuery.of(context).size.height*0.05,
+//              child:Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
+//        ),
       ],
     );
   }

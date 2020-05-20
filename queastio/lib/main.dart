@@ -14,9 +14,27 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
+        theme: _buildTheme(),
         onGenerateRoute: router.generateRoute,
         initialRoute: HomeViewRoute,
       ),
     );
   }
+}
+ThemeData _buildTheme() {
+  final ThemeData base = ThemeData.light();
+  return base.copyWith(
+//      accentColor: kUndaGreen,
+//      scaffoldBackgroundColor: Colors.grey,
+      cardColor: Colors.white,
+      textSelectionColor: Colors.amberAccent,
+//      errorColor: Colors.green,
+      textSelectionHandleColor: Colors.black,
+      appBarTheme:AppBarTheme(elevation: 0.0,
+        color:Color(0xff43b77d),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+      )
+  );
 }

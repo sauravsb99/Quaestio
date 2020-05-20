@@ -228,7 +228,7 @@ class QuizTile extends StatelessWidget {
       child: Container(
         height: 100.0,
         child: Card(
-            color: Colors.black87,
+            color: Colors.black54,
             child: Center(
               child: Wrap(
                 children: <Widget>[

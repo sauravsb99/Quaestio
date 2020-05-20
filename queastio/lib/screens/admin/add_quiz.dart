@@ -9,7 +9,6 @@ import 'package:queastio/models/user.dart';
 import 'dart:convert' show utf8;
 import 'package:queastio/services/database.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:provider/provider.dart';
 
 class AddQuiz extends StatefulWidget {
   @override
