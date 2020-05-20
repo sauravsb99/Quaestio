@@ -176,45 +176,57 @@ class _QuestionCardState extends State<QuestionCard> {
                           ],
                         ),
                       ),
-                      question['qType'] == 'Text'
-                          ? Text(
-                              (index + 1).toString() + '. ' + question['qText'],
-                              style: TextStyle(
-                                fontSize: 18.0,
-                              ),
-                            )
-                          : Wrap(
-                              children: <Widget>[
-                                Text(
-                                  (index + 1).toString() + '. ',
-                                  style: TextStyle(
-                                    fontSize: 18.0,
+                      Flexible(
+                        flex: 2,
+                        child: Scrollbar(
+                          child: SingleChildScrollView(
+                            child: question['qType'] == 'Text'
+                                ? Text(
+                                    (index + 1).toString() +
+                                        '. ' +
+                                        question['qText'],
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                    ),
+                                  )
+                                : Wrap(
+                                    children: <Widget>[
+                                      Text(
+                                        (index + 1).toString() + '. ',
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                        ),
+                                      ),
+                                      Image.network(question['qImage']),
+                                    ],
                                   ),
-                                ),
-                                Image.network(question['qImage']),
-                              ],
-                            ),
+                          ),
+                        ),
+                      ),
                       Divider(
-                        height: 30.0,
+                        height: 5.0,
                         color: Colors.grey,
                       ),
                       Flexible(
-                        child: ListView.builder(
-                            itemCount: question['options'].length,
-                            itemBuilder: (context, ind) {
-                              return RadioListTile<String>(
-                                title: Text(question['options'][ind]),
-                                value: question['options'][ind],
-                                groupValue: selectedOptions[index],
-                                activeColor: Colors.indigo,
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedOptions[index] = value;
-                                    print(selectedOptions[index]);
-                                  });
-                                },
-                              );
-                            }),
+                        flex: 2,
+                        child: Scrollbar(
+                          child: ListView.builder(
+                              itemCount: question['options'].length,
+                              itemBuilder: (context, ind) {
+                                return RadioListTile<String>(
+                                  title: Text(question['options'][ind]),
+                                  value: question['options'][ind],
+                                  groupValue: selectedOptions[index],
+                                  activeColor: Colors.indigo,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedOptions[index] = value;
+                                      print(selectedOptions[index]);
+                                    });
+                                  },
+                                );
+                              }),
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
