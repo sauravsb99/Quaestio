@@ -56,6 +56,7 @@ class QuizTile extends StatelessWidget {
       }).toList();
       print(answers);
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             User user = Provider.of<User>(context, listen: false);
