@@ -131,7 +131,9 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Colors.grey,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, AboutUsRoute);
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(

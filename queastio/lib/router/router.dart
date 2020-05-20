@@ -4,6 +4,7 @@ import 'package:queastio/screens/admin/Quiz_listAdmin.dart';
 import 'package:queastio/screens/admin/add_quiz.dart';
 import 'package:queastio/screens/admin/user_listAdmin.dart';
 import 'package:queastio/screens/authenticate/sign_in.dart';
+import 'package:queastio/screens/home/about_us.dart';
 import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/screens/home/answersheet.dart';
 import 'package:queastio/screens/home/leader_board.dart';
@@ -48,17 +49,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case UserListRoute:
       return MaterialPageRoute(builder: (context) => UserList());
     case Signin:
-    return MaterialPageRoute(builder: (context)=> SignIn());
+      return MaterialPageRoute(builder: (context) => SignIn());
     case LeaderRoute:
       return MaterialPageRoute(
           builder: (context) => LeaderBoard(qname: settings.arguments));
     case AnswerSheetRoute:
       dynamic data = settings.arguments;
       return MaterialPageRoute(
-          builder: (context) => AnswerSheet(
-                answers: data['answers'],
-                questions: data['questions'],
-                selected: data['selected'],
-              ));
+        builder: (context) => AnswerSheet(
+          answers: data['answers'],
+          questions: data['questions'],
+          selected: data['selected'],
+        ),
+      );
+    case AboutUsRoute:
+      return MaterialPageRoute(builder: (context) => AboutUs());
   }
 }
