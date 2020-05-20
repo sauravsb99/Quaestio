@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/quiz.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
@@ -27,14 +26,14 @@ class QuizTile extends StatelessWidget {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    textColor: Colors.indigo,
+                    textColor: Color(0xff0fc77e),
                     child: Text('Cancel'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   FlatButton(
-                    textColor: Colors.indigo,
+                    textColor: Color(0xff0fc77e),
                     child: Text('Continue'),
                     onPressed: () {
                       Navigator.pushNamed(context, QuestionRoute, arguments: {
@@ -93,7 +92,7 @@ class QuizTile extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.all(2.0),
                             decoration: BoxDecoration(
-                              color: Colors.indigo,
+                              color: Color(0xff0fc77e),
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(5.0),
                             ),

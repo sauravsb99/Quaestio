@@ -1,10 +1,7 @@
 import 'dart:ui';
-import 'package:queastio/router/router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:queastio/screens/authenticate/sign_in.dart';
 import 'package:queastio/services/auth.dart';
-import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:flutter/material.dart';
 
@@ -164,7 +161,13 @@ class _RegisterState extends State<Register> {
                       Text(
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
-                      )
+                      ),
+                      SizedBox(height: 50),
+
+                      SizedBox(height: 100,
+                        child: CachedNetworkImage(
+                            imageUrl:"https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
+                      ),
                     ],
                   ),
                 ),
