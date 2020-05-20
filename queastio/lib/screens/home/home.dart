@@ -4,7 +4,6 @@ import 'package:queastio/screens/home/landing.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:queastio/services/database.dart';
 import 'package:provider/provider.dart';
-import 'topic_list.dart';
 import 'package:queastio/models/topic.dart';
 
 class Home extends StatelessWidget {
@@ -18,16 +17,19 @@ class Home extends StatelessWidget {
       value: DatabaseService().topics,
       child: Container(
         child: Scaffold(
-          backgroundColor: Colors.indigo,
+          backgroundColor: Color(0xffa9b6b8),
           drawer: Drawer(
             child: MyDrawer(),
           ),
           appBar: AppBar(
-            title: Text('Quaestia'),
-            backgroundColor: Colors.black45,
+//            title: Text('Quaestia'),
+//            backgroundColor: Color(0xff0fc77e),
+            backgroundColor: Color(0xff4e6c47),
             elevation: 0.0,
+            leading: null
           ),
-          body: Landing(),
+          body: Landing()
+
         ),
       ),
     );
