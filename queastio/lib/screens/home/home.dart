@@ -17,16 +17,18 @@ class Home extends StatelessWidget {
       value: DatabaseService().topics,
       child: Container(
         child: Scaffold(
-          backgroundColor: Color(0xffa9b6b8),
+          backgroundColor: Color(0xff1b1b1b),
           drawer: Drawer(
             child: MyDrawer(),
           ),
           appBar: AppBar(
 //            title: Text('Quaestia'),
-//            backgroundColor: Color(0xff0fc77e),
-            backgroundColor: Color(0xff4e6c47),
+//            backgroundColor: Color(0xff1b1b1b),
+//            backgroundColor: Color(0xff4e6c47),
             elevation: 0.0,
-            leading: null
+//            actions:<Widget>[
+//            Row(children:<Widget>[Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),],)
+//          ],
           ),
           body: Landing()
 

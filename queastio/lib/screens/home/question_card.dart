@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:queastio/screens/home/answersheet.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/services/scoring.dart';
 import 'package:queastio/models/user.dart';
@@ -161,7 +160,7 @@ class _QuestionCardState extends State<QuestionCard> {
                           children: <Widget>[
                             Container(
                                 padding: EdgeInsets.all(8.0),
-                                color: Colors.indigo,
+                                color: Color(0xff43b77d),
                                 child: Text(
                                   'Time Left: ' + time,
                                   style: buttonText,
@@ -171,7 +170,7 @@ class _QuestionCardState extends State<QuestionCard> {
                               onPressed:
                                   selectedOptions == null ? null : calcScore,
                               child: Text('Submit Test', style: buttonText),
-                              color: Colors.indigo,
+                              color: Color(0xff43b77d),
                             ),
                           ],
                         ),
@@ -206,7 +205,7 @@ class _QuestionCardState extends State<QuestionCard> {
                                 title: Text(question['options'][ind]),
                                 value: question['options'][ind],
                                 groupValue: selectedOptions[index],
-                                activeColor: Colors.indigo,
+                                activeColor: Color(0xff43b77d),
                                 onChanged: (value) {
                                   setState(() {
                                     selectedOptions[index] = value;
@@ -221,7 +220,7 @@ class _QuestionCardState extends State<QuestionCard> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           IconButton(
-                            color: Colors.indigo,
+                            color: Color(0xff43b77d),
                             disabledColor: Colors.white,
                             icon: Icon(
                               Icons.arrow_left,
@@ -237,7 +236,7 @@ class _QuestionCardState extends State<QuestionCard> {
                                   },
                           ),
                           IconButton(
-                            color: Colors.indigo,
+                            color: Color(0xff43b77d),
                             disabledColor: Colors.white,
                             icon: Icon(
                               Icons.arrow_right,

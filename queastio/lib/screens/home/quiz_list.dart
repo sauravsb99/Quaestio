@@ -24,7 +24,7 @@ class _QuizListState extends State<QuizList> {
           return Scaffold(
             backgroundColor: Color(0xff0fc77e),
             appBar: AppBar(
-              backgroundColor: Color(0xff0fc77e),
+//              backgroundColor: Color(0xff0fc77e),
               title: Text(
                 topic,
                 style: TextStyle(
@@ -40,7 +40,7 @@ class _QuizListState extends State<QuizList> {
                     ),
                   )
                 : Container(
-                    color: Color(0xfff2c4c1),
+                    color: Colors.white,
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
