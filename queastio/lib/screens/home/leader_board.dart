@@ -31,7 +31,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                             (scores[index].score / scores[index].total) * 100;
                         return LeaderTile(
                             uid: scores[index].uid,
-                            score: perc.toString(),
+                            score: perc.toStringAsFixed(2),
                             index: (index + 1).toString());
                       }),
             );
