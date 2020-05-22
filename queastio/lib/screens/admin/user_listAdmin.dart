@@ -18,7 +18,10 @@ class _UserListState extends State<UserList> {
           if (snapshot.hasData) {
             List<UserData> userList = snapshot.data;
             return Scaffold(
-              appBar: AppBar(title: Text('Users')),
+              appBar: AppBar(
+                title: Text('Users'),
+                backgroundColor: Colors.indigo,
+              ),
               body: userList.length == 0
                   ? Center(child: Text('No users yet.'))
                   : ListView.builder(
