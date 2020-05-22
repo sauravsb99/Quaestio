@@ -164,9 +164,9 @@ class _RegisterState extends State<Register> {
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
-                      SizedBox(height: MediaQuery.of(context).size.height*0.1),
+//                      SizedBox(height: MediaQuery.of(context).size.height*0.05),
 
-                      SizedBox(height: MediaQuery.of(context).size.height*0.15,
+                      SizedBox(height: MediaQuery.of(context).size.height*0.16,
                         child: CachedNetworkImage(
                             imageUrl:"https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
                       ),

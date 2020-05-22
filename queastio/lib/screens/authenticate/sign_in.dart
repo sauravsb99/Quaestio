@@ -186,10 +186,10 @@ class _SignInState extends State<SignIn> {
 //                          child: Text("",textAlign:TextAlign.end),
 ////                height: 15.0
 //                        ),),
-                      SizedBox(height: MediaQuery.of(context).size.height*0.08
-                        ,),
+//                      SizedBox(height: MediaQuery.of(context).size.height*0.08
+//                        ,),
 
-                        SizedBox(height: MediaQuery.of(context).size.height*0.10,
+                        SizedBox(height: MediaQuery.of(context).size.height*0.16,
                           child: CachedNetworkImage(
                               imageUrl:"https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
                         ),
@@ -369,7 +369,8 @@ class _SignInState extends State<SignIn> {
                   ),
                 )
               ],
-            ),SizedBox(height: 10,)
+            ),
+            SizedBox(height: 20,)
           ],
         ));
 //     Scaffold(
