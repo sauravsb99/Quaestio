@@ -74,9 +74,9 @@ class _PreviousScoresState extends State<PreviousScores> {
                   child: Scaffold(
                     appBar: AppBar(
                       title: Text("My Scores"),
-                      backgroundColor: Colors.indigoAccent,
+                      backgroundColor: Color(0xff43b77d),
                       bottom: TabBar(
-                        indicatorColor: Color(0xff9962D0),
+                        indicatorColor: Color(0xff43b77d),
                         tabs: [
                           Tab(icon: Icon(Icons.table_chart)),
                           Tab(icon: Icon(Icons.line_style)),
@@ -110,16 +110,16 @@ class _PreviousScoresState extends State<PreviousScores> {
                                     ),
                                   ),
                                 ),
-                                DataColumn(
-                                  label: Container(
-                                    child: Text(
-                                      'Total',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // DataColumn(
+                                //   label: Container(
+                                //     child: Text(
+                                //       'Total',
+                                //       style: TextStyle(
+                                //         color: Colors.white,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                               rows: List.generate(data.length, (index) {
                                 return DataRow(
@@ -134,18 +134,22 @@ class _PreviousScoresState extends State<PreviousScores> {
                                     )),
                                     DataCell(Container(
                                         child: Text(
-                                      data[index].score.toString(),
+                                      (100 *
+                                                  (data[index].score /
+                                                      data[index].total))
+                                              .toStringAsFixed(2) +
+                                          '%',
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),
                                     ))),
-                                    DataCell(Container(
-                                        child: Text(
-                                      data[index].total.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ))),
+                                    // DataCell(Container(
+                                    //     child: Text(
+                                    //   data[index].total.toString(),
+                                    //   style: TextStyle(
+                                    //     color: Colors.white,
+                                    //   ),
+                                    // ))),
                                   ],
                                 );
                               }),
@@ -359,7 +363,7 @@ class _PreviousScoresState extends State<PreviousScores> {
             );
           }
           return Scaffold(
-              backgroundColor: Colors.indigo,
+              backgroundColor: Color(0xff43bfdd),
               appBar: AppBar(
                 title: Text('My Scores'),
                 backgroundColor: Colors.black,
