@@ -220,7 +220,7 @@ class _PreviousScoresState extends State<PreviousScores> {
                                                 includeArea: true,
                                                 stacked: true),
                                         animate: true,
-                                        animationDuration: Duration(seconds: 3),
+                                        animationDuration: Duration(seconds: 2),
                                         behaviors: [
                                           new charts.ChartTitle('Score',
                                               behaviorPosition:
