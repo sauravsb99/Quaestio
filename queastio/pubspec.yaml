@@ -32,14 +32,24 @@ dependencies:
   image_picker: ^0.6.6+1
   csv: ^4.0.3
   file_picker: ^1.9.0+1
+  flutter_markdown:
   charts_flutter: ^0.6.0
   date_format:
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.0"
   flutter_test:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path_ios: "assets/logo_ok.png"
+  image_path_android: "assets/logo_ok.png"
 
 # The following section is specific to Flutter.
 flutter:
@@ -50,6 +60,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/logo_ok.png
+    - assets/logo_only.png
+    - assets/logo_circle.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
