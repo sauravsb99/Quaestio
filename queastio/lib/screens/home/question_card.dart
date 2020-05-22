@@ -7,6 +7,7 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:quiver/async.dart';
+// import 'package:auto_size_text/auto_size_text.dart';
 
 class QuestionCard extends StatefulWidget {
   final Map quiz;
@@ -177,12 +178,15 @@ class _QuestionCardState extends State<QuestionCard> {
                         ),
                       ),
                       question['qType'] == 'Text'
-                          ? Text(
+                          ? SingleChildScrollView(child:Text(
                               (index + 1).toString() + '. ' + question['qText'],
                               style: TextStyle(
-                                fontSize: 18.0,
+                                // if (5>4)?
+                                fontSize: 15.0,
+                                // :fontSize: 15.0,
                               ),
-                            )
+                              // maxLines: 10,
+                            ))
                           : Wrap(
                               children: <Widget>[
                                 Text(
