@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/widgets.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -36,16 +37,35 @@ class _SignInState extends State<SignIn> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                    child: Text('Welcome',
-                        style: TextStyle(
-                            fontSize: 78.0, fontWeight: FontWeight.bold)),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
-                    child: Text('Back',
-                        style: TextStyle(
-                            fontSize: 78.0, fontWeight: FontWeight.bold)),
+//                    padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding:EdgeInsets.fromLTRB(15.0, MediaQuery.of(context).size.height*0.1, 0.0, 0.0),
+                          child: Text('Welcome',
+                              style: TextStyle(
+                                  fontSize:MediaQuery.of(context).size.height*0.09
+//                            78.0
+                                  , fontWeight: FontWeight.bold)),
+                        ),
+//                      ],
+//                    ),
+//                  ),
+//                  Container(
+//                    padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
+//                    child:
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
+                        child: Text('Back',
+                          style: TextStyle(
+                              fontSize:MediaQuery.of(context).size.height*0.09
+//                            78.0
+                              , fontWeight: FontWeight.bold)),
+                      ),
+                      ],
+                    ),
                   ),
                   // Container(
                   //   padding: EdgeInsets.fromLTRB(220.0, 175.0, 0.0, 0.0),
@@ -68,7 +88,7 @@ class _SignInState extends State<SignIn> {
                   key: _formKey,
                   child: Container(
                     // color: Colors.black,
-                    padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                    padding: EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0),
                     child: Column(
                       children: <Widget>[
                         SizedBox(height: 20.0),
@@ -155,12 +175,21 @@ class _SignInState extends State<SignIn> {
                               
                         //     }
                         // ),
-                        SizedBox(height: 20.0),
+
                         Text(
                           error,
                           style: TextStyle(color: Colors.red, fontSize: 20.0),
                         ),
-                        SizedBox(height: 100,
+//                        Expanded(
+//                          child:Container(
+//                            color:Colors.black87,
+//                          child: Text("",textAlign:TextAlign.end),
+////                height: 15.0
+//                        ),),
+                      SizedBox(height: MediaQuery.of(context).size.height*0.08
+                        ,),
+
+                        SizedBox(height: MediaQuery.of(context).size.height*0.10,
                           child: CachedNetworkImage(
                               imageUrl:"https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
                         ),
@@ -316,7 +345,10 @@ class _SignInState extends State<SignIn> {
             //         // )
             //       ],
             //     ))),
-            SizedBox(height: 15.0),
+            Expanded(
+              child: Text("",textAlign:TextAlign.end),
+//                height: 15.0
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -337,7 +369,7 @@ class _SignInState extends State<SignIn> {
                   ),
                 )
               ],
-            )
+            ),SizedBox(height: 10,)
           ],
         ));
 //     Scaffold(

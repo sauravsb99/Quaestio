@@ -10,14 +10,34 @@ class AboutUs extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
-          child: Padding(
+          child: Column(
+            children: <Widget>[
+              Padding(
         padding: const EdgeInsets.all(8.0),
         child: RichText(
-          text: TextSpan(
-              text:
-                  'Enable Employee Excellence \(Enable\) is a platform for bridging the employability gaps prevalent among career-oriented population. Our programs are rooted in a deep understanding of the employability problem by considering multiple perspectives such as those of the employers, academia, students and policy makers. Our PURPOSE is “ Employability for All ”'),
+              text: TextSpan(
+                  text:
+                      'Enable Employee Excellence \(Enable\) is a platform for bridging the employability gaps prevalent among career-oriented population. Our programs are rooted in a deep understanding of the employability problem by considering multiple perspectives such as those of the employers, academia, students and policy makers. Our PURPOSE is “ Employability for All ”'),
         ),
-      )
+      ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RichText(
+                  text: TextSpan(
+                      text:
+                      'Enable Employee Excellence \(Enable\) is a platform for bridging the employability gaps prevalent among career-oriented population. Our programs are rooted in a deep understanding of the employability problem by considering multiple perspectives such as those of the employers, academia, students and policy makers. Our PURPOSE is “ Employability for All ”'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RichText(
+                  text: TextSpan(
+                      text:
+                      'Enable Employee Excellence \(Enable\) is a platform for bridging the employability gaps prevalent among career-oriented population. Our programs are rooted in a deep understanding of the employability problem by considering multiple perspectives such as those of the employers, academia, students and policy makers. Our PURPOSE is “ Employability for All ”'),
+                ),
+              ),
+            ],
+          )
 // OBJECTIVES
 
 // • Channelize the energy of our youth towards a purposeful career. Help them make an informed

@@ -39,7 +39,9 @@ class _RegisterState extends State<Register> {
                   child: Text(
                     'Signup',
                     style:
-                        TextStyle(fontSize: 78.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize:MediaQuery.of(context).size.height*0.09
+//                        78.0
+                            , fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Container(
@@ -162,9 +164,9 @@ class _RegisterState extends State<Register> {
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: MediaQuery.of(context).size.height*0.1),
 
-                      SizedBox(height: 100,
+                      SizedBox(height: MediaQuery.of(context).size.height*0.15,
                         child: CachedNetworkImage(
                             imageUrl:"https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
                       ),
