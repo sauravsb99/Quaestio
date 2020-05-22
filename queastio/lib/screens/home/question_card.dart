@@ -184,6 +184,19 @@ class _QuestionCardState extends State<QuestionCard>
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            // Center(
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(8.0),
+                            //     decoration: BoxDecoration(
+                            //       shape: BoxShape.circle,
+                            //       color: Colors.black,
+                            //     ),
+                            //     child: Text(
+                            //       (index + 1).toString(),
+                            //       style: buttonText,
+                            //     ),
+                            //   ),
+                            // ),
                             Flexible(
                               flex: 2,
                               child: Scrollbar(
@@ -299,7 +312,7 @@ class _QuestionCardState extends State<QuestionCard>
                         Column(
                           children: <Widget>[
                             AnimatedOpacity(
-                              duration: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 100),
                               opacity: buttonPressed == true ? 1 : 0,
                               child: Container(
                                 decoration: BoxDecoration(
