@@ -48,11 +48,16 @@ class _QuizListAdminState extends State<QuizListAdmin> {
                     ),
                   )
                 : Container(
-                    color: Colors.indigo,
+                    color: Colors.white,
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        return QuizTileAdmin(quiz: data[index]);
+                        return Column(
+                          children: <Widget>[
+                            QuizTileAdmin(quiz: data[index]),
+                            Divider(height: 1)
+                          ],
+                        );
                       },
                     ),
                   ),
