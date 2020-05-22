@@ -22,9 +22,9 @@ class _QuizListState extends State<QuizList> {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
           return Scaffold(
-            backgroundColor: Colors.indigo,
+            backgroundColor: Color(0xff0fc77e),
             appBar: AppBar(
-              backgroundColor: Colors.indigo,
+//              backgroundColor: Color(0xff0fc77e),
               title: Text(
                 topic,
                 style: TextStyle(
@@ -40,7 +40,7 @@ class _QuizListState extends State<QuizList> {
                     ),
                   )
                 : Container(
-                    color: Colors.indigo,
+                    color: Colors.white,
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
