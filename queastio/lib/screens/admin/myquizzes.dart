@@ -16,9 +16,8 @@ class MyQuizListAdmin extends StatefulWidget {
 class _MyQuizListAdminState extends State<MyQuizListAdmin> {
   _MyQuizListAdminState();
   @override
-
   Widget build(BuildContext context) {
-    User user= Provider.of<User>(context, listen: false);
+    User user = Provider.of<User>(context, listen: false);
     return StreamBuilder<List<Quiz>>(
       stream: DatabaseService().getQuizzesadmin(user.uid),
       builder: (context, snapshot) {
@@ -38,11 +37,16 @@ class _MyQuizListAdminState extends State<MyQuizListAdmin> {
                     ),
                   )
                 : Container(
-                    color: Colors.indigo,
+                    color: Colors.white,
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        return MyQuizTileAdmin(quiz: data[index]);
+                        return Column(
+                          children: <Widget>[
+                            MyQuizTileAdmin(quiz: data[index]),
+                            Divider(height: 1.0),
+                          ],
+                        );
                       },
                     ),
                   ),
