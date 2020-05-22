@@ -54,6 +54,7 @@ class MyQuizTileAdmin extends StatelessWidget {
       }).toList();
       print(answers);
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             User user = Provider.of<User>(context, listen: false);
@@ -72,37 +73,35 @@ class MyQuizTileAdmin extends StatelessWidget {
                       SizedBox(
                         height: 50,
                       ),
+                      Wrap(children: <Widget>[
+                        Text(
+                          quiz.qName.toUpperCase(),
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                            letterSpacing: 2.0,
+                            wordSpacing: 5.0,
+                          ),
+                        ),
+                      ]),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                quiz.qName.toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24.0,
-                                  letterSpacing: 2.0,
-                                  wordSpacing: 5.0,
-                                ),
+                          Container(
+                            padding: EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              color: Colors.indigo,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Text(
+                              quiz.qTopic,
+                              style: TextStyle(
+                                fontSize: 10.0,
+                                color: Colors.white,
                               ),
-                              Container(
-                                padding: EdgeInsets.all(2.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.indigo,
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: Text(
-                                  quiz.qTopic,
-                                  style: TextStyle(
-                                    fontSize: 10.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                           Tooltip(
                             message:
@@ -113,7 +112,7 @@ class MyQuizTileAdmin extends StatelessWidget {
                               (Icons.help),
                               color: Colors.grey,
                             ),
-                          )
+                          ),
                         ],
                       ),
                       Divider(
@@ -122,56 +121,33 @@ class MyQuizTileAdmin extends StatelessWidget {
                         color: Colors.black54,
                         indent: 0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          quiz.qDesc,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.black87,
-                          ),
-                          textAlign: TextAlign.justify,
+                      Text(
+                        quiz.qDesc,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black87,
                         ),
                       ),
                       SizedBox(height: 20.0),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'No of questions: ' + quiz.qCount.toString(),
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.black87,
-                          ),
+                      Text(
+                        'No of questions: ' + quiz.qCount.toString(),
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black87,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Duration: ' + quiz.duration.toString() + ' minutes',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.black87,
-                          ),
+                      Text(
+                        'Duration: ' + quiz.duration.toString() + ' minutes',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black87,
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: Text(
-                      //     'Note: This is a time bound test. Your answers will be submitted automatically when the time runs out',
-                      //     style: TextStyle(
-                      //       fontSize: 18.0,
-                      //       color: Colors.black87,
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(height: 45.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           MaterialButton(
-//                          child: ClipRRect(
-//                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-
                             child: RaisedButton(
                               padding: EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 5.0),
@@ -189,9 +165,6 @@ class MyQuizTileAdmin extends StatelessWidget {
                             onPressed: () {},
                           ),
                           MaterialButton(
-//                          child: ClipRRect(
-//                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-
                             child: RaisedButton(
                               padding: EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 5.0),
@@ -200,19 +173,15 @@ class MyQuizTileAdmin extends StatelessWidget {
                                 DatabaseService(uid: user.uid)
                                     .testAlreadyTaken(quiz.qName)
                                     .then((value) {
-                                  if (value.documents.isEmpty) {
-                                    Navigator.pushNamed(context, QuestionRoute,
-                                        arguments: {
-                                          'questions': quiz.questions,
-                                          'answers': answers,
-                                          'qname': quiz.qName,
-                                          'qTopic': quiz.qTopic,
-                                          'firstTime': true,
-                                          'duration': quiz.duration
-                                        });
-                                  } else {
-                                    _showNoScoreDialog(answers);
-                                  }
+                                  Navigator.pushNamed(context, QuestionRoute,
+                                      arguments: {
+                                        'questions': quiz.questions,
+                                        'answers': answers,
+                                        'qname': quiz.qName,
+                                        'qTopic': quiz.qTopic,
+                                        'firstTime': true,
+                                        'duration': quiz.duration
+                                      });
                                 });
                               },
                               child: Text(
@@ -250,39 +219,18 @@ class MyQuizTileAdmin extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Card(
-                  color: Colors.black87,
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Wrap(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(25.0),
-                          child: Text(
-                            quiz.qName.toUpperCase(),
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
+              child: ListTile(
+                title: Text(quiz.qName.toUpperCase()),
+                trailing: IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red[700],
                     ),
-                  )),
-            ),
-            FlatButton(
-              child: Icon(
-                Icons.delete,
-                color: Colors.white,
+                    onPressed: () {
+                      User user = Provider.of<User>(context, listen: false);
+                      DatabaseService(uid: user.uid).deleteQuiz(quiz.qId);
+                    }),
               ),
-              onPressed: () {
-                User user = Provider.of<User>(context, listen: false);
-                DatabaseService(uid: user.uid).deleteQuiz(quiz.qId);
-//                if(b){
-//                  print(b);
-//                }
-                print(user.uid);
-              },
             ),
           ],
         ),
