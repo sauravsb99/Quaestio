@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:queastio/models/topic.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/models/score.dart';
+import 'package:queastio/shared/loading.dart';
 
 class PreviousScores extends StatefulWidget {
   final Widget child;
@@ -16,7 +18,8 @@ class PreviousScores extends StatefulWidget {
 class _PreviousScoresState extends State<PreviousScores> {
   List<charts.Series<Score, DateTime>> _seriesLineData;
   final String uid;
-  String topic;
+  String topic = 'All';
+  Set<String> items;
   _PreviousScoresState({this.uid, this.topic});
 //  List<Score> mydata;
 
@@ -29,7 +32,7 @@ class _PreviousScoresState extends State<PreviousScores> {
 //                                        user.timestamp.seconds,
 
       measureFn: (Score data, _) => (data.score) / data.total * 100,
-      colorFn: (Score data, _) => getcolor(data.qTopic),
+      colorFn: (Score data, _) => charts.Color.fromHex(code: '#43b77d'),
 //        colorFn:
 //        id:
       data: data,
@@ -46,7 +49,7 @@ class _PreviousScoresState extends State<PreviousScores> {
         stream: DatabaseService(uid: uid).getScores(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Score> data = snapshot.data;
+            List<Score> scores = snapshot.data;
 
 //            List<Score> score = snapshot.data;
 //      var i=0;
@@ -60,6 +63,16 @@ class _PreviousScoresState extends State<PreviousScores> {
 //              List.generate(score, index){
 ////            }
             topic = topic == null ? 'All' : topic;
+            items = Set.from(['All']);
+            scores.forEach((element) {
+              items.add(element.qTopic);
+            });
+            List<Score> topicScores = scores;
+            if (topic != 'All') {
+              topicScores =
+                  scores.where((score) => score.qTopic == topic).toList();
+            }
+            _generateData(topicScores);
             return Scaffold(
 //              backgroundColor: Colors.indigo,
 //              appBar: AppBar(
@@ -121,12 +134,12 @@ class _PreviousScoresState extends State<PreviousScores> {
                                 //   ),
                                 // ),
                               ],
-                              rows: List.generate(data.length, (index) {
+                              rows: List.generate(scores.length, (index) {
                                 return DataRow(
                                   cells: [
                                     DataCell(Container(
                                       child: Text(
-                                        data[index].quiz,
+                                        scores[index].quiz,
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
@@ -135,8 +148,8 @@ class _PreviousScoresState extends State<PreviousScores> {
                                     DataCell(Container(
                                         child: Text(
                                       (100 *
-                                                  (data[index].score /
-                                                      data[index].total))
+                                                  (scores[index].score /
+                                                      scores[index].total))
                                               .toStringAsFixed(2) +
                                           '%',
                                       style: TextStyle(
@@ -183,170 +196,57 @@ class _PreviousScoresState extends State<PreviousScores> {
                                   SizedBox(
                                     height: 20,
                                   ),
-//                                        Flexible(
-//                                          child: ListView.builder(
-//                                              itemCount: question['options'].length,
-//                                              itemBuilder: (context, ind) {
-//                                                return RadioListTile<String>(
-//                                                  title: Text(question['options'][ind]),
-//                                                  value: question['options'][ind],
-//                                                  groupValue: selectedOptions[index],
-//                                                  activeColor: Colors.indigo,
-//                                                  onChanged: (value) {
-//                                                    setState(() {
-//                                                      selectedOptions[index] = value;
-//                                                      print(selectedOptions[index]);
-//                                                    });
-//                                                  },
-//                                                );
-//                                              }),
-//                                        ),
-                                  Wrap(
-                                      alignment: WrapAlignment.spaceBetween,
-                                      spacing: 20.0,
-                                      children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Text('All'),
-                                            Radio(
-                                                value: 'All',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('Maths'),
-                                            Radio(
-                                                value: 'Maths',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('Aptitude'),
-                                            Radio(
-                                                value: 'Aptitude',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('Chemistry'),
-                                            Radio(
-                                                value: 'Chemistry',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('Computer'),
-                                            Radio(
-                                                value: 'Computer',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('Physics'),
-                                            Radio(
-                                                value: 'Physics',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('English'),
-                                            Radio(
-                                                value: 'English',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('Biology'),
-                                            Radio(
-                                                value: 'Biology',
-                                                groupValue: topic,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    topic = value;
-                                                  });
-                                                }),
-                                          ],
-                                        ),
-                                      ]),
-                                  StreamBuilder<List<Score>>(
-                                      stream: DatabaseService(uid: uid)
-                                          .getTopicScores(topic),
-                                      // ignore: missing_return
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasData) {
-                                          List<Score> datas = snapshot.data;
-
-//                                            _generateData(datas);
-                                          datagen(topic, data, datas);
-                                          return Expanded(
+                                  DropdownButton<String>(
+                                    value: topic,
+                                    underline: Container(
+                                      color: Color(0xff43b77d),
+                                      height: 2.0,
+                                    ),
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        topic = newValue;
+                                      });
+                                    },
+                                    items: items.map((item) {
+                                      return DropdownMenuItem(
+                                          value: item, child: Text(item));
+                                    }).toList(),
+                                  ),
+                                  Expanded(
 //                                              height: MediaQuery.of(context).size.height*0.60,
 //                                              width: MediaQuery.of(context).size.width*0.50,
-                                            child: charts.TimeSeriesChart(
-                                                _seriesLineData,
-                                                defaultRenderer: new charts
-                                                        .LineRendererConfig(
-                                                    includeArea: true,
-                                                    stacked: true),
-                                                animate: true,
-                                                animationDuration:
-                                                    Duration(seconds: 5),
-                                                behaviors: [
-                                                  new charts.ChartTitle('Score',
-                                                      behaviorPosition: charts
-                                                          .BehaviorPosition
-                                                          .start,
-                                                      titleOutsideJustification:
-                                                          charts
-                                                              .OutsideJustification
-                                                              .middleDrawArea),
-                                                ]),
-                                          );
-                                        } else {
-                                          return Container();
-                                        }
-                                      }),
+                                    child: charts.TimeSeriesChart(
+                                        _seriesLineData,
+                                        defaultRenderer:
+                                            new charts.LineRendererConfig(
+                                                includeArea: true,
+                                                stacked: true),
+                                        animate: true,
+                                        animationDuration: Duration(seconds: 3),
+                                        behaviors: [
+                                          new charts.ChartTitle('Score',
+                                              behaviorPosition:
+                                                  charts.BehaviorPosition.start,
+                                              titleOutsideJustification: charts
+                                                  .OutsideJustification
+                                                  .middleDrawArea),
+                                        ]),
+                                  ),
+//                                           StreamBuilder<List<Score>>(
+//                                               stream: DatabaseService(uid: uid)
+//                                                   .getTopicScores(topic),
+//                                               // ignore: missing_return
+//                                               builder: (context, snapshot) {
+//                                                 if (snapshot.hasData) {
+//                                                   List<Score> datas =
+//                                                       snapshot.data;
+
+// //                                            _generateData(datas);
+
+//                                                 } else {
+//                                                   return Container();
+//                                                 }
+//                                               }),
                                   SizedBox(
                                     height: 50,
                                   )
@@ -354,7 +254,7 @@ class _PreviousScoresState extends State<PreviousScores> {
                               ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -370,47 +270,10 @@ class _PreviousScoresState extends State<PreviousScores> {
               ),
               body: Center(
                 child: Text(
-                  'You have not attempted any tests yet',
+                  'No tests attempted yet',
                   style: TextStyle(color: Colors.white),
                 ),
               ));
         });
-  }
-
-  datagen(topic, data, datas) {
-    switch (topic) {
-      case 'All':
-        return _generateData(data);
-        break;
-      default:
-        return _generateData(datas);
-        break;
-    }
-  }
-
-  getcolor(qTopic) {
-    switch (qTopic) {
-      case 'Aptitude':
-        return charts.Color.fromHex(code: '#438786');
-        break;
-      case 'Maths':
-        return charts.Color.fromHex(code: '#532234');
-        break;
-      case 'Biology':
-        return charts.Color.fromHex(code: '#937219');
-        break;
-      case 'Computer':
-        return charts.Color.fromHex(code: '#374182');
-        break;
-      case 'Physics':
-        return charts.Color.fromHex(code: '#437264');
-        break;
-      case 'Chemistry':
-        return charts.Color.fromHex(code: '#725373');
-        break;
-      default:
-        return charts.Color.fromHex(code: '#261262');
-        break;
-    }
   }
 }
