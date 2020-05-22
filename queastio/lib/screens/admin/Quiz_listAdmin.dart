@@ -48,7 +48,7 @@ class _QuizListAdminState extends State<QuizListAdmin> {
                     ),
                   )
                 : Container(
-                    color: Colors.indigo,
+                    color: Colors.white,
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {

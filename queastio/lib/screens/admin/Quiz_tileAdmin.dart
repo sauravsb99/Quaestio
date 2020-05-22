@@ -171,37 +171,33 @@ class QuizTileAdmin extends StatelessWidget {
           });
     }
 
-    return InkWell(
-      splashColor: Colors.white70,
-      splashFactory: InkSplash.splashFactory,
-      onTap: () {
-        print(quiz.questions);
-        _showQuizDetails();
-      },
-      child: Container(
-        height: 100.0,
-        child: Card(
-            color: Colors.black87,
-            child: Center(
-              child: Wrap(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 0, vertical: 2.0),
-                    child: Text(
-                      quiz.qName.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2.0,
-                      ),
-                      textAlign: TextAlign.center,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        splashColor: Colors.white70,
+        splashFactory: InkSplash.splashFactory,
+        onTap: () {
+          print(quiz.questions);
+          _showQuizDetails();
+        },
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: ListTile(
+                title: Text(quiz.qName.toUpperCase()),
+                trailing: IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red[700],
                     ),
-                  ),
-                ],
+                    onPressed: () {
+                      User user = Provider.of<User>(context, listen: false);
+                      DatabaseService(uid: user.uid).deleteQuiz(quiz.qId);
+                    }),
               ),
-            )),
+            ),
+          ],
+        ),
       ),
     );
   }
