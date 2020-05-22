@@ -52,7 +52,12 @@ class _QuizListAdminState extends State<QuizListAdmin> {
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        return QuizTileAdmin(quiz: data[index]);
+                        return Column(
+                          children: <Widget>[
+                            QuizTileAdmin(quiz: data[index]),
+                            Divider(height: 1)
+                          ],
+                        );
                       },
                     ),
                   ),
