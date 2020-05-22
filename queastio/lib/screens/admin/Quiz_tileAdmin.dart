@@ -185,15 +185,6 @@ class QuizTileAdmin extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title: Text(quiz.qName.toUpperCase()),
-                trailing: IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red[700],
-                    ),
-                    onPressed: () {
-                      User user = Provider.of<User>(context, listen: false);
-                      DatabaseService(uid: user.uid).deleteQuiz(quiz.qId);
-                    }),
               ),
             ),
           ],
