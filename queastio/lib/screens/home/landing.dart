@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/topic.dart';
+import 'package:queastio/screens/home/topic_tile.dart';
 import 'package:queastio/shared/constants.dart';
 
 class Landing extends StatefulWidget {
@@ -53,7 +54,7 @@ class _LandingState extends State<Landing> {
               } else {
                 heights[1] = 0;
                 heights[0] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height);
+                    AppBar().preferredSize.height);
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
@@ -67,45 +68,46 @@ class _LandingState extends State<Landing> {
           child: AnimatedContainer(
             duration: Duration(milliseconds: 250),
             height: heights2[0],
-            child:Padding(
+            child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                  child: Stack(
-                      children: <Widget>[
-                      // Positioned.fill(
-                      //   child: Image.asset(
-                      //     'assets/aptitude.jpg',
-                      //     fit: BoxFit.fill,
-                      //   ),
-                      // ),
-                      Container(
+                child: Stack(
+                  children: <Widget>[
+                    // Positioned.fill(
+                    //   child: Image.asset(
+                    //     'assets/aptitude.jpg',
+                    //     fit: BoxFit.fill,
+                    //   ),
+                    // ),
+                    Container(
                       padding: EdgeInsets.all(18),
-          //                 color: Colors.white,
+                      //                 color: Colors.white,
                       decoration: BoxDecoration(
-          //                     borderRadius: BorderRadius.circular(20.0),
+                          //                     borderRadius: BorderRadius.circular(20.0),
                           color: Colors.black87,
                           image: DecorationImage(
                             fit: BoxFit.fitWidth,
                             alignment: FractionalOffset.topCenter,
-                            image:  CachedNetworkImageProvider("https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",),
-                          )
-                      ),
+                            image: CachedNetworkImageProvider(
+                              "https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",
+                            ),
+                          )),
                     ),
                     Center(
                         child: Text(
-                          'Domain Specific',
-                          style: TextStyle(
-                            fontSize: 26.0,
-                            color: Colors.white,
-                            letterSpacing: 3.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
-          //                    ],
-          //                  ),
-              ],
-          ),
-          ),
+                      'Domain Specific',
+                      style: TextStyle(
+                        fontSize: 26.0,
+                        color: Colors.white,
+                        letterSpacing: 3.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                    //                    ],
+                    //                  ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -115,28 +117,33 @@ class _LandingState extends State<Landing> {
           color: Color(0xff1b1b1b),
           height: heights[0],
           child: ListView.builder(
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
               itemCount: dTopic.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: <Widget>[
-                    ListTile(
-                      onTap: () {
-                        Navigator.pushNamed(context, QuizListRoute,
-                            arguments: dTopic[index].name);
-                      },
-                      title: Text(
-                        dTopic[index].name,
-                        style: TextStyle(fontSize: 20.0, color: Colors.white),
-                      ),
-                    ),
-                    Divider(
-                      height: (MediaQuery.of(context).size.height -
-                              AppBar().preferredSize.height) *
-                          0.0001,
-                      color: Color(0xfffaece6),
-                    ),
-                  ],
+                return
+                    // children: <Widget>[
+                    TopicTile(
+                  topic: dTopic[index],
                 );
+                // ListTile(
+                //   onTap: () {
+                //     Navigator.pushNamed(context, QuizListRoute,
+                //         arguments: dTopic[index].name);
+                //   },
+                //   title: Text(
+                //     dTopic[index].name,
+                //     style: TextStyle(fontSize: 20.0, color: Colors.white),
+                //   ),
+                // ),
+                // Divider(
+                //   height: (MediaQuery.of(context).size.height -
+                //           AppBar().preferredSize.height) *
+                //       0.0001,
+                //   color: Color(0xfffaece6),
+                // ),
+                // ],
+                // );
               }),
         ),
         InkWell(
@@ -153,9 +160,9 @@ class _LandingState extends State<Landing> {
                     0.4;
                 clickedCard = null;
               } else {
-                heights[1] = (MediaQuery.of(context).size.height
-                              - AppBar().preferredSize.height-50
-                             ) *
+                heights[1] = (MediaQuery.of(context).size.height -
+                        AppBar().preferredSize.height -
+                        50) *
                     0.7;
                 heights[0] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
@@ -182,29 +189,30 @@ class _LandingState extends State<Landing> {
                     //     fit: BoxFit.fill,
                     //   ),
                     // ),
-                 Container(
-                   padding: EdgeInsets.all(18),
+                    Container(
+                      padding: EdgeInsets.all(18),
 //                 color: Colors.white,
-                   decoration: BoxDecoration(
+                      decoration: BoxDecoration(
 //                     borderRadius: BorderRadius.circular(20.0),
-                       color: Colors.black87,
-                       image: DecorationImage(
-                         fit: BoxFit.fitWidth,
-                         alignment: FractionalOffset.topCenter,
-                         image:  CachedNetworkImageProvider("https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",),
-                       )
-                   ),
-                 ),
+                          color: Colors.black87,
+                          image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            alignment: FractionalOffset.topCenter,
+                            image: CachedNetworkImageProvider(
+                              "https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",
+                            ),
+                          )),
+                    ),
                     Center(
-                            child: Text(
-                          'General Aptitude',
-                          style: TextStyle(
-                            fontSize: 26.0,
-                            color: Colors.white,
-                            letterSpacing: 3.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
+                        child: Text(
+                      'General Aptitude',
+                      style: TextStyle(
+                        fontSize: 26.0,
+                        color: Colors.white,
+                        letterSpacing: 3.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
 //                    ],
 //                  ),
                   ],
@@ -223,25 +231,25 @@ class _LandingState extends State<Landing> {
               itemBuilder: (context, index) {
                 return Column(
                   children: <Widget>[
-                    // TopicTile(
-                    //   topic: aTopic[index],
-                    // )
-                    ListTile(
-                      onTap: () {
-                        Navigator.pushNamed(context, QuizListRoute,
-                            arguments: aTopic[index].name);
-                      },
-                      title: Text(
-                        aTopic[index].name,
-                        style: TextStyle(fontSize: 20.0, color: Colors.white),
-                      ),
+                    TopicTile(
+                      topic: aTopic[index],
                     ),
-                    Divider(
-                      height: (MediaQuery.of(context).size.height -
-                              AppBar().preferredSize.height) *
-                          0.0001,
-//                      color: Color(0xfffaece6),
-                    ),
+//                     ListTile(
+//                       onTap: () {
+//                         Navigator.pushNamed(context, QuizListRoute,
+//                             arguments: aTopic[index].name);
+//                       },
+//                       title: Text(
+//                         aTopic[index].name,
+//                         style: TextStyle(fontSize: 20.0, color: Colors.white),
+//                       ),
+//                     ),
+//                     Divider(
+//                       height: (MediaQuery.of(context).size.height -
+//                               AppBar().preferredSize.height) *
+//                           0.0001,
+// //                      color: Color(0xfffaece6),
+//                     ),
                   ],
                 );
               }),
@@ -254,8 +262,6 @@ class _LandingState extends State<Landing> {
     );
   }
 }
-
-
 
 //a9b6b8
 //091919

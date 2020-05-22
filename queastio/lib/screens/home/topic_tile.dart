@@ -18,7 +18,7 @@ class TopicTile extends StatelessWidget {
         Navigator.pushNamed(context, QuizListRoute, arguments: topic.name);
       },
       child: Card(
-          color: Colors.indigo,
+          color: Color(0xff43b77d),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
