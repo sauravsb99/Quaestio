@@ -30,8 +30,7 @@ class Home extends StatelessWidget {
 //            Row(children:<Widget>[Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),],)
 //          ],
           ),
-          body: Landing()
-
+          body: Landing(),
         ),
       ),
     );
