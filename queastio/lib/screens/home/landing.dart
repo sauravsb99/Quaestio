@@ -88,8 +88,7 @@ class _LandingState extends State<Landing> {
                           image: DecorationImage(
                             fit: BoxFit.fitWidth,
                             alignment: FractionalOffset.topCenter,
-                            image: CachedNetworkImageProvider(
-                              "https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",
+                            image: CachedNetworkImageProvider("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/pharma.jpg?alt=media&token=8ba8c44c-1a31-4389-8d87-a0f6d6b01866"
                             ),
                           )),
                     ),
@@ -199,7 +198,7 @@ class _LandingState extends State<Landing> {
                             fit: BoxFit.fitWidth,
                             alignment: FractionalOffset.topCenter,
                             image: CachedNetworkImageProvider(
-                              "https://guardian.ng/wp-content/uploads/2016/09/PHARMACY.jpg",
+                              "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/quanti.jpg?alt=media&token=d6243484-1d09-49e2-861a-ab56d66d873d",
                             ),
                           )),
                     ),
