@@ -12,15 +12,13 @@ class PreviousScores extends StatefulWidget {
   final String uid;
   PreviousScores({Key key, this.child, this.uid}) : super(key: key);
   @override
-  _PreviousScoresState createState() => _PreviousScoresState(uid: uid);
+  _PreviousScoresState createState() => _PreviousScoresState();
 }
 
 class _PreviousScoresState extends State<PreviousScores> {
   List<charts.Series<Score, DateTime>> _seriesLineData;
-  final String uid;
   String topic = 'All';
   Set<String> items;
-  _PreviousScoresState({this.uid, this.topic});
 //  List<Score> mydata;
 
   _generateData(data) {
@@ -46,7 +44,7 @@ class _PreviousScoresState extends State<PreviousScores> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Score>>(
-        stream: DatabaseService(uid: uid).getScores(),
+        stream: DatabaseService(uid: widget.uid).getScores(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Score> scores = snapshot.data;
