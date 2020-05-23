@@ -8,16 +8,14 @@ class QuizList extends StatefulWidget {
   final String topic;
   QuizList({this.topic});
   @override
-  _QuizListState createState() => _QuizListState(topic: topic);
+  _QuizListState createState() => _QuizListState();
 }
 
 class _QuizListState extends State<QuizList> {
-  final String topic;
-  _QuizListState({this.topic});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Quiz>>(
-      stream: DatabaseService().getQuizzes(topic),
+      stream: DatabaseService().getQuizzes(widget.topic),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
@@ -26,7 +24,7 @@ class _QuizListState extends State<QuizList> {
             appBar: AppBar(
 //              backgroundColor: Color(0xff0fc77e),
               title: Text(
-                topic,
+                widget.topic,
                 style: TextStyle(
                   letterSpacing: 2.0,
                 ),

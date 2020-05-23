@@ -64,7 +64,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   Divider(
                     indent: 20.0,
                     endIndent: 20.0,
-                    color: Colors.grey,
+                    color: Color(0xff3b3b3b),
                   ),
                   Wrap(
                     alignment: WrapAlignment.center,
@@ -81,7 +81,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderRadius: BorderRadius.circular(15.0),
                           borderOnForeground: true,
                           child: FlatButton(
-                            color: Colors.grey,
+                            color: Color(0xff3b3b3b),
                             onPressed: () {
                               Navigator.pushNamed(context, PrevScoresRoute,
                                   arguments: user.uid);
@@ -97,19 +97,19 @@ class _MyDrawerState extends State<MyDrawer> {
                                     'Previous Scores',
                                     style: TextStyle(
                                       fontSize: 22,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.black,
-                                  width: 3,
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(11)),
+                            // shape: RoundedRectangleBorder(
+                            //     side: BorderSide(
+                            //       color: Colors.white,
+                            //       width: 3,
+                            //       style: BorderStyle.solid,
+                            //     ),
+                            //     borderRadius: BorderRadius.circular(11)),
                           ),
                         ),
                       ),
@@ -130,7 +130,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderRadius: BorderRadius.circular(15.0),
                           borderOnForeground: true,
                           child: FlatButton(
-                            color: Colors.grey,
+                            color: Color(0xff3b3b3b),
                             onPressed: () {
                               Navigator.pushNamed(context, AboutUsRoute);
                             },
@@ -145,19 +145,19 @@ class _MyDrawerState extends State<MyDrawer> {
                                     "About Us",
                                     style: TextStyle(
                                       fontSize: 22,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.black,
-                                  width: 3,
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(11)),
+                            // shape: RoundedRectangleBorder(
+                            //     side: BorderSide(
+                            //       color: Colors.white,
+                            //       width: 3,
+                            //       // style: BorderStyle.solid,
+                            //     ),
+                            //     borderRadius: BorderRadius.circular(11)),
                           ),
                         ),
                       ),
@@ -179,7 +179,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderRadius: BorderRadius.circular(15.0),
                           borderOnForeground: true,
                           child: FlatButton(
-                            color: Colors.grey,
+                            color: Color(0xff3b3b3b),
                             onPressed: () {},
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -192,19 +192,19 @@ class _MyDrawerState extends State<MyDrawer> {
                                     'Contact Us',
                                     style: TextStyle(
                                       fontSize: 22,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.black,
-                                  width: 3,
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(11)),
+                            // shape: RoundedRectangleBorder(
+                            //     side: BorderSide(
+                            //       color: Colors.white,
+                            //       width: 3,
+                            //       style: BorderStyle.solid,
+                            //     ),
+                            //     borderRadius: BorderRadius.circular(11)),
                           ),
                         ),
                       ),
@@ -226,7 +226,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderRadius: BorderRadius.circular(15.0),
                           borderOnForeground: true,
                           child: FlatButton(
-                            color: Colors.grey,
+                            color: Color(0xff3b3b3b),
                             onPressed: () {
                               Navigator.pop(context);
                               Navigator.pushNamed(context, FaQRoute);
@@ -241,20 +241,20 @@ class _MyDrawerState extends State<MyDrawer> {
                                     'FAQ',
                                     style: TextStyle(
                                       fontSize: 22,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: Colors.black,
-                                width: 3,
-                                style: BorderStyle.solid,
-                              ),
-                              borderRadius: BorderRadius.circular(11),
-                            ),
+                            // shape: RoundedRectangleBorder(
+                            //   side: BorderSide(
+                            //     color: Colors.white,
+                            //     width: 3,
+                            //     style: BorderStyle.solid,
+                            //   ),
+                            //   borderRadius: BorderRadius.circular(11),
+                            // ),
                           ),
                         ),
                       ),
@@ -288,10 +288,11 @@ class _MyDrawerState extends State<MyDrawer> {
                             MediaQuery.of(context).size.width * 0.05,
                             0),
                         child: Material(
-                          elevation: 0.0,
+                          elevation: 15.0,
                           borderRadius: BorderRadius.circular(15.0),
                           borderOnForeground: true,
                           child: FlatButton(
+                            color: Color(0xff3b3b3b),
                             onPressed: () async {
                               await _auth.signOut();
                               Navigator.pop(context);
@@ -306,25 +307,24 @@ class _MyDrawerState extends State<MyDrawer> {
                                     'Logout',
                                     style: TextStyle(
                                       fontSize: 22,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.grey,
-                                  width: 5,
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(11)),
+                            // shape: RoundedRectangleBorder(
+                            //     side: BorderSide(
+                            //       color: Color(0xff3b3b3b),
+                            //       width: 5,
+                            //       style: BorderStyle.solid,
+                            //     ),
+                            //     borderRadius: BorderRadius.circular(11)),
                           ),
                         ),
                       ),
                     ],
                   ),
-
                 ],
               ),
             );
