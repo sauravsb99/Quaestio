@@ -19,23 +19,14 @@ class _TopicListState extends State<TopicList> {
   _TopicListState({this.user});
   @override
   Widget build(BuildContext context) {
-    String batch='12';
-    final user = Provider.of<List<User>>(context);
-//    print(userData.batch);
-
-    var uid;
+    print("ok");
+    print(user.batch);
+    print("ok");
     return StreamBuilder<List<Topic>>(
-        stream: DatabaseService().getTopics(batch),
-    // ignore: missing_return
+        stream: DatabaseService().getTopicsBatch(user.batch),
     builder: (context, snapshot) {
     if (snapshot.hasData) {
     List<Topic> topics = snapshot.data;
-//    final topics = Provider.of<List<Topic>>(context);
-    // topics.forEach((topic) {
-    //   print(topic.name);
-    //   print(topic.image);
-    // });
-
     return ListView.builder(
       itemCount: topics.length,
       itemBuilder: (context, index) {

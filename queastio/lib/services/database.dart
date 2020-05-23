@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:queastio/models/batch.dart';
 import 'package:queastio/models/faq.dart';
 import 'package:queastio/models/score.dart';
 import 'package:queastio/models/topic.dart';
@@ -23,6 +24,9 @@ class DatabaseService {
   final CollectionReference faqCollection =
       Firestore.instance.collection('faq');
 
+  final CollectionReference batchCollection =
+      Firestore.instance.collection('batches');
+
   Future<void> updateUserData(String name, String image, String role) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
@@ -31,12 +35,13 @@ class DatabaseService {
       'role': role,
     });
   }
-  
-  Future<void> addTopic(String category,String image,String name) async{
+
+  Future<void> addTopic(String category, String image, String name,String batch) async {
     await topicCollection.document().setData({
-      'category' : category,
+      'category': category,
       'image': image,
-      'name' : name,
+      'name': name,
+      'batch': batch,
     });
     return ("true");
   }
@@ -109,6 +114,7 @@ class DatabaseService {
       name: snapshot.data['name'],
       image: snapshot.data['image'],
       role: snapshot.data['role'],
+      batch: snapshot.data['batch'],
     );
   }
 
@@ -119,6 +125,7 @@ class DatabaseService {
         name: doc['name'],
         image: doc['image'],
         role: doc['role'],
+        batch: doc['batch'],
       );
     }).toList();
   }
@@ -129,6 +136,7 @@ class DatabaseService {
         name: doc.data['name'] ?? '',
         image: doc.data['image'] ?? '',
         category: doc.data['category'] ?? '',
+        batch: doc.data['batch'] ?? '',
       );
     }).toList();
   }
@@ -163,6 +171,15 @@ class DatabaseService {
     }).toList();
   }
 
+//  List<Batch> _batchListFromSnapshot(QuerySnapshot snapshot) {
+//    return snapshot.documents.map((doc) {
+//      return Batch(
+//        name: doc.data['name'] ?? '',
+//        topics: doc.data['topics'] ?? [],
+//      );
+//    }).toList();
+//  }
+
   Stream<UserData> get userData {
     try {
       return userCollection
@@ -196,25 +213,20 @@ class DatabaseService {
   }
 
   Stream<List<Topic>> get topics {
-    return topicCollection
-        .snapshots().map(_topicListFromSnapshot);
+    return topicCollection.snapshots().map(_topicListFromSnapshot);
   }
-//  Stream<List<Topic>> get topicsbatch {
-//    return topicCollection
-//        .where('batch',isEqualTo: batch)
-//        .snapshots().map(_topicListFromSnapshot);
-//  }
 
   Stream<List<Faq>> get faqs {
     return faqCollection.snapshots().map(_faqListFromSnapshot);
   }
 
-  Stream<List<Topic>>  getTopics(String batch){
-    return topicCollection
-        .where('batch',isEqualTo: batch)
-        .snapshots()
-        .map(_topicListFromSnapshot);
-  }
+//  Stream<List<Batch>> get batches {
+//    try {
+//      return batchCollection.snapshots().map(_batchListFromSnapshot);
+//    } on Exception {
+//      return null;
+//    }
+//  }
 
   Stream<List<Quiz>> getQuizzes(String topic) {
     return quizCollection
@@ -242,6 +254,13 @@ class DatabaseService {
           .snapshots()
           .map(_scoreListFromSnapshot);
     }
+  }
+
+  Stream<List<Topic>> getTopicsBatch(String batch) {
+    print(batch);
+    return topicCollection
+        .where('batch',isEqualTo: batch )
+        .snapshots().map(_topicListFromSnapshot);
   }
 
   Stream<List<Score>> getTopicScoresAll(String topic) {
