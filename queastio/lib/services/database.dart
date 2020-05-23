@@ -167,6 +167,7 @@ Future<void> deleteUser(String uid) async {
     try {
       return userCollection
           .where('role', isEqualTo: 'user')
+          .orderBy('name')
           .snapshots()
           .map(_userDataListFromSnapshot);
     } on Exception {
