@@ -62,7 +62,7 @@ class _TopicAddState extends State<TopicAdd> {
                 image = "https://firebasestorage.googleapis.com/v0/b/okkk-810ee.appspot.com/o/aptitude.jpg?alt=media&token=ee80431a-5377-4027-a853-9e6c3171c998";
               else
                 image = "https://firebasestorage.googleapis.com/v0/b/okkk-810ee.appspot.com/o/aptitude.jpg?alt=media&token=ee80431a-5377-4027-a853-9e6c3171c998";
-              await DatabaseService().addTopic(category, image, _currentName);
+              await DatabaseService().addTopic(category, image, _currentName,'Pharma');
               // print(_currentName);
               // print(_currentSugars);
               // print(_currentStrength);
