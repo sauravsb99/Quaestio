@@ -196,11 +196,24 @@ class DatabaseService {
   }
 
   Stream<List<Topic>> get topics {
-    return topicCollection.snapshots().map(_topicListFromSnapshot);
+    return topicCollection
+        .snapshots().map(_topicListFromSnapshot);
   }
+//  Stream<List<Topic>> get topicsbatch {
+//    return topicCollection
+//        .where('batch',isEqualTo: batch)
+//        .snapshots().map(_topicListFromSnapshot);
+//  }
 
   Stream<List<Faq>> get faqs {
     return faqCollection.snapshots().map(_faqListFromSnapshot);
+  }
+
+  Stream<List<Topic>>  getTopics(String batch){
+    return topicCollection
+        .where('batch',isEqualTo: batch)
+        .snapshots()
+        .map(_topicListFromSnapshot);
   }
 
   Stream<List<Quiz>> getQuizzes(String topic) {

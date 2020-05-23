@@ -233,22 +233,6 @@ class _LandingState extends State<Landing> {
                     TopicTile(
                       topic: aTopic[index],
                     ),
-//                     ListTile(
-//                       onTap: () {
-//                         Navigator.pushNamed(context, QuizListRoute,
-//                             arguments: aTopic[index].name);
-//                       },
-//                       title: Text(
-//                         aTopic[index].name,
-//                         style: TextStyle(fontSize: 20.0, color: Colors.white),
-//                       ),
-//                     ),
-//                     Divider(
-//                       height: (MediaQuery.of(context).size.height -
-//                               AppBar().preferredSize.height) *
-//                           0.0001,
-// //                      color: Color(0xfffaece6),
-//                     ),
                   ],
                 );
               }),
