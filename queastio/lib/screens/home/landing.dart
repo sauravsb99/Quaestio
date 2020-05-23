@@ -53,8 +53,8 @@ class _LandingState extends State<Landing> {
                 clickedCard = null;
               } else {
                 heights[1] = 0;
-                heights[0] = (MediaQuery.of(context).size.height -
-                    AppBar().preferredSize.height);
+                heights[0] =
+                    (MediaQuery.of(context).size.height) * 0.3 * dTopic.length;
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
@@ -88,8 +88,8 @@ class _LandingState extends State<Landing> {
                           image: DecorationImage(
                             fit: BoxFit.fitWidth,
                             alignment: FractionalOffset.topCenter,
-                            image: CachedNetworkImageProvider("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/pharma.jpg?alt=media&token=8ba8c44c-1a31-4389-8d87-a0f6d6b01866"
-                            ),
+                            image: CachedNetworkImageProvider(
+                                "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/pharma.jpg?alt=media&token=8ba8c44c-1a31-4389-8d87-a0f6d6b01866"),
                           )),
                     ),
                     Center(
@@ -159,10 +159,8 @@ class _LandingState extends State<Landing> {
                     0.4;
                 clickedCard = null;
               } else {
-                heights[1] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height -
-                        50) *
-                    0.7;
+                heights[1] =
+                    (MediaQuery.of(context).size.height) * 0.3 * aTopic.length;
                 heights[0] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
@@ -226,6 +224,8 @@ class _LandingState extends State<Landing> {
           padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
           color: Color(0xff1b1b1b),
           child: ListView.builder(
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
               itemCount: aTopic.length,
               itemBuilder: (context, index) {
                 return Column(
