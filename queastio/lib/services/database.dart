@@ -55,7 +55,9 @@ class DatabaseService {
       'questions': questions,
     });
   }
-
+Future<void> deleteUser(String uid) async {
+    return userCollection.document(uid).delete();
+  }
   Future<void> deleteQuiz(String qid) async {
     print('ok');
     quizCollection.document(qid).delete();
@@ -119,7 +121,7 @@ class DatabaseService {
       );
     }).toList();
   }
-
+  
   List<Quiz> _quizListFromSnapshot(QuerySnapshot snapshot) {
     developer.log('Hi');
     return snapshot.documents.map((doc) {
