@@ -1,5 +1,3 @@
-import 'package:charts_flutter/flutter.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +7,25 @@ class AboutUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final _markDownData = string1.map((x) => "- $x\n").reduce((x, y) => "$x$y");
-
     return Scaffold(
       backgroundColor: Colors.black54,
       appBar: AppBar(
         backgroundColor: Colors.black54,
+      ),
+      floatingActionButton:
+      Container(
+        height: 80.0,
+        width: 80.0,
+        child: FittedBox(
+          child: FloatingActionButton(backgroundColor: Colors.transparent,splashColor:Colors.transparent,onPressed: () {},
+            child: Padding(
+
+              padding: const EdgeInsets.all(4),
+              child:
+              Image.asset("assets/logo_ok.png"),
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
           child: Column(
@@ -56,7 +67,9 @@ class AboutUs extends StatelessWidget {
 //                  Wrap(
 //                    children: <Widget>[
                       Column(
-                        children: <Widget>[SizedBox(height: 20,),
+
+                        children: <Widget>[
+                        SizedBox(height: 20,),
                           Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
 //                          mainAxisAlignment: MainAxisAlignment.start,
@@ -117,7 +130,198 @@ class AboutUs extends StatelessWidget {
 //          )
 
                 ),
-              )
+
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+//                child: RichText(
+//                  textAlign: TextAlign.left,
+//                  text: TextSpan(
+////                      style: TextStyle(fontSize: 23),
+//                      text:
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text('OUR APPROACH',style: TextStyle(color: Colors.white),),
+                    ],
+                  )
+//                ),
+              ),
+              Divider(
+                height: 30.0,
+                thickness: 2.0,
+                color: Colors.white,
+                indent: 6,
+                endIndent: 300,
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+//                  Wrap(
+//                    children: <Widget>[
+                  Column(
+                    children: <Widget>[SizedBox(height: 20,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+//                          mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+//                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("• ",style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                          Expanded(
+                              child:Text("Our objectives are derived from our purpose of “ Employability for All ”We aim to:",style: TextStyle(color: Colors.white),)
+//                                 Markdown(data: _markDownData,)
+                          )
+
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+//                          mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+//                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("• ",style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                          Expanded(
+                              child:Text("Continually refine our understanding of the Employability Problem through structuredengagement with all stakeholders",style: TextStyle(color: Colors.white),)
+//                                 Markdown(data: _markDownData,)
+                          )
+
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+//                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("• ",style: TextStyle(color: Colors.white),textAlign: TextAlign.start,),
+                            ],
+                          ),
+                          Expanded(
+                              child:Text("Play back the ‘Industry Expectations’ to the Academia and Students. Incorporate these expectations in all our programs",style: TextStyle(color: Colors.white),)
+//                                 Markdown(data: _markDownData,)
+                          )
+
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+//                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("• ",style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                          Expanded(
+                              child:Text("Influence the policymaking bodies to incorporate the ‘Industry Expectations’ into academiccurriculum",style: TextStyle(color: Colors.white),)
+//                                 Markdown(data: _markDownData,)
+                          )
+
+                        ],
+                      ),
+                    ],
+                  ),
+//            ],
+//          )
+
+                ),
+
+
+              ),
+              SizedBox(height: 20,),
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+//                child: RichText(
+//                  textAlign: TextAlign.left,
+//                  text: TextSpan(
+////                      style: TextStyle(fontSize: 23),
+//                      text:
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text('CONTACT US :',style: TextStyle(color: Colors.white),),
+                    ],
+                  )
+//                ),
+              ),
+              Divider(
+                height: 30.0,
+                thickness: 2.0,
+                color: Colors.white,
+                indent: 6,
+                endIndent: 300,
+              ),
+
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+//                  Wrap(
+//                    children: <Widget>[
+                  Column(
+
+                    children: <Widget>[
+                      SizedBox(height: 20,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+//                          mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+//                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("Website:\t  www.enable-careers.com",style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+//                          Expanded(
+//                              child:Text("Channelize the energy of our youth towards a purposeful career. Help them make an informedchoice in sync with their interest & ability",style: TextStyle(color: Colors.white),)
+////                                 Markdown(data: _markDownData,)
+//                          )
+
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+//                          Column(
+////                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+////                        crossAxisAlignment: CrossAxisAlignment.start,
+//                            children: <Widget>[
+//                              Text("• ",style: TextStyle(color: Colors.white),textAlign: TextAlign.start,),
+//                            ],
+//                          ),
+                          Expanded(
+                              child:Text("E-Mail:\t  jobs@enable-careers.com",style: TextStyle(color: Colors.white),)
+//                                 Markdown(data: _markDownData,)
+                          )
+
+                        ],
+                      ),
+                      ],
+                  ),
+//            ],
+//          )
+
+                ),
+
+              ),
             ]
               )
 // OBJECTIVES
