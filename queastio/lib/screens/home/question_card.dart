@@ -6,18 +6,17 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:quiver/async.dart';
+// import 'package:auto_size_text/auto_size_text.dart';
 
 class QuestionCard extends StatefulWidget {
   final Map quiz;
   QuestionCard({this.quiz});
   @override
-  _QuestionCardState createState() => _QuestionCardState(quiz: quiz);
+  _QuestionCardState createState() => _QuestionCardState();
 }
 
 class _QuestionCardState extends State<QuestionCard>
     with SingleTickerProviderStateMixin {
-  final Map quiz;
-  _QuestionCardState({this.quiz});
   int index = 0;
   bool _isPrevButtonDisabled;
   bool _isNextButtonDisabled;
@@ -26,6 +25,7 @@ class _QuestionCardState extends State<QuestionCard>
   User user;
   UserData userData;
   CountdownTimer c;
+  List questions;
   var sub;
   _convertToTwoDigit(int n) {
     if (n < 10) return '0' + n.toString();
@@ -35,20 +35,25 @@ class _QuestionCardState extends State<QuestionCard>
   Future<void> calcScore() async {
     sub.cancel();
     Scoring instance =
-        Scoring(answers: quiz['answers'], selected: selectedOptions);
+        Scoring(answers: widget.quiz['answers'], selected: selectedOptions);
     int score = instance.getScore();
     print('Score:' + score.toString());
-    if (userData.role == "user" && quiz['firstTime']) {
+    if (userData.role == "user" && widget.quiz['firstTime']) {
       DateTime time = DateTime.now();
-      await DatabaseService(uid: user.uid).insertScore(userData.name,
-          quiz['qname'], quiz['qTopic'], score, quiz['answers'].length, time);
+      await DatabaseService(uid: user.uid).insertScore(
+          userData.name,
+          widget.quiz['qname'],
+          widget.quiz['qTopic'],
+          score,
+          widget.quiz['answers'].length,
+          time);
     }
-    _showMyDialog(score, quiz['answers'].length);
+    _showMyDialog(score, widget.quiz['answers'].length);
   }
 
   void startTimer() {
     c = CountdownTimer(
-      Duration(minutes: quiz['duration']),
+      Duration(minutes: widget.quiz['duration']),
       Duration(seconds: 1),
     );
     sub = c.listen(null);
@@ -89,8 +94,8 @@ class _QuestionCardState extends State<QuestionCard>
               FlatButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AnswerSheetRoute, arguments: {
-                    'answers': quiz['answers'],
-                    'questions': quiz['questions'],
+                    'answers': widget.quiz['answers'],
+                    'questions': widget.quiz['questions'],
                     'selected': selectedOptions
                   });
                 },
@@ -123,11 +128,16 @@ class _QuestionCardState extends State<QuestionCard>
     _isPrevButtonDisabled = true;
     _isNextButtonDisabled = false;
     buttonPressed = false;
+    questions = widget.quiz['questions'];
+    questions.forEach((element) {
+      element['options'].shuffle();
+    });
+    questions.shuffle();
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
-    d = new Duration(minutes: quiz['duration']);
+    d = new Duration(minutes: widget.quiz['duration']);
     startTimer();
   }
 
@@ -151,7 +161,6 @@ class _QuestionCardState extends State<QuestionCard>
   List<String> selectedOptions;
   @override
   Widget build(BuildContext context) {
-    final List questions = quiz['questions'];
     Map question = Map.from(questions[index]);
 
     selectedOptions =
@@ -181,6 +190,19 @@ class _QuestionCardState extends State<QuestionCard>
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            // Center(
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(8.0),
+                            //     decoration: BoxDecoration(
+                            //       shape: BoxShape.circle,
+                            //       color: Colors.black,
+                            //     ),
+                            //     child: Text(
+                            //       (index + 1).toString(),
+                            //       style: buttonText,
+                            //     ),
+                            //   ),
+                            // ),
                             Flexible(
                               flex: 2,
                               child: Scrollbar(
@@ -296,7 +318,7 @@ class _QuestionCardState extends State<QuestionCard>
                         Column(
                           children: <Widget>[
                             AnimatedOpacity(
-                              duration: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 100),
                               opacity: buttonPressed == true ? 1 : 0,
                               child: Container(
                                 decoration: BoxDecoration(
