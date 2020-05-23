@@ -27,9 +27,9 @@ class UserTile extends StatelessWidget {
                       Icons.delete,
                       color: Colors.red[700],
                     ),
-                    onPressed: (){
+                    onPressed: () async {
                       // User user = Provider.of<User>(context, listen: false);
-                      DatabaseService().deleteUser(user.uid);
+                      await DatabaseService().deleteUser(user.uid);
                     },
           ),
           leading: CircleAvatar(backgroundImage: NetworkImage(user.image)),
