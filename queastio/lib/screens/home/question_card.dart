@@ -24,6 +24,7 @@ class _QuestionCardState extends State<QuestionCard>
   User user;
   UserData userData;
   CountdownTimer c;
+  List questions;
   var sub;
   _convertToTwoDigit(int n) {
     if (n < 10) return '0' + n.toString();
@@ -126,6 +127,11 @@ class _QuestionCardState extends State<QuestionCard>
     _isPrevButtonDisabled = true;
     _isNextButtonDisabled = false;
     buttonPressed = false;
+    questions = widget.quiz['questions'];
+    questions.forEach((element) {
+      element['options'].shuffle();
+    });
+    questions.shuffle();
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 500),
@@ -154,7 +160,6 @@ class _QuestionCardState extends State<QuestionCard>
   List<String> selectedOptions;
   @override
   Widget build(BuildContext context) {
-    final List questions = widget.quiz['questions'];
     Map question = Map.from(questions[index]);
 
     selectedOptions =
