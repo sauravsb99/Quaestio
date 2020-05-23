@@ -49,11 +49,8 @@ class Home extends StatelessWidget {
               height: 80.0,
               width: 80.0,
               child: FittedBox(
-                child: FloatingActionButton(
-                  elevation: 15,
-                  backgroundColor: Color(0xff1b1b1b),
-                  onPressed: () {
-                    Navigator.pushNamed(context, AboutUsRoute);
+                child: FloatingActionButton(elevation:0.5,backgroundColor: Colors.transparent,onPressed: () {
+                  Navigator.pushNamed(context, AboutUsRoute);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(4),

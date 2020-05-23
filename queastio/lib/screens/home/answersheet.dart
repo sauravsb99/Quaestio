@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class AnswerSheet extends StatelessWidget {
   final List questions;
-  final List answers;
   final List selected;
-  AnswerSheet({this.questions, this.answers, this.selected});
+  AnswerSheet({this.questions, this.selected});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +50,7 @@ class AnswerSheet extends StatelessWidget {
                             return RadioListTile<String>(
                               onChanged: (value) {},
                               title: Text(questions[index]['options'][ind]),
-                              groupValue: answers[index],
+                              groupValue: questions[index]['answer'],
                               value: questions[index]['options'][ind],
                               activeColor: Colors.green,
                             );
@@ -62,7 +61,7 @@ class AnswerSheet extends StatelessWidget {
                       children: <Widget>[
                         Text('Your Answer: ' +
                             (selected[index] != null ? selected[index] : '')),
-                        answers[index] == selected[index]
+                        questions[index]['answer'] == selected[index]
                             ? Icon(
                                 Icons.check,
                                 color: Colors.green,

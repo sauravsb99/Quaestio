@@ -1,11 +1,11 @@
 class Scoring {
-  final List answers, selected;
-  Scoring({this.answers, this.selected});
+  final List questions, selected;
+  Scoring({this.questions, this.selected});
 
   int getScore() {
     int count = 0;
-    for (int i = 0; i < answers.length; ++i) {
-      if (answers[i] == selected[i]) count++;
+    for (int i = 0; i < questions.length; ++i) {
+      if (questions[i]['answer'] == selected[i]) count++;
     }
     return count;
   }
