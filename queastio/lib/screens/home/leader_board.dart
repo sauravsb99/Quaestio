@@ -7,16 +7,14 @@ class LeaderBoard extends StatefulWidget {
   final String qname;
   LeaderBoard({this.qname});
   @override
-  _LeaderBoardState createState() => _LeaderBoardState(qname: qname);
+  _LeaderBoardState createState() => _LeaderBoardState();
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
-  final String qname;
-  _LeaderBoardState({this.qname});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Score>>(
-        stream: DatabaseService().getQuizScores(qname),
+        stream: DatabaseService().getQuizScores(widget.qname),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Score> scores = snapshot.data;

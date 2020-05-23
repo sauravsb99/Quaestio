@@ -9,16 +9,14 @@ class QuizListAdmin extends StatefulWidget {
   final String topic;
   QuizListAdmin({this.topic});
   @override
-  _QuizListAdminState createState() => _QuizListAdminState(topic: topic);
+  _QuizListAdminState createState() => _QuizListAdminState();
 }
 
 class _QuizListAdminState extends State<QuizListAdmin> {
-  final String topic;
-  _QuizListAdminState({this.topic});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Quiz>>(
-      stream: DatabaseService().getQuizzes(topic),
+      stream: DatabaseService().getQuizzes(widget.topic),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
@@ -27,7 +25,7 @@ class _QuizListAdminState extends State<QuizListAdmin> {
             appBar: AppBar(
               backgroundColor: Colors.indigo,
               title: Text(
-                topic,
+                widget.topic,
                 style: TextStyle(
                   letterSpacing: 2.0,
                 ),
