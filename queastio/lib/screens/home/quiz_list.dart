@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/models/quiz.dart';
+import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:queastio/screens/home/quiz_tile.dart';
 import 'package:queastio/services/database.dart';
@@ -29,6 +30,15 @@ class _QuizListState extends State<QuizList> {
                   letterSpacing: 2.0,
                 ),
               ),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.star_border),
+                  onPressed: () {
+                    Navigator.pushNamed(context, TopicLeaderRoute,
+                        arguments: widget.topic);
+                  },
+                )
+              ],
             ),
             body: data.length == 0
                 ? Center(

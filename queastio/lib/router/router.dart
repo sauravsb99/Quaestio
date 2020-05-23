@@ -11,6 +11,7 @@ import 'package:queastio/screens/home/leader_board.dart';
 import 'package:queastio/screens/home/previous_scores.dart';
 import 'package:queastio/screens/home/question_card.dart';
 import 'package:queastio/screens/home/quiz_list.dart';
+import 'package:queastio/screens/home/topic_leader_board.dart';
 import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/screens/wrapper.dart';
 import 'package:queastio/shared/constants.dart';
@@ -53,6 +54,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LeaderRoute:
       return MaterialPageRoute(
           builder: (context) => LeaderBoard(qname: settings.arguments));
+    case TopicLeaderRoute:
+      return MaterialPageRoute(
+          builder: (context) => TopicLeaderBoard(topic: settings.arguments));
     case AnswerSheetRoute:
       dynamic data = settings.arguments;
       return MaterialPageRoute(
