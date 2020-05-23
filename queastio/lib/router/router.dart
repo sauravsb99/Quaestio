@@ -57,7 +57,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       dynamic data = settings.arguments;
       return MaterialPageRoute(
         builder: (context) => AnswerSheet(
-          answers: data['answers'],
           questions: data['questions'],
           selected: data['selected'],
         ),
