@@ -31,6 +31,15 @@ class DatabaseService {
       'role': role,
     });
   }
+  
+  Future<void> addTopic(String category,String image,String name) async{
+    await topicCollection.document().setData({
+      'category' : category,
+      'image': image,
+      'name' : name,
+    });
+    return ("true");
+  }
 
   Future<void> updateUserDataByAdmin(
       String name, String image, String role) async {
