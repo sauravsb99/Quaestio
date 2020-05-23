@@ -23,7 +23,7 @@ class AdminHome extends StatelessWidget {
           ),
           appBar: AppBar(
             title: Text('Quaestia'),
-            backgroundColor: Colors.indigo,
+//            backgroundColor: Colors.indigo,
             elevation: 0.0,
           ),
           body: TopicListAdmin(),

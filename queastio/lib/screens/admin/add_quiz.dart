@@ -133,8 +133,8 @@ class _AddQuizState extends State<AddQuiz> {
     return new MaterialApp(
       home: new Scaffold(
         key: _scaffoldKey,
-        appBar: new AppBar(
-          backgroundColor: Colors.green,
+        appBar: AppBar(
+          backgroundColor: Color(0xff43b77d),
           title: const Text('Upload .csv File'),
         ),
         body: new Center(
