@@ -33,7 +33,6 @@ dependencies:
   csv: ^4.0.3
   auto_size_text: ^2.1.0
   file_picker: ^1.9.0+1
-  flutter_markdown:
   charts_flutter: ^0.6.0
   date_format:
 dev_dependencies:

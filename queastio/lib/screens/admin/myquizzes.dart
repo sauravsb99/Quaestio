@@ -26,7 +26,7 @@ class _MyQuizListAdminState extends State<MyQuizListAdmin> {
           return Scaffold(
             backgroundColor: Colors.indigo,
             appBar: AppBar(
-              backgroundColor: Colors.indigo,
+//              backgroundColor: Colors.indigo,
               title: Text('MyQuizzes'),
             ),
             body: data.length == 0

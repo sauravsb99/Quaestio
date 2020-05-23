@@ -21,9 +21,9 @@ class _QuizListAdminState extends State<QuizListAdmin> {
         if (snapshot.hasData) {
           List<Quiz> data = snapshot.data;
           return Scaffold(
-            backgroundColor: Colors.indigo,
+//            backgroundColor: Colors.indigo,
             appBar: AppBar(
-              backgroundColor: Colors.indigo,
+//              backgroundColor: Colors.indigo,
               title: Text(
                 widget.topic,
                 style: TextStyle(

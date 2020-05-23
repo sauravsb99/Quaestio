@@ -31,8 +31,8 @@ class _AdminRegisterState extends State<AdminRegister> {
     return loading ? Loading() : Scaffold(
 //      backgroundColor: Colors.indigo,
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
-        elevation: 0.0,
+//        backgroundColor: Colors.indigo,
+        elevation: 10.0,
         title: Text('Register'),
       ),
       body: Wrap(
@@ -48,30 +48,13 @@ class _AdminRegisterState extends State<AdminRegister> {
 //                      child:Text('hiyo',textScaleFactor: 5,style: TextStyle(fontFamily: 'Jost') ,textAlign: TextAlign.left,),
                     ),
                   ),
-                  Material(
-//                    color: Colors.indigo,
-                    child: Align(
-
-                      alignment: Alignment.bottomRight,
-                      //<Widget>[
-                      child: Material(
-//                        color: Colors.indigo,
-                        child:FlatButton.icon(color: Colors.black,
-                          icon: Icon(Icons.person,color: Colors.white,),
-                          label: Text('Register',style: TextStyle( color: Colors.white),),
-                          onPressed: () {},
-                        ),
-
-                      ),
-                    ),
-                  ),
                   SizedBox(width: 5,),
                 ],
               ),
             ),
           ),
           Align(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.bottomCenter,
 
 
             child: Container(
@@ -83,13 +66,17 @@ class _AdminRegisterState extends State<AdminRegister> {
                 child: Form(
                   key: _formKey,
                   child: Container(
-                    color: Colors.black,
+                    color: Colors.transparent,
                     padding: EdgeInsets.fromLTRB(38,28,38,8),
                     child: Column(
-                      children: <Widget>[
-                        SizedBox(height: 20.0),
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[SizedBox(height: MediaQuery.of(context).size.height*0.2,
+                      child:Image.asset("assets/logo_ok.png"),
+                      ),
+                        SizedBox(height: MediaQuery.of(context).size.height*0.05,),
                         TextFormField(
-                          decoration: textInputDecoration.copyWith(hintText: 'email'),
+                          decoration: textInputDecoration.copyWith(fillColor: Colors.transparent ,hintText: 'E-mail'),
                           validator: (val) => val.isEmpty ? 'Enter an email' : null,
                           onChanged: (val) {
                             setState(() => email = val);
@@ -97,7 +84,7 @@ class _AdminRegisterState extends State<AdminRegister> {
                         ),
                         SizedBox(height: 20.0),
                         TextFormField(
-                          decoration: textInputDecoration.copyWith(hintText: 'password'),
+                          decoration: textInputDecoration.copyWith(fillColor: Colors.transparent ,hintText: 'Password'),
                           obscureText: true,
                           validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                           onChanged: (val) {
@@ -106,7 +93,7 @@ class _AdminRegisterState extends State<AdminRegister> {
                         ),
                         SizedBox(height: 40.0),
                         RaisedButton(
-                            color: Colors.pink[400],
+                            color: Color(0xff43b77d),
                             child: Text(
                               'Register',
                               style: TextStyle(color: Colors.white),
@@ -126,10 +113,8 @@ class _AdminRegisterState extends State<AdminRegister> {
                                   setState(() {
 
 //                                    loading = false;
-                                    print("success");
                                     Navigator.pop(context);
                                   });
-                                  print('Yus');
                                 }
                               }
                             }

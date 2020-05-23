@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/home/home.dart';
 import 'package:queastio/services/database.dart';
+import 'package:queastio/shared/constants.dart';
 
 class Userput extends StatefulWidget {
 //  DatabaseService data;
@@ -134,7 +135,7 @@ class _UserputState extends State<Userput> {
                                             style: TextStyle(fontSize: 17)),
                                         SizedBox(width: 15),
                                         Container(
-                                          color: Colors.white,
+                                          color: Colors.transparent,
                                           child: SizedBox(
                                             width: (MediaQuery.of(context)
                                                         .size
@@ -147,7 +148,7 @@ class _UserputState extends State<Userput> {
                                                 padding:
                                                     const EdgeInsets.fromLTRB(
                                                         8.0, 8.0, 15.0, 8.0),
-                                                child: TextFormField(
+                                                child: TextFormField(decoration: textInputDecoration.copyWith(fillColor: Colors.transparent, ),
                                                   initialValue: userData.name,
                                                   style: TextStyle(
                                                       fontSize: 18,
@@ -182,6 +183,7 @@ class _UserputState extends State<Userput> {
                                       children: <Widget>[
                                         RaisedButton(
                                           onPressed: () async {
+                                            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Please Wait"),));
                                             String err = "Photo Updated";
                                             if (_image != null) {
                                               String fileName =
@@ -209,7 +211,7 @@ class _UserputState extends State<Userput> {
                                                 print("Data Updated");
                                                 Scaffold.of(context)
                                                     .showSnackBar(SnackBar(
-                                                        content: Text(err)));
+                                                        content: Text(err),duration: Duration(milliseconds: 200)));
                                               });
                                             }
                                             if (_formKey.currentState
@@ -227,13 +229,13 @@ class _UserputState extends State<Userput> {
                                                 Scaffold.of(context)
                                                     .showSnackBar(SnackBar(
                                                         content: Text(
-                                                            "Name Updated")));
+                                                            "Name Updated"),duration: Duration(milliseconds: 200)));
                                               });
                                             }
                                           },
                                           splashColor: Colors.white,
                                           textColor: Colors.white,
-                                          color: Colors.grey,
+                                          color: Color(0xff43b77d),
                                           child: Text(
                                             "Submit",
                                             style: TextStyle(
