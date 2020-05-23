@@ -6,6 +6,7 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:quiver/async.dart';
+// import 'package:auto_size_text/auto_size_text.dart';
 
 class QuestionCard extends StatefulWidget {
   final Map quiz;
