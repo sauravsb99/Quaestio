@@ -34,8 +34,7 @@ class _QuestionCardState extends State<QuestionCard>
 
   Future<void> calcScore() async {
     sub.cancel();
-    Scoring instance =
-        Scoring(answers: widget.quiz['answers'], selected: selectedOptions);
+    Scoring instance = Scoring(questions: questions, selected: selectedOptions);
     int score = instance.getScore();
     print('Score:' + score.toString());
     if (userData.role == "user" && widget.quiz['firstTime']) {
@@ -94,8 +93,7 @@ class _QuestionCardState extends State<QuestionCard>
               FlatButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AnswerSheetRoute, arguments: {
-                    'answers': widget.quiz['answers'],
-                    'questions': widget.quiz['questions'],
+                    'questions': questions,
                     'selected': selectedOptions
                   });
                 },
