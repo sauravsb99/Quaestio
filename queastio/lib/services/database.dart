@@ -64,9 +64,11 @@ class DatabaseService {
       'questions': questions,
     });
   }
-Future<void> deleteUser(String uid) async {
+
+  Future<void> deleteUser(String uid) async {
     return userCollection.document(uid).delete();
   }
+
   Future<void> deleteQuiz(String qid) async {
     print('ok');
     quizCollection.document(qid).delete();
@@ -130,7 +132,7 @@ Future<void> deleteUser(String uid) async {
       );
     }).toList();
   }
-  
+
   List<Quiz> _quizListFromSnapshot(QuerySnapshot snapshot) {
     developer.log('Hi');
     return snapshot.documents.map((doc) {
@@ -224,6 +226,17 @@ Future<void> deleteUser(String uid) async {
           .where('uid', isEqualTo: uid)
           .where('qTopic', isEqualTo: topic)
           .orderBy('time', descending: true)
+          .snapshots()
+          .map(_scoreListFromSnapshot);
+    }
+  }
+
+  Stream<List<Score>> getTopicScoresAll(String topic) {
+    if (topic == 'All' || topic == 'null') {
+      return getScores();
+    } else {
+      return scoreCollection
+          .where('qTopic', isEqualTo: topic)
           .snapshots()
           .map(_scoreListFromSnapshot);
     }

@@ -180,7 +180,10 @@ class _MyDrawerState extends State<MyDrawer> {
                           borderOnForeground: true,
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, TopicLeaderRoute,
+                                  arguments: 'All');
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -189,7 +192,7 @@ class _MyDrawerState extends State<MyDrawer> {
 //                          color: Colors.blueGrey,
                                 child: Center(
                                   child: Text(
-                                    'Contact Us',
+                                    'Leaderboard',
                                     style: TextStyle(
                                       fontSize: 22,
                                       color: Colors.white,
