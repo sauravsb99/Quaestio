@@ -43,8 +43,8 @@ class Home extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
                       height: AppBar().preferredSize.height - 5,
-                      child: Image.network(
-                          "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_only_white.png?alt=media&token=85ab4b3d-777f-4983-af42-aceaaee6e2a1"),
+//                      child: Image.network(
+//                          "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_only_white.png?alt=media&token=85ab4b3d-777f-4983-af42-aceaaee6e2a1"),
 //              SizedBox(height:2,)
                     ),
                     onPressed: () {

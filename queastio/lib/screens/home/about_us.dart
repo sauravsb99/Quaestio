@@ -11,8 +11,11 @@ class AboutUs extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.green,
-
+//        backgroundColor:Colors.transparent,
+//        iconTheme: IconThemeData(
+//          color: Colors.black,
+//        ),
+//        backgroundColor: Colors.green,
       ),
 //      floatingActionButton:
 //      Container(
@@ -33,7 +36,7 @@ class AboutUs extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-        padding: const EdgeInsets.fromLTRB(8.0,8.0,8.0,48.0),
+        padding: const EdgeInsets.fromLTRB(8.0,24.0,8.0,48.0),
         child: Text(
 //              text: TextSpan(
 //                  text:
