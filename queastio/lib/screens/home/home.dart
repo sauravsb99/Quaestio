@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/home/drawer.dart';
 import 'package:queastio/screens/home/landing.dart';
 import 'package:queastio/services/auth.dart';
@@ -12,10 +13,20 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
     // Navigator.pop(context);
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            UserData userData = snapshot.data;
+            print("ok");
+            print(userData.uid);
+            print(userData.batch);
     return StreamProvider<List<Topic>>.value(
       initialData: List(),
-      value: DatabaseService().topics,
+      value: DatabaseService().getTopicsBatch(userData.batch),
+
       child: Container(
         child: Scaffold(
             backgroundColor: Color(0xff1b1b1b),
@@ -32,8 +43,8 @@ class Home extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
                       height: AppBar().preferredSize.height - 5,
-                      child: Image.network(
-                          "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_only_white.png?alt=media&token=85ab4b3d-777f-4983-af42-aceaaee6e2a1"),
+//                      child: Image.network(
+//                          "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_only_white.png?alt=media&token=85ab4b3d-777f-4983-af42-aceaaee6e2a1"),
 //              SizedBox(height:2,)
                     ),
                     onPressed: () {
@@ -45,22 +56,13 @@ class Home extends StatelessWidget {
 //            Row(children:<Widget>[Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),],)
 //          ],
                 ),
-            floatingActionButton: Container(
-              height: 80.0,
-              width: 80.0,
-              child: FittedBox(
-                child: FloatingActionButton(elevation:0.5,backgroundColor: Colors.transparent,onPressed: () {
-                  Navigator.pushNamed(context, AboutUsRoute);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Image.asset("assets/logo_ok.png"),
-                  ),
-                ),
-              ),
-            ),
+//            floatingActionButton:
             body: Landing()),
       ),
     );
+  } else {
+            return Container();
+  }
+});
   }
 }
