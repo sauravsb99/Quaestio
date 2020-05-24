@@ -93,6 +93,9 @@ class DatabaseService {
       'questions': questions,
     });
   }
+  Future<void> deleteTopic(String name) async{
+    return topicCollection.document(name).delete();
+  }
 
   Future<void> deleteUser(String uid) async {
     return userCollection.document(uid).delete();

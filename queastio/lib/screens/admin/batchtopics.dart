@@ -37,6 +37,7 @@ class _BatchTopicsState extends State<BatchTopics> {
                           'topics': topics,
                         });
                     setState(() {
+                      if(data['batch']!=Null)
                       widget.batch = data['batch'];
                     });
                   },
