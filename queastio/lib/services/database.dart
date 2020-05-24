@@ -70,6 +70,13 @@ class DatabaseService {
     });
   }
 
+  Future<void> addFaq(String question, String answer) async {
+    await faqCollection.document().setData({
+      'question': question,
+      'answer': answer,
+    });
+  }
+
   Future<void> updateUserDataByAdmin(
       String name, String image, String role) async {
     await userCollection.document(uid).setData({

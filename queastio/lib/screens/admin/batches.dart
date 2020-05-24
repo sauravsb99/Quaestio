@@ -12,13 +12,13 @@ class Batches extends StatefulWidget {
 
 class _BatchesState extends State<Batches> {
   final _formKey = GlobalKey<FormState>();
+  String _batchName;
   @override
   Widget build(BuildContext context) {
     void _addBatch() {
       showModalBottomSheet(
           context: context,
           builder: (context) {
-            String _batchName;
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: Form(
