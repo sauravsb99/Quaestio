@@ -56,8 +56,8 @@ class AdminHome extends StatelessWidget {
             
             child: Icon(Icons.ac_unit),
             label:"Domain Specific",
-            labelStyle: TextStyle(fontSize: 18.0,fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,),
+            labelStyle: TextStyle(fontSize: 18.0,decoration: TextDecoration.none,
+                              fontWeight: FontWeight.bold,color:Colors.green),
             onTap: () {
               _InsertTopicName("Domain Specific");
             },
@@ -65,7 +65,8 @@ class AdminHome extends StatelessWidget {
           SpeedDialChild(
             child: Icon(Icons.accessibility_new),
             label:"General Aptitude",
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: TextStyle(fontSize: 18.0,decoration: TextDecoration.none,
+                              fontWeight: FontWeight.bold,color:Colors.green),
             onTap: () {
               _InsertTopicName("General Aptitude");
             },
