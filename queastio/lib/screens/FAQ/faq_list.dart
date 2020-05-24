@@ -12,10 +12,6 @@ class _FaqListState extends State<FaqList> {
   @override
   Widget build(BuildContext context) {
     final faqs = Provider.of<List<Faq>>(context);
-    // topics.forEach((topic) {
-    //   print(topic.name);
-    //   print(topic.image);
-    // });
 
     return ListView.builder(
       itemCount: faqs.length,
