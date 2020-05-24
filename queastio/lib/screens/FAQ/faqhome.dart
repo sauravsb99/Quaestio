@@ -15,7 +15,9 @@ class FaqHome extends StatelessWidget {
       value: DatabaseService().faqs,
       child: Container(
         child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text('FAQ',style: TextStyle(color: Colors.white),),
+          ),
           backgroundColor: Colors.white,
 
 //          drawer: MyDrawer(),

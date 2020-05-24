@@ -15,6 +15,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  String batch = 'Pharma';
+  Set<String> items;
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -27,6 +29,12 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+
+    batch = batch == null ? 'Pharma' : batch;
+    items=Set.from(['Pharma']);
+    items.add('B-Tech');
+    items.add('12th');
+
     return loading ? Loading() : Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
@@ -107,7 +115,49 @@ class _RegisterState extends State<Register> {
                           setState(() => password = val);
                         },
                       ),
-                      SizedBox(height: 40.0),
+                      SizedBox(height: 20,),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                          child:
+                          SizedBox(),
+
+                        ),
+                          Text("BATCH :",style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),),
+                          Expanded(
+                            child:
+                              SizedBox(),
+
+                          ),
+                          Wrap(
+//                            width: MediaQuery.of(context).size.width*0.4,
+                            children:<Widget> [DropdownButton<String>(
+                              value: batch,
+                              underline: Container(
+                                color: Color(0xff43b77d),
+                                height: 2.0,
+                              ),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  batch = newValue;
+                                });
+                              },
+                              items: items.map((item) {
+                                return DropdownMenuItem(
+                                    value: item, child: Text(item));
+                              }).toList(),
+                            ),]
+                          ),Expanded(
+                            child:
+                            SizedBox(),
+
+                          ),
+                        ],
+                      ),
+//                      SizedBox(height: 40.0),
                       RaisedButton(
                         color: Colors.green,
                         child: Text(
@@ -118,7 +168,7 @@ class _RegisterState extends State<Register> {
                         onPressed: () async {
                           if(_formKey.currentState.validate()){
                             setState(() => loading = true);
-                            dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                            dynamic result = await _auth.registerWithEmailAndPassword(email, password,batch);
                             // dynamic user = result.user;
                             // user.send
                             if(result == null) {
@@ -167,9 +217,7 @@ class _RegisterState extends State<Register> {
 //                      SizedBox(height: MediaQuery.of(context).size.height*0.05),
 
                       SizedBox(height: MediaQuery.of(context).size.height*0.16,
-                        child: CachedNetworkImage(
-                            imageUrl:"https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
-                      ),
+                        child:Image.asset('assets/logo_.png') ),
                     ],
                   ),
                 ),

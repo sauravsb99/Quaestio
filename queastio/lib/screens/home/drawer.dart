@@ -232,7 +232,6 @@ class _MyDrawerState extends State<MyDrawer> {
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () {
-                              Navigator.pop(context);
                               Navigator.pushNamed(context, FaQRoute);
                             },
                             child: Padding(

@@ -64,7 +64,8 @@ flutter:
     - assets/
     - assets/logo_ok.png
     - assets/logo_only.png
-    - assets/logo_circle.png
+    - assets/logo_circle2.png
+    - assets/logo_.png
     - assets/lead.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
