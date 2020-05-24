@@ -48,6 +48,7 @@ class _UserputState extends State<Userput> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
+            print(userData.batch);
 
             return Scaffold(
               body: Wrap(
@@ -225,7 +226,7 @@ class _UserputState extends State<Userput> {
                                               await DatabaseService(
                                                       uid: user.uid)
                                                   .updateUserData(
-                                                      name, i, userData.role);
+                                                      name, i, userData.role,userData.batch);
                                               setState(() {
                                                 Scaffold.of(context)
                                                     .showSnackBar(SnackBar(

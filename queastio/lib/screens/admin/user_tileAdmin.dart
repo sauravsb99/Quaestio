@@ -32,7 +32,7 @@ class UserTile extends StatelessWidget {
                       await DatabaseService().deleteUser(user.uid);
                     },
           ),
-          leading: CircleAvatar(backgroundImage: NetworkImage(user.image)),
+          leading: CircleAvatar(backgroundImage: NetworkImage(user.image),backgroundColor: Color(0xff43b77d),),
         ),
       ),
     
