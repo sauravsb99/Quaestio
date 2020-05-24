@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/services/database.dart';
+import 'package:queastio/models/user.dart';
+import 'package:provider/provider.dart';
 
 class QuestionAdd extends StatefulWidget {
   final String qTopic;
@@ -108,14 +110,9 @@ int time = 0;
                       all.add(threeController.text);
                       all.add(fourController.text);
                       var correct = all[groupValue];
-                      print(correct);
-                      List<String> ll = [];
-                      ll.add(correct);
-                      ll.add(oneController.text);
-                      ll.add(twoController.text);
-                      ll.add(threeController.text);
-                      ll.add(fourController.text);
-                      map['options'] = ll;
+                      // print(correct);
+                      map['answer'] = correct;
+                      map['options'] = all;
                       orderLines.add(map);
                       // all.removeAt(groupValue);
                       // QuizModel quizModel = QuizModel(
@@ -140,8 +137,9 @@ int time = 0;
                   ),
                   FlatButton(
                       onPressed: () async{
-                        await DatabaseService()
-                            .updateQuiz(qName, qTopic, qDescr, qno, time, orderLines);
+                        User user = Provider.of<User>(context, listen: false);
+                        await DatabaseService(uid: user.uid)
+                            .updateQuiz(qName, qTopic, qDescr, qno - 1, time, orderLines);
                       },
                       child: Text("START"),
                       color: Colors.red.withOpacity(0.2)),
