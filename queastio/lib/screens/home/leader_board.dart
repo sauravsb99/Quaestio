@@ -5,18 +5,20 @@ import 'package:queastio/services/database.dart';
 
 class LeaderBoard extends StatefulWidget {
   final String qname;
-  LeaderBoard({this.qname});
+  final String qtopic;
+  LeaderBoard({this.qname,this.qtopic});
   @override
-  _LeaderBoardState createState() => _LeaderBoardState(qname: qname);
+  _LeaderBoardState createState() => _LeaderBoardState(qname: qname,qtopic:qtopic);
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
   final String qname;
-  _LeaderBoardState({this.qname});
+  final String qtopic;
+  _LeaderBoardState({this.qname,this.qtopic});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Score>>(
-        stream: DatabaseService().getQuizScores(qname),
+        stream: DatabaseService().getQuizScores(qname,qtopic),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Score> scores = snapshot.data;

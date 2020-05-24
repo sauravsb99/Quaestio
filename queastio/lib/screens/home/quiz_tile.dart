@@ -159,7 +159,8 @@ class QuizTile extends StatelessWidget {
                               onPressed: () {
                                 print(answers);
                                 Navigator.pushNamed(context, LeaderRoute,
-                                    arguments: quiz.qName);
+                                    arguments:{ 'qname':quiz.qName,
+                                      'qtopic':quiz.qTopic});
                               },
                               child: Text(
                                 'Leaderboard',

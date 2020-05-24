@@ -43,6 +43,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           CircleAvatar(
+                          backgroundColor:Color(0xff43b77d),
                             radius: MediaQuery.of(context).size.width * 0.10,
                             backgroundImage: NetworkImage(userData.image),
                           ),
