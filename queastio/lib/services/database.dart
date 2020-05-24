@@ -4,6 +4,7 @@ import 'package:queastio/models/score.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/models/quiz.dart';
+import 'package:queastio/models/batch.dart';
 import 'dart:developer' as developer;
 
 class DatabaseService {
@@ -23,6 +24,9 @@ class DatabaseService {
   final CollectionReference faqCollection =
       Firestore.instance.collection('faq');
 
+  final CollectionReference batchCollection =
+      Firestore.instance.collection('batches');
+
   Future<void> updateUserData(String name, String image, String role) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
@@ -31,14 +35,21 @@ class DatabaseService {
       'role': role,
     });
   }
-  
-  Future<void> addTopic(String category,String image,String name) async{
+
+  Future<void> addTopic(String category, String image, String name) async {
     await topicCollection.document().setData({
-      'category' : category,
+      'category': category,
       'image': image,
-      'name' : name,
+      'name': name,
     });
     return ("true");
+  }
+
+  Future<void> addBatch(String name) async {
+    await batchCollection.document().setData({
+      'name': name,
+      'topics': [],
+    });
   }
 
   Future<void> updateUserDataByAdmin(
@@ -67,6 +78,10 @@ class DatabaseService {
 
   Future<void> deleteUser(String uid) async {
     return userCollection.document(uid).delete();
+  }
+
+  Future<void> deleteBatch(String bid) async {
+    return batchCollection.document(bid).delete();
   }
 
   Future<void> deleteQuiz(String qid) async {
@@ -163,6 +178,16 @@ class DatabaseService {
     }).toList();
   }
 
+  List<Batch> _batchListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Batch(
+        bid: doc.documentID,
+        name: doc.data['name'] ?? '',
+        topics: doc.data['topics'] ?? [],
+      );
+    }).toList();
+  }
+
   Stream<UserData> get userData {
     try {
       return userCollection
@@ -201,6 +226,14 @@ class DatabaseService {
 
   Stream<List<Faq>> get faqs {
     return faqCollection.snapshots().map(_faqListFromSnapshot);
+  }
+
+  Stream<List<Batch>> get batches {
+    try {
+      return batchCollection.snapshots().map(_batchListFromSnapshot);
+    } on Exception {
+      return null;
+    }
   }
 
   Stream<List<Quiz>> getQuizzes(String topic) {
