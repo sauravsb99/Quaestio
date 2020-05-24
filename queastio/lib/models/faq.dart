@@ -1,7 +1,7 @@
 class Faq {
-  final int faqQid;
+//  final int faqQid;
   final String faqQuestion;
   final String faqAnswer;
 
-  Faq( {this.faqQid, this.faqQuestion, this.faqAnswer});
+  Faq( { this.faqQuestion, this.faqAnswer});
 }
