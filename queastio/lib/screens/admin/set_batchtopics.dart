@@ -37,12 +37,18 @@ class _SetBatchTopicsState extends State<SetBatchTopics> {
               for (var i = 0; i < widget.topics.length; ++i) {
                 if (checkboxes[i] == true) {
                   newTopics.add(widget.topics[i].name);
+                  await DatabaseService().updateTopicBatches(
+                      widget.topics[i].tid, widget.batch.name, "add");
+                } else {
+                  await DatabaseService().updateTopicBatches(
+                      widget.topics[i].tid, widget.batch.name, "remove");
                 }
               }
               Batch newBatch = Batch(
                   bid: widget.batch.bid,
                   name: widget.batch.name,
                   topics: newTopics);
+
               await DatabaseService().updateBatchTopics(newBatch);
               Navigator.pop(context, {'batch': newBatch});
             },

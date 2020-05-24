@@ -20,49 +20,45 @@ class Home extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
-            print("ok");
-            print(userData.uid);
-            print(userData.batch);
-    return StreamProvider<List<Topic>>.value(
-      initialData: List(),
-      value: DatabaseService().getTopicsBatch(userData.batch),
-
-      child: Container(
-        child: Scaffold(
-            backgroundColor: Color(0xff1b1b1b),
-            drawer: Drawer(
-              child: MyDrawer(),
-            ),
-            appBar: AppBar(
+            return StreamProvider<List<Topic>>.value(
+              initialData: List(),
+              value: DatabaseService().getTopicsBatch(userData.batch),
+              child: Container(
+                child: Scaffold(
+                    backgroundColor: Color(0xff1b1b1b),
+                    drawer: Drawer(
+                      child: MyDrawer(),
+                    ),
+                    appBar: AppBar(
 //            title: Text('Quaestia'),
 //            backgroundColor: Color(0xff1b1b1b),
 //            backgroundColor: Color(0xff4e6c47),
-                elevation: 0.0,
-                actions: <Widget>[
-                  MaterialButton(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: AppBar().preferredSize.height - 5,
+                        elevation: 0.0,
+                        actions: <Widget>[
+                          MaterialButton(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: AppBar().preferredSize.height - 5,
 //                      child: Image.network(
 //                          "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_only_white.png?alt=media&token=85ab4b3d-777f-4983-af42-aceaaee6e2a1"),
 //              SizedBox(height:2,)
-                    ),
-                    onPressed: () {
-                      Drawer();
-                    },
-                  ),
-                ]
+                            ),
+                            onPressed: () {
+                              Drawer();
+                            },
+                          ),
+                        ]
 //            actions:<Widget>[
 //            Row(children:<Widget>[Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),],)
 //          ],
-                ),
+                        ),
 //            floatingActionButton:
-            body: Landing()),
-      ),
-    );
-  } else {
+                    body: Landing()),
+              ),
+            );
+          } else {
             return Container();
-  }
-});
+          }
+        });
   }
 }

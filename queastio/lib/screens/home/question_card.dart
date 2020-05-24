@@ -292,23 +292,39 @@ class _QuestionCardState extends State<QuestionCard>
                                 ),
                                 backgroundColor: Color(0xff43b77d),
                               ),
-                              IconButton(
-                                color: Color(0xff43b77d),
-                                disabledColor: Colors.white,
-                                icon: Icon(
-                                  Icons.arrow_right,
-                                  size: 50.0,
-                                ),
-                                onPressed: _isNextButtonDisabled
-                                    ? null
-                                    : () {
-                                        setState(() {
-                                          index += 1;
-                                          print(index);
-                                        });
-                                        if (buttonPressed) _handleClick();
-                                      },
-                              ),
+                              _isNextButtonDisabled
+                                  ? IconButton(
+                                      // padding: EdgeInsets.all(8.0),
+                                      icon: Icon(
+                                        Icons.done,
+                                        size: 40.0,
+                                      ),
+                                      // shape: RoundedRectangleBorder(
+                                      //   side: BorderSide(color: Colors.white),
+                                      // ),
+                                      onPressed: selectedOptions == null
+                                          ? null
+                                          : calcScore,
+                                      // child: Text('Submit', style: buttonText),
+                                      color: Color(0xff43b77d),
+                                    )
+                                  : IconButton(
+                                      color: Color(0xff43b77d),
+                                      disabledColor: Colors.white,
+                                      icon: Icon(
+                                        Icons.arrow_right,
+                                        size: 50.0,
+                                      ),
+                                      onPressed: _isNextButtonDisabled
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                index += 1;
+                                                print(index);
+                                              });
+                                              if (buttonPressed) _handleClick();
+                                            },
+                                    )
                             ],
                           ),
                           alignment: Alignment.bottomCenter,
