@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/home/drawer.dart';
 import 'package:queastio/screens/home/landing.dart';
 import 'package:queastio/services/auth.dart';
@@ -12,10 +13,20 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
     // Navigator.pop(context);
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            UserData userData = snapshot.data;
+            print("hi");
+            print(userData.uid);
+            print(userData.batch);
     return StreamProvider<List<Topic>>.value(
       initialData: List(),
-      value: DatabaseService().topics,
+      value: DatabaseService().getTopicsBatch(userData.batch),
+
       child: Container(
         child: Scaffold(
             backgroundColor: Color(0xff1b1b1b),
@@ -62,5 +73,9 @@ class Home extends StatelessWidget {
             body: Landing()),
       ),
     );
+  } else {
+            return Container();
+  }
+});
   }
 }
