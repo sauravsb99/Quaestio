@@ -27,12 +27,13 @@ class DatabaseService {
   final CollectionReference batchCollection =
       Firestore.instance.collection('batches');
 
-  Future<void> updateUserData(String name, String image, String role) async {
+  Future<void> updateUserData(String name, String image, String role,String batch) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
       'image': image,
       'role': role,
+      'batch': batch,
     });
   }
 
@@ -307,9 +308,10 @@ class DatabaseService {
     }
   }
 
-  Stream<List<Score>> getQuizScores(String qname) {
+  Stream<List<Score>> getQuizScores(String qname,String topic) {
     return scoreCollection
         .where('quiz', isEqualTo: qname)
+        .where('qTopic', isEqualTo: topic)
         .orderBy('score', descending: true)
         .snapshots()
         .map(_scoreListFromSnapshot);

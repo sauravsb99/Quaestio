@@ -11,6 +11,7 @@ class AboutUs extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text('ENABLE',style: TextStyle(color: Colors.white),),
 //        backgroundColor:Colors.transparent,
 //        iconTheme: IconThemeData(
 //          color: Colors.black,

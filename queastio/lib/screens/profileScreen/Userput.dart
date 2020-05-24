@@ -48,6 +48,7 @@ class _UserputState extends State<Userput> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
+            print(userData.batch);
 
             return Scaffold(
               body: Wrap(
@@ -77,7 +78,8 @@ class _UserputState extends State<Userput> {
                                         0.20),
                                 child: CircleAvatar(
                                   radius: 80,
-                                  backgroundColor: Colors.black,
+
+                                  backgroundColor:Color(0xff43b77d),
                                   child: ClipOval(
                                     child: SizedBox(
                                       width: 140.0,
@@ -224,7 +226,7 @@ class _UserputState extends State<Userput> {
                                               await DatabaseService(
                                                       uid: user.uid)
                                                   .updateUserData(
-                                                      name, i, userData.role);
+                                                      name, i, userData.role,userData.batch);
                                               setState(() {
                                                 Scaffold.of(context)
                                                     .showSnackBar(SnackBar(

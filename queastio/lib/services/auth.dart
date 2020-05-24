@@ -42,7 +42,7 @@ class AuthService{
     } 
   }
 
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(String email, String password,String batch) async {
     try {
       
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -51,7 +51,7 @@ class AuthService{
       
 
       var rng = new Random();
-      await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}','https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg','user');
+      await DatabaseService(uid: user.uid).updateUserData('Guest${rng.nextInt(100000)}','https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg','user',batch);
       
       // await user.sendEmailVerification();
         return _userFromFirebaseUser(user);

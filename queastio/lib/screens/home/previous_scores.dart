@@ -3,6 +3,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:queastio/services/database.dart';
 import 'package:queastio/models/score.dart';
 import 'package:queastio/shared/constants.dart';
+import 'package:queastio/shared/loading.dart';
 
 class PreviousScores extends StatefulWidget {
   final Widget child;
@@ -20,11 +21,9 @@ class _PreviousScoresState extends State<PreviousScores> {
     _seriesLineData = List<charts.Series<Score, DateTime>>();
     _seriesLineData.add(charts.Series(
       domainFn: (Score data, _) => data.time.toDate(),
-
       measureFn: (Score data, _) => (data.score) / data.total * 100,
       colorFn: (Score data, _) => charts.Color.fromHex(code: '#43b77d'),
       data: data,
-
       labelAccessorFn: (Score row, _) => "${row.time}",
       id: "Growth Chart",
     ));
@@ -49,184 +48,223 @@ class _PreviousScoresState extends State<PreviousScores> {
                   scores.where((score) => score.qTopic == topic).toList();
             }
             _generateData(topicScores);
-            return Scaffold(
-              body: MaterialApp(
-                home: DefaultTabController(
-                  length: 2,
-                  child: Scaffold(
-                    appBar: AppBar(
-                      title: Text("My Scores"),
-                      backgroundColor: Color(0xff43b77d),
-                      bottom: TabBar(
-                        indicatorColor: Color(0xff43b77d),
-                        tabs: [
-                          Tab(icon: Icon(Icons.table_chart)),
-                          Tab(icon: Icon(Icons.show_chart)),
-                        ],
-                      ),
-                    ),
-                    body: TabBarView(
-                      children: [
-                        Container(
-                          color: Colors.black,
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                                minWidth: MediaQuery.of(context).size.width),
-                            child: DataTable(
-                              columns: [
-                                DataColumn(
-                                  label: Container(
-                                    child: Text('Quiz Name',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Container(
-                                    child: Text(
-                                      'Score',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Container(
-                                    child: Text(
-                                      'LeaderBoard',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+            return scores.length != 0
+                ? Scaffold(
+                    body: MaterialApp(
+                      home: DefaultTabController(
+                        length: 2,
+                        child: Scaffold(
+                          appBar: AppBar(
+                            title: Text("My Scores"),
+                            backgroundColor: Color(0xff43b77d),
+                            bottom: TabBar(
+                              indicatorColor: Color(0xff43b77d),
+                              tabs: [
+                                Tab(icon: Icon(Icons.table_chart)),
+                                Tab(icon: Icon(Icons.show_chart)),
                               ],
-                              rows: List.generate(scores.length, (index) {
-                                return DataRow(
-                                  cells: [
-                                    DataCell(Container(
-                                      child: Text(
-                                        scores[index].quiz.toUpperCase(),
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )),
-                                    DataCell(Container(
-                                        child: Text(
-                                      (100 *
-                                                  (scores[index].score /
-                                                      scores[index].total))
-                                              .toStringAsFixed(2) +
-                                          '%',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ))),
-                                    DataCell(Container(
-                                      child:IconButton(
-                                        icon: Icon(Icons.star,color: Colors.white,),
-                                        onPressed: () {
-                                          Navigator.pushNamed(context, LeaderRoute,
-                                              arguments: scores[index].quiz);
-                                        },
-                                      )))
-                                  ],
-                                );
-                              }),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Center(
-                              child: Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-//                                              padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Past Performance',
-                                          style: TextStyle(
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.bold),
+                          body: TabBarView(
+                            children: [
+                              Container(
+                                color: Colors.black,
+                                child: ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                      minWidth:
+                                          MediaQuery.of(context).size.width),
+                                  child: DataTable(
+                                    columns: [
+                                      DataColumn(
+                                        label: Container(
+                                          child: Text('Quiz Name',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                      DataColumn(
+                                        label: Container(
+                                          child: Text(
+                                            'Score',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      DataColumn(
+                                        label: Container(
+                                          child: Text(
+                                            'LeaderBoard',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
+                                    rows: List.generate(scores.length, (index) {
+                                      return DataRow(
+                                        cells: [
+                                          DataCell(Container(
+                                            child: Text(
+                                              scores[index].quiz.toUpperCase(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          )),
+                                          DataCell(Container(
+                                              child: Text(
+                                            (100 *
+                                                        (scores[index].score /
+                                                            scores[index]
+                                                                .total))
+                                                    .toStringAsFixed(2) +
+                                                '%',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ))),
+                                          DataCell(Container(
+                                              child: IconButton(
+                                            icon:
+                                                Image.asset('assets/lead.png'),
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, LeaderRoute,
+                                                  arguments: {
+                                                    'qname': scores[index].quiz,
+                                                    'qtopic':
+                                                        scores[index].qTopic
+                                                  });
+                                            },
+                                          )))
+                                        ],
+                                      );
+                                    }),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  DropdownButton<String>(
-                                    value: topic,
-                                    underline: Container(
-                                      color: Color(0xff43b77d),
-                                      height: 2.0,
-                                    ),
-                                    onChanged: (String newValue) {
-                                      setState(() {
-                                        topic = newValue;
-                                      });
-                                    },
-                                    items: items.map((item) {
-                                      return DropdownMenuItem(
-                                          value: item, child: Text(item));
-                                    }).toList(),
-                                  ),
-                                  Expanded(
-                                    child: charts.TimeSeriesChart(
-                                        _seriesLineData,
-                                        defaultRenderer:
-                                            new charts.LineRendererConfig(
-                                                includeArea: true,
-                                                stacked: true),
-                                        animate: true,
-                                        animationDuration: Duration(seconds: 2),
-                                        behaviors: [
-                                          new charts.ChartTitle('Score',
-                                              behaviorPosition:
-                                                  charts.BehaviorPosition.start,
-                                              titleOutsideJustification: charts
-                                                  .OutsideJustification
-                                                  .middleDrawArea),
-                                        ]),
-                                  ),
-                                  SizedBox(
-                                    height: 50,
-                                    child:Text("Time",style: TextStyle(fontSize: MediaQuery.of(context).size.width*0.04),)
-                                  )
-                                ],
+                                ),
                               ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: Center(
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+//                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                'Past Performance',
+                                                style: TextStyle(
+                                                    fontSize: 24.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        DropdownButton<String>(
+                                          value: topic,
+                                          underline: Container(
+                                            color: Color(0xff43b77d),
+                                            height: 2.0,
+                                          ),
+                                          onChanged: (String newValue) {
+                                            setState(() {
+                                              topic = newValue;
+                                            });
+                                          },
+                                          items: items.map((item) {
+                                            return DropdownMenuItem(
+                                                value: item, child: Text(item));
+                                          }).toList(),
+                                        ),
+                                        Expanded(
+                                          child: charts.TimeSeriesChart(
+                                              _seriesLineData,
+                                              defaultRenderer:
+                                                  new charts.LineRendererConfig(
+                                                      includeArea: true,
+                                                      stacked: true),
+                                              animate: true,
+                                              animationDuration:
+                                                  Duration(seconds: 2),
+                                              behaviors: [
+                                                new charts.ChartTitle('Score',
+                                                    behaviorPosition: charts
+                                                        .BehaviorPosition.start,
+                                                    titleOutsideJustification:
+                                                        charts
+                                                            .OutsideJustification
+                                                            .middleDrawArea),
+                                              ]),
+                                        ),
+                                        SizedBox(
+                                            height: 50,
+                                            child: Text(
+                                              "Time",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.04),
+                                            ))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Scaffold(
+                    backgroundColor: Colors.black,
+                    appBar: AppBar(
+                      title: Text('My Scores'),
+                      backgroundColor: Color(0xff43b77d),
+                    ),
+                    body: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.sentiment_neutral,
+                            color: Colors.white,
+                            size: 40.0,
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            'No tests attempted yet',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              letterSpacing: 2.0,
                             ),
                           ),
-                        )
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            );
+                  );
+          } else {
+            return Loading();
           }
-          return Scaffold(
-              backgroundColor: Color(0xff43bfdd),
-              appBar: AppBar(
-                title: Text('My Scores'),
-                backgroundColor: Colors.black,
-              ),
-              body: Center(
-                child: Text(
-                  'No tests attempted yet',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ));
         });
   }
 }
