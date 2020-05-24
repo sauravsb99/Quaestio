@@ -18,6 +18,8 @@ import 'package:queastio/shared/constants.dart';
 import 'package:queastio/screens/newadmin/New_adminHome.dart';
 import 'package:queastio/screens/admin/myquizzes.dart';
 
+import '../screens/admin/batches.dart';
+
 // ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -67,5 +69,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case AboutUsRoute:
       return MaterialPageRoute(builder: (context) => AboutUs());
+    case BatchesRoute:
+      return MaterialPageRoute(builder: (context) => Batches());
   }
 }
