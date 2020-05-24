@@ -36,6 +36,8 @@ int time = 0;
   TextEditingController twoController = TextEditingController();
   TextEditingController threeController = TextEditingController();
   TextEditingController fourController = TextEditingController();
+  TextEditingController fiveController = TextEditingController();
+  TextEditingController sixController = TextEditingController();
   var orderLines = <Map>[];
   @override
   Widget build(BuildContext context) {
@@ -52,9 +54,12 @@ int time = 0;
               Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: TextField(
                       controller: titleController,
+                      decoration: new InputDecoration.collapsed(
+    hintText: 'Enter the question'
+  ),
                     ),
                   ),
                   DropdownButton<String>(
@@ -139,6 +144,30 @@ int time = 0;
                       });
                     },
                   ),
+                  RadioListTile(
+                    groupValue: groupValue,
+                    value: 4,
+                    title: TextField(
+                      controller: fiveController,
+                    ),
+                    onChanged: (t) {
+                      setState(() {
+                        groupValue = 4;
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    groupValue: groupValue,
+                    value: 5,
+                    title: TextField(
+                      controller: sixController,
+                    ),
+                    onChanged: (t) {
+                      setState(() {
+                        groupValue = 5;
+                      });
+                    },
+                  ),
                 ],
               ),
               Column(
@@ -159,6 +188,8 @@ int time = 0;
                       all.add(twoController.text);
                       all.add(threeController.text);
                       all.add(fourController.text);
+                      all.add(fiveController.text);
+                      all.add(sixController.text);
                       var correct = all[groupValue];
                       // print(correct);
                       map['answer'] = correct;
@@ -180,6 +211,8 @@ int time = 0;
                       twoController.clear();
                       threeController.clear();
                       fourController.clear();
+                      fiveController.clear();
+                      sixController.clear();
                       titleController.clear();
                     },
                     child: Text("ADD"),
@@ -190,6 +223,7 @@ int time = 0;
                         User user = Provider.of<User>(context, listen: false);
                         await DatabaseService(uid: user.uid)
                             .updateQuiz(qName, qTopic, qDescr, qno - 1, time, orderLines);
+                        Navigator.pop(context);
                       },
                       child: Text("Submit"),
                       color: Color(0xff43b77d)),
