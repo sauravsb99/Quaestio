@@ -242,6 +242,7 @@ class DatabaseService {
   Stream<List<Quiz>> getQuizzes(String topic) {
     return quizCollection
         .where('qTopic', isEqualTo: topic)
+        .orderBy('qName')
         .snapshots()
         .map(_quizListFromSnapshot);
   }
