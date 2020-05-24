@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
-            print("hi");
+            print("ok");
             print(userData.uid);
             print(userData.batch);
     return StreamProvider<List<Topic>>.value(
