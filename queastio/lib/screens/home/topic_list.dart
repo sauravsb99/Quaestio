@@ -19,9 +19,6 @@ class _TopicListState extends State<TopicList> {
   _TopicListState({this.user});
   @override
   Widget build(BuildContext context) {
-    print("ok");
-    print(user.batch);
-    print("ok");
     return StreamBuilder<List<Topic>>(
         stream: DatabaseService().getTopicsBatch(user.batch),
     builder: (context, snapshot) {

@@ -11,37 +11,36 @@ class FaqTile extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[ Card(color: Colors.white12,
-        child : FlatButton(
-            onPressed: () {
-//        print(faq.faqQuestion);
-//        Navigator.pushNamed(context, '/faqanswer', arguments: faq.faqAnswer);
-            },
-                color: Colors.white12,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(10.0,10.0,10.0,10.0),
+      children: <Widget>[ Padding(
+                  padding: EdgeInsets.fromLTRB(0,10.0,10.0,10.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[ Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(faq.faqQuestion==null?"Some Answer":faq.faqQuestion,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 20.0, color: Colors.white
-                            ),
-                          ),
+                        padding: const EdgeInsets.fromLTRB(8,8,8,0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[Text("?  "),
+                            Expanded(
+//                              padding: const EdgeInsets.all(8.0),
+                                child: Text(faq.faqQuestion==null?"Questions not available":faq.faqQuestion,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: 15.0, color: Colors.black
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
+                      ),
                       ],
                     ),
                 ),
-            ),
-      ),
-
               Card(
-                color: Colors.white,
+                color: Color(0x4f43b77d),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(10.0,0,10.0,10.0),
+                  padding: EdgeInsets.fromLTRB(0,0,10.0,10.0),
                   child: Wrap(
                     children: <Widget>[ Container(
                         child: Column(
@@ -49,10 +48,11 @@ class FaqTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[ Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(faq.faqAnswer==null?"Some Question":faq.faqAnswer,
+                              child: Text(faq.faqAnswer==null?"Answer not available":'•  ${faq.faqAnswer}',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    fontSize: 15.0, color: Colors.black
+                                    fontSize: 15.0,
+                                    color: Colors.white
                                 ),
                               ),
                             ),
