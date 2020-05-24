@@ -20,7 +20,7 @@ import 'package:queastio/shared/constants.dart';
 import 'package:queastio/screens/newadmin/New_adminHome.dart';
 import 'package:queastio/screens/admin/myquizzes.dart';
 
-import '../screens/admin/batches.dart';
+//import '../screens/admin/batches.dart';
 
 // ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -82,10 +82,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case AboutUsRoute:
       return MaterialPageRoute(builder: (context) => AboutUs());
-    case BatchesRoute:
-      return MaterialPageRoute(builder: (context) => Batches());
+    // case BatchesRoute:
+    //   return MaterialPageRoute(builder: (context) => Batches());
     case QuizAddManualRoute:
       return MaterialPageRoute(
           builder: (context) => QuizAddManual(qTopic: settings.arguments));
+//    case BatchesRoute:
+//      return MaterialPageRoute(builder: (context) => Batches());
   }
 }
