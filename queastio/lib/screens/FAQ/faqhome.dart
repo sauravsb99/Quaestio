@@ -15,12 +15,13 @@ class FaqHome extends StatelessWidget {
       value: DatabaseService().faqs,
       child: Container(
         child: Scaffold(
-          backgroundColor: Colors.grey,
+          appBar: AppBar(),
+          backgroundColor: Colors.white,
 
 //          drawer: MyDrawer(),
 
-          body: Padding(
-            padding: const EdgeInsets.all(18.0),
+          body: Container(
+            padding: const EdgeInsets.all(4.0),
             child: FaqList(),
           ),
         ),
