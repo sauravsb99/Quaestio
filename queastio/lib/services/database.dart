@@ -217,7 +217,7 @@ class DatabaseService {
   List<Faq> _faqListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Faq(
-          faqQid: doc.data['qid'] ?? '',
+//          faqQid: doc.data['qid'] ?? '',
           faqQuestion: doc.data['question'] ?? '',
           faqAnswer: doc.data['answer'] ?? '');
     }).toList();

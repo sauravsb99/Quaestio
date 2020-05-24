@@ -56,20 +56,7 @@ class Home extends StatelessWidget {
 //            Row(children:<Widget>[Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),],)
 //          ],
                 ),
-            floatingActionButton: Container(
-              height: 80.0,
-              width: 80.0,
-              child: FittedBox(
-                child: FloatingActionButton(elevation:0.5,backgroundColor: Colors.transparent,onPressed: () {
-                  Navigator.pushNamed(context, AboutUsRoute);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Image.asset("assets/logo_ok.png"),
-                  ),
-                ),
-              ),
-            ),
+//            floatingActionButton:
             body: Landing()),
       ),
     );

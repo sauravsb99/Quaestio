@@ -26,6 +26,8 @@ class _LandingState extends State<Landing> {
           0.4,
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
           0.4,
+      (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
+      0.1,
     ];
   }
 
@@ -50,17 +52,23 @@ class _LandingState extends State<Landing> {
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.4;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.1;
                 clickedCard = null;
               } else {
                 heights[1] = 0;
                 heights[0] =
-                    (MediaQuery.of(context).size.height) * 0.3 * dTopic.length;
+                    (MediaQuery.of(context).size.height) * 0.3 * dTopic.length+(dTopic.length*16);
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.0;
                 clickedCard = 'domain';
               }
             });
@@ -157,10 +165,13 @@ class _LandingState extends State<Landing> {
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.4;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.1;
                 clickedCard = null;
               } else {
                 heights[1] =
-                    (MediaQuery.of(context).size.height) * 0.3 * aTopic.length;
+                    ((MediaQuery.of(context).size.height) * 0.3 * aTopic.length)+(aTopic.length*16);
                 heights[0] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
@@ -168,6 +179,9 @@ class _LandingState extends State<Landing> {
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.0;
                 clickedCard = 'aptitude';
               }
             });
@@ -237,6 +251,51 @@ class _LandingState extends State<Landing> {
                 );
               }),
         ),
+
+        AnimatedContainer(
+            duration: Duration(milliseconds: 250),
+            height: heights2[2],
+//            child: Padding(
+//              padding: const EdgeInsets.all(8.0),
+//                child: Stack(
+//                  children: <Widget>[
+                    // Positioned.fill(
+                    //   child: Image.asset(
+                    //     'assets/aptitude.jpg',
+                    //     fit: BoxFit.fill,
+                    //   ),
+                    // ),
+                   child:
+//                   Column(
+//                     children: <Widget>[
+                       Container(
+                          height: 80.0,
+                          width: 80.0,
+                          child: FittedBox(
+                            alignment: Alignment.centerRight,
+
+                            child: FloatingActionButton(elevation:0.5,backgroundColor: Colors.transparent,onPressed: () {
+                              Navigator.pushNamed(context, AboutUsRoute);
+                            },
+                              child: Padding(
+                                padding: const EdgeInsets.all(4),
+                                child: Image.asset("assets/logo_ok.png"),
+                              ),
+                            ),
+                          ),
+                        ),
+//                       SizedBox(width: 20,)
+//                     ],
+//                   ),
+                    //                    ],
+                    //                  ),
+//                  ],
+////                ),
+////              ),
+//            ),
+//          ),
+        ),
+
 //            SizedBox(
 //              height: MediaQuery.of(context).size.height*0.05,
 //              child:Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
