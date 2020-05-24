@@ -1,8 +1,9 @@
 class Topic {
+  final String tid;
   final String name;
   final String image;
   final String category;
-  final String batch;
+  final List batches;
 
-  Topic({this.name, this.image, this.category,this.batch});
+  Topic({this.tid, this.name, this.image, this.category, this.batches});
 }

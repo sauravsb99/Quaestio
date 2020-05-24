@@ -43,6 +43,15 @@ class DatabaseService {
     });
   }
 
+  Future<void> updateTopicBatches(
+      String tid, String batchname, String action) async {
+    return await topicCollection.document(tid).updateData({
+      'batches': action == "add"
+          ? FieldValue.arrayUnion([batchname])
+          : FieldValue.arrayRemove([batchname]),
+    });
+  }
+
   Future<void> addTopic(
       String category, String image, String name, String batch) async {
     await topicCollection.document().setData({
@@ -151,9 +160,11 @@ class DatabaseService {
   List<Topic> _topicListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Topic(
+        tid: doc.documentID,
         name: doc.data['name'] ?? '',
         image: doc.data['image'] ?? '',
         category: doc.data['category'] ?? '',
+        batches: doc.data['batches'] ?? [],
       );
     }).toList();
   }
@@ -276,7 +287,7 @@ class DatabaseService {
 
   Stream<List<Topic>> getTopicsBatch(String batch) {
     return topicCollection
-        .where('batch', isEqualTo: batch)
+        .where('batches', arrayContains: batch)
         .snapshots()
         .map(_topicListFromSnapshot);
   }
