@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:queastio/screens/FAQ/faqhome.dart';
 import 'package:queastio/screens/admin/Quiz_listAdmin.dart';
 import 'package:queastio/screens/admin/add_quiz.dart';
+import 'package:queastio/screens/admin/questionadd.dart';
+import 'package:queastio/screens/admin/quizaddmanual.dart';
 import 'package:queastio/screens/admin/user_listAdmin.dart';
 import 'package:queastio/screens/authenticate/sign_in.dart';
 import 'package:queastio/screens/home/about_us.dart';
@@ -28,6 +30,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case QuizListRoute:
       return MaterialPageRoute(
           builder: (context) => QuizList(topic: settings.arguments));
+    case QuestionsAddRoute:
+    dynamic data = settings.arguments;
+      return MaterialPageRoute(
+          builder: (context) => QuestionAdd(
+            qTopic : data["qTopic"],
+            qDescr : data["qDescr"],
+            qName : data["qName"],
+            // qCount : data["qCount"],
+            qTime : data["qTime"],
+          )
+          );
     case QuestionRoute:
       return MaterialPageRoute(
           builder: (context) => QuestionCard(quiz: settings.arguments));
@@ -71,5 +84,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AboutUs());
     case BatchesRoute:
       return MaterialPageRoute(builder: (context) => Batches());
+    case QuizAddManualRoute:
+      return MaterialPageRoute(
+          builder: (context) => QuizAddManual(qTopic: settings.arguments));
   }
 }
