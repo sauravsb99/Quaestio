@@ -70,8 +70,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Signin:
       return MaterialPageRoute(builder: (context) => SignIn());
     case LeaderRoute:
+      dynamic data = settings.arguments;
       return MaterialPageRoute(
-          builder: (context) => LeaderBoard(qname: settings.arguments));
+          builder: (context) => LeaderBoard(
+          qname: data['qname'],
+            qtopic: data['qtopic'],
+
+      ));
     case TopicLeaderRoute:
       return MaterialPageRoute(
           builder: (context) => TopicLeaderBoard(topic: settings.arguments));

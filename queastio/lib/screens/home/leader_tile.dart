@@ -33,7 +33,7 @@ class LeaderTile extends StatelessWidget {
                         style: TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
                     ),
-                    CircleAvatar(backgroundImage: NetworkImage(user.image)),
+                    CircleAvatar(backgroundImage: NetworkImage(user.image),backgroundColor: Color(0xff43b77d),),
                   ],
                 ),
                 trailing: Text(
