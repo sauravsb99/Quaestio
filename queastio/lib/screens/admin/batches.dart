@@ -3,6 +3,8 @@ import 'package:queastio/models/batch.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/loading.dart';
 
+import '../../shared/constants.dart';
+
 class Batches extends StatefulWidget {
   @override
   _BatchesState createState() => _BatchesState();
@@ -66,6 +68,10 @@ class _BatchesState extends State<Batches> {
                       itemCount: batchList.length,
                       itemBuilder: (context, index) {
                         return ListTile(
+                          onTap: () {
+                            Navigator.pushNamed(context, BatchTopicsRoute,
+                                arguments: batchList[index]);
+                          },
                           title: Text(batchList[index].name),
                           trailing: IconButton(
                             icon: Icon(Icons.delete, color: Colors.red[800]),

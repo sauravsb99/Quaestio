@@ -17,6 +17,8 @@ import 'package:queastio/screens/wrapper.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/screens/newadmin/New_adminHome.dart';
 import 'package:queastio/screens/admin/myquizzes.dart';
+import 'package:queastio/screens/admin/batchtopics.dart';
+import 'package:queastio/screens/admin/set_batchtopics.dart';
 
 import '../screens/admin/batches.dart';
 
@@ -71,5 +73,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AboutUs());
     case BatchesRoute:
       return MaterialPageRoute(builder: (context) => Batches());
+    case BatchTopicsRoute:
+      return MaterialPageRoute(
+          builder: (context) => BatchTopics(batch: settings.arguments));
+    case SetBatchTopicsRoute:
+      dynamic data = settings.arguments;
+      return MaterialPageRoute(
+          builder: (context) =>
+              SetBatchTopics(topics: data['topics'], batch: data['batch']));
   }
 }

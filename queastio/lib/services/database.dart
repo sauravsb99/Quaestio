@@ -36,6 +36,13 @@ class DatabaseService {
     });
   }
 
+  Future<void> updateBatchTopics(Batch batch) async {
+    return await batchCollection.document(batch.bid).setData({
+      'name': batch.name,
+      'topics': batch.topics,
+    });
+  }
+
   Future<void> addTopic(String category, String image, String name) async {
     await topicCollection.document().setData({
       'category': category,

@@ -15,7 +15,7 @@ class _TopicListAdminState extends State<TopicListAdmin> {
     return ListView.builder(
       itemCount: topics.length,
       itemBuilder: (context, index) {
-        return TopicTileAdmin(topic: topics[index]);
+        return TopicTileAdmin(topic: topics[index].name);
       },
     );
   }
