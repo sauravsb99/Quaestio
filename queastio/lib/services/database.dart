@@ -36,12 +36,20 @@ class DatabaseService {
     });
   }
 
-  Future<void> addTopic(String category, String image, String name,String batch) async {
+  Future<void> updateBatchTopics(Batch batch) async {
+    return await batchCollection.document(batch.bid).setData({
+      'name': batch.name,
+      'topics': batch.topics,
+    });
+  }
+
+  Future<void> addTopic(
+      String category, String image, String name, String batch) async {
     await topicCollection.document().setData({
       'category': category,
       'image': image,
       'name': name,
-      'batch':batch,
+      'batch': batch,
     });
     return ("true");
   }
@@ -121,12 +129,11 @@ class DatabaseService {
 
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
-      uid: uid,
-      name: snapshot.data['name'],
-      image: snapshot.data['image'],
-      role: snapshot.data['role'],
-      batch: snapshot.data['batch']
-    );
+        uid: uid,
+        name: snapshot.data['name'],
+        image: snapshot.data['image'],
+        role: snapshot.data['role'],
+        batch: snapshot.data['batch']);
   }
 
   List<UserData> _userDataListFromSnapshot(QuerySnapshot snapshot) {
@@ -269,12 +276,10 @@ class DatabaseService {
   }
 
   Stream<List<Topic>> getTopicsBatch(String batch) {
-
-      return topicCollection
-          .where('batch', isEqualTo: batch)
-          .snapshots()
-          .map(_topicListFromSnapshot);
-
+    return topicCollection
+        .where('batch', isEqualTo: batch)
+        .snapshots()
+        .map(_topicListFromSnapshot);
   }
 
   Stream<List<Score>> getTopicScoresAll(String topic) {
