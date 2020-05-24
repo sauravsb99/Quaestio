@@ -35,3 +35,5 @@ const String TopicLeaderRoute = '/topicleader';
 const String AnswerSheetRoute = '/answers';
 const String AboutUsRoute = '/about-us';
 const String BatchesRoute = '/batches';
+const String QuizAddManualRoute = '/qmr';
+const String QuestionsAddRoute = '/qar';
