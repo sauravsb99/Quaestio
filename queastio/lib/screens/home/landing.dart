@@ -101,15 +101,23 @@ class _LandingState extends State<Landing> {
                           )),
                     ),
                     Center(
-                        child: Text(
-                      'Domain Specific',
+                        child: Container(
+//                          color: Colors.black54,
+                          decoration: BoxDecoration(color:Colors.black54,borderRadius: BorderRadius.circular(12)),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(8,4,8,4),
+                            child: Text(
+                      'Domain Specific Quiz',
                       style: TextStyle(
-                        fontSize: 26.0,
-                        color: Colors.white,
-                        letterSpacing: 3.0,
-                        fontWeight: FontWeight.bold,
+                            fontSize: 26.0,
+                            color: Colors.white,
+                            letterSpacing: 3.0,
+                            fontWeight: FontWeight.bold,
                       ),
-                    )),
+                              textAlign: TextAlign.center,
+                    ),
+                          ),
+                        )),
                     //                    ],
                     //                  ),
                   ],
@@ -206,6 +214,7 @@ class _LandingState extends State<Landing> {
                       decoration: BoxDecoration(
 //                     borderRadius: BorderRadius.circular(20.0),
                           color: Colors.black87,
+
                           image: DecorationImage(
                             fit: BoxFit.fitWidth,
                             alignment: FractionalOffset.topCenter,
@@ -215,15 +224,22 @@ class _LandingState extends State<Landing> {
                           )),
                     ),
                     Center(
-                        child: Text(
-                      'General Aptitude',
+                        child: Container(
+//                          color: Colors.black54,
+                          decoration: BoxDecoration(color:Colors.black54,borderRadius: BorderRadius.circular(12)),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(8,4,8,4),
+                            child: Text(
+                      'General Aptitude Quiz',
                       style: TextStyle(
-                        fontSize: 26.0,
-                        color: Colors.white,
-                        letterSpacing: 3.0,
-                        fontWeight: FontWeight.bold,
+                            fontSize: 26.0,
+                            color: Colors.white,
+                            letterSpacing: 3.0,
+                            fontWeight: FontWeight.bold,
                       ),
-                    )),
+                    ),
+                          ),
+                        )),
 //                    ],
 //                  ),
                   ],
