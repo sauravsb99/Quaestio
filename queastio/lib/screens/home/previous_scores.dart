@@ -127,10 +127,13 @@ class _PreviousScoresState extends State<PreviousScores> {
                                     ))),
                                     DataCell(Container(
                                       child:IconButton(
-                                        icon: Icon(Icons.star,color: Colors.white,),
+                                        icon: Image.asset('assets/lead.png'),
                                         onPressed: () {
                                           Navigator.pushNamed(context, LeaderRoute,
-                                              arguments: scores[index].quiz);
+                                              arguments:{
+                                              'qname':scores[index].quiz
+                                              ,
+                                              'qtopic':scores[index].qTopic});
                                         },
                                       )))
                                   ],

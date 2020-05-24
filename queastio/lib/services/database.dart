@@ -304,9 +304,10 @@ class DatabaseService {
     }
   }
 
-  Stream<List<Score>> getQuizScores(String qname) {
+  Stream<List<Score>> getQuizScores(String qname,String topic) {
     return scoreCollection
         .where('quiz', isEqualTo: qname)
+        .where('qTopic', isEqualTo: topic)
         .orderBy('score', descending: true)
         .snapshots()
         .map(_scoreListFromSnapshot);
