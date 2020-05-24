@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:queastio/services/database.dart';
 import 'package:queastio/models/score.dart';
+import 'package:queastio/shared/constants.dart';
 
 class PreviousScores extends StatefulWidget {
   final Widget child;
@@ -60,7 +61,7 @@ class _PreviousScoresState extends State<PreviousScores> {
                         indicatorColor: Color(0xff43b77d),
                         tabs: [
                           Tab(icon: Icon(Icons.table_chart)),
-                          Tab(icon: Icon(Icons.line_style)),
+                          Tab(icon: Icon(Icons.show_chart)),
                         ],
                       ),
                     ),
@@ -91,13 +92,23 @@ class _PreviousScoresState extends State<PreviousScores> {
                                     ),
                                   ),
                                 ),
+                                DataColumn(
+                                  label: Container(
+                                    child: Text(
+                                      'LeaderBoard',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                               rows: List.generate(scores.length, (index) {
                                 return DataRow(
                                   cells: [
                                     DataCell(Container(
                                       child: Text(
-                                        scores[index].quiz,
+                                        scores[index].quiz.toUpperCase(),
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
@@ -114,6 +125,14 @@ class _PreviousScoresState extends State<PreviousScores> {
                                         color: Colors.white,
                                       ),
                                     ))),
+                                    DataCell(Container(
+                                      child:IconButton(
+                                        icon: Icon(Icons.star,color: Colors.white,),
+                                        onPressed: () {
+                                          Navigator.pushNamed(context, LeaderRoute,
+                                              arguments: scores[index].quiz);
+                                        },
+                                      )))
                                   ],
                                 );
                               }),
