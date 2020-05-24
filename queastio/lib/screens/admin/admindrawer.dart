@@ -79,54 +79,6 @@ class _AdminDrawerState extends State<AdminDrawer> {
                           child: FlatButton(
                             color: Colors.grey,
                             onPressed: () {
-                              Navigator.pushNamed(context, BatchesRoute);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.7,
-                                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-//                          color: Colors.blueGrey,
-                                child: Center(
-                                  child: Text(
-                                    'Batches',
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.black,
-                                  width: 3,
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(11)),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            MediaQuery.of(context).size.width * 0.05,
-                            30,
-                            MediaQuery.of(context).size.width * 0.05,
-                            10),
-//
-                        child: Material(
-                          elevation: 15.0,
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderOnForeground: true,
-                          child: FlatButton(
-                            color: Colors.grey,
-                            onPressed: () {
                               Navigator.pushNamed(context, UserListRoute);
                             },
                             child: Padding(

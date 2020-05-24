@@ -1,11 +1,7 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:queastio/models/topic.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/models/score.dart';
-import 'package:queastio/shared/loading.dart';
 
 class PreviousScores extends StatefulWidget {
   final Widget child;
@@ -19,25 +15,17 @@ class _PreviousScoresState extends State<PreviousScores> {
   List<charts.Series<Score, DateTime>> _seriesLineData;
   String topic = 'All';
   Set<String> items;
-//  List<Score> mydata;
-
   _generateData(data) {
     _seriesLineData = List<charts.Series<Score, DateTime>>();
-
-//    User user;
     _seriesLineData.add(charts.Series(
       domainFn: (Score data, _) => data.time.toDate(),
-//                                        user.timestamp.seconds,
 
       measureFn: (Score data, _) => (data.score) / data.total * 100,
       colorFn: (Score data, _) => charts.Color.fromHex(code: '#43b77d'),
-//        colorFn:
-//        id:
       data: data,
 
       labelAccessorFn: (Score row, _) => "${row.time}",
       id: "Growth Chart",
-//          fillPatternFn:
     ));
   }
 
@@ -48,18 +36,7 @@ class _PreviousScoresState extends State<PreviousScores> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Score> scores = snapshot.data;
-
-//            List<Score> score = snapshot.data;
-//      var i=0;
-//      for(i=0; i<=score.length;i++){
-//      _generateData(score[i]);}
-
-//            void initState() {
-            // TODO: implement initState
-//              super.initState();
             _seriesLineData = List<charts.Series<Score, DateTime>>();
-//              List.generate(score, index){
-////            }
             topic = topic == null ? 'All' : topic;
             items = Set.from(['All']);
             scores.forEach((element) {
@@ -72,13 +49,6 @@ class _PreviousScoresState extends State<PreviousScores> {
             }
             _generateData(topicScores);
             return Scaffold(
-//              backgroundColor: Colors.indigo,
-//              appBar: AppBar(
-//                title: Text(
-//                    'My Scores'
-//                ),
-//                backgroundColor: Colors.black,
-//              ),
               body: MaterialApp(
                 home: DefaultTabController(
                   length: 2,
@@ -121,16 +91,6 @@ class _PreviousScoresState extends State<PreviousScores> {
                                     ),
                                   ),
                                 ),
-                                // DataColumn(
-                                //   label: Container(
-                                //     child: Text(
-                                //       'Total',
-                                //       style: TextStyle(
-                                //         color: Colors.white,
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
                               ],
                               rows: List.generate(scores.length, (index) {
                                 return DataRow(
@@ -154,20 +114,12 @@ class _PreviousScoresState extends State<PreviousScores> {
                                         color: Colors.white,
                                       ),
                                     ))),
-                                    // DataCell(Container(
-                                    //     child: Text(
-                                    //   data[index].total.toString(),
-                                    //   style: TextStyle(
-                                    //     color: Colors.white,
-                                    //   ),
-                                    // ))),
                                   ],
                                 );
                               }),
                             ),
                           ),
                         ),
-//                  ),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Container(
@@ -211,8 +163,6 @@ class _PreviousScoresState extends State<PreviousScores> {
                                     }).toList(),
                                   ),
                                   Expanded(
-//                                              height: MediaQuery.of(context).size.height*0.60,
-//                                              width: MediaQuery.of(context).size.width*0.50,
                                     child: charts.TimeSeriesChart(
                                         _seriesLineData,
                                         defaultRenderer:
@@ -230,23 +180,9 @@ class _PreviousScoresState extends State<PreviousScores> {
                                                   .middleDrawArea),
                                         ]),
                                   ),
-//                                           StreamBuilder<List<Score>>(
-//                                               stream: DatabaseService(uid: uid)
-//                                                   .getTopicScores(topic),
-//                                               // ignore: missing_return
-//                                               builder: (context, snapshot) {
-//                                                 if (snapshot.hasData) {
-//                                                   List<Score> datas =
-//                                                       snapshot.data;
-
-// //                                            _generateData(datas);
-
-//                                                 } else {
-//                                                   return Container();
-//                                                 }
-//                                               }),
                                   SizedBox(
                                     height: 50,
+                                    child:Text("Time",style: TextStyle(fontSize: MediaQuery.of(context).size.width*0.04),)
                                   )
                                 ],
                               ),

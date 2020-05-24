@@ -22,6 +22,8 @@ import 'package:queastio/screens/admin/set_batchtopics.dart';
 
 import '../screens/admin/batches.dart';
 
+//import '../screens/admin/batches.dart';
+
 // ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {

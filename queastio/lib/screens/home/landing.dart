@@ -26,6 +26,8 @@ class _LandingState extends State<Landing> {
           0.4,
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
           0.4,
+      (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
+      0.1,
     ];
   }
 
@@ -50,17 +52,23 @@ class _LandingState extends State<Landing> {
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.4;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.1;
                 clickedCard = null;
               } else {
                 heights[1] = 0;
                 heights[0] =
-                    (MediaQuery.of(context).size.height) * 0.3 * dTopic.length;
+                    (MediaQuery.of(context).size.height) * 0.3 * dTopic.length+(dTopic.length*16);
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.0;
                 clickedCard = 'domain';
               }
             });
@@ -93,15 +101,23 @@ class _LandingState extends State<Landing> {
                           )),
                     ),
                     Center(
-                        child: Text(
-                      'Domain Specific',
+                        child: Container(
+//                          color: Colors.black54,
+                          decoration: BoxDecoration(color:Colors.black54,borderRadius: BorderRadius.circular(12)),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(8,4,8,4),
+                            child: Text(
+                      'Domain Specific Quiz',
                       style: TextStyle(
-                        fontSize: 26.0,
-                        color: Colors.white,
-                        letterSpacing: 3.0,
-                        fontWeight: FontWeight.bold,
+                            fontSize: 26.0,
+                            color: Colors.white,
+                            letterSpacing: 3.0,
+                            fontWeight: FontWeight.bold,
                       ),
-                    )),
+                              textAlign: TextAlign.center,
+                    ),
+                          ),
+                        )),
                     //                    ],
                     //                  ),
                   ],
@@ -157,10 +173,13 @@ class _LandingState extends State<Landing> {
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.4;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.1;
                 clickedCard = null;
               } else {
                 heights[1] =
-                    (MediaQuery.of(context).size.height) * 0.3 * aTopic.length;
+                    ((MediaQuery.of(context).size.height) * 0.3 * aTopic.length)+(aTopic.length*16);
                 heights[0] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
@@ -168,6 +187,9 @@ class _LandingState extends State<Landing> {
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
+                heights2[2] = (MediaQuery.of(context).size.height -
+                               AppBar().preferredSize.height) *
+                              0.0;
                 clickedCard = 'aptitude';
               }
             });
@@ -192,6 +214,7 @@ class _LandingState extends State<Landing> {
                       decoration: BoxDecoration(
 //                     borderRadius: BorderRadius.circular(20.0),
                           color: Colors.black87,
+
                           image: DecorationImage(
                             fit: BoxFit.fitWidth,
                             alignment: FractionalOffset.topCenter,
@@ -201,15 +224,22 @@ class _LandingState extends State<Landing> {
                           )),
                     ),
                     Center(
-                        child: Text(
-                      'General Aptitude',
+                        child: Container(
+//                          color: Colors.black54,
+                          decoration: BoxDecoration(color:Colors.black54,borderRadius: BorderRadius.circular(12)),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(8,4,8,4),
+                            child: Text(
+                      'General Aptitude Quiz',
                       style: TextStyle(
-                        fontSize: 26.0,
-                        color: Colors.white,
-                        letterSpacing: 3.0,
-                        fontWeight: FontWeight.bold,
+                            fontSize: 26.0,
+                            color: Colors.white,
+                            letterSpacing: 3.0,
+                            fontWeight: FontWeight.bold,
                       ),
-                    )),
+                    ),
+                          ),
+                        )),
 //                    ],
 //                  ),
                   ],
@@ -233,26 +263,55 @@ class _LandingState extends State<Landing> {
                     TopicTile(
                       topic: aTopic[index],
                     ),
-//                     ListTile(
-//                       onTap: () {
-//                         Navigator.pushNamed(context, QuizListRoute,
-//                             arguments: aTopic[index].name);
-//                       },
-//                       title: Text(
-//                         aTopic[index].name,
-//                         style: TextStyle(fontSize: 20.0, color: Colors.white),
-//                       ),
-//                     ),
-//                     Divider(
-//                       height: (MediaQuery.of(context).size.height -
-//                               AppBar().preferredSize.height) *
-//                           0.0001,
-// //                      color: Color(0xfffaece6),
-//                     ),
                   ],
                 );
               }),
         ),
+
+        AnimatedContainer(
+            duration: Duration(milliseconds: 250),
+            height: heights2[2],
+//            child: Padding(
+//              padding: const EdgeInsets.all(8.0),
+//                child: Stack(
+//                  children: <Widget>[
+                    // Positioned.fill(
+                    //   child: Image.asset(
+                    //     'assets/aptitude.jpg',
+                    //     fit: BoxFit.fill,
+                    //   ),
+                    // ),
+                   child:
+//                   Column(
+//                     children: <Widget>[
+                       Container(
+                          height: 80.0,
+                          width: 80.0,
+                          child: FittedBox(
+                            alignment: Alignment.centerRight,
+
+                            child: FloatingActionButton(elevation:0.5,backgroundColor: Colors.transparent,onPressed: () {
+                              Navigator.pushNamed(context, AboutUsRoute);
+                            },
+                              child: Padding(
+                                padding: const EdgeInsets.all(4),
+                                child: Image.asset("assets/logo_ok.png"),
+                              ),
+                            ),
+                          ),
+                        ),
+//                       SizedBox(width: 20,)
+//                     ],
+//                   ),
+                    //                    ],
+                    //                  ),
+//                  ],
+////                ),
+////              ),
+//            ),
+//          ),
+        ),
+
 //            SizedBox(
 //              height: MediaQuery.of(context).size.height*0.05,
 //              child:Image.network("https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/logo_EEE.png?alt=media&token=a3186033-a2f8-411b-8335-eabdf6a05c80"),
