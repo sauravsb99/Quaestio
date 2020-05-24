@@ -15,6 +15,7 @@ class _TopicAddState extends State<TopicAdd> {
   final _formKey = GlobalKey<FormState>();
   // print(category);
    String _currentName;
+   String image;
   @override
   // print(category);
   Widget build(BuildContext context) {
@@ -28,14 +29,24 @@ class _TopicAddState extends State<TopicAdd> {
           ),
           SizedBox(height: 30.0),
           Text(
-            "Enter the Subject Name",
+            "Enter the Subject Name*",
             style: TextStyle(fontSize: 22.0),
           ),
-          SizedBox(height: 30.0),
+          // SizedBox(height: 30.0),
           TextFormField(
             // decoration: textInputDecoration,
             validator: (val) => val.isEmpty ? 'Please enter a Subject' : null,
             onChanged: (val) => setState(() => _currentName = val),
+          ),
+          SizedBox(height: 30.0),
+           Text(
+            "Enter the Image url",
+            style: TextStyle(fontSize: 22.0),
+          ),
+          TextFormField(
+            // decoration: textInputDecoration,
+            // validator: (val) => val.isEmpty ? 'Please enter ' : null,
+            onChanged: (val) => setState(() => image = val),
           ),
           // SizedBox(height: 10.0),
           // DropdownButtonFormField(
@@ -57,12 +68,13 @@ class _TopicAddState extends State<TopicAdd> {
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {
-              String image;
-              if(category == "Domain Specific")
+              // String image;
+              if(image == null)
                 image = "https://firebasestorage.googleapis.com/v0/b/okkk-810ee.appspot.com/o/aptitude.jpg?alt=media&token=ee80431a-5377-4027-a853-9e6c3171c998";
-              else
-                image = "https://firebasestorage.googleapis.com/v0/b/okkk-810ee.appspot.com/o/aptitude.jpg?alt=media&token=ee80431a-5377-4027-a853-9e6c3171c998";
+              // else
+                // image = "https://firebasestorage.googleapis.com/v0/b/okkk-810ee.appspot.com/o/aptitude.jpg?alt=media&token=ee80431a-5377-4027-a853-9e6c3171c998";
               await DatabaseService().addTopic(category, image, _currentName,'Pharma');
+              Navigator.pop(context);
               // print(_currentName);
               // print(_currentSugars);
               // print(_currentStrength);
