@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/models/user.dart';
 import 'package:provider/provider.dart';
@@ -15,11 +18,15 @@ class QuestionAdd extends StatefulWidget {
 }
 
 class _QuestionAddState extends State<QuestionAdd> {
+  File _image;
+  String url;
 final String qTopic;
   final String qDescr;
   final String qName;
   // final String qCount;
   final String qTime;
+String type = 'Text';
+Set<String> items;
 _QuestionAddState({this.qTopic,this.qDescr,this.qName,this.qTime});
 int time = 0;
   int qno=1;
@@ -32,6 +39,10 @@ int time = 0;
   var orderLines = <Map>[];
   @override
   Widget build(BuildContext context) {
+    type = type == null ? 'Text' : type;
+    items=Set.from(['Text']);
+    items.add('Image');
+    var image;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -44,6 +55,40 @@ int time = 0;
                     padding: const EdgeInsets.all(16.0),
                     child: TextField(
                       controller: titleController,
+                    ),
+                  ),
+                  DropdownButton<String>(
+                    value: type,
+                    underline: Container(
+                      color: Color(0xff43b77d),
+                      height: 2.0,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        type = newValue;
+                      });
+                    },
+                    items: items.map((item) {
+                      return DropdownMenuItem(
+                          value: item, child: Text(item));
+                    }).toList(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 80.0),
+                    child: IconButton(
+                      icon: Icon(Icons.insert_photo),
+                      onPressed: () async {
+
+                            image = await ImagePicker.pickImage(
+                                source: ImageSource.gallery
+                            );
+                            setState(() {
+                              _image = image;
+                              print('Image Path $_image');
+//                              print(image.lengthSync());
+                            });
+
+                        }
                     ),
                   ),
                   RadioListTile(
@@ -103,8 +148,13 @@ int time = 0;
                       var map = {};
                       List<String> all = [];
                       map['qno'] = qno;
-                      map['qType'] = "Text";
-                      map['qText'] = titleController.text;
+                      map['qType'] = type;
+                      if(type=='Image'){
+                      map['qImage'] = titleController.text;
+                      }
+                      else{
+                        map['qText'] = titleController.text;
+                      }
                       all.add(oneController.text);
                       all.add(twoController.text);
                       all.add(threeController.text);
@@ -141,8 +191,9 @@ int time = 0;
                         await DatabaseService(uid: user.uid)
                             .updateQuiz(qName, qTopic, qDescr, qno - 1, time, orderLines);
                       },
-                      child: Text("START"),
-                      color: Colors.red.withOpacity(0.2)),
+                      child: Text("Submit"),
+                      color: Color(0xff43b77d)),
+                  Text('You must click ADD for the final Question Also')
                 ],
               ),
             ],
