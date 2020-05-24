@@ -37,65 +37,26 @@ class AdminHome extends StatelessWidget {
 //            backgroundColor: Colors.indigo,
             elevation: 0.0,
           ),
-          floatingActionButton:  Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-    children: <Widget>[
-            Container(
-              height: 70.0,
-              width: 70.0,
-              child: FittedBox(
-                child: FloatingActionButton(elevation:0.5,backgroundColor: Color(0xff43b77d),onPressed: (){
-                  _InsertTopicName("Domain Specific");
-                },
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text('+DS'),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              height: 70.0,
-              width: 70.0,
-              child: FittedBox(
-                child: FloatingActionButton(elevation:0.5,backgroundColor: Color(0xff43b77d),onPressed: (){
-                  _InsertTopicName("General Aptitude");
-                },
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text('+GA'),
-                  ),
-                ),
-              ),
-            ),
-//      MaterialButton(
-//    color: Color(0xff43b77d),
-//        elevation: 10,
-//    disabledElevation: 0,
-////        heroTag: "btn1",
-//    child: Text('+DS'),onPressed: (){
-//    _InsertTopicName("Domain Specific");
-//    },),
-////    Align(
-////    alignment: Alignment(0.90,0.60),
-////    child:
-//    MaterialButton(
-//    color: Color(0xff43b77d),
-//    elevation: 1,
-//    disabledElevation: 0,
-////    heroTag: "btn2",
-//    child: Text('+GA'),onPressed: (){
-//    _InsertTopicName("General Aptitude");
-//    },
-//    ),
-//    ),
-    ]
-    ),
           body: TopicListAdmin(),
           
         ),
       ),
+      Align(
+      alignment: Alignment(0.90,0.80),
+      child: FloatingActionButton(
+        heroTag: "btn1",
+        child: Text('+DS'),onPressed: (){
+        _InsertTopicName("Domain Specific");
+      },),
+    ),
+    Align(
+      alignment: Alignment(-0.90,0.80),
+      child: FloatingActionButton(
+        heroTag: "btn2",
+        child: Text('+GA'),onPressed: (){
+        _InsertTopicName("General Aptitude");
+      },),
+    ),
       ],
       )
     );
