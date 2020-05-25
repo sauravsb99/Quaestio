@@ -81,51 +81,73 @@ class _HomeState extends State<Home> {
                 return Container(
                 child:  Scaffold(
                 backgroundColor: Colors.black,
+                  drawer: Drawer(
+                    child: MyDrawer(),
+                  ),
                 appBar: AppBar(
-//                  title: Text('My Scores'),
+//                  title: Text('Batc'),
 //                  backgroundColor: Color(0xff43b77d),
                 ),
-                drawer: MyDrawer(),
+//                drawer: MyDrawer(),
                 body: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Icon(
-                        Icons.radio_button_checked,
-                        color: Colors.white,
-                        size: 40.0,
-                      ),
+//                      Icon(
+//                        Icons.radio_button_checked,
+//                        color: Colors.white,
+//                        size: 40.0,
+//                      ),
                       SizedBox(
                         height: 20.0,
                       ),
                       Text(
-                        'Set Your Batch Here.\n This is Permanent',
+                        'Set Your Batch Here.\n This change will Permanent',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                           letterSpacing: 2.0,
                         ),textAlign: TextAlign.center,
                       ),
+                      SizedBox(height: MediaQuery.of(context).size.height*0.1,),
 
-                      Container(
-                        color: Colors.white,
-                        child: DropdownButton<String>(
-                          value: batchval,
-                          underline: Container(
-                            color: Color(0xff43b77d),
-                            height: 2.0,
-                          ),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              batchval = newValue;
-                            });
-                          },
-                          items: items.map((item) {
-                            return DropdownMenuItem(
-                                value: item, child: Text(item));
-                          }).toList(),
+                      Row(
+//                        color: Colors.white,
+                        children:<Widget> [
+                          Expanded(child: SizedBox(),),
+                          Text("Batch :",style: TextStyle(color: Colors.white),),
+                  SizedBox(width: 10,),
+                          Expanded(
+//                            width: MediaQuery.of(context).size.width*0.3,
+
+                            child: Container(
+                              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10)),
+//                              color: Colors.white,
+                              child: Padding(
+
+                                padding: const EdgeInsets.fromLTRB(20,8,20,8),
+                                child: DropdownButton<String>(
+                                value: batchval,
+
+                                underline: Container(
+                                  color: Color(0xff43b77d),
+                                  height: 2.0,
+                                ),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    batchval = newValue;
+                                  });
+                                },
+                                items: items.map((item) {
+                                  return DropdownMenuItem(
+                                      value: item, child: Text(item));
+                                }).toList(),
                         ),
+                              ),
+                            ),
+                          ),Expanded(child: SizedBox())],
                       ),
+                      SizedBox(height: MediaQuery.of(context).size.height*0.05),
                       RaisedButton(
                         onPressed: () async {
 //                          Scaffold.of(context).showSnackBar(SnackBar(content: Text("Please Wait"),));
