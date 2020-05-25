@@ -12,10 +12,12 @@ class _TopicListAdminState extends State<TopicListAdmin> {
   @override
   Widget build(BuildContext context) {
     final topics = Provider.of<List<Topic>>(context);
+    // topics.
+    print(topics[0].tid);
     return ListView.builder(
       itemCount: topics.length,
       itemBuilder: (context, index) {
-        return TopicTileAdmin(topic: topics[index].name);
+        return TopicTileAdmin(topic: topics[index]);
       },
     );
   }

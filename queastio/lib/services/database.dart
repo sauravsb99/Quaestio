@@ -56,6 +56,7 @@ class DatabaseService {
   Future<void> addTopic(
       String category, String image, String name, String batch) async {
     await topicCollection.document().setData({
+      'uid': uid,
       'category': category,
       'image': image,
       'name': name,
@@ -94,8 +95,8 @@ class DatabaseService {
       'questions': questions,
     });
   }
-  Future<void> deleteTopic(String name) async{
-    return topicCollection.document(name).delete();
+  Future<void> deleteTopic() async{
+    return topicCollection.document(uid).delete();
   }
 
   Future<void> deleteUser(String uid) async {
