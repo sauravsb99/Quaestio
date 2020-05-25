@@ -150,13 +150,22 @@ class _HomeState extends State<Home> {
                       SizedBox(height: MediaQuery.of(context).size.height*0.05),
                       RaisedButton(
                         onPressed: () async {
+                          if(batchval!='---') {
 //                          Scaffold.of(context).showSnackBar(SnackBar(content: Text("Please Wait"),));
-                          String err = "Photo Updated";
-                          print(batchval);
-                            await DatabaseService(uid: user.uid)
-                                .updateUserData(userData.name, userData.image, userData.role,batchval);
-                            setState(() {
-                            });
+//                          String err = "Photo Updated";
+                          await DatabaseService(
+                              uid: user.uid
+                          )
+                              .updateUserData(
+                              userData.name, userData.image, userData.role,
+                              batchval
+                          );
+                          setState(
+                                  (
+                                  ){}
+                          );
+                        }
+                          else{}
                         },
                         splashColor: Colors.white,
                         textColor: Colors.white,
