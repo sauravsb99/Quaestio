@@ -32,7 +32,8 @@ class _QuizListState extends State<QuizList> {
               ),
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.star_border),
+                  icon:
+                  Image.asset('assets/lead.png'),
                   onPressed: () {
                     Navigator.pushNamed(context, TopicLeaderRoute,
                         arguments: widget.topic);

@@ -290,11 +290,11 @@ class _LandingState extends State<Landing> {
                           child: FittedBox(
                             alignment: Alignment.centerRight,
 
-                            child: FloatingActionButton(elevation:0.5,backgroundColor: Colors.transparent,onPressed: () {
+                            child: FloatingActionButton(elevation:10,backgroundColor: Color(0xff1b1b1b),onPressed: () {
                               Navigator.pushNamed(context, AboutUsRoute);
                             },
                               child: Padding(
-                                padding: const EdgeInsets.all(4),
+                                padding: const EdgeInsets.all(2),
                                 child: Image.asset("assets/logo_ok.png"),
                               ),
                             ),
