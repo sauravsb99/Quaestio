@@ -38,7 +38,7 @@ class AnswerSheet extends StatelessWidget {
                                   fontSize: 18.0,
                                 ),
                               ),
-                              Image.network(questions[index]['qImage']),
+                              Image.network(questions[index]['qText']),
                             ],
                           ),
                     SizedBox(
