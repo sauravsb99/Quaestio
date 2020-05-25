@@ -32,6 +32,7 @@ _QuestionAddState({this.qTopic,this.qDescr,this.qName,this.qTime});
 int time = 0;
   int qno=1;
     int groupValue = 0;
+  TextEditingController errController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController oneController = TextEditingController();
   TextEditingController twoController = TextEditingController();
@@ -45,7 +46,7 @@ int time = 0;
     type = type == null ? 'Text' : type;
     items=Set.from(['Text']);
     items.add('Image');
-    String err='You Can Choose a Picture from local > 200 KB';
+    String err='Click Up';
     var image;
     return Scaffold(
       body: SafeArea(
@@ -99,17 +100,30 @@ int time = 0;
                           }
                             }
                         );
-                        print(err);
+                        errController.text=err;
                       }
                     ),
                   ),
-                  Text(err,style: TextStyle(color: Colors.red, fontSize: 16.0),),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextField(
+                      controller: errController,
+                      decoration: new InputDecoration.collapsed(
+                          hintText: 'You Can Choose a Picture from local > 200 KB'
+                      ),
+                      style: TextStyle(color: Colors.red, fontSize: 16.0),
+                      readOnly: true,
+                    ),
+                  ),
+                  Text("",style: TextStyle(color: Colors.red, fontSize: 16.0),),
                   Text(" "),
                   RaisedButton(child: Text("Up"),onPressed: () async {
                     print(err);
-                    if ( _image != null ) {
+                    if ( _image != null && type=='Image') {
 //                    Scaffold.of(context).showSnackBar(SnackBar(content: Text("Please Wait"),));
 //                    String err = "Photo Updated";
+                    err="Please Wait";
+                    errController.text=err;
                     String fileName = basename(
                         'userData'
                     );
@@ -131,6 +145,7 @@ int time = 0;
                     if ( uploadTask.isCanceled ) {
                       url = null;
                       err="There Was an Upload Error";
+                      errController.text=err;
                       _image = null;
                       image = null;
                     }
@@ -139,13 +154,16 @@ int time = 0;
                     setState(() {
                       print("Data Updated");
                       titleController.text=url;
+                      errController.text="Image added as Question";
 //                      Scaffold.of(context)
 //                          .showSnackBar(SnackBar(
 //                          content: Text(err),duration: Duration(milliseconds: 200)));
                     });
                   }
                     else{
-                    titleController.text=err;
+                      err='change Type to Image';
+                      errController.text=err;
+//                    print(err);
                     }
                     },),
                   RadioListTile(
@@ -231,12 +249,22 @@ int time = 0;
                       map['qno'] = qno;
                       map['qType'] = type;
                       map['qText'] = titleController.text;
-                      all.add(oneController.text);
-                      all.add(twoController.text);
-                      all.add(threeController.text);
-                      all.add(fourController.text);
-                      all.add(fiveController.text);
-                      all.add(sixController.text);
+                      if(oneController.text!=''){
+                      all.add(oneController.text);}
+                      if(twoController.text!=''){
+                        all.add(twoController.text);}
+                      if(threeController.text!=''){
+                        all.add(threeController.text);}
+                      if(fourController.text!=''){
+                        all.add(fourController.text);}
+                      if(fiveController.text!=''){
+                        all.add(fiveController.text);}
+                      if(sixController.text!=''){
+                        all.add(sixController.text);}
+                      if(sixController.text!=''){
+                        all.add(sixController.text);}
+
+
                       var correct = all[groupValue];
                       // print(correct);
                       map['answer'] = correct;
@@ -254,6 +282,8 @@ int time = 0;
                       setState((){
                         qno = qno+1;
                       });
+                      type='Text';
+                      errController.clear();
                       oneController.clear();
                       twoController.clear();
                       threeController.clear();
