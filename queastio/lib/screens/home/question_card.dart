@@ -222,7 +222,7 @@ class _QuestionCardState extends State<QuestionCard>
                                                 fontSize: 18.0,
                                               ),
                                             ),
-                                            Image.network(question['qImage']),
+                                            Image.network(question['qText']),
                                           ],
                                         ),
                                 ),

@@ -1,5 +1,6 @@
-import 'dart:html';
-
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:queastio/services/database.dart';
@@ -44,6 +45,7 @@ int time = 0;
     type = type == null ? 'Text' : type;
     items=Set.from(['Text']);
     items.add('Image');
+    String err='You Can Choose a Picture from local > 200 KB';
     var image;
     return Scaffold(
       body: SafeArea(
@@ -79,23 +81,73 @@ int time = 0;
                     }).toList(),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 80.0),
+                    padding: EdgeInsets.only(top: 10.0),
                     child: IconButton(
                       icon: Icon(Icons.insert_photo),
                       onPressed: () async {
+                        image = await ImagePicker.pickImage(
+                            source: ImageSource.gallery
+                        );
 
-                            image = await ImagePicker.pickImage(
-                                source: ImageSource.gallery
-                            );
-                            setState(() {
+                        setState((){
+                          if(image.lengthSync()<=204800){
                               _image = image;
                               print('Image Path $_image');
-//                              print(image.lengthSync());
-                            });
-
-                        }
+                          }else{
+                              _image = null;
+                              err='Choose An Image with less size';
+                          }
+                            }
+                        );
+                        print(err);
+                      }
                     ),
                   ),
+                  Text(err,style: TextStyle(color: Colors.red, fontSize: 16.0),),
+                  Text(" "),
+                  RaisedButton(child: Text("Up"),onPressed: () async {
+                    print(err);
+                    if ( _image != null ) {
+//                    Scaffold.of(context).showSnackBar(SnackBar(content: Text("Please Wait"),));
+//                    String err = "Photo Updated";
+                    String fileName = basename(
+                        'userData'
+                    );
+                    StorageReference firebaseStorageRef = FirebaseStorage
+                        .instance.ref(
+                    ).child(
+                        fileName
+                    );
+                    StorageUploadTask uploadTask = firebaseStorageRef
+                        .putFile(
+                        _image
+                    );
+                    StorageTaskSnapshot taskSnapshot = await uploadTask
+                        .onComplete;
+                    var dowurl = await (
+                        await uploadTask.onComplete
+                    ).ref.getDownloadURL(
+                    );
+                    if ( uploadTask.isCanceled ) {
+                      url = null;
+                      err="There Was an Upload Error";
+                      _image = null;
+                      image = null;
+                    }
+                    url = dowurl.toString(
+                    );
+                    setState(() {
+                      print("Data Updated");
+                      titleController.text=url;
+//                      Scaffold.of(context)
+//                          .showSnackBar(SnackBar(
+//                          content: Text(err),duration: Duration(milliseconds: 200)));
+                    });
+                  }
+                    else{
+                    titleController.text=err;
+                    }
+                    },),
                   RadioListTile(
                     groupValue: groupValue,
                     value: 0,
@@ -178,12 +230,7 @@ int time = 0;
                       List<String> all = [];
                       map['qno'] = qno;
                       map['qType'] = type;
-                      if(type=='Image'){
-                      map['qImage'] = titleController.text;
-                      }
-                      else{
-                        map['qText'] = titleController.text;
-                      }
+                      map['qText'] = titleController.text;
                       all.add(oneController.text);
                       all.add(twoController.text);
                       all.add(threeController.text);
