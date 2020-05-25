@@ -13,7 +13,7 @@ class _TopicListAdminState extends State<TopicListAdmin> {
   Widget build(BuildContext context) {
     final topics = Provider.of<List<Topic>>(context);
     // topics.
-    print(topics[0].tid);
+    // print(topics[0].tid);
     return ListView.builder(
       itemCount: topics.length,
       itemBuilder: (context, index) {

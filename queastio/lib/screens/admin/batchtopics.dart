@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queastio/screens/admin/batchtile.dart';
 
 import '../../models/batch.dart';
 import '../../models/topic.dart';
@@ -37,9 +38,10 @@ class _BatchTopicsState extends State<BatchTopics> {
                           'topics': topics,
                         });
                     setState(() {
+                      if(data!=Null){
                       if(data['batch']!=Null)
                       widget.batch = data['batch'];
-                    });
+                    }});
                   },
                 )
               ],
@@ -49,9 +51,10 @@ class _BatchTopicsState extends State<BatchTopics> {
                     child: Text('No topics yet'),
                   )
                 : ListView.builder(
+                  
                     itemCount: widget.batch.topics.length,
                     itemBuilder: (context, index) {
-                      return TopicTileAdmin(topic: widget.batch.topics[index]);
+                      return BatchTile(topic: widget.batch.topics[index]);
                     },
                   ),
           );

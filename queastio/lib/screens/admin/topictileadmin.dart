@@ -16,7 +16,7 @@ class TopicTileAdmin extends StatelessWidget {
       splashFactory: InkSplash.splashFactory,
       onTap: () {
         print("hi");
-        Navigator.pushNamed(context, QuizListAdminRoute, arguments: topic);
+        Navigator.pushNamed(context, QuizListAdminRoute, arguments: topic.name);
       },
       child: Card(
         child: ListTile(
