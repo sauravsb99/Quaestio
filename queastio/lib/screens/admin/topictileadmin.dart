@@ -6,7 +6,7 @@ import 'package:queastio/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TopicTileAdmin extends StatelessWidget {
-  final String topic;
+  final Topic topic;
 
   TopicTileAdmin({this.topic});
   @override
@@ -21,7 +21,7 @@ class TopicTileAdmin extends StatelessWidget {
       child: Card(
         child: ListTile(
           title: Text(
-            topic,
+            topic.name,
             style: TextStyle(
               fontSize: 20.0,
             ),
@@ -32,33 +32,14 @@ class TopicTileAdmin extends StatelessWidget {
                       color: Colors.red[700],
                     ),
                     onPressed: () async {
+                      await DatabaseService(uid: topic.tid).deleteTopic();
     //                   await Firestore.instance.runTransaction((Transaction myTransaction) async {
     // await myTransaction.delete(snapshot.data.documents[index].reference);
 // });
                     }
           ),
-          // leading: CircleAvatar(backgroundImage: NetworkImage(user.image)),
         ),
       ),
-//       child: Material(
-// //          color: Colors.indigo,
-//           child: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.start,
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: Text(
-//                 topic,
-// //                    style: TextStyle(fontSize: 20.0, color: Colors.white),
-//               ),
-              
-//             ),
-//           ],
-//         ),
-//       )),
     );
   }
 }
