@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/services/database.dart';
-import 'package:provider/provider.dart';
 
 class UserTile extends StatelessWidget {
   final UserData user;
@@ -10,7 +9,7 @@ class UserTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      
+
       onTap: () {
         Navigator.pushNamed(context, PrevScoresRoute, arguments: user.uid);
       },

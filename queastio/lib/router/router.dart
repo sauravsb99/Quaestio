@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:queastio/screens/FAQ/faqhome.dart';
 import 'package:queastio/screens/admin/Quiz_listAdmin.dart';
 import 'package:queastio/screens/admin/add_quiz.dart';
@@ -29,11 +30,17 @@ import '../screens/admin/batches.dart';
 // ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
+      case QuizListRoute:
+        return PageTransition(
+          child: QuizList(topic: settings.arguments,),
+          type: PageTransitionType.rightToLeft,
+          settings: settings,
+          duration: Duration(milliseconds: 250),
+
+        );
     case HomeViewRoute:
       return MaterialPageRoute(builder: (context) => Wrapper());
-    case QuizListRoute:
-      return MaterialPageRoute(
-          builder: (context) => QuizList(topic: settings.arguments));
+
     case QuestionsAddRoute:
       dynamic data = settings.arguments;
       return MaterialPageRoute(
@@ -41,21 +48,34 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 qTopic: data["qTopic"],
                 qDescr: data["qDescr"],
                 qName: data["qName"],
-                // qCount : data["qCount"],
                 qTime: data["qTime"],
               ));
     case QuestionRoute:
       return MaterialPageRoute(
           builder: (context) => QuestionCard(quiz: settings.arguments));
+
     case PrevScoresRoute:
-      return MaterialPageRoute(
-          builder: (context) => PreviousScores(uid: settings.arguments));
+      return PageTransition(
+        child: PreviousScores(uid:settings.arguments),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        duration: Duration(milliseconds: 500),
+      );
+//          builder: (context) => PreviousScores(uid: settings.arguments));
     case HomeRoute:
       return MaterialPageRoute(builder: (context) => Home());
     case ProfileRoute:
-      return MaterialPageRoute(builder: (context) => ProfileScreen());
+      return PageTransition(
+        child: ProfileScreen(),
+        type: PageTransitionType.rightToLeft,
+        duration: Duration(milliseconds: 500),
+      );
     case FaQRoute:
-      return MaterialPageRoute(builder: (context) => FaqHome());
+      return PageTransition(
+        child: FaqHome(),
+        type: PageTransitionType.rightToLeft,
+        duration: Duration(milliseconds: 500),
+      );
     case NewAdminHomeRoute:
       return MaterialPageRoute(builder: (context) => NewAdminHome());
     case QuizListAdminRoute:
@@ -71,15 +91,25 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SignIn());
     case LeaderRoute:
       dynamic data = settings.arguments;
-      return MaterialPageRoute(
-          builder: (context) => LeaderBoard(
-          qname: data['qname'],
-            qtopic: data['qtopic'],
 
-      ));
+      return PageTransition(
+        child:  LeaderBoard(
+          qname: data['qname'],
+          qtopic: data['qtopic'],
+        ),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        duration: Duration(milliseconds: 500));
+
     case TopicLeaderRoute:
-      return MaterialPageRoute(
-          builder: (context) => TopicLeaderBoard(topic: settings.arguments));
+      return PageTransition(
+          child:  TopicLeaderBoard(
+              topic: settings.arguments
+          ),
+          type: PageTransitionType.rightToLeft,
+          settings: settings,
+          duration: Duration(milliseconds: 500));
+
     case AnswerSheetRoute:
       dynamic data = settings.arguments;
       return MaterialPageRoute(
@@ -88,6 +118,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           selected: data['selected'],
         ),
       );
+
     case AboutUsRoute:
       return MaterialPageRoute(builder: (context) => AboutUs());
     case BatchesRoute:

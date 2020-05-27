@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/shared/constants.dart';
-import 'package:provider/provider.dart';
 import 'package:queastio/services/database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TopicTileAdmin extends StatelessWidget {
   final Topic topic;

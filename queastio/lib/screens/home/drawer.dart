@@ -1,7 +1,9 @@
+import 'package:page_transition/page_transition.dart';
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:queastio/screens/home/home.dart';
+import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/services/database.dart';
@@ -31,10 +33,13 @@ class _MyDrawerState extends State<MyDrawer> {
                     splashColor: Colors.white,
                     splashFactory: InkSplash.splashFactory,
                     onTap: () {
-                      print(userData.name);
-                      Navigator.pushNamed(context, ProfileRoute
+//                      Navigator.pop(context,PageTransition(duration: Duration(milliseconds: 1000)));
+                      Navigator.pushNamed(context, ProfileRoute);
+//
+//                      Navigator.pushNamed(context,QuizListRoute,arguments: topic.name );
+//                      Navigator.pushNamed(context, ProfileRoute
 //                      arguments: userData.name
-                          );
+//                          );
                     },
                     child: DrawerHeader(
                       child: Row(

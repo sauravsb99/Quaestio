@@ -6,7 +6,6 @@ import '../../models/topic.dart';
 import '../../services/database.dart';
 import '../../shared/constants.dart';
 import '../../shared/loading.dart';
-import 'topictileadmin.dart';
 
 class BatchTopics extends StatefulWidget {
   Batch batch;

@@ -77,15 +77,16 @@ class _UserputState extends State<Userput> {
                                     left: MediaQuery.of(context).size.width *
                                         0.20),
                                 child: CircleAvatar(
-                                  radius: 80,
+                                  radius: 77,
 
                                   backgroundColor:Color(0xff43b77d),
                                   child: ClipOval(
                                     child: SizedBox(
                                       width: 140.0,
                                       height: 140.0,
+//                                  clipBehavior: Clip(heigh),
                                       child: _image == null
-                                          ? Image.network(userData.image)
+                                          ? Image.network(userData.image,fit: BoxFit.cover,)
                                           : Image.file(
                                               _image,
                                               fit: BoxFit.fill,

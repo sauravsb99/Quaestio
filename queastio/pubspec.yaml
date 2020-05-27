@@ -36,6 +36,7 @@ dependencies:
   file_picker: ^1.9.0+1
   charts_flutter: ^0.6.0
   url_launcher: ^5.0.2
+  page_transition: "^1.1.5"
   date_format:
 dev_dependencies:
   flutter_launcher_icons: "^0.7.0"

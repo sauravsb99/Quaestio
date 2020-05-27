@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:queastio/models/quiz.dart';
-import 'package:queastio/screens/admin/quizaddmanual.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:queastio/screens/admin/Quiz_tileAdmin.dart';
