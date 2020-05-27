@@ -25,9 +25,9 @@ class _LandingState extends State<Landing> {
     heights = [0, 0];
     heights2 = [
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
-          0.4,
+      0.4,
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
-          0.4,
+      0.4,
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
       0.1,
     ];
@@ -37,9 +37,9 @@ class _LandingState extends State<Landing> {
   Widget build(BuildContext context) {
     List<Topic> topics = Provider.of<List<Topic>>(context);
     List<Topic> dTopic =
-        topics.where((topic) => topic.category == 'Domain Specific').toList();
+    topics.where((topic) => topic.category == 'Domain Specific').toList();
     List<Topic> aTopic =
-        topics.where((topic) => topic.category == 'General Aptitude').toList();
+    topics.where((topic) => topic.category == 'General Aptitude').toList();
     return ListView(
       children: <Widget>[
         InkWell(
@@ -49,11 +49,11 @@ class _LandingState extends State<Landing> {
                 heights[0] = 0;
                 heights[1] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.4;
+                               AppBar().preferredSize.height) *
+                              0.4;
                 heights2[1] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.4;
+                               AppBar().preferredSize.height) *
+                              0.4;
                 heights2[2] = (MediaQuery.of(context).size.height -
                                AppBar().preferredSize.height) *
                               0.1;
@@ -63,11 +63,11 @@ class _LandingState extends State<Landing> {
                 heights[0] =
                     (MediaQuery.of(context).size.height) * 0.3 * dTopic.length+(dTopic.length*16);
                 heights2[0] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.1;
+                               AppBar().preferredSize.height) *
+                              0.1;
                 heights2[1] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.1;
+                               AppBar().preferredSize.height) *
+                              0.1;
                 heights2[2] = (MediaQuery.of(context).size.height -
                                AppBar().preferredSize.height) *
                               0.0;
@@ -87,7 +87,7 @@ class _LandingState extends State<Landing> {
                       padding: EdgeInsets.all(18),
                       //                 color: Colors.white,
                       decoration: BoxDecoration(
-                          //                     borderRadius: BorderRadius.circular(20.0),
+                        //                     borderRadius: BorderRadius.circular(20.0),
                           color: Colors.black87,
                           image: DecorationImage(
                             fit: BoxFit.fitWidth,
@@ -103,15 +103,15 @@ class _LandingState extends State<Landing> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(8,4,8,4),
                             child: Text(
-                      'Domain Specific Quiz',
-                      style: TextStyle(
-                            fontSize: 26.0,
-                            color: Colors.white,
-                            letterSpacing: 3.0,
-                            fontWeight: FontWeight.bold,
-                      ),
+                              'Domain Specific Quiz',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.white,
+                                letterSpacing: 3.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                               textAlign: TextAlign.center,
-                    ),
+                            ),
                           ),
                         )),
                   ],
@@ -131,10 +131,10 @@ class _LandingState extends State<Landing> {
               itemCount: dTopic.length,
               itemBuilder: (context, index) {
                 return
-                    // children: <Widget>[
-                    TopicTile(
-                  topic: dTopic[index],
-                );
+                  // children: <Widget>[
+                  TopicTile(
+                    topic: dTopic[index],
+                  );
               }),
         ),
         InkWell(
@@ -144,11 +144,11 @@ class _LandingState extends State<Landing> {
                 heights[0] = 0;
                 heights[1] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.4;
+                               AppBar().preferredSize.height) *
+                              0.4;
                 heights2[1] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.4;
+                               AppBar().preferredSize.height) *
+                              0.4;
                 heights2[2] = (MediaQuery.of(context).size.height -
                                AppBar().preferredSize.height) *
                               0.1;
@@ -158,11 +158,11 @@ class _LandingState extends State<Landing> {
                     ((MediaQuery.of(context).size.height) * 0.3 * aTopic.length)+(aTopic.length*16);
                 heights[0] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.1;
+                               AppBar().preferredSize.height) *
+                              0.1;
                 heights2[1] = (MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height) *
-                    0.1;
+                               AppBar().preferredSize.height) *
+                              0.1;
                 heights2[2] = (MediaQuery.of(context).size.height -
                                AppBar().preferredSize.height) *
                               0.0;
@@ -206,14 +206,14 @@ class _LandingState extends State<Landing> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(8,4,8,4),
                             child: Text(
-                      'General Aptitude Quiz',
-                      style: TextStyle(
-                            fontSize: 26.0,
-                            color: Colors.white,
-                            letterSpacing: 3.0,
-                            fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                              'General Aptitude Quiz',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.white,
+                                letterSpacing: 3.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         )),
 //                    ],
@@ -245,44 +245,44 @@ class _LandingState extends State<Landing> {
         ),
 
         AnimatedContainer(
-            duration: Duration(milliseconds: 10),
-            height: heights2[2],
+          duration: Duration(milliseconds: 10),
+          height: heights2[2],
 //            child: Padding(
 //              padding: const EdgeInsets.all(8.0),
 //                child: Stack(
 //                  children: <Widget>[
-                    // Positioned.fill(
-                    //   child: Image.asset(
-                    //     'assets/aptitude.jpg',
-                    //     fit: BoxFit.fill,
-                    //   ),
-                    // ),
-                   child:
+          // Positioned.fill(
+          //   child: Image.asset(
+          //     'assets/aptitude.jpg',
+          //     fit: BoxFit.fill,
+          //   ),
+          // ),
+          child:
 //                   Column(
 //                     children: <Widget>[
-                       Container(
-                          height: 80.0,
-                          width: 80.0,
-                          child: FittedBox(
-                            alignment: Alignment.centerRight,
+          Container(
+            height: 80.0,
+            width: 80.0,
+            child: FittedBox(
+              alignment: Alignment.centerRight,
 
-                            child: FloatingActionButton(elevation:10,backgroundColor: Color(0xff1b1b1b),onPressed: () {
+              child: FloatingActionButton(elevation:10,backgroundColor: Color(0xff1b1b1b),onPressed: () {
 
-                              Navigator.push(context, PageTransition(type: PageTransitionType.downToUp, child: AboutUs(),duration: Duration(milliseconds: 500)));
+                Navigator.push(context, PageTransition(type: PageTransitionType.downToUp, child: AboutUs(),duration: Duration(milliseconds: 500)));
 //                              Navigator.pushNamed(context, AboutUsRoute);
-                            },
-                              child: Padding(
-                                padding: const EdgeInsets.all(2),
-                                child: Image.asset("assets/logo_ok.png"),
-                              ),
-                            ),
-                          ),
-                        ),
+              },
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Image.asset("assets/logo_ok.png"),
+                ),
+              ),
+            ),
+          ),
 //                       SizedBox(width: 20,)
 //                     ],
 //                   ),
-                    //                    ],
-                    //                  ),
+          //                    ],
+          //                  ),
 //                  ],
 ////                ),
 ////              ),
