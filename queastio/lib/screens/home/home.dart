@@ -3,11 +3,9 @@ import 'package:queastio/models/batch.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/home/drawer.dart';
 import 'package:queastio/screens/home/landing.dart';
-import 'package:queastio/services/auth.dart';
 import 'package:queastio/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/topic.dart';
-import 'package:queastio/shared/constants.dart';
 
 class Home extends StatefulWidget {
   String batchval = '---';
@@ -151,18 +149,12 @@ class _HomeState extends State<Home> {
                       RaisedButton(
                         onPressed: () async {
                           if(batchval!='---') {
-//                          Scaffold.of(context).showSnackBar(SnackBar(content: Text("Please Wait"),));
-//                          String err = "Photo Updated";
                           await DatabaseService(
                               uid: user.uid
                           )
                               .updateUserData(
                               userData.name, userData.image, userData.role,
                               batchval
-                          );
-                          setState(
-                                  (
-                                  ){}
                           );
                         }
                           else{}
@@ -177,20 +169,6 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       )
-
-
-
-
-//                    await DatabaseService(
-//                    uid: user.uid)
-//                    .updateUserData(
-//                    name, i, userData.role,userData.batch);
-//                  setState(() {
-//                Scaffold.of(context)
-//                    .showSnackBar(SnackBar(
-//                    content: Text(
-//                        "Name Updated"),duration: Duration(milliseconds: 200)));
-//              });
                     ],
                   ),
                 ),

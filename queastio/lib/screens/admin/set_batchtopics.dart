@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/batch.dart';
-import '../../models/topic.dart';
 import '../../services/database.dart';
-import '../../shared/constants.dart';
 import '../../shared/constants.dart';
 
 class SetBatchTopics extends StatefulWidget {

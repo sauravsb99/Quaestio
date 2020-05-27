@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/topic.dart';
+import 'package:queastio/screens/home/about_us.dart';
 import 'package:queastio/screens/home/topic_tile.dart';
 import 'package:queastio/shared/constants.dart';
 
@@ -81,12 +83,6 @@ class _LandingState extends State<Landing> {
               child: Card(
                 child: Stack(
                   children: <Widget>[
-                    // Positioned.fill(
-                    //   child: Image.asset(
-                    //     'assets/aptitude.jpg',
-                    //     fit: BoxFit.fill,
-                    //   ),
-                    // ),
                     Container(
                       padding: EdgeInsets.all(18),
                       //                 color: Colors.white,
@@ -118,8 +114,6 @@ class _LandingState extends State<Landing> {
                     ),
                           ),
                         )),
-                    //                    ],
-                    //                  ),
                   ],
                 ),
               ),
@@ -141,24 +135,6 @@ class _LandingState extends State<Landing> {
                     TopicTile(
                   topic: dTopic[index],
                 );
-                // ListTile(
-                //   onTap: () {
-                //     Navigator.pushNamed(context, QuizListRoute,
-                //         arguments: dTopic[index].name);
-                //   },
-                //   title: Text(
-                //     dTopic[index].name,
-                //     style: TextStyle(fontSize: 20.0, color: Colors.white),
-                //   ),
-                // ),
-                // Divider(
-                //   height: (MediaQuery.of(context).size.height -
-                //           AppBar().preferredSize.height) *
-                //       0.0001,
-                //   color: Color(0xfffaece6),
-                // ),
-                // ],
-                // );
               }),
         ),
         InkWell(
@@ -269,7 +245,7 @@ class _LandingState extends State<Landing> {
         ),
 
         AnimatedContainer(
-            duration: Duration(milliseconds: 250),
+            duration: Duration(milliseconds: 10),
             height: heights2[2],
 //            child: Padding(
 //              padding: const EdgeInsets.all(8.0),
@@ -291,7 +267,9 @@ class _LandingState extends State<Landing> {
                             alignment: Alignment.centerRight,
 
                             child: FloatingActionButton(elevation:10,backgroundColor: Color(0xff1b1b1b),onPressed: () {
-                              Navigator.pushNamed(context, AboutUsRoute);
+
+                              Navigator.push(context, PageTransition(type: PageTransitionType.downToUp, child: AboutUs(),duration: Duration(milliseconds: 500)));
+//                              Navigator.pushNamed(context, AboutUsRoute);
                             },
                               child: Padding(
                                 padding: const EdgeInsets.all(2),

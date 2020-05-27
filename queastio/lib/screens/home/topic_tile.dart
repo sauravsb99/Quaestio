@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:queastio/screens/home/quiz_list.dart';
 import 'package:queastio/shared/constants.dart';
+
+import 'about_us.dart';
 
 class TopicTile extends StatelessWidget {
   final Topic topic;
@@ -10,12 +14,14 @@ class TopicTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.indigo,
-      splashFactory: InkSplash.splashFactory,
+    return GestureDetector(
+//      splashColor: Colors.indigo,
+//      splashFactory: InkSplash.splashFactory,
+//    final GestureDragDownCallback onPanDown
       onTap: () {
         print(topic.name);
-        Navigator.pushNamed(context, QuizListRoute, arguments: topic.name);
+        Navigator.pushNamed(context,QuizListRoute,arguments: topic.name );
+//        QuizListRoute, arguments: topic.name);
       },
       child: Card(
           color: Color(0xff43b77d),

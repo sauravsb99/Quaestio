@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:queastio/services/auth.dart';
 import 'package:queastio/shared/loading.dart';
@@ -116,48 +115,6 @@ class _RegisterState extends State<Register> {
                         },
                       ),
                       SizedBox(height: 20,),
-//                      Row(
-//                        children: <Widget>[
-//                          Expanded(
-//                          child:
-//                          SizedBox(),
-//
-//                        ),
-//                          Text("BATCH :",style: TextStyle(
-//                            fontFamily: 'Montserrat',
-//                            fontWeight: FontWeight.bold,
-//                            color: Colors.grey),),
-//                          Expanded(
-//                            child:
-//                              SizedBox(),
-//
-//                          ),
-//                          Wrap(
-////                            width: MediaQuery.of(context).size.width*0.4,
-//                            children:<Widget> [DropdownButton<String>(
-//                              value: batch,
-//                              underline: Container(
-//                                color: Color(0xff43b77d),
-//                                height: 2.0,
-//                              ),
-//                              onChanged: (String newValue) {
-//                                setState(() {
-//                                  batch = newValue;
-//                                });
-//                              },
-//                              items: items.map((item) {
-//                                return DropdownMenuItem(
-//                                    value: item, child: Text(item));
-//                              }).toList(),
-//                            ),]
-//                          ),Expanded(
-//                            child:
-//                            SizedBox(),
-//
-//                          ),
-//                        ],
-//                      ),
-//                      SizedBox(height: 40.0),
                       RaisedButton(
                         color: Colors.green,
                         child: Text(

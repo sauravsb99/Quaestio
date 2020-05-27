@@ -5,7 +5,6 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/admin/myquizzes_tile.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:queastio/services/database.dart';
-import 'dart:developer' as developer;
 
 class MyQuizListAdmin extends StatefulWidget {
   MyQuizListAdmin();
