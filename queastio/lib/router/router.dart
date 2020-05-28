@@ -30,14 +30,15 @@ import '../screens/admin/batches.dart';
 // ignore: missing_return
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-      case QuizListRoute:
-        return PageTransition(
-          child: QuizList(topic: settings.arguments,),
-          type: PageTransitionType.rightToLeft,
-          settings: settings,
-          duration: Duration(milliseconds: 250),
-
-        );
+    case QuizListRoute:
+      return PageTransition(
+        child: QuizList(
+          topic: settings.arguments,
+        ),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        duration: Duration(milliseconds: 250),
+      );
     case HomeViewRoute:
       return MaterialPageRoute(builder: (context) => Wrapper());
 
@@ -56,7 +57,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case PrevScoresRoute:
       return PageTransition(
-        child: PreviousScores(uid:settings.arguments),
+        child: PreviousScores(uid: settings.arguments),
         type: PageTransitionType.rightToLeft,
         settings: settings,
         duration: Duration(milliseconds: 500),
@@ -93,19 +94,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       dynamic data = settings.arguments;
 
       return PageTransition(
-        child:  LeaderBoard(
-          qname: data['qname'],
-          qtopic: data['qtopic'],
-        ),
-        type: PageTransitionType.rightToLeft,
-        settings: settings,
-        duration: Duration(milliseconds: 500));
+          child: LeaderBoard(
+            qId: data['qId'],
+          ),
+          type: PageTransitionType.rightToLeft,
+          settings: settings,
+          duration: Duration(milliseconds: 500));
 
     case TopicLeaderRoute:
       return PageTransition(
-          child:  TopicLeaderBoard(
-              topic: settings.arguments
-          ),
+          child: TopicLeaderBoard(topic: settings.arguments),
           type: PageTransitionType.rightToLeft,
           settings: settings,
           duration: Duration(milliseconds: 500));
