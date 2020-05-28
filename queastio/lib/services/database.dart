@@ -144,7 +144,7 @@ class DatabaseService {
         .map(_quizListFromSnapshot);
   }
 
-  Future<void> insertScore(String uname, String qname, String qTopic, int score,
+  Future<void> insertScore(String uname, String qname, String qId, int score,
       int total, DateTime time) async {
     var db = Firestore.instance;
     var batch = db.batch();
@@ -153,7 +153,7 @@ class DatabaseService {
       'uid': uid,
       'uname': uname,
       'quiz': qname,
-      'qTopic': qTopic,
+      'qId': qId,
       'score': score,
       'total': total,
       'time': time
@@ -338,10 +338,9 @@ class DatabaseService {
     }
   }
 
-  Stream<List<Score>> getQuizScores(String qname, String topic) {
+  Stream<List<Score>> getQuizScores(String qId) {
     return scoreCollection
-        .where('quiz', isEqualTo: qname)
-        .where('qTopic', isEqualTo: topic)
+        .where('qId', isEqualTo: qId)
         .orderBy('score', descending: true)
         .snapshots()
         .map(_scoreListFromSnapshot);

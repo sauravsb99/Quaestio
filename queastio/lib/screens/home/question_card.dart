@@ -42,7 +42,7 @@ class _QuestionCardState extends State<QuestionCard>
       await DatabaseService(uid: user.uid).insertScore(
           userData.name,
           widget.quiz['qname'],
-          widget.quiz['qTopic'],
+          widget.quiz['qId'],
           score,
           widget.quiz['answers'].length,
           time);
