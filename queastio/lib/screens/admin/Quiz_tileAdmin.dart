@@ -118,7 +118,7 @@ class QuizTileAdmin extends StatelessWidget {
                               onPressed: () {
                                 print(answers);
                                 Navigator.pushNamed(context, LeaderRoute,
-                                    arguments: quiz.qName);
+                                    arguments: {'qId': quiz.qId});
                               },
                               child: Text(
                                 'Leaderboard',

@@ -29,7 +29,7 @@ class _LandingState extends State<Landing> {
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
           0.4,
       (MediaQuery.of(context).size.height - AppBar().preferredSize.height) *
-      0.1,
+          0.1,
     ];
   }
 
@@ -55,22 +55,23 @@ class _LandingState extends State<Landing> {
                         AppBar().preferredSize.height) *
                     0.4;
                 heights2[2] = (MediaQuery.of(context).size.height -
-                               AppBar().preferredSize.height) *
-                              0.1;
+                        AppBar().preferredSize.height) *
+                    0.1;
                 clickedCard = null;
               } else {
                 heights[1] = 0;
                 heights[0] =
-                    (MediaQuery.of(context).size.height) * 0.3 * dTopic.length+(dTopic.length*16);
+                    (MediaQuery.of(context).size.height) * 0.3 * dTopic.length +
+                        (dTopic.length * 16);
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
-                    0.1;
+                    0.4;
                 heights2[2] = (MediaQuery.of(context).size.height -
-                               AppBar().preferredSize.height) *
-                              0.0;
+                        AppBar().preferredSize.height) *
+                    0.0;
                 clickedCard = 'domain';
               }
             });
@@ -87,33 +88,36 @@ class _LandingState extends State<Landing> {
                       padding: EdgeInsets.all(18),
                       //                 color: Colors.white,
                       decoration: BoxDecoration(
-                          //                     borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.black87,
-                          image: DecorationImage(
-                            fit: BoxFit.fitWidth,
-                            alignment: FractionalOffset.topCenter,
-                            image: CachedNetworkImageProvider(
-                                "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/pharma.jpg?alt=media&token=8ba8c44c-1a31-4389-8d87-a0f6d6b01866"),
-                          )),
+                        //                     borderRadius: BorderRadius.circular(20.0),
+                        color: Colors.black87,
+//                          image: DecorationImage(
+//                            fit: BoxFit.fitWidth,
+//                            alignment: FractionalOffset.topCenter,
+//                            image: CachedNetworkImageProvider(
+//                                "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/pharma.jpg?alt=media&token=8ba8c44c-1a31-4389-8d87-a0f6d6b01866"),
+//                          )
+                      ),
                     ),
                     Center(
                         child: Container(
 //                          color: Colors.black54,
-                          decoration: BoxDecoration(color:Colors.black54,borderRadius: BorderRadius.circular(12)),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8,4,8,4),
-                            child: Text(
-                      'Domain Specific Quiz',
-                      style: TextStyle(
+                      decoration: BoxDecoration(
+//                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                        child: Text(
+                          'Domain Specific Quiz',
+                          style: TextStyle(
                             fontSize: 26.0,
-                            color: Colors.white,
+                            color: Color(0xff43b77d),
                             letterSpacing: 3.0,
                             fontWeight: FontWeight.bold,
-                      ),
-                              textAlign: TextAlign.center,
-                    ),
                           ),
-                        )),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )),
                   ],
                 ),
               ),
@@ -150,22 +154,24 @@ class _LandingState extends State<Landing> {
                         AppBar().preferredSize.height) *
                     0.4;
                 heights2[2] = (MediaQuery.of(context).size.height -
-                               AppBar().preferredSize.height) *
-                              0.1;
+                        AppBar().preferredSize.height) *
+                    0.1;
                 clickedCard = null;
               } else {
-                heights[1] =
-                    ((MediaQuery.of(context).size.height) * 0.3 * aTopic.length)+(aTopic.length*16);
+                heights[1] = ((MediaQuery.of(context).size.height) *
+                        0.3 *
+                        aTopic.length) +
+                    (aTopic.length * 16);
                 heights[0] = 0;
                 heights2[0] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
-                    0.1;
+                    0.4;
                 heights2[1] = (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
                     0.1;
                 heights2[2] = (MediaQuery.of(context).size.height -
-                               AppBar().preferredSize.height) *
-                              0.0;
+                        AppBar().preferredSize.height) *
+                    0.0;
                 clickedCard = 'aptitude';
               }
             });
@@ -189,33 +195,35 @@ class _LandingState extends State<Landing> {
 //                 color: Colors.white,
                       decoration: BoxDecoration(
 //                     borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.black87,
-
-                          image: DecorationImage(
-                            fit: BoxFit.fitWidth,
-                            alignment: FractionalOffset.topCenter,
-                            image: CachedNetworkImageProvider(
-                              "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/quanti.jpg?alt=media&token=d6243484-1d09-49e2-861a-ab56d66d873d",
-                            ),
-                          )),
+                        color: Colors.black87,
+//                          image: DecorationImage(
+//                            fit: BoxFit.fitWidth,
+//                            alignment: FractionalOffset.topCenter,
+//                            image: CachedNetworkImageProvider(
+//                              "https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/quanti.jpg?alt=media&token=d6243484-1d09-49e2-861a-ab56d66d873d",
+//                            ),
+//                          )
+                      ),
                     ),
                     Center(
                         child: Container(
 //                          color: Colors.black54,
-                          decoration: BoxDecoration(color:Colors.black54,borderRadius: BorderRadius.circular(12)),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8,4,8,4),
-                            child: Text(
-                      'General Aptitude Quiz',
-                      style: TextStyle(
+                      decoration: BoxDecoration(
+//                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                        child: Text(
+                          'General Aptitude Quiz',
+                          style: TextStyle(
                             fontSize: 26.0,
-                            color: Colors.white,
+                            color: Color(0xff43b77d),
                             letterSpacing: 3.0,
                             fontWeight: FontWeight.bold,
-                      ),
-                    ),
                           ),
-                        )),
+                        ),
+                      ),
+                    )),
 //                    ],
 //                  ),
                   ],
@@ -245,44 +253,40 @@ class _LandingState extends State<Landing> {
         ),
 
         AnimatedContainer(
-            duration: Duration(milliseconds: 10),
-            height: heights2[2],
-//            child: Padding(
-//              padding: const EdgeInsets.all(8.0),
-//                child: Stack(
-//                  children: <Widget>[
-                    // Positioned.fill(
-                    //   child: Image.asset(
-                    //     'assets/aptitude.jpg',
-                    //     fit: BoxFit.fill,
-                    //   ),
-                    // ),
-                   child:
+          duration: Duration(milliseconds: 10),
+          height: heights2[2],
+          child:
 //                   Column(
 //                     children: <Widget>[
-                       Container(
-                          height: 80.0,
-                          width: 80.0,
-                          child: FittedBox(
-                            alignment: Alignment.centerRight,
-
-                            child: FloatingActionButton(elevation:10,backgroundColor: Color(0xff1b1b1b),onPressed: () {
-
-                              Navigator.push(context, PageTransition(type: PageTransitionType.downToUp, child: AboutUs(),duration: Duration(milliseconds: 500)));
+              Container(
+            height: 80.0,
+            width: 80.0,
+            child: FittedBox(
+              alignment: Alignment.centerRight,
+              child: FloatingActionButton(
+                elevation: 10,
+                backgroundColor: Color(0xff1b1b1b),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.downToUp,
+                          child: AboutUs(),
+                          duration: Duration(milliseconds: 500)));
 //                              Navigator.pushNamed(context, AboutUsRoute);
-                            },
-                              child: Padding(
-                                padding: const EdgeInsets.all(2),
-                                child: Image.asset("assets/logo_ok.png"),
-                              ),
-                            ),
-                          ),
-                        ),
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Image.asset("assets/logo_ok.png"),
+                ),
+              ),
+            ),
+          ),
 //                       SizedBox(width: 20,)
 //                     ],
 //                   ),
-                    //                    ],
-                    //                  ),
+          //                    ],
+          //                  ),
 //                  ],
 ////                ),
 ////              ),

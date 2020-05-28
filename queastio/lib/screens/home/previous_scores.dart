@@ -4,6 +4,7 @@ import 'package:queastio/services/database.dart';
 import 'package:queastio/models/score.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
+import 'package:queastio/shared/nothing_here.dart';
 
 class PreviousScores extends StatefulWidget {
   final Widget child;
@@ -232,36 +233,8 @@ class _PreviousScoresState extends State<PreviousScores> {
                       ),
                     ),
                   )
-                : Scaffold(
-                    backgroundColor: Colors.black,
-                    appBar: AppBar(
-                      title: Text('My Scores'),
-                      backgroundColor: Color(0xff43b77d),
-                    ),
-                    body: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.sentiment_neutral,
-                            color: Colors.white,
-                            size: 40.0,
-                          ),
-                          SizedBox(
-                            height: 20.0,
-                          ),
-                          Text(
-                            'No tests attempted yet',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                              letterSpacing: 2.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                : NothingHere(
+                    title: 'My Scores', text: 'No tests attempted yet');
           } else {
             return Loading();
           }
