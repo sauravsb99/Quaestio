@@ -37,10 +37,10 @@ class _BatchTopicsState extends State<BatchTopics> {
                           'topics': topics,
                         });
                     setState(() {
-                      if(data!=Null){
-                      if(data['batch']!=Null)
-                      widget.batch = data['batch'];
-                    }});
+                      if (data != null) {
+                        if (data['batch'] != null) widget.batch = data['batch'];
+                      }
+                    });
                   },
                 )
               ],
@@ -50,7 +50,6 @@ class _BatchTopicsState extends State<BatchTopics> {
                     child: Text('No topics yet'),
                   )
                 : ListView.builder(
-                  
                     itemCount: widget.batch.topics.length,
                     itemBuilder: (context, index) {
                       return BatchTile(topic: widget.batch.topics[index]);
