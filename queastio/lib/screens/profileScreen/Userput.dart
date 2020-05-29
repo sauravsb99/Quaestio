@@ -247,7 +247,42 @@ class _UserputState extends State<Userput> {
                                           ),
                                         )
                                       ],
+                                    ),
+
+
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        RaisedButton(
+                                          onPressed: () async {
+//                                              var dowurl =
+
+                                             url=getvideo(user.uid,'');
+//                                              url = dowurl.toString();
+                                              setState(() {
+                                                print("Data Updated");
+                                                Scaffold.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                    content: Text(err),duration: Duration(milliseconds: 200)));
+                                              });
+                                            },
+//                                          },
+                                          splashColor: Colors.white,
+                                          textColor: Colors.white,
+                                          color: Color(0xff43b77d),
+                                          child: Text(
+                                            "Submit",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     )
+
                                   ],
                                 )))
                       ],

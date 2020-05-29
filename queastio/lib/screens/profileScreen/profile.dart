@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/screens/home/drawer.dart';
+import 'package:queastio/screens/profileScreen/Userput.dart';
 import 'package:queastio/services/database.dart';
-import 'Usercontroller.dart';
+//import 'Usercontroller.dart';
 
 
     class ProfileScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ import 'Usercontroller.dart';
             child: Scaffold(
               drawer: MyDrawer(),
 
-              body: UserGet(),
+              body: Userput(),
             ),
           ),
         );
