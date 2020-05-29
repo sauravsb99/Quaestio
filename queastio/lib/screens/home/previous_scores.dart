@@ -41,6 +41,7 @@ class _PreviousScoresState extends State<PreviousScores> {
             topic = topic == null ? 'All' : topic;
             items = Set.from(['All']);
             scores.forEach((element) {
+              print(element.qTopic);
               items.add(element.qTopic);
             });
             List<Score> topicScores = scores;

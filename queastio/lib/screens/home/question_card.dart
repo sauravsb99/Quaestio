@@ -6,6 +6,7 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:quiver/async.dart';
+import 'package:http/http.dart' as http;
 // import 'package:auto_size_text/auto_size_text.dart';
 
 class QuestionCard extends StatefulWidget {
@@ -32,6 +33,15 @@ class _QuestionCardState extends State<QuestionCard>
     return n.toString();
   }
 
+  Future<bool> checkConnectivity() async {
+    try {
+      var response = await http.get('https://www.google.com');
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   Future<void> calcScore() async {
     sub.cancel();
     Scoring instance = Scoring(questions: questions, selected: selectedOptions);
@@ -39,10 +49,16 @@ class _QuestionCardState extends State<QuestionCard>
     print('Score:' + score.toString());
     if (userData.role == "user" && widget.quiz['firstTime']) {
       DateTime time = DateTime.now();
+      bool isNetConnected = await checkConnectivity();
+      if (isNetConnected)
+        print('Hi');
+      else
+        print('NO');
       await DatabaseService(uid: user.uid).insertScore(
           userData.name,
           widget.quiz['qname'],
           widget.quiz['qId'],
+          widget.quiz['qTopic'],
           score,
           widget.quiz['answers'].length,
           time);

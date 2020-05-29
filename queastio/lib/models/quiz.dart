@@ -26,5 +26,5 @@ class Quizadd {
   String qTopic;
   List questions;
   Map m;
-  Quizadd({this.uid,this.name, this.qTopic, this.questions, this.m});
+  Quizadd({this.uid, this.name, this.qTopic, this.questions, this.m});
 }

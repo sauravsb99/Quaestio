@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'package:path/path.dart' as Path;
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/quiz.dart';
@@ -9,6 +13,72 @@ class QuizTile extends StatelessWidget {
   final Quiz quiz;
 
   QuizTile({this.quiz});
+
+  _showUploadDialog(File file, User user, BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(
+            titlePadding: EdgeInsets.all(15.0),
+            title: Column(
+              children: <Widget>[
+                Text('Upload File'),
+                SizedBox(height: 20.0),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.all(8.0),
+                    color: Colors.grey[300],
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.picture_as_pdf, color: Colors.red),
+                        Flexible(
+                          child: Text(
+                            Path.basename(file.path),
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () async {
+                  print(Path.extension(file.path));
+                  String type =
+                      Path.extension(file.path) == '.pdf' ? 'pdf' : 'video';
+                  StorageReference storageReference = FirebaseStorage.instance
+                      .ref()
+                      .child('fileSubmissions/${Path.basename(file.path)}');
+                  StorageUploadTask uploadTask = storageReference.putFile(file);
+                  try {
+                    await uploadTask.onComplete;
+                    String myUrl = await storageReference.getDownloadURL();
+                    await DatabaseService(uid: user.uid)
+                        .addDocument(quiz.qId, type, myUrl);
+                  } catch (err) {
+                    print(err.toString());
+                  }
+                },
+                child: Text(
+                  'Upload',
+                  style: TextStyle(
+                    color: Colors.green,
+                  ),
+                ),
+              )
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,16 +175,18 @@ class QuizTile extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Tooltip(
-                            message:
-                                'Note: This is a time bound test. Your answers will be submitted automatically when the time runs out',
-                            padding: EdgeInsets.all(15.0),
-                            preferBelow: false,
-                            child: Icon(
-                              (Icons.help),
-                              color: Colors.grey,
-                            ),
-                          ),
+                          quiz.qName != 'submission'
+                              ? Tooltip(
+                                  message:
+                                      'Note: This is a time bound test. Your answers will be submitted automatically when the time runs out',
+                                  padding: EdgeInsets.all(15.0),
+                                  preferBelow: false,
+                                  child: Icon(
+                                    (Icons.help),
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                       Divider(
@@ -131,83 +203,117 @@ class QuizTile extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20.0),
-                      Text(
-                        'No of questions: ' + quiz.qCount.toString(),
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      Text(
-                        'Duration: ' + quiz.duration.toString() + ' minutes',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      SizedBox(height: 45.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          MaterialButton(
+                      quiz.qName != 'submission'
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'No of questions: ' + quiz.qCount.toString(),
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  'Duration: ' +
+                                      quiz.duration.toString() +
+                                      ' minutes',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                SizedBox(height: 45.0),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    MaterialButton(
 //                          child: ClipRRect(
 //                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
 
-                            child: RaisedButton(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 5.0),
-                              onPressed: () {
-                                print(answers);
-                                Navigator.pushNamed(context, LeaderRoute,
-                                    arguments: {'qId': quiz.qId});
-                              },
-                              child: Text(
-                                'Leaderboard',
-                                style: buttonText,
-                              ),
-                              color: Colors.black87,
-                            ),
-                            onPressed: () {},
-                          ),
-                          MaterialButton(
+                                      child: RaisedButton(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 10.0, horizontal: 5.0),
+                                        onPressed: () {
+                                          print(answers);
+                                          Navigator.pushNamed(
+                                              context, LeaderRoute,
+                                              arguments: {'qId': quiz.qId});
+                                        },
+                                        child: Text(
+                                          'Leaderboard',
+                                          style: buttonText,
+                                        ),
+                                        color: Colors.black87,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    MaterialButton(
 //                          child: ClipRRect(
 //                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
 
-                            child: RaisedButton(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 5.0),
-                              onPressed: () {
-                                print(answers);
-                                DatabaseService(uid: user.uid)
-                                    .testAlreadyTaken(quiz.qName)
-                                    .then((value) {
-                                  if (value.documents.isEmpty) {
-                                    Navigator.pushNamed(context, QuestionRoute,
-                                        arguments: {
-                                          'questions': quiz.questions,
-                                          'answers': answers,
-                                          'qname': quiz.qName,
-                                          'qId': quiz.qId,
-                                          'firstTime': true,
-                                          'duration': quiz.duration
-                                        });
-                                  } else {
-                                    _showNoScoreDialog(answers);
+                                      child: RaisedButton(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 10.0, horizontal: 5.0),
+                                        onPressed: () {
+                                          print(answers);
+                                          DatabaseService(uid: user.uid)
+                                              .testAlreadyTaken(quiz.qName)
+                                              .then((value) {
+                                            if (value.documents.isEmpty) {
+                                              Navigator.pushNamed(
+                                                  context, QuestionRoute,
+                                                  arguments: {
+                                                    'questions': quiz.questions,
+                                                    'answers': answers,
+                                                    'qname': quiz.qName,
+                                                    'qId': quiz.qId,
+                                                    'qTopic': quiz.qTopic,
+                                                    'firstTime': true,
+                                                    'duration': quiz.duration
+                                                  });
+                                            } else {
+                                              _showNoScoreDialog(answers);
+                                            }
+                                          });
+                                        },
+                                        child: Text(
+                                          'Start Quiz',
+                                          style: buttonText,
+                                        ),
+                                        color: Colors.black87,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          : MaterialButton(
+//                          child: ClipRRect(
+//                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
+
+                              child: RaisedButton(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 5.0),
+                                onPressed: () async {
+                                  File file = await FilePicker.getFile(
+                                    type: FileType.custom,
+                                    allowedExtensions: ['pdf', 'mp4'],
+                                  );
+                                  if (file != null) {
+                                    _showUploadDialog(file, user, context);
                                   }
-                                });
-                              },
-                              child: Text(
-                                'Start Quiz',
-                                style: buttonText,
+                                },
+                                child: Text(
+                                  'Choose File',
+                                  style: buttonText,
+                                ),
+                                color: Colors.black87,
                               ),
-                              color: Colors.black87,
+                              onPressed: () {},
                             ),
-                            onPressed: () {},
-                          ),
-
-//                        ),
-                        ],
-                      ),
                       SizedBox(
                         height: 50,
                       )

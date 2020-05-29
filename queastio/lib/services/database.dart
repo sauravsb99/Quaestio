@@ -29,6 +29,9 @@ class DatabaseService {
   final CollectionReference batchCollection =
       Firestore.instance.collection('batches');
 
+  final CollectionReference documentCollection =
+      Firestore.instance.collection('documents');
+
   Future<void> updateUserData(
       String name, String image, String role, String batch) async {
     return await userCollection.document(uid).setData({
@@ -72,6 +75,15 @@ class DatabaseService {
     await batchCollection.document().setData({
       'name': name,
       'topics': [],
+    });
+  }
+
+  Future<void> addDocument(String qid, String type, String url) async {
+    await documentCollection.document().setData({
+      'uid': uid,
+      'qid': qid,
+      'type': type,
+      'url': url,
     });
   }
 
@@ -144,8 +156,8 @@ class DatabaseService {
         .map(_quizListFromSnapshot);
   }
 
-  Future<void> insertScore(String uname, String qname, String qId, int score,
-      int total, DateTime time) async {
+  Future<void> insertScore(String uname, String qname, String qId,
+      String qTopic, int score, int total, DateTime time) async {
     var db = Firestore.instance;
     var batch = db.batch();
     var docRef = scoreCollection.document();
@@ -154,6 +166,7 @@ class DatabaseService {
       'uname': uname,
       'quiz': qname,
       'qId': qId,
+      'qTopic': qTopic,
       'score': score,
       'total': total,
       'time': time
@@ -207,9 +220,9 @@ class DatabaseService {
         qId: doc.documentID,
         qName: doc.data['name'] ?? '',
         qTopic: doc.data['qTopic'] ?? '',
-        questions: List.from(doc.data['questions']) ?? List(),
+        questions: List.from(doc.data['questions'] ?? []),
         qDesc: doc.data['qDesc'] ?? 'A Simple Quiz',
-        duration: doc.data['duration'] ?? 10,
+        duration: doc.data['duration'] ?? 0,
         qCount: doc.data['qCount'] ?? 0,
       );
     }).toList();
