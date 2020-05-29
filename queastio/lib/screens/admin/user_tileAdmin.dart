@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:queastio/models/user.dart';
+import 'package:queastio/screens/video/VideoList.dart';
 import 'package:queastio/shared/constants.dart';
 import 'package:queastio/services/database.dart';
 
@@ -21,15 +23,42 @@ class UserTile extends StatelessWidget {
               fontSize: 20.0,
             ),
           ),
-          trailing: IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red[700],
+          trailing:
+          SizedBox(
+            width: MediaQuery.of(context).size.width*0.4,
+            child: Row(
+              children: [Expanded(child: SizedBox(),),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        PageTransition(
+                            type: PageTransitionType.downToUp,
+                            child: VideoList(user.uid),
+                            duration: Duration(milliseconds: 500)));
+                  },
+//                                          },
+                  splashColor: Colors.white,
+                  textColor: Colors.white,
+                  color: Color(0xff43b77d),
+                  child: Text(
+                    "Doc",
+                    style: TextStyle(
+                      fontSize: 16,
                     ),
-                    onPressed: () async {
-                      // User user = Provider.of<User>(context, listen: false);
-                      await DatabaseService().deleteUser(user.uid);
-                    },
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red[700],
+                  ),
+                  onPressed: () async {
+                    // User user = Provider.of<User>(context, listen: false);
+                    await DatabaseService().deleteUser(user.uid);
+                  },
+                ),
+              ],
+            ),
           ),
           leading: CircleAvatar(backgroundImage: NetworkImage(user.image),backgroundColor: Color(0xff43b77d),),
         ),

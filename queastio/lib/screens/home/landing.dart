@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -6,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:queastio/models/topic.dart';
 import 'package:queastio/screens/home/about_us.dart';
 import 'package:queastio/screens/home/topic_tile.dart';
-import 'package:queastio/shared/constants.dart';
-
 class Landing extends StatefulWidget {
   @override
   _LandingState createState() => _LandingState();

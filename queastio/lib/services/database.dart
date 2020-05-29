@@ -5,6 +5,7 @@ import 'package:queastio/models/topic.dart';
 import 'package:queastio/models/user.dart';
 import 'package:queastio/models/quiz.dart';
 import 'package:queastio/models/batch.dart';
+import 'package:queastio/models/documents.dart';
 import 'dart:developer' as developer;
 
 class DatabaseService {
@@ -284,6 +285,23 @@ class DatabaseService {
     }).toList();
   }
 
+  List<Documents> _documentListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Documents(
+//          faqQid: doc.data['qid'] ?? '',
+        did: doc.documentID,
+        qid: doc.data['qid'] ?? '',
+        uid: doc.data['uid'] ?? '',
+        type: doc.data['type'] ?? '',
+        url: doc.data['url'] ?? '',
+      );
+    }).toList();
+  }
+
+  Stream<List<Documents>> get docs {
+    return faqCollection.snapshots().map(_documentListFromSnapshot);
+  }
+
   Stream<List<Topic>> get topics {
     return topicCollection.snapshots().map(_topicListFromSnapshot);
   }
@@ -306,6 +324,17 @@ class DatabaseService {
         .orderBy('name')
         .snapshots()
         .map(_quizListFromSnapshot);
+  }
+
+  Stream<List<Documents>> geturl(
+    String uid,
+//      String qid
+  ) {
+    return documentCollection
+//        .where('qid', isEqualTo: qid)
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map(_documentListFromSnapshot);
   }
 
   Stream<List<Score>> getScores() {
