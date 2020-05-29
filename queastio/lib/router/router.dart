@@ -15,6 +15,7 @@ import 'package:queastio/screens/home/previous_scores.dart';
 import 'package:queastio/screens/home/question_card.dart';
 import 'package:queastio/screens/home/quiz_list.dart';
 import 'package:queastio/screens/home/topic_leader_board.dart';
+import 'package:queastio/screens/home/upload_document.dart';
 import 'package:queastio/screens/profileScreen/profile.dart';
 import 'package:queastio/screens/wrapper.dart';
 import 'package:queastio/shared/constants.dart';
@@ -132,5 +133,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case QuizAddManualRoute:
       return MaterialPageRoute(
           builder: (context) => QuizAddManual(qTopic: settings.arguments));
+    case UploaderRoute:
+      return MaterialPageRoute(
+          builder: (context) => Uploader(qid: settings.arguments));
   }
 }

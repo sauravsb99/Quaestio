@@ -39,3 +39,4 @@ const String BatchTopicsRoute = '/batchtopics';
 const String SetBatchTopicsRoute = '/setbatchtopics';
 const String QuizAddManualRoute = '/qmr';
 const String QuestionsAddRoute = '/qar';
+const String UploaderRoute = '/upload';
