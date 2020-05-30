@@ -247,6 +247,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return Score(
         uid: doc.data['uid'] ?? '',
+        qId: doc.data['qId'] ?? '',
         uname: doc.data['uname'] ?? '',
         qTopic: doc.data['qTopic'] ?? '',
         quiz: doc.data['quiz'] ?? '',

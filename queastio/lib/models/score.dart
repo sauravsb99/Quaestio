@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Score {
   final String quiz;
+  final String qId;
   final String qTopic;
   final String uname;
   final String uid;
@@ -15,5 +16,5 @@ class Score {
       this.uname,
       this.score,
       this.total,
-      this.time});
+      this.time,this.qId});
 }
