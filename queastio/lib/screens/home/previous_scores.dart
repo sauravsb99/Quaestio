@@ -134,12 +134,13 @@ class _PreviousScoresState extends State<PreviousScores> {
                                             icon:
                                                 Image.asset('assets/lead.png'),
                                             onPressed: () {
+                                              print(scores[index].qId);
                                               Navigator.pushNamed(
                                                   context, LeaderRoute,
                                                   arguments: {
-                                                    'qname': scores[index].quiz,
-                                                    'qtopic':
-                                                        scores[index].qTopic
+                                                    'qId': scores[index].qId,
+                                                    // 'qtopic':
+                                                    //     scores[index].qTopic
                                                   });
                                             },
                                           )))
