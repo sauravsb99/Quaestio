@@ -10,7 +10,8 @@ import 'package:queastio/shared/constants.dart';
 
 class Uploader extends StatefulWidget {
   final String qid;
-  Uploader({this.qid});
+  final String qname;
+  Uploader({this.qid,this.qname});
   @override
   _UploaderState createState() => _UploaderState();
 }
@@ -116,7 +117,7 @@ class _UploaderState extends State<Uploader> {
                                 String myUrl =
                                     await storageReference.getDownloadURL();
                                 await DatabaseService(uid: user.uid)
-                                    .addDocument(widget.qid, type, myUrl);
+                                    .addDocument(widget.qid, type, myUrl,widget.qname);
                               } catch (err) {
                                 print(err.toString());
                               }
@@ -231,7 +232,7 @@ class _UploaderState extends State<Uploader> {
                                       String myUrl = await storageReference
                                           .getDownloadURL();
                                       await DatabaseService(uid: user.uid)
-                                          .addDocument(widget.qid, type, myUrl);
+                                          .addDocument(widget.qid, type, myUrl,widget.qname);
                                       showAlertDialog(
                                           'Your file has been uploaded!',
                                           context);

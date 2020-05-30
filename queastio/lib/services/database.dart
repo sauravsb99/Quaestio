@@ -79,12 +79,13 @@ class DatabaseService {
     });
   }
 
-  Future<void> addDocument(String qid, String type, String url) async {
+  Future<void> addDocument(String qid, String type, String url, String qname) async {
     await documentCollection.document().setData({
       'uid': uid,
       'qid': qid,
       'type': type,
       'url': url,
+      'qname': qname,
     });
   }
 
@@ -290,6 +291,7 @@ class DatabaseService {
       return Documents(
 //          faqQid: doc.data['qid'] ?? '',
         did: doc.documentID,
+        qname:doc.data['qname'] ?? '',
         qid: doc.data['qid'] ?? '',
         uid: doc.data['uid'] ?? '',
         type: doc.data['type'] ?? '',

@@ -4,6 +4,7 @@ import 'package:queastio/models/documents.dart';
 import 'package:queastio/screens/video/Video.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/loading.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VideoList extends StatefulWidget {
 
@@ -32,7 +33,7 @@ class _VideoListState extends State<VideoList> {
             return Scaffold(
               appBar: AppBar(
                 title: Text(
-                    'Video Submissions'
+                    'Submissions'
                 ),
 //                backgroundColor: Colors.indigo,
               ),
@@ -49,6 +50,7 @@ class _VideoListState extends State<VideoList> {
                     ){
                   return ListTile(
                     onTap: (){
+                      if(docList[index].type=='video'){
 //                      print(docList[index].url);
                       Navigator.push(context,
                           PageTransition(
@@ -58,10 +60,23 @@ class _VideoListState extends State<VideoList> {
                                   milliseconds: 500
                               )
                           )
-                      );
+                      );}
+                      else{
+                        launch(docList[index].url);
+                      }
                     },
-                    title: Text(
-                        docList[index].qid
+                    title: SizedBox(
+                      width: MediaQuery.of(context).size.width*0.9,
+                      child: Row(
+                        children: [
+                          Text(
+                              docList[index].qname.toUpperCase()
+                          ),Expanded(child: SizedBox(width:10,),),
+                          Text(docList[index].type.toUpperCase()
+                          )
+
+                        ],
+                      ),
                     ),
                   );
                 },

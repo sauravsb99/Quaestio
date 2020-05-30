@@ -5,6 +5,7 @@ class Documents {
   final String type;
   final String url;
   final String did;
+  final String qname;
 
-  Documents( { this.qid, this.uid,this.type,this.url, this.did});
+  Documents( { this.qid, this.uid,this.type,this.url, this.did,this.qname});
 }

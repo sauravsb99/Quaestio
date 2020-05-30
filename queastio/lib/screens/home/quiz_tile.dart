@@ -227,7 +227,10 @@ class QuizTile extends StatelessWidget {
         if (quiz.qName != 'submission')
           _showQuizDetails();
         else
-          Navigator.pushNamed(context, UploaderRoute, arguments: quiz.qId);
+          Navigator.pushNamed(context, UploaderRoute, arguments: {
+            'qid':quiz.qId,
+            'qname':quiz.qName
+          });
       },
       child: Container(
         height: 100.0,

@@ -134,7 +134,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => QuizAddManual(qTopic: settings.arguments));
     case UploaderRoute:
+      dynamic data = settings.arguments;
       return MaterialPageRoute(
-          builder: (context) => Uploader(qid: settings.arguments));
+          builder: (context) => Uploader(qid: data['qid'],qname: data['qname'],));
   }
 }

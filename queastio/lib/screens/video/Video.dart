@@ -50,7 +50,7 @@ class VideoState extends State<VideoAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    print("What we got is ${url}");
+//    print("What we got is ${url}");
     return Scaffold(
       appBar: AppBar(
         title: Text('Video Example'),
@@ -76,9 +76,9 @@ class VideoState extends State<VideoAdmin> {
         });
 
         print(playerController);
-        print("buffering  ${playerController.value.isBuffering}");
-        print("Playing  ${playerController.value.isPlaying}");
-        print("Buffered  ${playerController.value.buffered}");
+//        print("buffering  ${playerController.value.isBuffering}");
+//        print("Playing  ${playerController.value.isPlaying}");
+//        print("Buffered  ${playerController.value.buffered}");
         },
         child: Icon(
         playerController.value.isPlaying ? Icons.pause : Icons.play_arrow,
