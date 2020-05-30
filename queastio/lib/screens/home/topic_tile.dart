@@ -20,7 +20,7 @@ class TopicTile extends StatelessWidget {
 //    final GestureDragDownCallback onPanDown
       onTap: () {
         print(topic.name);
-        Navigator.pushNamed(context,QuizListRoute,arguments: topic.name );
+        Navigator.pushNamed(context, QuizListRoute, arguments: topic.name);
 //        QuizListRoute, arguments: topic.name);
       },
       child: Card(
@@ -34,6 +34,9 @@ class TopicTile extends StatelessWidget {
                 CachedNetworkImage(
                   placeholder: (context, url) => CircularProgressIndicator(),
                   imageUrl: topic.image,
+                  fit: BoxFit.cover,
+                  width: 300.0,
+                  height: 150.0,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
