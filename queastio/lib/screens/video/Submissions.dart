@@ -92,6 +92,8 @@ class _SubmissionListState extends State<SubmissionList> {
                                     CircleAvatar(backgroundImage: NetworkImage(user.image),backgroundColor: Color(0xff43b77d),),
                                   ],
                                 ),
+                                subtitle: Text(docList[index].fname)
+                                ,
                                 trailing: Text(docList[index].type.toUpperCase()
                                 ),
                               ),
