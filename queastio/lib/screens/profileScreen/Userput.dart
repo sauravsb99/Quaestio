@@ -21,6 +21,7 @@ class Userput extends StatefulWidget {
 class _UserputState extends State<Userput> {
   final UserData user;
   final _formKey = GlobalKey<FormState>();
+  StorageUploadTask uploadTask;
 
   _UserputState({this.user});
 
@@ -50,229 +51,259 @@ class _UserputState extends State<Userput> {
             UserData userData = snapshot.data;
             print(userData.batch);
             return Scaffold(
-              body: Wrap(
+              body: Stack(
                 children: <Widget>[
-                  Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 35,
-                        ),
-                        IconButton(
-                            icon: Icon(Icons.arrow_back),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            }),
-                        //              SizedBox(height: 0.0,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  Wrap(
+                    children: <Widget>[
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width *
-                                        0.20),
-                                child: CircleAvatar(
-                                  radius: 77,
-                                  backgroundColor: Color(0xff43b77d),
-                                  child: ClipOval(
-                                    child: SizedBox(
-                                      width: 140.0,
-                                      height: 140.0,
+                            SizedBox(
+                              height: 35,
+                            ),
+                            IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            //              SizedBox(height: 0.0,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.20),
+                                    child: CircleAvatar(
+                                      radius: 77,
+                                      backgroundColor: Color(0xff43b77d),
+                                      child: ClipOval(
+                                        child: SizedBox(
+                                          width: 140.0,
+                                          height: 140.0,
 //                                  clipBehavior: Clip(heigh),
-                                      child: _image == null
-                                          ? Image.network(
-                                              userData.image,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Image.file(
-                                              _image,
-                                              fit: BoxFit.fill,
-                                            ),
+                                          child: _image == null
+                                              ? Image.network(
+                                                  userData.image,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image.file(
+                                                  _image,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 80.0),
+                                  child: IconButton(
+                                    icon: Icon(Icons.insert_photo),
+                                    onPressed: () {
+                                      getImage(false);
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 80.0),
+                                  child: IconButton(
+                                    icon: Icon(Icons.camera),
+                                    onPressed: () {
+                                      getImage(true);
+                                    },
+                                  ),
+                                )
+                              ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 80.0),
-                              child: IconButton(
-                                icon: Icon(Icons.insert_photo),
-                                onPressed: () {
-                                  getImage(false);
-                                },
-                              ),
+                            SizedBox(
+                              height: 200,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 80.0),
-                              child: IconButton(
-                                icon: Icon(Icons.camera),
-                                onPressed: () {
-                                  getImage(true);
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 200,
-                        ),
-                        Container(
-                            child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                            Container(
+                                child: Form(
+                                    key: _formKey,
+                                    child: Column(
                                       children: <Widget>[
                                         SizedBox(
-                                          width: 10,
+                                          height: 10,
                                         ),
-                                        Text("Name",
-                                            style: TextStyle(fontSize: 17)),
-                                        SizedBox(width: 15),
-                                        Container(
-                                          color: Colors.transparent,
-                                          child: SizedBox(
-                                            width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width -
-                                                    75) *
-                                                0.7,
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text("Name",
+                                                style: TextStyle(fontSize: 17)),
+                                            SizedBox(width: 15),
+                                            Container(
+                                              color: Colors.transparent,
+                                              child: SizedBox(
+                                                width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width -
+                                                        75) *
+                                                    0.7,
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
                                                         8.0, 8.0, 15.0, 8.0),
-                                                child: TextFormField(
-                                                  decoration:
-                                                      textInputDecoration
-                                                          .copyWith(
-                                                    fillColor:
-                                                        Colors.transparent,
+                                                    child: TextFormField(
+                                                      decoration:
+                                                          textInputDecoration
+                                                              .copyWith(
+                                                        fillColor:
+                                                            Colors.transparent,
+                                                      ),
+                                                      initialValue:
+                                                          userData.name,
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                      validator: (val) =>
+                                                          val.isEmpty
+                                                              ? 'Enter name'
+                                                              : null,
+                                                      onChanged: (val) {
+                                                        setState(
+                                                            () => name = val);
+                                                      },
+                                                    ),
                                                   ),
-                                                  initialValue: userData.name,
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                  validator: (val) =>
-                                                      val.isEmpty
-                                                          ? 'Enter name'
-                                                          : null,
-                                                  onChanged: (val) {
-                                                    setState(() => name = val);
-                                                  },
                                                 ),
                                               ),
                                             ),
-                                          ),
+                                            Icon(Icons.edit),
+                                          ],
                                         ),
-                                        Icon(Icons.edit),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    SizedBox(
-                                      height: 60,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        RaisedButton(
-                                          onPressed: () async {
-                                            Scaffold.of(context)
-                                                .showSnackBar(SnackBar(
-                                              content: Text("Please Wait"),
-                                            ));
-                                            String err = "Photo Updated";
-                                            if (_image != null) {
-                                              String fileName = basename(
-                                                  "${userData.uid}.jpg");
-                                              print(fileName);
-                                              StorageReference
-                                                  firebaseStorageRef =
-                                                  FirebaseStorage.instance
-                                                      .ref()
-                                                      .child(fileName);
-                                              StorageUploadTask uploadTask =
-                                                  firebaseStorageRef
-                                                      .putFile(_image);
-                                              StorageTaskSnapshot taskSnapshot =
-                                                  await uploadTask.onComplete;
-                                              var dowurl =
-                                                  await (await uploadTask
-                                                          .onComplete)
-                                                      .ref
-                                                      .getDownloadURL();
-                                              if (uploadTask.isCanceled) {
-                                                err = "Error";
-                                              }
-                                              url = dowurl.toString();
-                                              setState(() {
-                                                print("Data Updated");
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          height: 60,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: <Widget>[
+                                            RaisedButton(
+                                              onPressed: () async {
                                                 Scaffold.of(context)
                                                     .showSnackBar(SnackBar(
-                                                        content: Text(err),
-                                                        duration: Duration(
-                                                            milliseconds:
-                                                                200)));
-                                              });
-                                            }
-                                            if (_formKey.currentState
-                                                .validate()) {
-                                              print(name);
-                                              String i = url;
-                                              if (name == null)
-                                                name = userData.name;
-                                              if (i == null) i = userData.image;
-                                              await DatabaseService(
-                                                      uid: user.uid)
-                                                  .updateUserData(
-                                                      name,
-                                                      i,
-                                                      userData.role,
-                                                      userData.batch);
-                                              setState(() {
-                                                Scaffold.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                        content: Text(
-                                                            "Name Updated"),
-                                                        duration: Duration(
-                                                            milliseconds:
-                                                                200)));
-                                              });
-                                            }
-                                          },
-                                          splashColor: Colors.white,
-                                          textColor: Colors.white,
-                                          color: Color(0xff43b77d),
-                                          child: Text(
-                                            "Submit",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        )
+                                                  content: Text("Please Wait"),
+                                                ));
+                                                String err = "Photo Updated";
+                                                if (_image != null) {
+                                                  String fileName = basename(
+                                                      "${userData.uid}.jpg");
+                                                  print(fileName);
+                                                  StorageReference
+                                                      firebaseStorageRef =
+                                                      FirebaseStorage.instance
+                                                          .ref()
+                                                          .child(fileName);
+                                                  setState(() {
+                                                    uploadTask =
+                                                        firebaseStorageRef
+                                                            .putFile(_image);
+                                                  });
+                                                  StorageTaskSnapshot
+                                                      taskSnapshot =
+                                                      await uploadTask
+                                                          .onComplete;
+                                                  var dowurl =
+                                                      await (await uploadTask
+                                                              .onComplete)
+                                                          .ref
+                                                          .getDownloadURL();
+                                                  if (uploadTask.isCanceled) {
+                                                    err = "Error";
+                                                  }
+                                                  url = dowurl.toString();
+                                                  setState(() {
+                                                    print("Data Updated");
+                                                    uploadTask = null;
+                                                    Scaffold.of(context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(err),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    200)));
+                                                  });
+                                                }
+                                                if (_formKey.currentState
+                                                    .validate()) {
+                                                  print(name);
+                                                  String i = url;
+                                                  if (name == null)
+                                                    name = userData.name;
+                                                  if (i == null)
+                                                    i = userData.image;
+                                                  await DatabaseService(
+                                                          uid: user.uid)
+                                                      .updateUserData(
+                                                          name,
+                                                          i,
+                                                          userData.role,
+                                                          userData.batch);
+                                                  setState(() {
+                                                    Scaffold.of(context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Name Updated"),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    200)));
+                                                  });
+                                                }
+                                              },
+                                              splashColor: Colors.white,
+                                              textColor: Colors.white,
+                                              color: Color(0xff43b77d),
+                                              child: Text(
+                                                "Submit",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ],
-                                    ),
-                                  ],
-                                )))
-                      ],
-                    ),
+                                    )))
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  SafeArea(
+                    child: uploadTask != null
+                        ? StreamBuilder<StorageTaskEvent>(
+                            stream: uploadTask.events,
+                            builder: (context, snapshot) {
+                              var event = snapshot?.data?.snapshot;
+                              double progress = event != null
+                                  ? event.bytesTransferred /
+                                      event.totalByteCount
+                                  : 0;
+                              return LinearProgressIndicator(
+                                value: progress,
+                              );
+                            })
+                        : Container(),
+                  )
                 ],
               ),
             );
