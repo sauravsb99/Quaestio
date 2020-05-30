@@ -123,7 +123,7 @@ class _AddQuizState extends State<AddQuiz> {
     }
 
     await DatabaseService(uid: user.uid)
-        .updateQuiz(name, qTopic, qDesc, qCount, duration, orderLines);
+        .updateQuiz(name, qTopic,'','', qDesc, qCount, duration, orderLines);
     // print(data);
     // print(orderLines);
   }

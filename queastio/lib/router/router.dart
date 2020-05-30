@@ -136,6 +136,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case UploaderRoute:
       dynamic data = settings.arguments;
       return MaterialPageRoute(
-          builder: (context) => Uploader(qid: data['qid'],qname: data['qname'],));
+          builder: (context) => Uploader(qid: data['qid'],qname: data['qname'],stype: data['stype']));
   }
 }

@@ -11,7 +11,8 @@ import 'package:queastio/shared/constants.dart';
 class Uploader extends StatefulWidget {
   final String qid;
   final String qname;
-  Uploader({this.qid,this.qname});
+  final String stype;
+  Uploader({this.qid,this.qname,this.stype});
   @override
   _UploaderState createState() => _UploaderState();
 }
@@ -57,7 +58,42 @@ class _UploaderState extends State<Uploader> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 uploadFile != null
-                    ? Container(
+                    ? widget.stype=='pdf'?Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  padding: EdgeInsets.all(8.0),
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: <Widget>[
+                      type == 'pdf'
+                          ? Icon(Icons.picture_as_pdf, color: Colors.red)
+                          : Icon(Icons.video_library,
+                          color: Colors.orange[800]),
+                      Text(
+                        Path.basename(uploadFile.path),
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.close,
+                          size: 20.0,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            uploadFile = null;
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                ):Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(5.0),
@@ -129,18 +165,39 @@ class _UploaderState extends State<Uploader> {
                         ),
                       ),
                     ),
+
+                    widget.stype=='pdf'?IconButton(
+                        color: Color(0xff43b77d),
+                        onPressed: () async {
+                          File file = await FilePicker.getFile(
+                              type: FileType.custom,
+                              allowedExtensions: ['pdf']);
+                          if (file != null)
+                            setState(() {
+                              uploadFile = file;
+                              type = '.pdf';
+//                                  ? 'pdf'
+//                                  : 'video';
+                            });
+                        },
+                        icon: Icon(Icons.attach_file)
+                      // child: Text(
+                      //   'Choose File',
+                      // ),
+                    ):
                     IconButton(
                         color: Color(0xff43b77d),
                         onPressed: () async {
                           File file = await FilePicker.getFile(
                               type: FileType.custom,
-                              allowedExtensions: ['pdf', 'mp4']);
+                              allowedExtensions: ['mp4']);
                           if (file != null)
                             setState(() {
                               uploadFile = file;
-                              type = Path.extension(file.path) == '.pdf'
-                                  ? 'pdf'
-                                  : 'video';
+                              type = 'video';
+//                              Path.extension(file.path) == '.pdf'
+//                                  ? 'pdf'
+//                                  : 'video';
                             });
                         },
                         icon: Icon(Icons.attach_file)
@@ -179,8 +236,16 @@ class _UploaderState extends State<Uploader> {
                                   type == 'pdf'
                                       ? Icon(Icons.picture_as_pdf,
                                           color: Colors.red)
-                                      : Icon(Icons.video_library,
-                                          color: Colors.orange),
+                                      : SizedBox(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.video_library,
+                                                color: Colors.orange),
+                                            Icon(Icons.camera,
+                                                color: Colors.orange),
+                                          ],
+                                        ),
+                                      ),
                                   Text(
                                     Path.basename(uploadFile.path),
                                     style: TextStyle(
@@ -251,18 +316,39 @@ class _UploaderState extends State<Uploader> {
                               ),
                             ),
                           ),
+                          widget.stype=='pdf'?IconButton(
+                              color: Color(0xff43b77d),
+                              onPressed: () async {
+                                File file = await FilePicker.getFile(
+                                    type: FileType.custom,
+                                    allowedExtensions: ['pdf']);
+                                if (file != null)
+                                  setState(() {
+                                    uploadFile = file;
+                                    type = 'pdf';
+//                                    Path.extension(file.path) == '.pdf'
+//                                        ? 'pdf'
+//                                        : 'video';
+                                  });
+                              },
+                              icon: Icon(Icons.attach_file)
+                            // child: Text(
+                            //   'Choose File',
+                            // ),
+                          ):
                           IconButton(
                               color: Color(0xff43b77d),
                               onPressed: () async {
                                 File file = await FilePicker.getFile(
                                     type: FileType.custom,
-                                    allowedExtensions: ['pdf', 'mp4']);
+                                    allowedExtensions: ['mp4']);
                                 if (file != null)
                                   setState(() {
                                     uploadFile = file;
-                                    type = Path.extension(file.path) == '.pdf'
-                                        ? 'pdf'
-                                        : 'video';
+                                    type = 'video';
+//                                    Path.extension(file.path) == '.pdf'
+//                                        ? 'pdf'
+//                                        : 'video';
                                   });
                               },
                               icon: Icon(Icons.attach_file)

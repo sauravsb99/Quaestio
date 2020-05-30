@@ -100,9 +100,11 @@ class DatabaseService {
     return ('True');
   }
 
-  Future<void> updateQuiz(String name, String qTopic, String qDesc, int qCount,
+  Future<void> updateQuiz(String name, String qTopic,String type ,String submissiontype,String qDesc, int qCount,
       int duration, List<Map> questions) async {
     return await quizCollection.document().setData({
+      'stype': submissiontype,
+      'type': type,
       'uid': uid,
       'name': name,
       'qTopic': qTopic,
@@ -219,6 +221,8 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       developer.log(doc.documentID);
       return Quiz(
+        type: doc.data['type'] ?? '',
+        stype: doc.data['stype'] ?? '',
         qId: doc.documentID,
         qName: doc.data['name'] ?? '',
         qTopic: doc.data['qTopic'] ?? '',

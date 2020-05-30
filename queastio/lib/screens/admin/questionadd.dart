@@ -299,7 +299,7 @@ int time = 0;
                       onPressed: () async{
                         User user = Provider.of<User>(context, listen: false);
                         await DatabaseService(uid: user.uid)
-                            .updateQuiz(qName, qTopic, qDescr, qno - 1, time, orderLines);
+                            .updateQuiz(qName, qTopic,'' ,'',qDescr, qno - 1, time, orderLines);
                         Navigator.pop(context);
                       },
                       child: Text("Submit"),

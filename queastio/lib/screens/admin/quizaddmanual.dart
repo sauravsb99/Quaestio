@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:queastio/models/user.dart';
+import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
 
 class QuizAddManual extends StatefulWidget {
   final String qTopic;
+  String _qtype='';
+  Set<String> items;
+
+  String _stype='pdf';
+  Set<String> itemstype;
   QuizAddManual({this.qTopic});
   @override
   _QuizAddManualState createState() => _QuizAddManualState(qTopic : qTopic);
@@ -11,15 +19,26 @@ class QuizAddManual extends StatefulWidget {
 class _QuizAddManualState extends State<QuizAddManual> {
   final _formKey = GlobalKey<FormState>();
   final String qTopic;
+  String _qtype='';
+  Set<String> items;
+
+
+  String _stype='pdf';
+  Set<String> itemstype;
   _QuizAddManualState({this.qTopic});
-  // print(category);
    String _quizName;
    String _quizDesc;
-  //  String _quizCount;
    String _quizTime;
   @override
-  // print(category);
   Widget build(BuildContext context) {
+
+    _qtype = _qtype == null ? null : _qtype;
+    items = Set.from(['']);
+    items.add('submission');
+
+    _stype = _stype == null ? 'pdf' : _stype;
+    itemstype = Set.from(['pdf']);
+    itemstype.add('video');
     return Scaffold(
       resizeToAvoidBottomInset: false,
     body: Container(
@@ -39,10 +58,34 @@ class _QuizAddManualState extends State<QuizAddManual> {
           ),
           SizedBox(height: 5.0),
           TextFormField(
-            // decoration: textInputDecoration,
             validator: (val) => val.isEmpty ? 'Please enter a Quiz Name' : null,
             onChanged: (val) => setState(() => _quizName = val),
           ),
+          SizedBox(height: 30.0),
+          Text(
+            "Enter the Type",
+            style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold),
+          ),
+
+
+      DropdownButton<String>(
+      value: _qtype,
+
+      underline: Container(
+        color: Color(0xff43b77d),
+        height: 2.0,
+      ),
+      onChanged: (String newValue) {
+        setState(() {
+          _qtype = newValue;
+        });
+        print(_qtype);
+      },
+      items: items.map((item) {
+        return DropdownMenuItem(
+            value: item, child: Text(item));
+      }).toList(),
+    ),
           SizedBox(height: 30.0),
           Text(
             "Enter the Quiz Description",
@@ -53,39 +96,37 @@ class _QuizAddManualState extends State<QuizAddManual> {
             validator: (val) => val.isEmpty ? 'Please enter a Description' : null,
             onChanged: (val) => setState(() => _quizDesc = val),
           ),
-          //  SizedBox(height: 30.0),
-          // Text(
-          //   "Enter the No of Questions",
-          //   style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold),
-          // ),
-          // TextFormField(
-          //   // decoration: textInputDecoration,
-          //   validator: (val) => val.isEmpty ? 'Please enter the No of Questions' : null,
-          //   onChanged: (val) => setState(() => _quizCount = val),
-          // ),
           SizedBox(height: 30.0),
-          Text(
-            "Enter the Time Limit",
+          _qtype==''?Text("Enter the Time Limit",
+            style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold),
+          ):
+          Text("Enter the Submission type",
             style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold),
           ),
-          TextFormField(
+          _qtype==''?TextFormField(
             // decoration: textInputDecoration,
             validator: (val) => val.isEmpty ? 'Please enter a Time Limit' : null,
             onChanged: (val) => setState(() => _quizTime = val),
+          ):DropdownButton<String>(
+            value: _stype,
+
+            underline: Container(
+              color: Color(0xff43b77d),
+              height: 2.0,
+            ),
+            onChanged: (String newVal) {
+              setState(() {
+                _stype = newVal;
+              });
+              print(_stype);
+            },
+            items: itemstype.map((itemsty) {
+              return DropdownMenuItem(
+                  value: itemsty, child: Text(itemsty));
+            }).toList(),
           ),
-          // DropdownButtonFormField(
-          //   value: _currentSugars ?? '0',
-          //   decoration: textInputDecoration,
-          //   items: sugars.map((sugar) {
-          //     return DropdownMenuItem(
-          //       value: sugar,
-          //       child: Text('$sugar sugars'),
-          //     );
-          //   }).toList(),
-          //   onChanged: (val) => setState(() => _currentSugars = val ),
-          // ),
           SizedBox(height: 20.0),
-          RaisedButton(
+          _qtype==''?RaisedButton(
             color: Colors.green,
             child: Text(
               'Submit',
@@ -101,93 +142,18 @@ class _QuizAddManualState extends State<QuizAddManual> {
       
               });
             }
-          ),
+          ):FlatButton(
+            onPressed: () async{
+            User user = Provider.of<User>(context, listen: false);
+            await DatabaseService(uid: user.uid)
+                .updateQuiz(_quizName, qTopic,_qtype, _stype,_quizDesc, 0 , 0, null);
+            Navigator.pop(context);
+          },child: Text("Submit"),
+              color: Color(0xff43b77d)),
         ],
       ),
     ),
     ),
     );
-    // return Form(
-    //   key: _formKey,
-    //   child: Column(
-    //     children: <Widget>[
-    //       Text(
-    //         "Enter Quiz Details",
-    //         style: TextStyle(fontSize: 24.0),
-    //       ),
-    //       SizedBox(height: 10.0),
-    //       Text(
-    //         "Enter the Quiz Name",
-    //         style: TextStyle(fontSize: 14.0),
-    //       ),
-    //       SizedBox(height: 10.0),
-    //       TextFormField(
-    //         // decoration: textInputDecoration,
-    //         validator: (val) => val.isEmpty ? 'Please enter a Quiz Name' : null,
-    //         onChanged: (val) => setState(() => _quizName = val),
-    //       ),
-    //       SizedBox(height: 10.0),
-    //       Text(
-    //         "Enter the Quiz Description",
-    //         style: TextStyle(fontSize: 14.0),
-    //       ),
-    //       TextFormField(
-    //         // decoration: textInputDecoration,
-    //         validator: (val) => val.isEmpty ? 'Please enter a Description' : null,
-    //         onChanged: (val) => setState(() => _quizDesc = val),
-    //       ),
-    //        SizedBox(height: 10.0),
-    //       Text(
-    //         "Enter the No of Questions",
-    //         style: TextStyle(fontSize: 14.0),
-    //       ),
-    //       TextFormField(
-    //         // decoration: textInputDecoration,
-    //         validator: (val) => val.isEmpty ? 'Please enter the No of Questions' : null,
-    //         onChanged: (val) => setState(() => _quizCount = val),
-    //       ),
-    //       SizedBox(height: 10.0),
-    //       Text(
-    //         "Enter the Time Limit",
-    //         style: TextStyle(fontSize: 14.0),
-    //       ),
-    //       TextFormField(
-    //         // decoration: textInputDecoration,
-    //         validator: (val) => val.isEmpty ? 'Please enter a Time Limit' : null,
-    //         onChanged: (val) => setState(() => _quizTime = val),
-    //       ),
-    //       // DropdownButtonFormField(
-    //       //   value: _currentSugars ?? '0',
-    //       //   decoration: textInputDecoration,
-    //       //   items: sugars.map((sugar) {
-    //       //     return DropdownMenuItem(
-    //       //       value: sugar,
-    //       //       child: Text('$sugar sugars'),
-    //       //     );
-    //       //   }).toList(),
-    //       //   onChanged: (val) => setState(() => _currentSugars = val ),
-    //       // ),
-    //       SizedBox(height: 20.0),
-    //       RaisedButton(
-    //         color: Colors.green,
-    //         child: Text(
-    //           'Submit',
-    //           style: TextStyle(color: Colors.white),
-    //         ),
-    //         onPressed: () async {
-    //           // String image;
-    //           // if(category == "Domain Specific")
-    //           //   image = "https://firebasestorage.googleapis.com/v0/b/okkk-810ee.appspot.com/o/aptitude.jpg?alt=media&token=ee80431a-5377-4027-a853-9e6c3171c998";
-    //           // else
-    //           //   image = "https://firebasestorage.googleapis.com/v0/b/okkk-810ee.appspot.com/o/aptitude.jpg?alt=media&token=ee80431a-5377-4027-a853-9e6c3171c998";
-    //           // await DatabaseService().addTopic(category, image, _currentName);
-    //           // // print(_currentName);
-    //           // // print(_currentSugars);
-    //           // // print(_currentStrength);
-    //         }
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }

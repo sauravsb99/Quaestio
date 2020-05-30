@@ -224,13 +224,15 @@ class QuizTile extends StatelessWidget {
       splashColor: Colors.white70,
       splashFactory: InkSplash.splashFactory,
       onTap: () {
-        if (quiz.qName != 'submission')
-          _showQuizDetails();
-        else
+        if (quiz.type != 'submission'){
+          _showQuizDetails();}
+        else{
           Navigator.pushNamed(context, UploaderRoute, arguments: {
             'qid':quiz.qId,
-            'qname':quiz.qName
+            'qname':quiz.qName,
+            'stype': quiz.stype
           });
+        }
       },
       child: Container(
         height: 100.0,
