@@ -77,15 +77,17 @@ class _UserputState extends State<Userput> {
                                         0.20),
                                 child: CircleAvatar(
                                   radius: 77,
-
-                                  backgroundColor:Color(0xff43b77d),
+                                  backgroundColor: Color(0xff43b77d),
                                   child: ClipOval(
                                     child: SizedBox(
                                       width: 140.0,
                                       height: 140.0,
 //                                  clipBehavior: Clip(heigh),
                                       child: _image == null
-                                          ? Image.network(userData.image,fit: BoxFit.cover,)
+                                          ? Image.network(
+                                              userData.image,
+                                              fit: BoxFit.cover,
+                                            )
                                           : Image.file(
                                               _image,
                                               fit: BoxFit.fill,
@@ -150,7 +152,13 @@ class _UserputState extends State<Userput> {
                                                 padding:
                                                     const EdgeInsets.fromLTRB(
                                                         8.0, 8.0, 15.0, 8.0),
-                                                child: TextFormField(decoration: textInputDecoration.copyWith(fillColor: Colors.transparent, ),
+                                                child: TextFormField(
+                                                  decoration:
+                                                      textInputDecoration
+                                                          .copyWith(
+                                                    fillColor:
+                                                        Colors.transparent,
+                                                  ),
                                                   initialValue: userData.name,
                                                   style: TextStyle(
                                                       fontSize: 18,
@@ -185,11 +193,14 @@ class _UserputState extends State<Userput> {
                                       children: <Widget>[
                                         RaisedButton(
                                           onPressed: () async {
-                                            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Please Wait"),));
+                                            Scaffold.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text("Please Wait"),
+                                            ));
                                             String err = "Photo Updated";
                                             if (_image != null) {
-                                              String fileName =
-                                                  basename("${userData.uid}.jpg");
+                                              String fileName = basename(
+                                                  "${userData.uid}.jpg");
                                               print(fileName);
                                               StorageReference
                                                   firebaseStorageRef =
@@ -214,7 +225,10 @@ class _UserputState extends State<Userput> {
                                                 print("Data Updated");
                                                 Scaffold.of(context)
                                                     .showSnackBar(SnackBar(
-                                                        content: Text(err),duration: Duration(milliseconds: 200)));
+                                                        content: Text(err),
+                                                        duration: Duration(
+                                                            milliseconds:
+                                                                200)));
                                               });
                                             }
                                             if (_formKey.currentState
@@ -227,12 +241,18 @@ class _UserputState extends State<Userput> {
                                               await DatabaseService(
                                                       uid: user.uid)
                                                   .updateUserData(
-                                                      name, i, userData.role,userData.batch);
+                                                      name,
+                                                      i,
+                                                      userData.role,
+                                                      userData.batch);
                                               setState(() {
                                                 Scaffold.of(context)
                                                     .showSnackBar(SnackBar(
                                                         content: Text(
-                                                            "Name Updated"),duration: Duration(milliseconds: 200)));
+                                                            "Name Updated"),
+                                                        duration: Duration(
+                                                            milliseconds:
+                                                                200)));
                                               });
                                             }
                                           },
@@ -247,7 +267,8 @@ class _UserputState extends State<Userput> {
                                           ),
                                         )
                                       ],
-                                    ),],
+                                    ),
+                                  ],
                                 )))
                       ],
                     ),
