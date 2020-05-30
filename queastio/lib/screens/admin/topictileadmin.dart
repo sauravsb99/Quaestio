@@ -13,7 +13,6 @@ class TopicTileAdmin extends StatelessWidget {
       splashColor: Colors.black,
       splashFactory: InkSplash.splashFactory,
       onTap: () {
-        print("hi");
         Navigator.pushNamed(context, QuizListAdminRoute, arguments: topic.name);
       },
       child: Card(
