@@ -29,11 +29,10 @@ class VideoState extends State<VideoAdmin> {
   void createVideo() {
 //    print(playerController.value.isPlaying);
     if (playerController == null) {
-
       playerController = VideoPlayerController.network(url
 //          'assets/video.mp4'
 //          'https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/videos%2Fvlc-record-2020-04-20-14h54m10s-5_10953317656036796.mp4-.mp4?alt=media&token=5b5cb9f4-1495-4319-87c6-4de1f19ec6a2'
-      )
+          )
         ..addListener(listener)
         ..setVolume(1.0)
         ..initialize()
@@ -57,33 +56,77 @@ class VideoState extends State<VideoAdmin> {
       ),
       body: Container(
         color: Colors.white,
-        child: Center(
-            child: AspectRatio(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(
+                width: 15.0,
+              )),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Container(
-                  color:Colors.black,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
                   child: (playerController != null
                       ? VideoPlayer(
-                    playerController,
-                  )
+                          playerController,
+                        )
                       : Container()),
-                ))),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      playerController.value.isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        playerController.value.isPlaying
+                            ? playerController.pause()
+                            : playerController.play();
+                      });
+                    },
+                  ),
+                  Spacer(),
+                  IconButton(
+                    tooltip: 'Go Back 10s',
+                    icon: Icon(Icons.replay_10),
+                    onPressed: () async {
+                      Duration pos = await playerController.position -
+                          Duration(seconds: 10);
+                      setState(() {
+                        playerController.seekTo(pos);
+                        playerController.play();
+                      });
+                    },
+                  ),
+                  IconButton(
+                    tooltip: 'Restart',
+                    icon: Icon(Icons.replay),
+                    onPressed: playerController.value.isPlaying
+                        ? null
+                        : () {
+                            setState(() {
+                              playerController.seekTo(Duration(seconds: 0));
+                              playerController.play();
+                            });
+                          },
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed:() {
-        setState(() {
-       playerController.value.isPlaying ? playerController.pause() : playerController.play();
-        });
-
-        print(playerController);
-//        print("buffering  ${playerController.value.isBuffering}");
-//        print("Playing  ${playerController.value.isPlaying}");
-//        print("Buffered  ${playerController.value.buffered}");
-        },
-        child: Icon(
-        playerController.value.isPlaying ? Icons.pause : Icons.play_arrow,
-      ),
-    ),
     );
   }
 }
