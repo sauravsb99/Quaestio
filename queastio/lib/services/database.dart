@@ -121,15 +121,24 @@ class DatabaseService {
 
   Future<void> deleteUser(String uid) async {
     var batch = Firestore.instance.batch();
+    
     var docRef = userCollection.document(uid);
+    print(batch);
+    print(docRef);
+    // try{
+    if(docRef!=null){
     await docRef.get().then((doc) {
+      if(doc['scores']!=null){
       doc['scores'].forEach((scoreId) {
         print(scoreId);
         batch.delete(scoreCollection.document(scoreId));
       });
-    });
+    }}
+    );
     batch.delete(userCollection.document(uid));
     batch.commit();
+      }
+    
   }
 
   Future<void> deleteScore(String uid) async {
