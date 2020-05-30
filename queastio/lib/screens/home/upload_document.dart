@@ -241,8 +241,6 @@ class _UploaderState extends State<Uploader> {
                                           children: [
                                             Icon(Icons.video_library,
                                                 color: Colors.orange),
-                                            Icon(Icons.camera,
-                                                color: Colors.orange),
                                           ],
                                         ),
                                       ),

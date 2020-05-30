@@ -49,7 +49,6 @@ class _UserputState extends State<Userput> {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
             print(userData.batch);
-
             return Scaffold(
               body: Wrap(
                 children: <Widget>[
@@ -190,7 +189,8 @@ class _UserputState extends State<Userput> {
                                             String err = "Photo Updated";
                                             if (_image != null) {
                                               String fileName =
-                                                  basename(userData.uid);
+                                                  basename("${userData.uid}.jpg");
+                                              print(fileName);
                                               StorageReference
                                                   firebaseStorageRef =
                                                   FirebaseStorage.instance

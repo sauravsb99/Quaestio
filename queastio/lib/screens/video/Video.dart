@@ -31,7 +31,6 @@ class VideoState extends State<VideoAdmin> {
     if (playerController == null) {
 
       playerController = VideoPlayerController.network(url
-//          'assets/video.mp4'
 //          'https://firebasestorage.googleapis.com/v0/b/quaestio-bfc06.appspot.com/o/videos%2Fvlc-record-2020-04-20-14h54m10s-5_10953317656036796.mp4-.mp4?alt=media&token=5b5cb9f4-1495-4319-87c6-4de1f19ec6a2'
       )
         ..addListener(listener)
