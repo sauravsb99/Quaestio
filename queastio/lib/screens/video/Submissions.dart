@@ -50,38 +50,40 @@ class _SubmissionListState extends State<SubmissionList> {
                     context, index
                     ){
                   return ListTile(
-                    onTap: (){
-                      if(docList[index].type=='video'){
-//                      print(docList[index].url);
-                        Navigator.push(context,
-                            PageTransition(
-                                type: PageTransitionType.downToUp,
-                                child: VideoAdmin(docList[index]),
-                                duration: Duration(
-                                    milliseconds: 500
-                                )
-                            )
-                        );}
-                      else{
-                        launch(docList[index].url);
-                      }
-                    },
+
                     title: StreamBuilder<UserData>(
                         stream: DatabaseService(uid: docList[index].uid).userData,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             UserData user = snapshot.data;
-                            return Card(
-                              child: ListTile(
-                                title: Text(
-                                  user.name,
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                            return InkWell(
+                              onTap: (){
+                                if(docList[index].type=='video'){
+//                      print(docList[index].url);
+                                  Navigator.push(context,
+                                      PageTransition(
+                                          type: PageTransitionType.downToUp,
+                                          child: VideoAdmin(docList[index]),
+                                          duration: Duration(
+                                              milliseconds: 500
+                                          )
+                                      )
+                                  );}
+                                else{
+                                  launch(docList[index].url);
+                                }
+                              },
+                              child: Card(
+                                child: ListTile(
+                                  title: Text(
+                                    user.name,
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                                leading: Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  children: <Widget>[
+                                  leading: Wrap(
+                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                    children: <Widget>[
 //                                    Container(
 //                                      padding: EdgeInsets.all(8.0),
 //                                      child: Text(
@@ -89,17 +91,18 @@ class _SubmissionListState extends State<SubmissionList> {
 //                                        style: TextStyle(fontSize: 16.0, color: Colors.grey),
 //                                      ),
 //                                    ),
-                                    CircleAvatar(backgroundImage: NetworkImage(user.image),backgroundColor: Color(0xff43b77d),),
-                                  ],
-                                ),
-                                subtitle: Text(docList[index].fname)
-                                ,
-                                trailing: Text(docList[index].type.toUpperCase()
+                                      CircleAvatar(backgroundImage: NetworkImage(user.image),backgroundColor: Color(0xff43b77d),),
+                                    ],
+                                  ),
+                                  subtitle: Text(docList[index].fname)
+                                  ,
+                                  trailing: Text(docList[index].type.toUpperCase()
+                                  ),
                                 ),
                               ),
                             );
                           } else {
-                            return Container();
+                            return Wrap();
                           }
                         }),
 //                    trailing: Text(docList[index].type.toUpperCase()
