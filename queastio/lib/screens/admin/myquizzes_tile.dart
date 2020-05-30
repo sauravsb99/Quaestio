@@ -221,6 +221,7 @@ class MyQuizTileAdmin extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title: Text(quiz.qName.toUpperCase()),
+                subtitle: Text(quiz.type==''?'Type: Quiz':'Type: ${quiz.type}'),
                 trailing: IconButton(
                     icon: Icon(
                       Icons.delete,

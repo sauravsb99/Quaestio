@@ -90,12 +90,12 @@ class _QuizListAdminState extends State<QuizListAdmin> {
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        return Column(
+                        return data[index].type == '' ? Column(
                           children: <Widget>[
                             QuizTileAdmin(quiz: data[index]),
                             Divider(height: 1)
                           ],
-                        );
+                        ) :Container();
                       },
                     ),
                     
