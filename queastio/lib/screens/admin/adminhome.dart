@@ -26,8 +26,8 @@ class AdminHome extends StatelessWidget {
     return StreamProvider<List<Topic>>.value(
       initialData: List(),
       value: DatabaseService().topics,
-      child: Stack(
-      children: <Widget>[Container(
+//      child: Stack(
+//      children: <Widget>[Container(
         
         child: Scaffold(
 //          backgroundColor: Colors.black26,
@@ -41,10 +41,11 @@ class AdminHome extends StatelessWidget {
           ),
           body: TopicListAdmin(),
           
-        ),
-      ),
-      // floatingactionbutton: 
+//        ),
+//      ),
+       floatingActionButton:
       SpeedDial(
+        backgroundColor: Color(0xff43b77d),
         animatedIcon: AnimatedIcons.play_pause,
         
         
@@ -55,6 +56,7 @@ class AdminHome extends StatelessWidget {
           SpeedDialChild(
             
             child: Icon(Icons.ac_unit),
+            backgroundColor: Color(0xff43b77d),
             label:"Domain Specific",
             labelStyle: TextStyle(fontSize: 18.0,decoration: TextDecoration.none,
                               fontWeight: FontWeight.bold,color:Colors.green),
@@ -64,6 +66,7 @@ class AdminHome extends StatelessWidget {
           ),
           SpeedDialChild(
             child: Icon(Icons.accessibility_new),
+            backgroundColor: Color(0xff43b77d),
             label:"General Aptitude",
             labelStyle: TextStyle(fontSize: 18.0,decoration: TextDecoration.none,
                               fontWeight: FontWeight.bold,color:Colors.green),
@@ -89,7 +92,7 @@ class AdminHome extends StatelessWidget {
     //     _InsertTopicName("General Aptitude");
     //   },),
     // ),
-      ],
+//      ],
       )
     );
   }

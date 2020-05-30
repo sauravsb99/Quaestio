@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:queastio/models/user.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,9 @@ class _MyDrawerState extends State<MyDrawer> {
             UserData userData = snapshot.data;
             return Container(
               color: Colors.black87,
-              child: ListView(
+              child: Flex(
+                direction: Axis.vertical,
+                verticalDirection: VerticalDirection.down,
                 children: <Widget>[
                   InkWell(
                     // child:Image.network(userData.image),
@@ -60,7 +63,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               userData.name,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 28.0, color: Colors.white),
+                                  fontSize: 21.0, color: Colors.white),
                             ),
                           ),
                         ],
@@ -84,8 +87,9 @@ class _MyDrawerState extends State<MyDrawer> {
 //
                         child: Material(
                           elevation: 15.0,
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(0),
                           borderOnForeground: true,
+                          color: Color(0xff3b3b3b),
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () {
@@ -134,8 +138,9 @@ class _MyDrawerState extends State<MyDrawer> {
 //
                         child: Material(
                           elevation: 15.0,
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(0),
                           borderOnForeground: true,
+                          color: Color(0xff3b3b3b),
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () {
@@ -184,8 +189,9 @@ class _MyDrawerState extends State<MyDrawer> {
 //
                         child: Material(
                           elevation: 15.0,
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(0),
                           borderOnForeground: true,
+                          color: Color(0xff3b3b3b),
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () {
@@ -232,8 +238,9 @@ class _MyDrawerState extends State<MyDrawer> {
 //
                         child: Material(
                           elevation: 15.0,
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(0),
                           borderOnForeground: true,
+                          color: Color(0xff3b3b3b),
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () {
@@ -268,24 +275,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ],
                   ),
-                  Container(
-                      child: Container(
-//                          alignment: FractionalOffset.bottomCenter,
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                          // This container holds all the children that will be aligned
-                          // on the bottom and should not scroll with the above ListView
-                          child: Container(
-                              child: Column(
-//                        children: <Widget>[
-//                          Divider(),
-//                          ListTile(
-//                              leading: Icon(Icons.settings),
-//                              title: Text('Settings')),
-//                          ListTile(
-//                              leading: Icon(Icons.help),
-//                              title: Text('Help and Feedback'))
-//                        ],
-                                  )))),
+                  Spacer(),
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
@@ -297,8 +287,9 @@ class _MyDrawerState extends State<MyDrawer> {
                             0),
                         child: Material(
                           elevation: 15.0,
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(0),
                           borderOnForeground: true,
+                          color: Color(0xff3b3b3b),
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () async {
@@ -333,6 +324,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 20,)
                 ],
               ),
             );

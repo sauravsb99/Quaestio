@@ -55,7 +55,7 @@ class _VideoListState extends State<VideoList> {
                       Navigator.push(context,
                           PageTransition(
                               type: PageTransitionType.downToUp,
-                              child: VideoAdmin(docList[index].url),
+                              child: VideoAdmin(docList[index]),
                               duration: Duration(
                                   milliseconds: 500
                               )

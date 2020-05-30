@@ -48,6 +48,7 @@ class _QuizListAdminState extends State<QuizListAdmin> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 FloatingActionButton(
+                  backgroundColor: Color(0xff43b77d),
                   heroTag: "cs",
                   onPressed: () {
                     Navigator.pushNamed(context, AddQuizRoute);
@@ -55,6 +56,8 @@ class _QuizListAdminState extends State<QuizListAdmin> {
                   child: Text('.csv'),
                 ),
                 FloatingActionButton(
+
+                  backgroundColor: Color(0xff43b77d),
                   heroTag: "ad",
                   onPressed: () {
                     print("hello");
