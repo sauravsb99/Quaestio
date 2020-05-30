@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:queastio/models/quiz.dart';
 import 'package:queastio/models/user.dart';
+import 'package:queastio/screens/video/Submissions.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/constants.dart';
 
@@ -213,7 +215,7 @@ class MyQuizTileAdmin extends StatelessWidget {
           isScrollControlled: true,
           context: context,
           builder: (context) {
-            User user = Provider.of<User>(context, listen: false);
+//            User user = Provider.of<User>(context, listen: false);
             return Wrap(
               children: <Widget>[
                 SizedBox(
@@ -292,72 +294,47 @@ class MyQuizTileAdmin extends StatelessWidget {
                           color: Colors.black87,
                         ),
                       ),
-                      Text(
-                        'You Can See Submissions using Users Panel',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.black87,
-                        ),
-                      ),
-//                      SizedBox(height: 45.0),
-//                      Row(
-//                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                        children: <Widget>[
-//                          MaterialButton(
-//                            child: RaisedButton(
-//                              padding: EdgeInsets.symmetric(
-//                                  vertical: 10.0, horizontal: 5.0),
-//                              onPressed: () {
-//                                print(answers);
-//                                Navigator.pushNamed(context, LeaderRoute,
-//                                    arguments: quiz.qName);
-//                              },
-//                              child: Text(
-//                                'Leaderboard',
-//                                style: buttonText,
-//                              ),
-//                              color: Colors.black87,
-//                            ),
-//                            onPressed: () {},
-//                          ),
-//                          MaterialButton(
-//                            child: RaisedButton(
-//                              padding: EdgeInsets.symmetric(
-//                                  vertical: 10.0, horizontal: 5.0),
-//                              onPressed: () {
-//                                print(answers);
-//                                DatabaseService(uid: user.uid)
-//                                    .testAlreadyTaken(quiz.qName)
-//                                    .then((value) {
-//                                  Navigator.pushNamed(context, QuestionRoute,
-//                                      arguments: {
-//                                        'questions': quiz.questions,
-//                                        'answers': answers,
-//                                        'qname': quiz.qName,
-//                                        'qTopic': quiz.qTopic,
-//                                        'firstTime': true,
-//                                        'duration': quiz.duration
-//                                      });
-//                                });
-//                              },
-//                              child: Text(
-//                                'Start Quiz',
-//                                style: buttonText,
-//                              ),
-//                              color: Colors.black87,
-//                            ),
-//                            onPressed: () {},
-//                          ),
+//                      Text(
+//                        'You Can See Submissions using Users Panel',
+//                        style: TextStyle(
+//                          fontSize: 18.0,
+//                          color: Colors.black87,
+//                        ),
+//                      ),
+                      SizedBox(height: 45.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[Spacer(),
+                          MaterialButton(
+                            child: RaisedButton(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 5.0),
+                              onPressed: () {Navigator.push(context,
+                                  PageTransition(
+                                      type: PageTransitionType.downToUp,
+                                      child: SubmissionList(quiz.qId),
+                                      duration: Duration(milliseconds: 500)));
+                              },
+                              child: Text(
+                                'See Submissions',
+                                style: buttonText,
+                              ),
+                              color: Colors.black87,
+                            ),
+                            onPressed: () {},
+                          ),
 
 //                        ),
-//                        ],
-//                      ),
+                        ],
+                      ),
                       SizedBox(
                         height: 50,
                       )
                     ],
                   ),
-                ),
+//                    ]
+//                ),
+            )
               ],
             );
           });

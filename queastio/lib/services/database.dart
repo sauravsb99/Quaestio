@@ -79,13 +79,14 @@ class DatabaseService {
     });
   }
 
-  Future<void> addDocument(String qid, String type, String url, String qname) async {
+  Future<void> addDocument(String qid, String type, String url, String qname, String fname) async {
     await documentCollection.document().setData({
       'uid': uid,
       'qid': qid,
       'type': type,
       'url': url,
       'qname': qname,
+      'fname': fname,
     });
   }
 
@@ -281,6 +282,17 @@ class DatabaseService {
     }
   }
 
+  Stream<List<Documents>> allDocs(String qid) {
+    try {
+      return documentCollection
+          .where('qid', isEqualTo: qid)
+          .snapshots()
+          .map(_documentListFromSnapshot);
+    } on Exception {
+      return null;
+    }
+  }
+
   List<Faq> _faqListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Faq(
@@ -296,6 +308,7 @@ class DatabaseService {
 //          faqQid: doc.data['qid'] ?? '',
         did: doc.documentID,
         qname:doc.data['qname'] ?? '',
+        fname:doc.data['fname'] ?? '',
         qid: doc.data['qid'] ?? '',
         uid: doc.data['uid'] ?? '',
         type: doc.data['type'] ?? '',

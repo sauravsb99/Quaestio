@@ -153,7 +153,7 @@ class _UploaderState extends State<Uploader> {
                                 String myUrl =
                                     await storageReference.getDownloadURL();
                                 await DatabaseService(uid: user.uid)
-                                    .addDocument(widget.qid, type, myUrl,widget.qname);
+                                    .addDocument(widget.qid, type, myUrl,widget.qname,uploadFile.path);
                               } catch (err) {
                                 print(err.toString());
                               }
@@ -295,7 +295,7 @@ class _UploaderState extends State<Uploader> {
                                       String myUrl = await storageReference
                                           .getDownloadURL();
                                       await DatabaseService(uid: user.uid)
-                                          .addDocument(widget.qid, type, myUrl,widget.qname);
+                                          .addDocument(widget.qid, type, myUrl,widget.qname,uploadFile.path);
                                       showAlertDialog(
                                           'Your file has been uploaded!',
                                           context);
