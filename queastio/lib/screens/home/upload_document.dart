@@ -53,85 +53,113 @@ class _UploaderState extends State<Uploader> {
         title: Text("Upload File"),
         automaticallyImplyLeading: false,
       ),
-      body: uploadTask == null
-          ? Column(
+      body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 uploadFile != null
-                    ? widget.stype=='pdf'?Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  padding: EdgeInsets.all(8.0),
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: <Widget>[
-                      type == 'pdf'
-                          ? Icon(Icons.picture_as_pdf, color: Colors.red)
-                          : Icon(Icons.video_library,
-                          color: Colors.orange[800]),
-                      Text(
-                        Path.basename(uploadFile.path),
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
+                    ? (uploadTask == null?
+      Container(
+      decoration: BoxDecoration(
+      color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      padding: EdgeInsets.all(8.0),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: <Widget>[
+          type == 'pdf'
+              ? Icon(Icons.picture_as_pdf, color: Colors.red)
+              : Icon(Icons.video_library,
+              color: Colors.orange[800]),
+          Text(
+            Path.basename(uploadFile.path),
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.close,
+              size: 20.0,
+            ),
+            onPressed: () {
+              setState(() {
+                uploadFile = null;
+              });
+            },
+          )
+        ],
+      ),
+    ):
+    StreamBuilder<StorageTaskEvent>(
+    stream: uploadTask.events,
+        builder: (context, snapshot) {
+          var event = snapshot?.data?.snapshot;
+          double progress = event != null
+              ? event.bytesTransferred / event.totalByteCount
+              : 0;
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    padding: EdgeInsets.fromLTRB(0, 8.0, 0, 0),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: <Widget>[
+                        type == 'pdf'
+                            ? Icon(Icons.picture_as_pdf,
+                            color: Colors.red)
+                            : SizedBox(
+                          child: Row(
+                            children: [
+                              Icon(Icons.video_library,
+                                  color: Colors.orange),
+                            ],
+                          ),
                         ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.close,
-                          size: 20.0,
+                        Text(
+                          Path.basename(uploadFile.path),
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        onPressed: () {
-                          setState(() {
-                            uploadFile = null;
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                ):Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(5.0),
+                        IconButton(
+                          icon: Icon(
+                            Icons.close,
+                            size: 20.0,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              uploadFile = null;
+                            });
+                          },
                         ),
-                        padding: EdgeInsets.all(8.0),
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: <Widget>[
-                            type == 'pdf'
-                                ? Icon(Icons.picture_as_pdf, color: Colors.red)
-                                : Icon(Icons.video_library,
-                                    color: Colors.orange[800]),
-                            Text(
-                              Path.basename(uploadFile.path),
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.close,
-                                size: 20.0,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  uploadFile = null;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      )
-                    : Container(),
-                // uploadFile != null ? SizedBox(height: 20.0) : Container(),
-                Row(
+                        event != null
+                            ? LinearProgressIndicator(
+                          value: progress,
+                        )
+                            : Container(),
+                      ],
+                    ),
+                  )
+                  ]
+              )
+          );
+        }
+    )
+                ):Container(),Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     FlatButton(
@@ -140,24 +168,31 @@ class _UploaderState extends State<Uploader> {
                       onPressed: uploadFile == null
                           ? null
                           : () async {
-                              StorageReference storageReference =
-                                  FirebaseStorage.instance.ref().child(
-                                      'fileSubmissions/${Path.basename(uploadFile.path)}');
-                              setState(() {
-                                uploadTask =
-                                    storageReference.putFile(uploadFile);
-                              });
+                        StorageReference storageReference =
+                        FirebaseStorage.instance.ref().child(
+                            'fileSubmissions/${Path.basename(uploadFile.path)}');
+                        setState(() {
+                          uploadTask =
+                              storageReference.putFile(uploadFile);
+                        });
+                        try {
+                          await uploadTask.onComplete;
+                          String myUrl =
+                          await storageReference.getDownloadURL();
+                          await DatabaseService(uid: user.uid)
+                              .addDocument(widget.qid, type, myUrl,widget.qname,uploadFile.path);
+                        showAlertDialog('Your file has been uploaded!',context);
+                        } catch (err) {
+                        setState(() {
+                          uploadTask = null;
+                          uploadFile = null;
+                        });
+                        showAlertDialog(err.toString(), context);
+                        print(err.toString());
+                        }
 
-                              try {
-                                await uploadTask.onComplete;
-                                String myUrl =
-                                    await storageReference.getDownloadURL();
-                                await DatabaseService(uid: user.uid)
-                                    .addDocument(widget.qid, type, myUrl,widget.qname,uploadFile.path);
-                              } catch (err) {
-                                print(err.toString());
-                              }
-                            },
+
+                        },
                       child: Text(
                         'Upload',
                         style: TextStyle(
@@ -176,14 +211,9 @@ class _UploaderState extends State<Uploader> {
                             setState(() {
                               uploadFile = file;
                               type = '.pdf';
-//                                  ? 'pdf'
-//                                  : 'video';
                             });
                         },
                         icon: Icon(Icons.attach_file)
-                      // child: Text(
-                      //   'Choose File',
-                      // ),
                     ):
                     IconButton(
                         color: Color(0xff43b77d),
@@ -195,171 +225,15 @@ class _UploaderState extends State<Uploader> {
                             setState(() {
                               uploadFile = file;
                               type = 'video';
-//                              Path.extension(file.path) == '.pdf'
-//                                  ? 'pdf'
-//                                  : 'video';
                             });
                         },
                         icon: Icon(Icons.attach_file)
-                        // child: Text(
-                        //   'Choose File',
-                        // ),
-                        ),
+                    ),
                   ],
                 ),
-              ],
-            )
-          : StreamBuilder<StorageTaskEvent>(
-              stream: uploadTask.events,
-              builder: (context, snapshot) {
-                var event = snapshot?.data?.snapshot;
-                double progress = event != null
-                    ? event.bytesTransferred / event.totalByteCount
-                    : 0;
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      uploadFile != null
-                          ? Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              padding: EdgeInsets.fromLTRB(0, 8.0, 0, 0),
-                              child: Wrap(
-                                alignment: WrapAlignment.center,
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: <Widget>[
-                                  type == 'pdf'
-                                      ? Icon(Icons.picture_as_pdf,
-                                          color: Colors.red)
-                                      : SizedBox(
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.video_library,
-                                                color: Colors.orange),
-                                          ],
-                                        ),
-                                      ),
-                                  Text(
-                                    Path.basename(uploadFile.path),
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.close,
-                                      size: 20.0,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        uploadFile = null;
-                                      });
-                                    },
-                                  ),
-                                  event != null
-                                      ? LinearProgressIndicator(
-                                          value: progress,
-                                        )
-                                      : Container(),
-                                ],
-                              ),
-                            )
-                          : Container(),
-                      // uploadFile != null ? SizedBox(height: 20.0) : Container(),
+    ]
+      )
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          FlatButton(
-                            color: Color(0xff43b77d),
-                            disabledColor: Colors.grey,
-                            onPressed: uploadFile == null
-                                ? null
-                                : () async {
-                                    StorageReference storageReference =
-                                        FirebaseStorage.instance.ref().child(
-                                            'fileSubmissions/${Path.basename(uploadFile.path)}');
-                                    setState(() {
-                                      uploadTask =
-                                          storageReference.putFile(uploadFile);
-                                    });
-                                    try {
-                                      await uploadTask.onComplete;
-                                      String myUrl = await storageReference
-                                          .getDownloadURL();
-                                      await DatabaseService(uid: user.uid)
-                                          .addDocument(widget.qid, type, myUrl,widget.qname,uploadFile.path);
-                                      showAlertDialog(
-                                          'Your file has been uploaded!',
-                                          context);
-                                    } catch (err) {
-                                      setState(() {
-                                        uploadTask = null;
-                                        uploadFile = null;
-                                      });
-                                      showAlertDialog(err.toString(), context);
-                                    }
-                                  },
-                            child: Text(
-                              'Upload',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          widget.stype=='pdf'?IconButton(
-                              color: Color(0xff43b77d),
-                              onPressed: () async {
-                                File file = await FilePicker.getFile(
-                                    type: FileType.custom,
-                                    allowedExtensions: ['pdf']);
-                                if (file != null)
-                                  setState(() {
-                                    uploadFile = file;
-                                    type = 'pdf';
-//                                    Path.extension(file.path) == '.pdf'
-//                                        ? 'pdf'
-//                                        : 'video';
-                                  });
-                              },
-                              icon: Icon(Icons.attach_file)
-                            // child: Text(
-                            //   'Choose File',
-                            // ),
-                          ):
-                          IconButton(
-                              color: Color(0xff43b77d),
-                              onPressed: () async {
-                                File file = await FilePicker.getFile(
-                                    type: FileType.custom,
-                                    allowedExtensions: ['mp4']);
-                                if (file != null)
-                                  setState(() {
-                                    uploadFile = file;
-                                    type = 'video';
-//                                    Path.extension(file.path) == '.pdf'
-//                                        ? 'pdf'
-//                                        : 'video';
-                                  });
-                              },
-                              icon: Icon(Icons.attach_file)
-                              // child: Text(
-                              //   'Choose File',
-                              // ),
-                              ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              }),
     );
   }
 }
