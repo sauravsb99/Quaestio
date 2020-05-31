@@ -102,7 +102,10 @@ class _SubmissionListState extends State<SubmissionList> {
                               ),
                             );
                           } else {
-                            return Wrap();
+                            return Container(
+                              color: Colors.black,
+                              child: Text(docList[index].did),
+                            );
                           }
                         }),
 //                    trailing: Text(docList[index].type.toUpperCase()

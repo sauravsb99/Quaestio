@@ -79,17 +79,6 @@ class DatabaseService {
     });
   }
 
-  Future<void> addDocument(String qid, String type, String url, String qname, String fname) async {
-    await documentCollection.document().setData({
-      'uid': uid,
-      'qid': qid,
-      'type': type,
-      'url': url,
-      'qname': qname,
-      'fname': fname,
-    });
-  }
-
   Future<void> updateUserDataByAdmin(
       String name, String image, String role) async {
     await userCollection.document(uid).setData({
@@ -135,6 +124,14 @@ class DatabaseService {
         batch.delete(scoreCollection.document(scoreId));
       });
     }}
+    );
+    await docRef.get().then((doc) {
+      if(doc['submissions']!=null){
+        doc['submissions'].forEach((documentId) {
+          print(documentId);
+          batch.delete(documentCollection.document(documentId));
+        });
+      }}
     );
     batch.delete(userCollection.document(uid));
     batch.commit();
@@ -192,6 +189,27 @@ class DatabaseService {
 
     batch.commit();
   }
+
+  Future<void> addDocument(String qid, String type, String url, String qname, String fname) async {
+    var db = Firestore.instance;
+    var batch = db.batch();
+    var docRef = documentCollection.document();
+    batch.setData(docRef, {
+      'uid': uid,
+      'qid': qid,
+      'type': type,
+      'url': url,
+      'qname': qname,
+      'fname': fname,
+    });
+    batch.updateData(userCollection.document(uid), {
+      'submissions': FieldValue.arrayUnion([docRef.documentID])
+    });
+
+    batch.commit();
+  }
+
+
 
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(

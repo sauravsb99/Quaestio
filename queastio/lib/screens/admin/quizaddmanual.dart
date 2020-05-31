@@ -9,6 +9,9 @@ class QuizAddManual extends StatefulWidget {
   String _qtype='';
   Set<String> items;
 
+  String _stopic='-';
+  Set<String> itemstopic;
+
   String _stype='pdf';
   Set<String> itemstype;
   QuizAddManual({this.qTopic});
@@ -21,6 +24,9 @@ class _QuizAddManualState extends State<QuizAddManual> {
   final String qTopic;
   String _qtype='';
   Set<String> items;
+
+  String _stopic='-';
+  Set<String> itemstopic;
 
 
   String _stype='pdf';
@@ -39,6 +45,10 @@ class _QuizAddManualState extends State<QuizAddManual> {
     _stype = _stype == null ? 'pdf' : _stype;
     itemstype = Set.from(['pdf']);
     itemstype.add('video');
+
+    _stopic = _stopic == null ? '-' : _stopic;
+    itemstopic = Set.from(['-']);
+    itemstopic.add(qTopic);
     return Scaffold(
       resizeToAvoidBottomInset: false,
     body: Container(
@@ -97,6 +107,34 @@ class _QuizAddManualState extends State<QuizAddManual> {
             onChanged: (val) => setState(() => _quizDesc = val),
           ),
           SizedBox(height: 30.0),
+          _qtype== '' ? Container(): Column(
+            children: [
+              Text(
+                "Change the topic for topic related submission",
+                style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold),
+              ),
+              DropdownButton<String>(
+                value: _stopic,
+
+                underline: Container(
+                  color: Color(0xff43b77d),
+                  height: 2.0,
+                ),
+                onChanged: (String newVa) {
+                  setState(() {
+                    _stopic = newVa;
+                  });
+                  print(_stopic);
+                },
+                items: itemstopic.map((itemstop) {
+                  return DropdownMenuItem(
+                      value: itemstop, child: Text(itemstop));
+                }).toList(),
+              ),
+          SizedBox(height: 30.0),
+            ],
+          ),
+
           _qtype==''?Text("Enter the Time Limit",
             style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold),
           ):
@@ -146,7 +184,7 @@ class _QuizAddManualState extends State<QuizAddManual> {
             onPressed: () async{
             User user = Provider.of<User>(context, listen: false);
             await DatabaseService(uid: user.uid)
-                .updateQuiz(_quizName, qTopic,_qtype, _stype,_quizDesc, 0 , 0, null);
+                .updateQuiz(_quizName, _stopic,_qtype, _stype,_quizDesc, 0 , 0, null);
             Navigator.pop(context);
           },child: Text("Submit"),
               color: Color(0xff43b77d)),

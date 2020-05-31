@@ -253,13 +253,19 @@ class MyQuizTileAdmin extends StatelessWidget {
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(5.0),
                             ),
-                            child: Text(
-                              quiz.qTopic,
+                            child: quiz.qTopic=='-'?Text(
+                              'General Submission',
                               style: TextStyle(
                                 fontSize: 10.0,
                                 color: Colors.white,
                               ),
+                            ):Text(
+                            quiz.qTopic,
+                            style: TextStyle(
+                              fontSize: 10.0,
+                              color: Colors.white,
                             ),
+                          ),
                           ),
 //                          Tooltip(
 //                            message:
@@ -294,13 +300,6 @@ class MyQuizTileAdmin extends StatelessWidget {
                           color: Colors.black87,
                         ),
                       ),
-//                      Text(
-//                        'You Can See Submissions using Users Panel',
-//                        style: TextStyle(
-//                          fontSize: 18.0,
-//                          color: Colors.black87,
-//                        ),
-//                      ),
                       SizedBox(height: 45.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
