@@ -46,7 +46,7 @@ class SubTile extends StatelessWidget {
                     Navigator.push(context,
                         PageTransition(
                             type: PageTransitionType.downToUp,
-                            child: SubList(user.uid),
+                            child: SubList(user),
                             duration: Duration(milliseconds: 500)));
                   },
 //                                          },

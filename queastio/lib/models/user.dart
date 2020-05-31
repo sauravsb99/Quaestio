@@ -14,8 +14,10 @@ class UserData {
   final String role;
   final String batch;
   final String resume;
+  final String vid;
+  final String res;
   
 
-  UserData({ this.uid,this.name,this.image,this.role,this.batch,this.resume});
+  UserData({ this.uid,this.name,this.image,this.role,this.batch,this.resume,this.res,this.vid});
 
 }

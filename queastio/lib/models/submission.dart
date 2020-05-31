@@ -4,8 +4,9 @@ class Submission{
   final String type;
   final String uid;
   final String url;
+  final String did;
 
-  Submission({this.fname,this.type,this.uid,this.url});
+  Submission({this.did,this.fname,this.type,this.uid,this.url});
 
 
 }

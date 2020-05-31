@@ -6,23 +6,24 @@ import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'vid_sub.dart';
+import 'package:queastio/models/user.dart';
 import 'package:queastio/models/submission.dart';
 
 class SubList extends StatefulWidget {
-  final String uid;
+  final UserData uid;
   SubList(this.uid);
   @override
   _SubListState createState() => _SubListState(uid: uid);
 }
 
 class _SubListState extends State<SubList> {
-  final String uid;
+  final UserData uid;
   _SubListState({this.uid});
   @override
   Widget build(BuildContext context){
     print('success');
     return StreamBuilder<List<Submission>>(
-        stream: DatabaseService().getsubs(uid,
+        stream: DatabaseService().getsubs(uid.uid,
 //            qid
         ),
         builder: (context, snapshot){
@@ -47,10 +48,12 @@ class _SubListState extends State<SubList> {
                 itemBuilder: (
                     context, index
                     ){
+                  if(docList[index].did == uid.vid || docList[index].did == uid.res){
+                    print(docList[index].did);
                   return ListTile(
                     onTap: (){
-                      if(docList[index].type=='Video'){
-                     print(docList[index].url);
+                      if(docList[index].type=='Video' ){
+                    //  print(docList[index].url);
                       Navigator.push(context,
                           PageTransition(
                               type: PageTransitionType.downToUp,
@@ -79,6 +82,10 @@ class _SubListState extends State<SubList> {
                       ),
                     ),
                   );
+                  }
+                  else{
+                    return Container(width: 0.0,height: 0.0,);
+                  }
                 },
               ),
             );

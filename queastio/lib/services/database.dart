@@ -38,13 +38,15 @@ class DatabaseService {
       Firestore.instance.collection('submissions');
 
   Future<void> updateUserData(
-      String name, String image, String role, String batch) async {
+      String name, String image, String role, String batch ,String vid, String res) async {
     return await userCollection.document(uid).setData({
       'uid': uid,
       'name': name,
       'image': image,
       'role': role,
       'batch': batch,
+      'vid': vid,
+      'res': res,
     });
   }
 
@@ -198,15 +200,23 @@ class DatabaseService {
     var batch = db.batch();
     var docRef = submissionCollection.document();
      await submissionCollection.document().setData({
+      'did': docRef.documentID,
       'uid': uid,
       'type': type,
       'url': url,
       'fname': fname,
     });
     // await updateUserData(userCollection.document(uid))
+    if(type == "Video"){
     batch.updateData(userCollection.document(uid), {
-      'subs': FieldValue.arrayUnion([docRef.documentID])
+      'vid': docRef.documentID,
     });
+    }
+    else{
+      batch.updateData(userCollection.document(uid), {
+      'res': docRef.documentID,
+    });
+    }
     batch.commit();
   }
 
@@ -243,6 +253,8 @@ class DatabaseService {
   List<UserData> _userDataListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return UserData(
+        vid: doc['vid'],
+        res: doc['res'],
         uid: doc['uid'],
         name: doc['name'],
         image: doc['image'],
@@ -368,7 +380,7 @@ class DatabaseService {
   List<Submission> _submissionListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Submission(
-        // did: doc.documentID,
+        did: doc.data['did'] ?? '',
         fname:doc.data['fname'] ?? '',
         uid: doc.data['uid'] ?? '',
         type: doc.data['type'] ?? '',
