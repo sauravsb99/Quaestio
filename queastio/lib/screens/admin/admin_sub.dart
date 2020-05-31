@@ -3,6 +3,7 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/services/database.dart';
 import 'package:queastio/shared/loading.dart';
 import 'user_tileAdmin.dart';
+import 'sub_tile.dart';
 
 class ListSubmission extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _ListSubmissionState extends State<ListSubmission> {
                   : ListView.builder(
                       itemCount: userList.length,
                       itemBuilder: (context, index) {
-                        return UserTile(user: userList[index]);
+                        return SubTile(user: userList[index]);
                       },
                     ),
             );

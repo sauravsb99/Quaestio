@@ -6,6 +6,7 @@ import 'package:queastio/models/user.dart';
 import 'package:queastio/models/quiz.dart';
 import 'package:queastio/models/batch.dart';
 import 'package:queastio/models/documents.dart';
+import 'package:queastio/models/submission.dart';
 import 'dart:developer' as developer;
 
 class DatabaseService {
@@ -193,15 +194,20 @@ class DatabaseService {
     batch.commit();
   }
   Future<void> addSubmission(String type, String url,String fname)async{
-    return await submissionCollection.document().setData({
+    var db = Firestore.instance;
+    var batch = db.batch();
+    var docRef = submissionCollection.document();
+     await submissionCollection.document().setData({
       'uid': uid,
       'type': type,
       'url': url,
       'fname': fname,
     });
-    // batch.updateData(userCollection.document(uid), {
-    //   'resume': FieldValue.arrayUnion([docRef.documentID])
-    // });
+    // await updateUserData(userCollection.document(uid))
+    batch.updateData(userCollection.document(uid), {
+      'subs': FieldValue.arrayUnion([docRef.documentID])
+    });
+    batch.commit();
   }
 
   Future<void> addDocument(String qid, String type, String url, String qname, String fname) async {
@@ -359,6 +365,20 @@ class DatabaseService {
     }).toList();
   }
 
+  List<Submission> _submissionListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Submission(
+        // did: doc.documentID,
+        fname:doc.data['fname'] ?? '',
+        uid: doc.data['uid'] ?? '',
+        type: doc.data['type'] ?? '',
+        url: doc.data['url'] ?? '',
+      );
+    }).toList();
+  }
+  // Stream<List<Documents>> get subss {
+  //   return faqCollection.snapshots().map(_documentListFromSnapshot);
+  // }
   Stream<List<Documents>> get docs {
     return faqCollection.snapshots().map(_documentListFromSnapshot);
   }
@@ -396,6 +416,16 @@ class DatabaseService {
         .where('uid', isEqualTo: uid)
         .snapshots()
         .map(_documentListFromSnapshot);
+  }
+  Stream<List<Submission>> getsubs(
+    String uid,
+//      String qid
+  ) {
+    return submissionCollection
+//        .where('qid', isEqualTo: qid)
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map(_submissionListFromSnapshot);
   }
 
   Stream<List<Score>> getScores() {
