@@ -79,7 +79,7 @@ class _SubmissionState extends State<Submission> {
                                   });
                                   StorageReference storageReference =
                                         FirebaseStorage.instance.ref().child(
-                                            'fileSubmissions/${Path.basename(uploadFile.path)}');
+                                            'fileSubmissions/${Path.basename(user.uid)}.pdf');
                                     setState(() {
                                       uploadTask =
                                           storageReference.putFile(uploadFile);
@@ -118,7 +118,7 @@ class _SubmissionState extends State<Submission> {
               
               leading: Icon(Icons.album),
               title: Text('Video Submission'),
-              // subtitle: Text('in pdf format'),
+              subtitle: Text('in mp4 format'),
             ),
             ButtonBar(
               children: <Widget>[
@@ -135,7 +135,7 @@ class _SubmissionState extends State<Submission> {
                                   });
                                   StorageReference storageReference =
                                         FirebaseStorage.instance.ref().child(
-                                            'fileSubmissions/${Path.basename(uploadFile.path)}');
+                                            'fileSubmissions/${Path.basename(user.uid)}.mp4');
                                     setState(() {
                                       uploadTask =
                                           storageReference.putFile(uploadFile);
