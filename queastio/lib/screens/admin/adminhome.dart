@@ -35,7 +35,7 @@ class AdminHome extends StatelessWidget {
             child: AdminDrawer(),
           ),
           appBar: AppBar(
-            title: Text('Quaestia'),
+            title: Text('Quaestio'),
 //            backgroundColor: Colors.indigo,
             elevation: 0.0,
           ),

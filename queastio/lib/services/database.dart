@@ -32,6 +32,9 @@ class DatabaseService {
 
   final CollectionReference documentCollection =
       Firestore.instance.collection('documents');
+  
+  final CollectionReference submissionCollection = 
+      Firestore.instance.collection('submissions');
 
   Future<void> updateUserData(
       String name, String image, String role, String batch) async {
@@ -188,6 +191,17 @@ class DatabaseService {
     });
 
     batch.commit();
+  }
+  Future<void> addSubmission(String type, String url,String fname)async{
+    return await submissionCollection.document().setData({
+      'uid': uid,
+      'type': type,
+      'url': url,
+      'fname': fname,
+    });
+    // batch.updateData(userCollection.document(uid), {
+    //   'resume': FieldValue.arrayUnion([docRef.documentID])
+    // });
   }
 
   Future<void> addDocument(String qid, String type, String url, String qname, String fname) async {

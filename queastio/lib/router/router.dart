@@ -1,8 +1,12 @@
+
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:queastio/screens/FAQ/faqhome.dart';
 import 'package:queastio/screens/admin/Quiz_listAdmin.dart';
 import 'package:queastio/screens/admin/add_quiz.dart';
+import 'package:queastio/screens/admin/admin_sub.dart';
 import 'package:queastio/screens/admin/questionadd.dart';
 import 'package:queastio/screens/admin/quizaddmanual.dart';
 import 'package:queastio/screens/admin/user_listAdmin.dart';
@@ -14,6 +18,7 @@ import 'package:queastio/screens/home/leader_board.dart';
 import 'package:queastio/screens/home/previous_scores.dart';
 import 'package:queastio/screens/home/question_card.dart';
 import 'package:queastio/screens/home/quiz_list.dart';
+import 'package:queastio/screens/home/submission.dart';
 import 'package:queastio/screens/home/topic_leader_board.dart';
 import 'package:queastio/screens/home/upload_document.dart';
 import 'package:queastio/screens/profileScreen/profile.dart';
@@ -117,7 +122,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           selected: data['selected'],
         ),
       );
-
+    case SubmissionRoute:
+      return MaterialPageRoute(builder: (context)=> Submission());
+    case ListSubmissionRoute:
+      return MaterialPageRoute(builder: (context)=> ListSubmission());
     case AboutUsRoute:
       return MaterialPageRoute(builder: (context) => AboutUs());
     case BatchesRoute:

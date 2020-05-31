@@ -229,6 +229,56 @@ class _AdminDrawerState extends State<AdminDrawer> {
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () {
+                              Navigator.pushNamed(context, ListSubmissionRoute);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+//                          color: Colors.blueGrey,
+                                child: Center(
+                                  child: Text(
+                                    'Submission',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+//                            shape: RoundedRectangleBorder(
+//                                side: BorderSide(
+//                                  color: Colors.black,
+//                                  width: 3,
+//                                  style: BorderStyle.solid,
+//                                ),
+//                                borderRadius: BorderRadius.circular(11)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    children: <Widget>[
+                      Padding(
+//padding: EdgeInsetsGeometry(WrapAlignment.center),
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.05,
+                            10,
+                            MediaQuery.of(context).size.width * 0.05,
+                            10),
+//
+                        child: Material(
+                          elevation: 15.0,
+                          borderRadius: BorderRadius.circular(0),
+                          borderOnForeground: true,
+                          color: Color(0xff3b3b3b),
+                          child: FlatButton(
+                            color: Color(0xff3b3b3b),
+                            onPressed: () {
                               Navigator.pushNamed(context, NewAdminHomeRoute);
                             },
                             child: Padding(
@@ -369,7 +419,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20,)
+                  // SizedBox(height: 20,)
                 ],
               ),
             );
