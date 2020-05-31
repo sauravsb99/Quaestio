@@ -42,14 +42,13 @@ class _AdminDrawerState extends State<AdminDrawer> {
 //                          );
                     },
                     child: DrawerHeader(
-
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           CircleAvatar(
-                            backgroundColor:Color(0xff43b77d),
+                            backgroundColor: Color(0xff43b77d),
                             radius: MediaQuery.of(context).size.width * 0.10,
                             backgroundImage: NetworkImage(userData.image),
                           ),
@@ -85,10 +84,9 @@ class _AdminDrawerState extends State<AdminDrawer> {
 //
                         child: Material(
                           elevation: 15.0,
-
                           borderRadius: BorderRadius.circular(0),
                           borderOnForeground: true,
-                        color: Color(0xff3b3b3b),
+                          color: Color(0xff3b3b3b),
                           child: FlatButton(
                             color: Color(0xff3b3b3b),
                             onPressed: () {
@@ -365,10 +363,6 @@ class _AdminDrawerState extends State<AdminDrawer> {
 //                    width: MediaQuery.of(context).size.width*0.6,
 //                    child: Container(
 //                      child:
-                      Expanded(
-//                      flex: 2,
-                        child: SizedBox(height: 10,),
-                      ),
 //                    ),
 //                  ),
                   Wrap(
@@ -377,7 +371,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             MediaQuery.of(context).size.width * 0.05,
-                            MediaQuery.of(context).size.height * 0.10,
+                            MediaQuery.of(context).size.height * 0.025,
                             MediaQuery.of(context).size.width * 0.05,
                             0),
                         child: Material(
@@ -401,7 +395,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                                     'Logout',
                                     style: TextStyle(
                                       fontSize: 22,
-                                      color: Colors.black,
+                                      color: Colors.white70,
                                     ),
                                   ),
                                 ),
