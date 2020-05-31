@@ -9,7 +9,7 @@ class QuizAddManual extends StatefulWidget {
   String _qtype='';
   Set<String> items;
 
-  String _stopic='-';
+  String _stopic='General Submission';
   Set<String> itemstopic;
 
   String _stype='pdf';
@@ -25,7 +25,7 @@ class _QuizAddManualState extends State<QuizAddManual> {
   String _qtype='';
   Set<String> items;
 
-  String _stopic='-';
+  String _stopic='General Submission';
   Set<String> itemstopic;
 
 
@@ -46,8 +46,8 @@ class _QuizAddManualState extends State<QuizAddManual> {
     itemstype = Set.from(['pdf']);
     itemstype.add('video');
 
-    _stopic = _stopic == null ? '-' : _stopic;
-    itemstopic = Set.from(['-']);
+    _stopic = _stopic == null ? 'General Submission' : _stopic;
+    itemstopic = Set.from(['General Submission']);
     itemstopic.add(qTopic);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -115,6 +115,7 @@ class _QuizAddManualState extends State<QuizAddManual> {
               ),
               DropdownButton<String>(
                 value: _stopic,
+//                hint: Text('General') ,
 
                 underline: Container(
                   color: Color(0xff43b77d),
@@ -184,7 +185,7 @@ class _QuizAddManualState extends State<QuizAddManual> {
             onPressed: () async{
             User user = Provider.of<User>(context, listen: false);
             await DatabaseService(uid: user.uid)
-                .updateQuiz(_quizName, _stopic,_qtype, _stype,_quizDesc, 0 , 0, null);
+                .updateQuiz(_quizName, _stopic =='General Submission' ? '-':_stopic,_qtype, _stype,_quizDesc, 0 , 0, null);
             Navigator.pop(context);
           },child: Text("Submit"),
               color: Color(0xff43b77d)),
